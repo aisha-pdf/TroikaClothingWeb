@@ -1,0 +1,137 @@
+﻿/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .body-content {
+        padding: 0;
+    }
+}
+
+/* default text code */
+:root {
+    --troika-navy: #3D304C;
+    --troika-white: #ffffff;
+    --troika-light-accent: #644F7D;
+}
+
+/*setting black as default for body site*/
+body {
+    color: #000000 !important;
+    background-color: var(--troika-white) !important;
+}
+
+/*navebar is white with a default navy blue text*/
+.navbar-troika {
+    background-color: var(--troika-white) !important;
+    border-bottom: 2px solid var(--troika-navy);
+}
+
+    .navbar-troika .navbar-brand,
+    .navbar-troika .nav-link {
+        color: var(--troika-navy) !important;
+        font-weight: 500;
+    }
+
+        .navbar-troika .nav-link:hover {
+            color: #d4d4d4 !important;
+            text-decoration: underline;
+        }
+
+/*new navbar setting for login and alles */
+.navbar-troika1 {
+    background-color: var(--troika-navy) !important;
+    border-bottom: 2px solid var(--troika-white);
+}
+
+    .navbar-troika1 .navbar-brand,
+    .navbar-troika1 .nav-link {
+        color: var(--troika-white) !important;
+        font-weight: 200;
+    }
+
+        .navbar-troika1 .nav-link:hover {
+            color: #d4d4d4 !important;
+            text-decoration: underline;
+        }
+
+
+/*default navy heading*/
+h1, h2, h3, h4, h5, h6 {
+    color: #3D304C;
+}
+
+
+/*navy links that are underlined*/
+a {
+    color: #3D304C;
+    text-decoration: underline;
+}
+
+    /* lighter navy for the hover*/
+    a:hover {
+        color: #644F7D;
+    }
+
+.col-md-3 .card .card-header {
+    background-color: #3D304C !important;
+    color: #ffffff !important;
+    border: none;
+    padding: 15px;
+}
+
+    .col-md-3 .card .card-header h5 {
+        color: #ffffff !important; /* Specifically target the heading */
+        margin: 0;
+    }
+
+.col-md-3 .card .card-body {
+    padding: 0;
+}
+
+.col-md-3 .card .list-unstyled li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eeeeee;
+    margin: 0;
+}
+
+    .col-md-3 .card .list-unstyled li:hover {
+        background-color: #f8f9fa !important;
+        cursor: pointer;
+    }
+
+    .col-md-3 .card .list-unstyled li:last-child {
+        border-bottom: none;
+    }
+
+/* Product card styles for col-md-9 */
+.col-md-9 .product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* makes all cards equal height */
+}
+
+    .col-md-9 .product-card .card-img-top {
+        width: 100%; /* make image stretch across card */
+        height: 500px; /* fixed height (adjust to your preference) */
+        object-fit: cover; /* crop the image to fit the box without distortion */
+        border-top-left-radius: 0.5rem; /* optional, match card rounded corners */
+        border-top-right-radius: 0.5rem;
+    }
+
+    /* Ensure body fills evenly */
+    .col-md-9 .product-card .card-body {
+        flex-grow: 1;
+    }
