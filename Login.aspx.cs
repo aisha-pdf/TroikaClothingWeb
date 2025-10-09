@@ -27,13 +27,21 @@ namespace TroikaClothingWeb
             }
 
             // Example hardcoded credentials
-            if ((username == "admin" && password == "123456") ||
-                (username == "user1" && password == "654321"))
+            if (username == "admin" && password == "123456") 
             {
                 // Save the username in session so user stays logged in
                 Session["Username"] = username;
+                Session["Role"] = "Admin";
 
-                // Redirect to homepage
+                // Redirect to admin homepage
+                Response.Redirect("Admin.aspx");
+            }
+            else if (username == "user1" && password == "654321")
+            {
+                Session["Username"] = username;
+                Session["Role"] = "User";
+
+                //Redirected to homepage 
                 Response.Redirect("Default.aspx");
             }
             else

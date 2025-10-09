@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TroikaClothingWeb {
-    
-    
-    public partial class SiteMaster {
-        
+namespace TroikaClothingWeb
+{
+
+
+    public partial class SiteMaster
+    {
+
         /// <summary>
         /// MainContent control.
         /// </summary>
