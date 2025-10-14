@@ -12,7 +12,7 @@ namespace TroikaClothingWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             // Ensure only admin can access
-            if (Session["Role"] == null || Session["Role"].ToString() != "Admin")
+            if (Session["Role"] == null || Session["Role"].ToString() != "Administrator")
             {
                 Response.Redirect("Login.aspx");
             }

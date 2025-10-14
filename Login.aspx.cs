@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -19,30 +20,47 @@ namespace TroikaClothingWeb
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            // Check if password is 6 digits
-            if (password.Length != 6 || !int.TryParse(password, out _))
+            // Validate password length (8 digits)
+            if (password.Length != 8 || username.Length != 6)
             {
-                lblMessage.Text = "Password must be exactly 6 digits.";
+                lblMessage.Text = "Password and/or Username is incorrect";
                 return;
             }
 
-            // Example hardcoded credentials
-            if (username == "admin" && password == "123456") 
+            // Make sure SqlDataSource exists
+            if (LoginDatasource == null)
             {
-                // Save the username in session so user stays logged in
-                Session["Username"] = username;
-                Session["Role"] = "Admin";
-
-                // Redirect to admin homepage
-                Response.Redirect("Admin.aspx");
+                lblMessage.Text = "Login data source not found.";
+                return;
             }
-            else if (username == "user1" && password == "654321")
-            {
-                Session["Username"] = username;
-                Session["Role"] = "User";
 
-                //Redirected to homepage 
-                Response.Redirect("Default.aspx");
+            // Execute the query
+            DataView dv = (DataView)LoginDatasource.Select(DataSourceSelectArguments.Empty);
+
+            // Check if record exists
+            if (dv != null && dv.Count > 0)
+            {
+                // Get stored username (for case-sensitive check)
+                string dbUsername = dv[0]["Username"].ToString();
+
+                // Compare case-sensitive
+                if (dbUsername == username)
+                {
+                    string role = dv[0]["Role"].ToString(); // "Administrator" or "Customer"
+                    
+                    Session["Username"] = username;
+                    Session["Role"] = role;
+
+                    // Redirect based on role
+                    if (role.Equals("Customer"))
+                        Response.Redirect("Default.aspx");
+                    else if(role.Equals("Administrator"))
+                        Response.Redirect("Admin.aspx");
+                }
+                else
+                {
+                    lblMessage.Text = "Invalid username or password (case-sensitive).";
+                }
             }
             else
             {

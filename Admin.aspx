@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="TroikaClothingWeb.Adminaspx" %>
+﻿<%@ Page Title="Admin" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="TroikaClothingWeb.Adminaspx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     <!-- Sidebar + Content Wrapper -->
@@ -7,7 +7,6 @@
         <!-- Sidebar -->
         <div style="width:220px; background-color:#5B4470; padding:20px; color:white; display:flex; flex-direction:column; gap:15px;">
             <asp:Button ID="btnUserList" runat="server" Text="User List" CssClass="menu-btn" OnClick="btnUserList_Click" />
-            <asp:Button ID="btnCreateUser" runat="server" Text="Create User" CssClass="menu-btn" OnClick="btnCreateUser_Click" />
             <asp:Button ID="btnProfile" runat="server" Text="Profile" CssClass="menu-btn" OnClick="btnProfile_Click" />
             <asp:Button ID="btnSettings" runat="server" Text="Settings" CssClass="menu-btn" OnClick="btnSettings_Click" />
             <asp:Button ID="btnLogout" runat="server" Text="Log Out" CssClass="menu-btn" OnClick="btnLogout_Click" />
@@ -22,7 +21,6 @@
                 <!-- Example User -->
                 <div style="background:white; padding:20px; display:flex; align-items:center; justify-content:space-between; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
                     <div style="display:flex; align-items:center; gap:15px;">
-                        <img src="https://via.placeholder.com/60" alt="User Avatar" style="border-radius:50%;" />
                         <div>
                             <p style="margin:0; font-weight:bold;">Bella Simpson</p>
                             <p style="margin:0; color:gray;">bellas123@gmail.com</p>
