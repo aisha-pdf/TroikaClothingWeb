@@ -55,7 +55,7 @@ namespace TroikaClothingWeb
                     if (role.Equals("Customer"))
                         Response.Redirect("Default.aspx");
                     else if(role.Equals("Administrator"))
-                        Response.Redirect("Admin.aspx");
+                        Response.Redirect("Admin Pages/Admin.aspx");
                 }
                 else
                 {

@@ -48,8 +48,8 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About Us</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="Public Pages/About">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="Public Pages/Contact">Contact</a></li>
                         <%-- <li class="nav-item"><a class="nav-link" runat="server" href="~/Help">FAQs/Help</a></li>--%>
                     </ul>
                 </div>
@@ -57,14 +57,14 @@
         </nav>
 
         <%--navy blue navigation bar with login, register etc--%>
-        <nav class="navbar navbar-expand-sm navbar-troika1">
+        <%--<nav class="navbar navbar-expand-sm navbar-troika1">
             <div class="container-fluid">
                 <ul class="navbar-nav ms-auto d-flex flex-row text-white py-2">
                     <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Product">Product Catalogue</a></li>
                     <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Login">Login</a> </li>
                 </ul>
             </div>
-        </nav>
+        </nav>--%>
 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
