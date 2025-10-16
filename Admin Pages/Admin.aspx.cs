@@ -14,7 +14,7 @@ namespace TroikaClothingWeb
             // Ensure only admin can access
             if (Session["Role"] == null || Session["Role"].ToString() != "Administrator")
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("~/Login.aspx");
             }
         }
 
