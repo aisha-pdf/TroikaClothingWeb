@@ -15,25 +15,50 @@
         <!-- Main Content -->
         <div style="flex:1; background:#f4f4f4; padding:30px;">
             <h2 style="color:#5B4470; margin-bottom:20px;">USER MANAGEMENT</h2>
+            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="3" DataKeyNames="ID" DataSourceID="UserListDs" ForeColor="#333333" GridLines="None" Height="399px" Width="979px">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                <Columns>
+                    <asp:CommandField ShowEditButton="True" ShowSelectButton="True" />
+                    <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" />
+                    <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                    <asp:BoundField DataField="Surname" HeaderText="Surname" SortExpression="Surname" />
+                    <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                </Columns>
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                </asp:GridView>
+                <asp:SqlDataSource ID="UserListDs" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteRegister] WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email" InsertCommand="INSERT INTO [WebsiteRegister] ([Name], [Surname], [Email]) VALUES (@Name, @Surname, @Email)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [ID], [Name], [Surname], [Email] FROM [WebsiteRegister]" UpdateCommand="UPDATE [WebsiteRegister] SET [Name] = @Name, [Surname] = @Surname, [Email] = @Email WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email">
+                    <DeleteParameters>
+                        <asp:Parameter Name="original_ID" Type="Int32" />
+                        <asp:Parameter Name="original_Name" Type="String" />
+                        <asp:Parameter Name="original_Surname" Type="String" />
+                        <asp:Parameter Name="original_Email" Type="String" />
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="Name" Type="String" />
+                        <asp:Parameter Name="Surname" Type="String" />
+                        <asp:Parameter Name="Email" Type="String" />
+                    </InsertParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="Name" Type="String" />
+                        <asp:Parameter Name="Surname" Type="String" />
+                        <asp:Parameter Name="Email" Type="String" />
+                        <asp:Parameter Name="original_ID" Type="Int32" />
+                        <asp:Parameter Name="original_Name" Type="String" />
+                        <asp:Parameter Name="original_Surname" Type="String" />
+                        <asp:Parameter Name="original_Email" Type="String" />
+                    </UpdateParameters>
+                </asp:SqlDataSource>
 
-            <!-- User Cards -->
-            <div style="display:flex; flex-direction:column; gap:20px;">
-                <!-- Example User -->
-                <div style="background:white; padding:20px; display:flex; align-items:center; justify-content:space-between; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                    <div style="display:flex; align-items:center; gap:15px;">
-                        <div>
-                            <p style="margin:0; font-weight:bold;">Bella Simpson</p>
-                            <p style="margin:0; color:gray;">bellas123@gmail.com</p>
-                        </div>
-                    </div>
-                    <div>
-                        <asp:Button runat="server" Text="View" CssClass="action-btn" />
-                        <asp:Button runat="server" Text="Update" CssClass="action-btn" />
-                    </div>
-                </div>
 
-                <!-- More users can be added here -->
-            </div>
         </div>
     </div>
 
