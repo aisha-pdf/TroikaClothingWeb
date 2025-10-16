@@ -20,7 +20,7 @@ namespace TroikaClothingWeb
 
         protected void btnUserList_Click(object sender, EventArgs e)
         {
-            // TODO: Navigate to User List
+            Response.Redirect("Admin.aspx");
         }
 
         protected void btnCreateUser_Click(object sender, EventArgs e)
