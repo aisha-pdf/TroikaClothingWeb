@@ -51,15 +51,6 @@ namespace TroikaClothingWeb.Account
         protected global::System.Web.UI.WebControls.Label Email;
 
         /// <summary>
-        /// btnEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEmail;
-
-        /// <summary>
         /// PhoneNumber control.
         /// </summary>
         /// <remarks>
@@ -67,15 +58,6 @@ namespace TroikaClothingWeb.Account
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label PhoneNumber;
-
-        /// <summary>
-        /// btnPhone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPhone;
 
         /// <summary>
         /// Password control.

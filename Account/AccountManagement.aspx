@@ -48,7 +48,7 @@
               <div class="row">
                 <div class="col-md-10">
                     <asp:Label runat="server" ID="Email" CssClass="form-control" TextMode="Email" />
-                     <asp:Button ID="btnEmail" runat="server" Text="Edit" />
+                     <asp:Button runat="server" OnClick="Email_Click" Text="Edit" CssClass="btn btn-outline-dark" />
                 </div>
             </div>
                 <p> 
@@ -63,7 +63,7 @@
               <div class="row">
                 <div class="col-md-10">
                     <asp:Label runat="server" ID="PhoneNumber" CssClass="form-control" TextMode="Phone" />
-                     <asp:Button ID="btnPhone" runat="server" Text="Edit" />
+                     <asp:Button runat="server" OnClick="PhoneNumber_Click" Text="Edit" CssClass="btn btn-outline-dark" />
                     </div>
                 </div>
                 <p> 

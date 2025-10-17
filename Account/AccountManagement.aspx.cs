@@ -27,5 +27,15 @@ namespace TroikaClothingWeb.Account
         {
             Response.Redirect("~/Account/UpdateLastName");
         }
+
+        protected void Email_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Account/UpdateEmail");
+        }
+
+        protected void PhoneNumber_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Account/UpdateEmail");
+        }
     }
 }
