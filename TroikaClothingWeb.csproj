@@ -150,6 +150,7 @@
     <Content Include="Account\UpdateFirstName.aspx" />
     <Content Include="Account\UpdateLastName.aspx" />
     <Content Include="Account\UpdatePhoneNumber.aspx" />
+    <Content Include="Admin Pages\ProductManagement.aspx" />
     <Content Include="Public Pages\About.aspx" />
     <Content Include="Account\AddPhoneNumber.aspx" />
     <Content Include="Account\Confirm.aspx" />
@@ -410,6 +411,13 @@
     </Compile>
     <Compile Include="Admin Pages\Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin Pages\ProductManagement.aspx.cs">
+      <DependentUpon>ProductManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin Pages\ProductManagement.aspx.designer.cs">
+      <DependentUpon>ProductManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Public Pages\About.aspx.cs">

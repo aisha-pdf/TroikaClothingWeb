@@ -1,6 +1,17 @@
-﻿
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="TroikaClothingWeb.Products" %>
 
-<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="TroikaClothingWeb.Products" %>
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <%--navy blue navigation bar with login, register etc--%>
+    <nav class="navbar navbar-expand-sm navbar-troika1">
+        <div class="container-fluid">
+            <ul class="navbar-nav ms-auto d-flex flex-row text-white py-2">
+                <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Public Pages/Product">Product Catalogue</a></li>
+                <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Login">Login</a> </li>
+            </ul>
+        </div>
+    </nav>
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
      <div class="products-container">
      <h1>Women's Clothing Collection</h1>
