@@ -87,5 +87,7 @@
 
 
                 </p>
+
+                <asp:Button runat="server" OnClick="CloseAccount_Click" Text="Close Account" CssClass="btn btn-outline-dark" ForeColor="Red" />
          </main>
     </asp:Content>

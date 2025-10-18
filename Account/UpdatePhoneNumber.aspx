@@ -18,9 +18,10 @@
               <div class="row">
                 <div class="col-md-10">
                    <asp:TextBox runat="server" ID="PhoneNumber" CssClass="form-control" />
-                  <%-- change to on submit button when added <asp:RequiredFieldValidator runat="server" ControlToValidate="Email" CssClass="text-danger" ErrorMessage="The Email field is required." /> --%>
+                  <%-- change to on submit button when added <asp:RequiredFieldValidator runat="server" ControlToValidate="PhoneNumber" CssClass="text-danger" ErrorMessage="The Email field is required." /> --%>
                    <asp:Button runat="server" OnClick="Back_Click" Text="Back" CssClass="btn btn-outline-dark" />
                 </div>
+            </div>
             </div>
 
     </main>

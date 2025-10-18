@@ -37,5 +37,10 @@ namespace TroikaClothingWeb.Account
         {
             Response.Redirect("~/Account/UpdateEmail");
         }
+
+        protected void CloseAccount_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Account/CloseAccount");
+        }
     }
 }

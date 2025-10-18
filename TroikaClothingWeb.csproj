@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\AccountManagement.aspx" />
+    <Content Include="Account\CloseAccount.aspx" />
     <Content Include="Account\UpdateEmail.aspx" />
     <Content Include="Account\UpdateFirstName.aspx" />
     <Content Include="Account\UpdateLastName.aspx" />
@@ -278,6 +279,13 @@
     </Compile>
     <Compile Include="Account\AddPhoneNumber.aspx.designer.cs">
       <DependentUpon>AddPhoneNumber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\CloseAccount.aspx.cs">
+      <DependentUpon>CloseAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\CloseAccount.aspx.designer.cs">
+      <DependentUpon>CloseAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Confirm.aspx.cs">
       <DependentUpon>Confirm.aspx</DependentUpon>
