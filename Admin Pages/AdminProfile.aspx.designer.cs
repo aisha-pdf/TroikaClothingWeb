@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TroikaClothingWeb
+namespace TroikaClothingWeb.Admin_Pages
 {
 
 
-    public partial class Adminaspx
+    public partial class AdminProfile
     {
 
         /// <summary>
@@ -42,21 +42,21 @@ namespace TroikaClothingWeb
         protected global::System.Web.UI.WebControls.Button btnLogout;
 
         /// <summary>
-        /// GridView1 control.
+        /// DetailsView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
 
         /// <summary>
-        /// UserListDs control.
+        /// AdminProfileDS control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource UserListDs;
+        protected global::System.Web.UI.WebControls.SqlDataSource AdminProfileDS;
     }
 }

@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace TroikaClothingWeb
+namespace TroikaClothingWeb.Admin_Pages
 {
-    public partial class Adminaspx : System.Web.UI.Page
+    public partial class AdminProfile : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,13 +23,10 @@ namespace TroikaClothingWeb
             Response.Redirect("Admin.aspx");
         }
 
-
-
         protected void btnProfile_Click(object sender, EventArgs e)
         {
             Response.Redirect("AdminProfile.aspx");
         }
-
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {

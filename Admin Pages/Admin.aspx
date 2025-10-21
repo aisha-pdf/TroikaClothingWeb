@@ -21,14 +21,13 @@
         <div style="width: 220px; background-color: #3D304C; padding: 20px; color: white; display: flex; flex-direction: column; gap: 15px;">
             <asp:Button ID="btnUserList" runat="server" Text="User List" CssClass="menu-btn" OnClick="btnUserList_Click" />
             <asp:Button ID="btnProfile" runat="server" Text="Profile" CssClass="menu-btn" OnClick="btnProfile_Click" />
-            <asp:Button ID="btnSettings" runat="server" Text="Settings" CssClass="menu-btn" OnClick="btnSettings_Click" />
             <asp:Button ID="btnLogout" runat="server" Text="Log Out" CssClass="menu-btn" OnClick="btnLogout_Click" />
         </div>
 
         <!-- Main Content -->
         <div style="flex: 1; background: #f4f4f4; padding: 30px;">
-            <h2 style="color: #3D304C; margin-bottom: 20px;">USER MANAGEMENT</h2>
-            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="3" DataKeyNames="ID" DataSourceID="UserListDs" ForeColor="#333333" GridLines="None" Height="399px" Width="979px">
+            <h2 style="color: #3D304C; margin-bottom: 20px;">USER MANAGEMENT - USER LIST</h2>
+            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ID" DataSourceID="UserListDs" ForeColor="#333333" GridLines="None" Height="399px" Width="979px">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:CommandField ShowEditButton="True" ShowSelectButton="True" />
