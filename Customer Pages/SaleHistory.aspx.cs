@@ -11,11 +11,11 @@ namespace TroikaClothingWeb.Sale_Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Ensure only admin can access
-            if (Session["Role"] == null || Session["Role"].ToString() != "Customer")
-            {
-                Response.Redirect("~/Login.aspx");
-            }
+            //// Ensure only admin can access
+            //if (Session["Role"] == null || Session["Role"].ToString() != "Customer")
+            //{
+            //    Response.Redirect("~/Login.aspx");
+            //}
         }
     }
 }
