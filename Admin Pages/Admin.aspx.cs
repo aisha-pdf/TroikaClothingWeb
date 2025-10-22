@@ -24,7 +24,6 @@ namespace TroikaClothingWeb
         }
 
 
-
         protected void btnProfile_Click(object sender, EventArgs e)
         {
             Response.Redirect("AdminProfile.aspx");

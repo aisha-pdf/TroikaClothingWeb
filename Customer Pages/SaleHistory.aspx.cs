@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace TroikaClothingWeb.Sale_Pages
+{
+    public partial class SaleHistory : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // Ensure only admin can access
+            if (Session["Role"] == null || Session["Role"].ToString() != "Customer")
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+        }
+    }
+}

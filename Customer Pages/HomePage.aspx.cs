@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace TroikaClothingWeb.Sale_Pages
+namespace TroikaClothingWeb.Customer_Pages
 {
-    public partial class SaleHistory : System.Web.UI.Page
+    public partial class HomePage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
