@@ -24,6 +24,15 @@ namespace TroikaClothingWeb.Account
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
 
         /// <summary>
+        /// LblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblMessage;
+
+        /// <summary>
         /// FirstName control.
         /// </summary>
         /// <remarks>
@@ -103,5 +112,32 @@ namespace TroikaClothingWeb.Account
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource DSUsers;
+
+        /// <summary>
+        /// DSUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DSUpdate;
+
+        /// <summary>
+        /// DSClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DSClose;
+
+        /// <summary>
+        /// ID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ID;
     }
 }
