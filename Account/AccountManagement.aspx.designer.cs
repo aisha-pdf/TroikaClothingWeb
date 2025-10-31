@@ -30,7 +30,7 @@ namespace TroikaClothingWeb.Account
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label FirstName;
+        protected global::System.Web.UI.WebControls.TextBox FirstName;
 
         /// <summary>
         /// LastName control.
@@ -39,7 +39,16 @@ namespace TroikaClothingWeb.Account
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LastName;
+        protected global::System.Web.UI.WebControls.TextBox LastName;
+
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
         /// Email control.
@@ -48,7 +57,16 @@ namespace TroikaClothingWeb.Account
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Email;
+        protected global::System.Web.UI.WebControls.TextBox Email;
+
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
         /// PhoneNumber control.
@@ -57,7 +75,7 @@ namespace TroikaClothingWeb.Account
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label PhoneNumber;
+        protected global::System.Web.UI.WebControls.TextBox PhoneNumber;
 
         /// <summary>
         /// Password control.
@@ -66,6 +84,24 @@ namespace TroikaClothingWeb.Account
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Password;
+        protected global::System.Web.UI.WebControls.TextBox Password;
+
+        /// <summary>
+        /// gvUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvUsers;
+
+        /// <summary>
+        /// DSUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DSUsers;
     }
 }

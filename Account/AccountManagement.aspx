@@ -16,14 +16,13 @@
                   </div>
               <div class="row">
                 <div class="col-md-10">
-                    <asp:Label runat="server" ID="FirstName" CssClass="form-control" TextMode="FirstName" Text="****" />
-                    <asp:Button runat="server" OnClick="Name_Click" Text="Edit" CssClass="btn btn-outline-dark" />
+                    <asp:TextBox ID="FirstName" runat="server" Width="393px"></asp:TextBox>
                 </div>
             </div>
             </div>
             <p> 
 
-
+              
 
 
             </p>
@@ -32,8 +31,7 @@
                   </div>
              <div class="row">
                 <div class="col-md-10">
-                    <asp:Label runat="server" ID="LastName" CssClass="form-control" TextMode="LastName" />
-                     <asp:Button runat="server" OnClick="LastName_Click" Text="Edit" CssClass="btn btn-outline-dark" />
+                    <asp:TextBox ID="LastName" runat="server" Width="393px"></asp:TextBox>
                 </div>
             </div>
                 <p> 
@@ -43,12 +41,11 @@
 
                 </p>
             <div class="row">
-                <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-2 col-form-label">Email</asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="Email"></asp:Label>
                 </div>
               <div class="row">
                 <div class="col-md-10">
-                    <asp:Label runat="server" ID="Email" CssClass="form-control" TextMode="Email" />
-                     <asp:Button runat="server" OnClick="Email_Click" Text="Edit" CssClass="btn btn-outline-dark" />
+                   <asp:TextBox ID="Email" runat="server" Width="393px"></asp:TextBox>
                 </div>
             </div>
                 <p> 
@@ -58,12 +55,11 @@
 
                 </p>
             <div class="row">
-                <asp:Label runat="server" AssociatedControlID="PhoneNumber" CssClass="col-md-2 col-form-label">Phone Number</asp:Label>
+                <asp:Label ID="Label2" runat="server" Text="Phone Number"></asp:Label>
                   </div>
               <div class="row">
                 <div class="col-md-10">
-                    <asp:Label runat="server" ID="PhoneNumber" CssClass="form-control" TextMode="Phone" />
-                     <asp:Button runat="server" OnClick="PhoneNumber_Click" Text="Edit" CssClass="btn btn-outline-dark" />
+                    <asp:TextBox ID="PhoneNumber" runat="server" Width="393px"></asp:TextBox>
                     </div>
                 </div>
                 <p> 
@@ -77,8 +73,7 @@
                </div>
             <div class="row">
                 <div class="col-md-10">
-                    <asp:Label runat="server" ID="Password" CssClass="form-control" TextMode="Password" />
-                    <asp:Button runat="server" OnClick="Password_Click" Text="Edit" CssClass="btn btn-outline-dark" />
+                    <asp:TextBox ID="Password" runat="server" Width="393px"></asp:TextBox>
                 </div>
             </div>
                 <p> 
@@ -87,7 +82,27 @@
 
 
                 </p>
+                <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="DSUsers" Visible="False">
+                    <Columns>
+                        <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" />
+                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                        <asp:BoundField DataField="Surname" HeaderText="Surname" SortExpression="Surname" />
+                        <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                        <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
+                        <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />
+                        <asp:BoundField DataField="PhoneNumber" HeaderText="PhoneNumber" SortExpression="PhoneNumber" />
+                    </Columns>
+    </asp:GridView>
+    <asp:SqlDataSource ID="DSUsers" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT * FROM [WebsiteRegister]"></asp:SqlDataSource>
+                <div style ="float:left; width:50%;">
+                <asp:Button runat="server" OnClick="SaveChanges_Click" Text="Save Changes" CssClass="btn btn-outline-dark" ForeColor="Black" />
 
-                <asp:Button runat="server" OnClick="CloseAccount_Click" Text="Close Account" CssClass="btn btn-outline-dark" ForeColor="Red" />
+                    </div>
+
+        <div style ="float:left; width:50%;">
+         <asp:Button runat="server" OnClick="CloseAccount_Click" Text="Close Account" CssClass="btn btn-outline-dark" ForeColor="Red" />
+
+        </div>
+
          </main>
     </asp:Content>
