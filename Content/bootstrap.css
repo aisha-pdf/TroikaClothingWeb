@@ -1752,7 +1752,7 @@ progress {
   margin-bottom: 1rem;
   color: var(--bs-table-color);
   vertical-align: top;
-  border-color: var(--bs-table-border-color);
+    margin-right: 0px;
 }
 .table > :not(caption) > * > * {
   padding: 0.5rem 0.5rem;
