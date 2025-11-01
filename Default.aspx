@@ -23,6 +23,7 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled">
+                        3
                         <li class="py-1">Just Dropped</li>
                         <li class="py-1">Hot Trends</li>
                         <li class="py-1">Winter Newness</li>

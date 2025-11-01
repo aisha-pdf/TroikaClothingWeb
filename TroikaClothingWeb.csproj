@@ -203,6 +203,7 @@
     <Content Include="Images\white linen pants.jpeg" />
     <Content Include="Images\white office shirt.jpeg" />
     <Content Include="Login.aspx" />
+    <Content Include="Public Pages\ProductDetail.aspx" />
     <Content Include="Public Pages\Products.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Customer Pages\SaleHistory.aspx" />
@@ -480,6 +481,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Public Pages\ProductDetail.aspx.cs">
+      <DependentUpon>ProductDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public Pages\ProductDetail.aspx.designer.cs">
+      <DependentUpon>ProductDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Public Pages\Products.aspx.cs">
       <DependentUpon>Products.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
