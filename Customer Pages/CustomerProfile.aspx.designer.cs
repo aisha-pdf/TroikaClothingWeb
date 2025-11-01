@@ -7,20 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TroikaClothingWeb.Sale_Pages
+namespace TroikaClothingWeb.Customer_Pages
 {
 
 
-    public partial class SaleHistory
+    public partial class CustomerProfile
     {
 
         /// <summary>
-        /// GridView1 control.
+        /// DetailsView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
     }
 }

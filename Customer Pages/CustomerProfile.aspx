@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SaleHistory.aspx.cs" Inherits="TroikaClothingWeb.Sale_Pages.SaleHistory" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CustomerProfile.aspx.cs" Inherits="TroikaClothingWeb.Customer_Pages.CustomerProfile" %>
 
-<asp:Content ID="Content0" ContentPlaceHolderID="WhiteNavbar" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="WhiteNavBar" runat="server">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-troika">
         <div class="container">
             <%--toggle for navbar--%>
@@ -18,11 +18,10 @@
                 </ul>
             </div>
         </div>
-        </nav>
+    </nav>
 </asp:Content>
 
-
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="HeadContent" runat="server">
     <%--navy blue navigation bar for admin--%>
     <nav class="navbar navbar-expand-sm navbar-troika1">
         <div class="container-fluid">
@@ -35,12 +34,13 @@
     </nav>
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="flex:1;padding:30px">
-        <h2 style="color: #3D304C; margin-bottom: 20px;">SALE HISTORY</h2>
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+
+ <div style="flex:1;padding:30px">
+        <h2 style="color: #3D304C; margin-bottom: 20px;">CUSTOMER PROFILE</h2>
     </div>
     <div>
-        <asp:GridView ID="GridView1" runat="server">
-        </asp:GridView>
+        <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="125px">
+        </asp:DetailsView>
     </div>
 </asp:Content>
