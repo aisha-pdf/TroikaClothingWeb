@@ -238,6 +238,7 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Account\Web.config" />
     <Content Include="Public Pages\ProductImageHandler.ashx" />
+    <Content Include="Admin Pages\ProductImageHandler.ashx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -432,6 +433,9 @@
     </Compile>
     <Compile Include="Admin Pages\AdminProfile.aspx.designer.cs">
       <DependentUpon>AdminProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin Pages\ProductImageHandler.ashx.cs">
+      <DependentUpon>ProductImageHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Admin Pages\ProductManagement.aspx.cs">
       <DependentUpon>ProductManagement.aspx</DependentUpon>
