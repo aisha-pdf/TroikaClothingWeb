@@ -96,9 +96,7 @@
         }
 
         .dropdown-select {
-            width: 180px;
             padding: 8px;
-            border: 2px solid var(--troika-light-accent);
             border-radius: 4px;
             font-size: 15px;
             background-color: #fff;
@@ -193,13 +191,55 @@
                  <!-- Color Section -->
                 <div class="dropdown-section">
                     <asp:Label ID="lblColor" runat="server" CssClass="dropdown-label" Text="Colour:"></asp:Label>
-                    <asp:DropDownList ID="ddlColor" runat="server" CssClass="dropdown-select"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlColor" runat="server" CssClass="dropdown-select" ToolTip="Please select a colour" Width="126px">
+                        <asp:ListItem>Black</asp:ListItem>
+                        <asp:ListItem>White</asp:ListItem>
+                        <asp:ListItem>Grey</asp:ListItem>
+                        <asp:ListItem>Navy</asp:ListItem>
+                        <asp:ListItem>Beige</asp:ListItem>
+                        <asp:ListItem>Brown</asp:ListItem>
+                        <asp:ListItem>Red</asp:ListItem>
+                        <asp:ListItem>Maroon</asp:ListItem>
+                        <asp:ListItem>Pink</asp:ListItem>
+                        <asp:ListItem>Blush</asp:ListItem>
+                        <asp:ListItem>Orange</asp:ListItem>
+                        <asp:ListItem>Mustard</asp:ListItem>
+                        <asp:ListItem>Yellow</asp:ListItem>
+                        <asp:ListItem>Green</asp:ListItem>
+                        <asp:ListItem>Olive</asp:ListItem>
+                        <asp:ListItem>Mint</asp:ListItem>
+                        <asp:ListItem>Teal</asp:ListItem>
+                        <asp:ListItem>Turquoise</asp:ListItem>
+                        <asp:ListItem>Blue</asp:ListItem>
+                        <asp:ListItem>Sky Blue</asp:ListItem>
+                        <asp:ListItem>Royal Blue</asp:ListItem>
+                        <asp:ListItem>Purple</asp:ListItem>
+                        <asp:ListItem>Lavender</asp:ListItem>
+                        <asp:ListItem>Lilac</asp:ListItem>
+                        <asp:ListItem>Burgundy</asp:ListItem>
+                        <asp:ListItem>Cream</asp:ListItem>
+                        <asp:ListItem>Khaki</asp:ListItem>
+                        <asp:ListItem>Coral</asp:ListItem>
+                        <asp:ListItem>Charcoal</asp:ListItem>
+                        <asp:ListItem>Sage</asp:ListItem>
+                        <asp:ListItem>Mocha</asp:ListItem>
+                        <asp:ListItem>Peach</asp:ListItem>
+                        <asp:ListItem>Tan</asp:ListItem>
+                        <asp:ListItem>Ivory</asp:ListItem>
+                    </asp:DropDownList>
                 </div>
 
                 <!-- Size Section -->
                 <div class="dropdown-section">
                     <asp:Label ID="lblSize" runat="server" CssClass="dropdown-label" Text="Size:"></asp:Label>
-                    <asp:DropDownList ID="ddlSize" runat="server" CssClass="dropdown-select"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlSize" runat="server" CssClass="dropdown-select" ToolTip="Please select a size" Width="80px">
+                        <asp:ListItem>XS</asp:ListItem>
+                        <asp:ListItem>S</asp:ListItem>
+                        <asp:ListItem>M</asp:ListItem>
+                        <asp:ListItem>L</asp:ListItem>
+                        <asp:ListItem>XL</asp:ListItem>
+                        <asp:ListItem></asp:ListItem>
+                    </asp:DropDownList>
                 </div>
 
                  <!-- Quantity Section -->
