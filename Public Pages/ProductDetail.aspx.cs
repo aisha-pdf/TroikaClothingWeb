@@ -53,11 +53,11 @@ namespace TroikaClothingWeb.Public_Pages
                     lblProductPrice.Text = "R" + Convert.ToDecimal(reader["Price"]).ToString("0.00");
 
                     // Handle image
+                    // Use handler to serve the image
                     if (reader["Picture"] != DBNull.Value)
                     {
-                        byte[] imgBytes = (byte[])reader["Picture"];
-                        string base64Image = "data:image/jpeg;base64," + Convert.ToBase64String(imgBytes);
-                        imgProduct.ImageUrl = base64Image;
+                        // Stream via handler (faster and avoids large page payloads)
+                        imgProduct.ImageUrl = $"~/Public Pages/ProductImageHandler.ashx?id={HttpUtility.UrlEncode(productId)}";
                     }
                     else
                     {

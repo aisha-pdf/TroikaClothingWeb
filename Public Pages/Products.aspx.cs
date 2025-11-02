@@ -16,27 +16,25 @@ namespace TroikaClothingWeb
             if (!IsPostBack)
             {
                 LoadProducts();
+               // ddlCategory.SelectedValue = "all";
             }
         }
 
         // Load all products, or filter by category and search term
         private void LoadProducts(string category = "all", string search = "")
         {
-            string query = "SELECT ProductID, ProductName, Description, Category, Price, Picture FROM Product";
+            string query = "SELECT ProductID, ProductName, Description, Category, Price, Picture FROM Product WHERE Status = 'Active'";
             bool hasCondition = false;
 
             if (category != "all" || !string.IsNullOrEmpty(search))
             {
-                query += " WHERE ";
                 if (category != "all")
                 {
-                    query += "Category = @Category";
-                    hasCondition = true;
+                    query += " AND Category = @Category";
                 }
                 if (!string.IsNullOrEmpty(search))
                 {
-                    if (hasCondition) query += " AND ";
-                    query += "(ProductName LIKE @Search OR Description LIKE @Search)";
+                    query += " AND (ProductName LIKE @Search OR Description LIKE @Search)";
                 }
             }
 
@@ -53,18 +51,18 @@ namespace TroikaClothingWeb
                 da.Fill(dt);
             }
 
-            // Compute and attach ImageUrl for display
+            // Compute and attach ImageUrl for display — use the handler to stream images
             dt.Columns.Add("ImageUrl", typeof(string));
             foreach (DataRow row in dt.Rows)
             {
+                // Use handler for database-stored images to avoid large base64 inline blocks
                 if (row["Picture"] != DBNull.Value)
                 {
-                    byte[] imgBytes = (byte[])row["Picture"];
-                    row["ImageUrl"] = "data:image/jpeg;base64," + Convert.ToBase64String(imgBytes);
+                    row["ImageUrl"] = $"~/Public Pages/ProductImageHandler.ashx?id={row["ProductID"]}";
                 }
                 else
                 {
-                    row["ImageUrl"] = "~/images/no-image.png"; // fallback image
+                    row["ImageUrl"] = "~/images/no-image.png"; // fallback image file on disk
                 }
             }
 
@@ -93,6 +91,8 @@ namespace TroikaClothingWeb
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadProducts(ddlCategory.SelectedValue, txtSearch.Text.Trim());
+
+           
         }
 
         // Handles "View Details" button click inside DataList
@@ -104,6 +104,22 @@ namespace TroikaClothingWeb
                 // Navigate to product detail page
                 Response.Redirect($"ProductDetail.aspx?id={productId}");
             }
+        }
+
+        protected void ddlCategory_DataBound(object sender, EventArgs e)
+        {
+            // Insert "All Categories" as the first item AFTER data is bound
+            ddlCategory.Items.Insert(0, new ListItem("All Categories", "all"));
+        }
+
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            // Clear both the search text and the category filter
+            txtSearch.Text = string.Empty;
+            ddlCategory.SelectedValue = "all";
+
+            // Reload all products
+            LoadProducts("all", "");
         }
     }
 }

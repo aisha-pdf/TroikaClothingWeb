@@ -19,25 +19,25 @@
         <div class="search-filter-section">
             <div class="search-bar">
                 <asp:TextBox ID="txtSearch" runat="server" placeholder="Search products..." CssClass="search-input" />
-                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="search-button" OnClick="btnSearch_Click" />
+                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="search-button" OnClick="btnSearch_Click" /> &nbsp
+                <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="search-button" OnClick="btnClear_Click" />
             </div>
 
             <div class="filter-section">
                 <label for="ddlCategory">Filter by Category:</label>
-                <asp:DropDownList ID="ddlCategory" runat="server" CssClass="category-dropdown" AutoPostBack="true" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged">
-                    <asp:ListItem Text="All Categories" Value="all" />
-                    <asp:ListItem Text="Dress" Value="Dress" />
-                    <asp:ListItem Text="Blazer" Value="Blazer" />
-                    <asp:ListItem Text="Gown" Value="Gown" />
-                    <asp:ListItem Text="Coat" Value="Coat" />
-                    <asp:ListItem Text="Skirt" Value="Skirt" />
+                <asp:DropDownList ID="ddlCategory" runat="server" CssClass="category-dropdown" AutoPostBack="true" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged"  OnDataBound="ddlCategory_DataBound"  DataSourceID="SqlDataSourceCategories"  DataTextField="Category" DataValueField="Category">
+                    
                 </asp:DropDownList>
             </div>
+
+            <asp:SqlDataSource ID="SqlDataSourceCategories" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT DISTINCT Category FROM Product WHERE (Category IS NOT NULL) ORDER BY Category"></asp:SqlDataSource>
+
         </div>
 
         <asp:Label ID="lblNoProducts" runat="server" Text="No products found." Visible="false" CssClass="no-products" />
 
         <!-- Products Grid -->
+        
         <div class="products-grid-container">
             <asp:DataList ID="dlProducts" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" 
                 CssClass="products-grid" OnItemCommand="dlProducts_ItemCommand">
