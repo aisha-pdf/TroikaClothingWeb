@@ -8,10 +8,10 @@
 //------------------------------------------------------------------------------
 
 namespace TroikaClothingWeb.Account {
-    
-    
+
+
     public partial class Register {
-        
+
         /// <summary>
         /// ErrorMessage control.
         /// </summary>
@@ -20,7 +20,7 @@ namespace TroikaClothingWeb.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
-        
+
         /// <summary>
         /// Email control.
         /// </summary>
@@ -29,7 +29,7 @@ namespace TroikaClothingWeb.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Email;
-        
+
         /// <summary>
         /// Password control.
         /// </summary>
@@ -38,7 +38,7 @@ namespace TroikaClothingWeb.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Password;
-        
+
         /// <summary>
         /// ConfirmPassword control.
         /// </summary>

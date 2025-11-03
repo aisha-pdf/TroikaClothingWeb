@@ -46,13 +46,59 @@
                         <img src="/Images/logo.png" alt="Troika Clothing CC" height="60" class="d-inline-block align-text-top">
                     </a>
                     <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                        <!-- LEFT SIDE NAVIGATION -->
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/About">About Us</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Contact">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Products.aspx">Product Catalogue</a></li>
+                        </ul>
+
+                        <!-- RIGHT SIDE NAVIGATION -->
+                        <ul class="navbar-nav ms-auto">
+                            <!-- Cart  -->
+                            <li class="nav-item">
+                                <a class="nav-link" runat="server" href="~/Public Pages/Cart.aspx">
+                                    🛒 Cart (<asp:Label ID="lblCartCount" runat="server" Text="0" />)
+                                </a>
+                            </li>
+
+                            <!-- When NOT logged in -->
+                            <asp:PlaceHolder ID="phLoggedOut" runat="server" Visible="true">
+                                <li class="nav-item">
+                                    <a class="nav-link" runat="server" href="~/Login.aspx">Account</a>
+                                </li>
+                            </asp:PlaceHolder>
+
+                            <!-- When logged in -->
+                            <asp:PlaceHolder ID="phLoggedIn" runat="server" Visible="false">
+                                <li class="nav-item">
+                                    <span class="nav-link">Welcome, <asp:Label ID="lblWelcome" runat="server" /></span>
+                                </li>
+                                <li class="nav-item">
+                                    <asp:LinkButton ID="btnLogout" runat="server" CssClass="nav-link" OnClick="btnLogout_Click">
+                                        Logout
+                                    </asp:LinkButton>
+                                </li>
+                            </asp:PlaceHolder>
+                        </ul>
+
+                    </div>
+
+
+
+                   <%-- <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
                             <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/About">About Us</a></li>
                             <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Contact">Contact</a></li>
-                            <%-- <li class="nav-item"><a class="nav-link" runat="server" href="~/Help">FAQs/Help</a></li>--%>
+                            <%-- <li class="nav-item"><a class="nav-link" runat="server" href="~/Help">FAQs/Help</a></li>
+                            <li class="nav-item>
+                        </li>
+
                         </ul>
-                    </div>
+                    </div> --%>
+
                 </div>
             </nav>
         </asp:ContentPlaceHolder>

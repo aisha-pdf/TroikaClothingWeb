@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Security.Principal;
@@ -6,7 +7,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.AspNet.Identity;
+using TroikaClothingWeb.Models;
 
 namespace TroikaClothingWeb
 {
@@ -46,6 +47,8 @@ namespace TroikaClothingWeb
             }
 
             Page.PreLoad += master_Page_PreLoad;
+
+
         }
 
         protected void master_Page_PreLoad(object sender, EventArgs e)
@@ -69,7 +72,40 @@ namespace TroikaClothingWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                bool loggedIn = (Session != null && Session["Username"] != null && Session["Role"] != null);
 
+                if (phLoggedIn != null) phLoggedIn.Visible = loggedIn;
+                if (phLoggedOut != null) phLoggedOut.Visible = !loggedIn;
+
+                // Set welcome label
+                if (loggedIn && lblWelcome != null)
+                {
+                    lblWelcome.Text = Session["Username"].ToString();
+                }
+
+                // Handle cart count safely
+                if (lblCartCount != null)
+                {
+                    var cart = ShoppingCart.Get(Session);
+                    lblCartCount.Text = (cart != null ? cart.Count : 0).ToString();
+                }
+            }
+            catch
+            {
+                // Fail silently — we don’t want layout to crash
+                if (lblCartCount != null) lblCartCount.Text = "0";
+            }
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            // Clear session and go to home
+            Session.Clear();
+            Session.Abandon();
+            Response.Redirect("~/");
+           // Response.Redirect("~/Public Pages/Products.aspx");
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

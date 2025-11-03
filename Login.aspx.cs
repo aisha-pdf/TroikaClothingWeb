@@ -52,11 +52,29 @@ namespace TroikaClothingWeb
                     Session["Username"] = username;
                     Session["Role"] = role;
 
-                    // Redirect based on role
-                    if (role.Equals("Customer"))
-                        Response.Redirect("~/Customer Pages/HomePage");
-                    else if (role.Equals("Administrator"))
-                        Response.Redirect("Admin Pages/Admin.aspx");
+                    // Handle ReturnUrl
+                    if (Session["ReturnUrl"] != null)
+                    {
+                        string returnUrl = Session["ReturnUrl"].ToString();
+                        Session["ReturnUrl"] = null;
+                        Response.Redirect(returnUrl);
+                        return;
+                    }
+
+                    // Redirect based on user role
+                    if (role.Equals("Customer", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Response.Redirect("~/Public Pages/Products.aspx");
+                    }
+                    else if (role.Equals("Administrator", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Response.Redirect("~/Admin Pages/Admin.aspx");
+                    }
+                    else
+                    {
+                        // fallback just in case
+                        Response.Redirect("~/Public Pages/Products.aspx");
+                    }
                 }
                 else
                 {
@@ -67,6 +85,8 @@ namespace TroikaClothingWeb
             {
                 lblMessage.Text = "Invalid username or password.";
             }
+
+
         }
     }
 }

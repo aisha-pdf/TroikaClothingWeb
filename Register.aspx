@@ -45,6 +45,48 @@
                 <label for="chkShowPwd" style="user-select:none; cursor:pointer;">Show password</label>
             </div>
 
+            <!-- Optional Address Section -->
+            <div id="addressSection" style="margin-top:20px;">
+                <button type="button" id="btnToggleAddress"
+                        style="background:none; border:none; color:#4B0082; font-weight:600; cursor:pointer; font-size:16px; display:flex; align-items:center; gap:8px;">
+                    <span id="toggleIcon" style="font-size:20px;">➕</span>
+                    Add Delivery Address (Optional)
+                </button>
+
+                <!-- Hidden Address Form -->
+                <div id="addressForm" style="display:none; margin-top:15px; padding:15px; border:1px dashed #bbb; border-radius:6px; background:#fafafa;">
+                    <h4 style="color:#4B0082; margin-bottom:10px;">Delivery Address</h4>
+                    <p style="color:#555; font-size:14px; margin-bottom:15px;">
+                        You can skip this and add your address later during checkout.
+                    </p>
+
+                    <!-- Street -->
+                    <div style="margin-bottom:10px;">
+                        <asp:Label ID="lblStreet" runat="server" Text="Street Address:" AssociatedControlID="txtStreet" />
+                        <asp:TextBox ID="txtStreet" runat="server" 
+                                     style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;" />
+                    </div>
+
+                    <!-- Suburb -->
+                    <div style="margin-bottom:10px;">
+                        <asp:Label ID="lblSuburb" runat="server" Text="Suburb:" AssociatedControlID="txtSuburb" />
+                        <asp:TextBox ID="txtSuburb" runat="server" 
+                                     style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;" />
+                    </div>
+
+                    <!-- Post Code -->
+                    <div style="margin-bottom:10px;">
+                        <asp:Label ID="lblPostCode" runat="server" Text="Post Code:" AssociatedControlID="txtPostCode" />
+                        <asp:TextBox ID="txtPostCode" runat="server" MaxLength="4"
+                                     style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;" />
+                    </div>
+                </div>
+            </div>
+
+
+            <br />
+
+
             <!-- Register button -->
             <asp:Button ID="btnRegister" runat="server" Text="Register"
                         OnClick="btnRegister_Click"
@@ -147,5 +189,36 @@
             }
         })();
     </script>
+
+    <script type="text/javascript">
+        // --- Address toggle panel ---
+        (function () {
+            var toggleBtn = document.getElementById("btnToggleAddress");
+            var addressForm = document.getElementById("addressForm");
+            var toggleIcon = document.getElementById("toggleIcon");
+
+            if (toggleBtn && addressForm && toggleIcon) {
+                toggleBtn.addEventListener("click", function () {
+                    if (addressForm.style.display === "none") {
+                        addressForm.style.display = "block";
+                        toggleIcon.textContent = "➖"; // change icon to minus
+                        toggleBtn.textContent = " Hide Delivery Address";
+                        toggleBtn.prepend(toggleIcon);
+                    } else {
+                        addressForm.style.display = "none";
+                        toggleIcon.textContent = "➕"; // change icon to plus
+                        toggleBtn.textContent = " Add Delivery Address (Optional)";
+                        toggleBtn.prepend(toggleIcon);
+                    }
+                });
+            }
+        })();
+    </script>
+
+
+
+
+
+
 </asp:Content>
 
