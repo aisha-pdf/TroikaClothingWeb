@@ -35,6 +35,7 @@
                     <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                     <asp:BoundField DataField="Surname" HeaderText="Surname" SortExpression="Surname" />
                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                    <asp:BoundField DataField="PhoneNumber" HeaderText="PhoneNumber" SortExpression="PhoneNumber" />
                 </Columns>
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -47,7 +48,7 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
-            <asp:SqlDataSource ID="UserListDs" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteRegister] WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email" InsertCommand="INSERT INTO [WebsiteRegister] ([Name], [Surname], [Email]) VALUES (@Name, @Surname, @Email)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [ID], [Name], [Surname], [Email] FROM [WebsiteRegister]" UpdateCommand="UPDATE [WebsiteRegister] SET [Name] = @Name, [Surname] = @Surname, [Email] = @Email WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email">
+            <asp:SqlDataSource ID="UserListDs" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteRegister] WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email" InsertCommand="INSERT INTO [WebsiteRegister] ([Name], [Surname], [Email]) VALUES (@Name, @Surname, @Email)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT ID, Name, Surname, Email, PhoneNumber FROM WebsiteRegister" UpdateCommand="UPDATE [WebsiteRegister] SET [Name] = @Name, [Surname] = @Surname, [Email] = @Email WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email">
                 <DeleteParameters>
                     <asp:Parameter Name="original_ID" Type="Int32" />
                     <asp:Parameter Name="original_Name" Type="String" />

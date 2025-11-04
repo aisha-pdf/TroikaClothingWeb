@@ -26,6 +26,11 @@
                 <asp:TextBox ID="txtEmail" runat="server" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;" />
             </div>
 
+            <!--Phone Number-->
+            <div style="margin-bottom:12px">
+                <asp:Label ID="lblPhoneNum" runat="server" Text="Phone Number (10 characters):" AssociatedControlID="txtPhoneNum"></asp:Label>
+                <asp:TextBox ID="txtPhoneNum" runat="server" MaxLength="10" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;"></asp:TextBox>
+            </div>
             <!-- Username -->
             <div style="margin-bottom:12px;">
                 <asp:Label ID="lblUsername" runat="server" Text="Username (6 characters):" AssociatedControlID="txtUsername" />
@@ -95,7 +100,7 @@
             <br /><br />
             <asp:Label ID="lblMessage" runat="server" ForeColor="Green"
                        style="display:block; text-align:center; font-weight:bold;" />
-            <asp:SqlDataSource ID="RegisterDataSource" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteRegister] WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email AND [Username] = @original_Username AND [Password] = @original_Password" InsertCommand="INSERT INTO WebsiteRegister(Name, Surname, Email, Username, Password, Status) VALUES (@Name, @Surname, @Email, @Username, @Password, 'Active')" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteRegister]" UpdateCommand="UPDATE [WebsiteRegister] SET [Name] = @Name, [Surname] = @Surname, [Email] = @Email, [Username] = @Username, [Password] = @Password WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email AND [Username] = @original_Username AND [Password] = @original_Password">
+            <asp:SqlDataSource ID="RegisterDataSource" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteRegister] WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email AND [Username] = @original_Username AND [Password] = @original_Password" InsertCommand="INSERT INTO WebsiteRegister(Name, Surname, Email, Username, Password, Status, PhoneNumber) VALUES (@Name, @Surname, @Email, @Username, @Password, 'Active', @PhoneNum)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteRegister]" UpdateCommand="UPDATE [WebsiteRegister] SET [Name] = @Name, [Surname] = @Surname, [Email] = @Email, [Username] = @Username, [Password] = @Password WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email AND [Username] = @original_Username AND [Password] = @original_Password">
                 <DeleteParameters>
                     <asp:Parameter Name="original_ID" Type="Int32" />
                     <asp:Parameter Name="original_Name" Type="String" />
@@ -110,6 +115,7 @@
                     <asp:ControlParameter ControlID="txtEmail" Name="Email" PropertyName="Text" Type="String" />
                     <asp:ControlParameter ControlID="txtUsername" Name="Username" PropertyName="Text" Type="String" />
                     <asp:ControlParameter ControlID="txtPassword" Name="Password" PropertyName="Text" Type="String" />
+                    <asp:ControlParameter ControlID="txtPhoneNum" Name="PhoneNum" PropertyName="Text" />
                 </InsertParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="Name" Type="String" />
@@ -125,7 +131,7 @@
                     <asp:Parameter Name="original_Password" Type="String" />
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteLogin] WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role" InsertCommand="INSERT INTO [WebsiteLogin] ([Username], [Password], [Role]) VALUES (@Username, @Password, @Role)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteLogin]" UpdateCommand="UPDATE [WebsiteLogin] SET [Username] = @Username, [Password] = @Password, [Role] = @Role WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role">
+            <asp:SqlDataSource ID="InsertLoginDS" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteLogin] WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role" InsertCommand="INSERT INTO [WebsiteLogin] ([Username], [Password], [Role]) VALUES (@Username, @Password, @Role)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteLogin]" UpdateCommand="UPDATE [WebsiteLogin] SET [Username] = @Username, [Password] = @Password, [Role] = @Role WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role">
                 <DeleteParameters>
                     <asp:Parameter Name="original_ID" Type="Int32" />
                     <asp:Parameter Name="original_Username" Type="String" />

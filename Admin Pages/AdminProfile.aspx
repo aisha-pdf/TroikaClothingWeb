@@ -36,6 +36,7 @@
                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                     <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
                     <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />
+                    <asp:BoundField DataField="PhoneNumber" HeaderText="PhoneNumber" SortExpression="PhoneNumber" />
                     <asp:CommandField ShowEditButton="True" />
                 </Fields>
                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -43,7 +44,7 @@
                 <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                 <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
             </asp:DetailsView>
-            <asp:SqlDataSource ID="AdminProfileDS" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteRegister] WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email AND [Username] = @original_Username AND [Password] = @original_Password" InsertCommand="INSERT INTO [WebsiteRegister] ([Name], [Surname], [Email], [Username], [Password]) VALUES (@Name, @Surname, @Email, @Username, @Password)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteRegister]" UpdateCommand="UPDATE [WebsiteRegister] SET [Name] = @Name, [Surname] = @Surname, [Email] = @Email, [Username] = @Username, [Password] = @Password WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email AND [Username] = @original_Username AND [Password] = @original_Password">
+            <asp:SqlDataSource ID="AdminProfileDS" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteRegister] WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email AND [Username] = @original_Username AND [Password] = @original_Password" InsertCommand="INSERT INTO [WebsiteRegister] ([Name], [Surname], [Email], [Username], [Password]) VALUES (@Name, @Surname, @Email, @Username, @Password)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT ID, Name, Surname, Email, Username, Password, PhoneNumber FROM WebsiteRegister" UpdateCommand="UPDATE [WebsiteRegister] SET [Name] = @Name, [Surname] = @Surname, [Email] = @Email, [Username] = @Username, [Password] = @Password WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email AND [Username] = @original_Username AND [Password] = @original_Password">
                 <DeleteParameters>
                     <asp:Parameter Name="original_ID" Type="Int32" />
                     <asp:Parameter Name="original_Name" Type="String" />

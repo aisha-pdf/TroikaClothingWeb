@@ -18,8 +18,10 @@ namespace TroikaClothingWeb
             string name = txtName.Text.Trim();
             string surname = txtSurname.Text.Trim();
             string email = txtEmail.Text.Trim();
+            string phoneNum = txtPhoneNum.Text.Trim();
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
+           
 
             string street = txtStreet.Text.Trim();
             string suburb = txtSuburb.Text.Trim();
@@ -29,6 +31,7 @@ namespace TroikaClothingWeb
             if (string.IsNullOrEmpty(name) ||
                 string.IsNullOrEmpty(surname) ||
                 string.IsNullOrEmpty(email) ||
+                string.IsNullOrEmpty(phoneNum) ||
                 string.IsNullOrEmpty(username) ||
                 string.IsNullOrEmpty(password))
             {
@@ -42,6 +45,14 @@ namespace TroikaClothingWeb
             {
                 lblMessage.ForeColor = System.Drawing.Color.Red;
                 lblMessage.Text = "Invalid email address.";
+                return;
+            }
+
+            //Phone number must be 10 digits
+            if (phoneNum.Length != 10)
+            {
+                lblMessage.ForeColor= System.Drawing.Color.Red;
+                lblMessage.Text = "Phone number must be 10 digits";
                 return;
             }
 
@@ -97,7 +108,7 @@ namespace TroikaClothingWeb
             {
                 // --- Insert into WebsiteRegister and WebsiteLogin ---
                 RegisterDataSource.Insert();
-                SqlDataSource1.Insert();
+                InsertLoginDS.Insert();
 
                 // --- Generate new CustomerID ---
                 string newCustomerID = GenerateNextCustomerID();
