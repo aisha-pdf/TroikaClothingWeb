@@ -21,38 +21,45 @@ namespace TroikaClothingWeb
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            // Validate password length (8 digits)
-            if (password.Length != 8 || username.Length != 6)
+            // Basic username and password length validation
+            if (username.Length != 6 || password.Length != 8)
             {
-                lblMessage.Text = "Password and/or Username is incorrect";
+                lblMessage.Text = "Username or Password is incorrect.";
                 return;
             }
 
-            // Make sure SqlDataSource exists
+            // Ensure the datasource exists
             if (LoginDatasource == null)
             {
                 lblMessage.Text = "Login data source not found.";
                 return;
             }
 
-            // Execute the query
+            // Get result from database
             DataView dv = (DataView)LoginDatasource.Select(DataSourceSelectArguments.Empty);
 
-            // Check if record exists
             if (dv != null && dv.Count > 0)
             {
-                // Get stored username (for case-sensitive check)
                 string dbUsername = dv[0]["Username"].ToString();
+                string status = dv[0]["Status"].ToString(); // ✅ Account Status from DB
 
-                // Compare case-sensitive
+                // Case-sensitive username match
                 if (dbUsername == username)
                 {
-                    string role = dv[0]["Role"].ToString(); // "Administrator" or "Customer"
-                    
+                    // ✅ Check if account is active
+                    if (!status.Equals("Active", StringComparison.OrdinalIgnoreCase))
+                    {
+                        lblMessage.Text = "Your account is not active. Please contact the administrator.";
+                        return;
+                    }
+
+                    string role = dv[0]["Role"].ToString(); // Administrator or Customer
+
+                    // Set session values
                     Session["Username"] = username;
                     Session["Role"] = role;
 
-                    // Handle ReturnUrl
+                    // ✅ If user was redirected to login from a restricted page
                     if (Session["ReturnUrl"] != null)
                     {
                         string returnUrl = Session["ReturnUrl"].ToString();
@@ -61,7 +68,7 @@ namespace TroikaClothingWeb
                         return;
                     }
 
-                    // Redirect based on user role
+                    // ✅ Role-based redirect
                     if (role.Equals("Customer", StringComparison.OrdinalIgnoreCase))
                     {
                         Response.Redirect("~/Public Pages/Products.aspx");
@@ -72,7 +79,6 @@ namespace TroikaClothingWeb
                     }
                     else
                     {
-                        // fallback just in case
                         Response.Redirect("~/Public Pages/Products.aspx");
                     }
                 }

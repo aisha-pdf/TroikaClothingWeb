@@ -131,7 +131,7 @@
                     <asp:Parameter Name="original_Password" Type="String" />
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="InsertLoginDS" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteLogin] WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role" InsertCommand="INSERT INTO [WebsiteLogin] ([Username], [Password], [Role]) VALUES (@Username, @Password, @Role)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteLogin]" UpdateCommand="UPDATE [WebsiteLogin] SET [Username] = @Username, [Password] = @Password, [Role] = @Role WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role">
+            <asp:SqlDataSource ID="InsertLoginDS" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteLogin] WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role" InsertCommand="INSERT INTO WebsiteLogin(Username, Password, Role, Status) VALUES (@Username, @Password, @Role, @Status)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteLogin]" UpdateCommand="UPDATE [WebsiteLogin] SET [Username] = @Username, [Password] = @Password, [Role] = @Role WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role">
                 <DeleteParameters>
                     <asp:Parameter Name="original_ID" Type="Int32" />
                     <asp:Parameter Name="original_Username" Type="String" />
@@ -142,6 +142,7 @@
                     <asp:ControlParameter ControlID="txtUsername" Name="Username" PropertyName="Text" Type="String" />
                     <asp:ControlParameter ControlID="txtPassword" Name="Password" PropertyName="Text" Type="String" />
                     <asp:Parameter DefaultValue="Customer" Name="Role" Type="String" />
+                    <asp:Parameter DefaultValue="Active" Name="Status" />
                 </InsertParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="Username" Type="String" />
