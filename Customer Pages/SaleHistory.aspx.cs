@@ -61,8 +61,11 @@ namespace TroikaClothingWeb.Sale_Pages
 
         protected void gvSale_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //getting selected reciept ID
             string recID = gvSale.DataKeys[gvSale.SelectedIndex].Value.ToString();
             ProductsSold.SelectParameters["recID"].DefaultValue = recID;
+
+            //rebind listview with products from that receipt
             lvProductsSold.DataBind();
         }
 

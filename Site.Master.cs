@@ -112,6 +112,11 @@ namespace TroikaClothingWeb
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
+
+        protected void Welcome_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Customer Page/CustomerProfile");
+        }
     }
 
 }

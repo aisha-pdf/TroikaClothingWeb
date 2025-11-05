@@ -15,12 +15,39 @@ namespace TroikaClothingWeb.Customer_Pages
     {
 
         /// <summary>
-        /// DetailsView1 control.
+        /// dvWebProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
+        protected global::System.Web.UI.WebControls.DetailsView dvWebProfile;
+
+        /// <summary>
+        /// WebProfileDS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource WebProfileDS;
+
+        /// <summary>
+        /// dvCustomerProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DetailsView dvCustomerProfile;
+
+        /// <summary>
+        /// ProfileDS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource ProfileDS;
     }
 }
