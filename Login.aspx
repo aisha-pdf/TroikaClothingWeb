@@ -63,6 +63,13 @@
                 <span>Don't have an account?</span>
                 <a href="Register.aspx" style="color:#4CAF50; text-decoration:none; font-weight:bold;">Register here</a>
             </div>
+
+            <!--Forgot Password Link-->
+            <div style ="text-align: center; margin-top: 15px;">
+                <span>Forgot Password?</span>
+                <a href="ForgotPassword.aspx" style="color:#4CAF50; text-decoration: none; font-weight: bold;">Reset Password</a>
+            </div>
+
         </div>
     </div>
 

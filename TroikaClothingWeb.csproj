@@ -163,6 +163,7 @@
     <Content Include="Admin Pages\ProductManagement.aspx" />
     <Content Include="Customer Pages\CustomerProfile.aspx" />
     <Content Include="Customer Pages\HomePage.aspx" />
+    <Content Include="ForgotPassword.aspx" />
     <Content Include="Public Pages\About.aspx" />
     <Content Include="Account\AddPhoneNumber.aspx" />
     <Content Include="Account\Confirm.aspx" />
@@ -468,6 +469,13 @@
     </Compile>
     <Compile Include="Customer Pages\HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
