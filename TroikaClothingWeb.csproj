@@ -229,7 +229,7 @@
     <Content Include="Public Pages\Products.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Customer Pages\SaleHistory.aspx" />
-    <Content Include="Reports.aspx" />
+    <Content Include="Admin Pages\Reports.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -571,11 +571,11 @@
     <Compile Include="Customer Pages\SaleHistory.aspx.designer.cs">
       <DependentUpon>SaleHistory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports.aspx.cs">
+    <Compile Include="Admin Pages\Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Reports.aspx.designer.cs">
+    <Compile Include="Admin Pages\Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">

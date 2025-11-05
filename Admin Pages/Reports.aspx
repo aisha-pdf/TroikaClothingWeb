@@ -25,7 +25,7 @@
 <asp:Button ID="btnPrint" runat="server" Text="Print Report"
     CssClass="btn btn-primary mt-3"
     OnClientClick="printReport(); return false;"
-    Visible="false" />
+    Visible="false" OnClick="btnPrint_Click" />
 
 
 <script type="text/javascript">

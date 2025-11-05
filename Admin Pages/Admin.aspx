@@ -7,6 +7,7 @@
             <ul class="navbar-nav ms-auto d-flex flex-row text-white py-2">
                 <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Admin Pages/Admin">User Management</a></li>
                 <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Admin Pages/ProductManagement">Product Management</a> </li>
+                <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Admin Pages/Reports">Reports</a> </li>
             </ul>
         </div>
     </nav>

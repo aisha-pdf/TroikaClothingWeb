@@ -11,6 +11,12 @@ namespace TroikaClothingWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Ensure only admin can access
+            if (Session["Role"] == null || Session["Role"].ToString() != "Administrator")
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
             if (!IsPostBack)
             {
                 imgReport1.Visible = false;
@@ -47,5 +53,9 @@ namespace TroikaClothingWeb
             }
         }
 
+        protected void btnPrint_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
