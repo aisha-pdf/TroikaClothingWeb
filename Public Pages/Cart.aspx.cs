@@ -287,7 +287,6 @@ namespace TroikaClothingWeb.Public_Pages
         }
 
 
-
         private string CalculateEstimatedDelivery()
         {
             string cs = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;

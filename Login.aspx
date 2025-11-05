@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TroikaClothingWeb.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-<div style="display:flex; justify-content:center; align-items:center; height:80vh;">
+    <div style="display:flex; justify-content:center; align-items:center; height:80vh;">
         <div style="width:350px; background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
             
             <h2 style="text-align:center; margin-bottom:20px; color:#333;">Login</h2>

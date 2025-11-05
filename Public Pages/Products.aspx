@@ -5,6 +5,7 @@
         <div class="container-fluid">
             <ul class="navbar-nav ms-auto d-flex flex-row text-white py-2">
                 <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Public Pages/Products">Product Catalogue</a></li>
+                 <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Customer Pages/SaleHistory">Sale History</a></li>
                 <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Login">Login</a></li>
             </ul>
         </div>
