@@ -356,7 +356,7 @@ body, html {
     <div style="display: flex; min-height: 80vh;">
 
         <!-- Sidebar -->
-        <div style="width: 220px; background-color: #3D304C; padding: 20px; color: white; display: flex; flex-direction: column; gap: 15px;">
+        <div style="width: 220px; padding: 20px; color: white; display: flex; flex-direction: column; gap: 15px;">
             <asp:Button ID="btnViewProducts" runat="server" Text="View Products" CssClass="menu-btn" OnClick="btnViewProducts_Click" />
             <asp:Button ID="btnShowAdd" runat="server" Text="Add New Product" CssClass="menu-btn" OnClick="btnShowAdd_Click" />
         </div>

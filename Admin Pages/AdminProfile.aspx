@@ -15,7 +15,7 @@
     <div style="display: flex; min-height: 80vh;">
 
         <!-- Sidebar -->
-        <div style="width: 220px; background-color: #3D304C; padding: 20px; color: white; display: flex; flex-direction: column; gap: 15px;">
+        <div style="width: 220px; padding: 20px; color: white; display: flex; flex-direction: column; gap: 15px;">
             <asp:Button ID="btnUserList" runat="server" Text="User List" CssClass="menu-btn" OnClick="btnUserList_Click" />
             <asp:Button ID="btnProfile" runat="server" Text="Profile" CssClass="menu-btn" OnClick="btnProfile_Click" />
             <asp:Button ID="btnLogout" runat="server" Text="Log Out" CssClass="menu-btn" OnClick="btnLogout_Click" />
