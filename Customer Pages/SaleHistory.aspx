@@ -39,8 +39,13 @@
     <div style="flex:1;padding:30px">
         <h2 style="color: #3D304C; margin-bottom: 20px;">SALE HISTORY</h2>
     </div>
-    <div>
-        <asp:GridView ID="GridView1" runat="server">
+    <div style="text-align:center">
+        <asp:GridView ID="GridView1" runat="server" HorizontalAlign="Center"></asp:GridView>
+    </div>
+    <div style="text-align:center">
+       
+        <asp:GridView ID="GridView2" runat="server" HorizontalAlign="Center">
         </asp:GridView>
+       
     </div>
 </asp:Content>
