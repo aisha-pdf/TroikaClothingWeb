@@ -1,15 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdminProfile.aspx.cs" Inherits="TroikaClothingWeb.Admin_Pages.AdminProfile" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-        <%--navy blue navigation bar for admin--%>
-    <nav class="navbar navbar-expand-sm navbar-troika1">
-        <div class="container-fluid">
-            <ul class="navbar-nav ms-auto d-flex flex-row text-white py-2">
-                <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Admin Pages/Admin">User Management</a></li>
-                <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Admin Pages/ProductManagement">Product Management</a> </li>
-            </ul>
-        </div>
-    </nav>
-</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
       <!-- Sidebar + Content Wrapper -->
     <div style="display: flex; min-height: 80vh;">
