@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProductDetail.aspx.cs" Inherits="TroikaClothingWeb.Public_Pages.ProductDetail" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="WhiteNavBar" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="HeadContent" runat="server">
 
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <style>
         /* Color variables from Site.css */
         :root {
@@ -130,11 +128,11 @@
             width: fit-content;
         }
 
-        .btn-add-to-cart:hover {
-            background: #234823;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
+            .btn-add-to-cart:hover {
+                background: #234823;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }
 
         .btn-back {
             padding: 8px 16px;
@@ -151,9 +149,9 @@
             margin-bottom: 20px;
         }
 
-        .btn-back:hover {
-            background: var(--troika-light-accent);
-        }
+            .btn-back:hover {
+                background: var(--troika-light-accent);
+            }
 
         @media (max-width: 768px) {
             .product-detail {
@@ -163,10 +161,7 @@
         }
     </style>
 
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-
-<div class="product-detail-container">
+    <div class="product-detail-container">
 
         <asp:HyperLink ID="lnkBackToProducts" runat="server" NavigateUrl="~/Public Pages/Products.aspx"
             CssClass="btn-back" Text="← Back to Products" />
@@ -175,7 +170,7 @@
 
             <!-- Left: Product Image -->
             <div class="product-image-section">
-                <asp:Image ID="imgProduct" runat="server" CssClass="main-product-image" 
+                <asp:Image ID="imgProduct" runat="server" CssClass="main-product-image"
                     ImageUrl="~/images/image-placeholder.png" AlternateText="Product Image" />
             </div>
 
@@ -188,7 +183,7 @@
                     Text="Product description will appear here."></asp:Label>
 
 
-                 <!-- Color Section -->
+                <!-- Color Section -->
                 <div class="dropdown-section">
                     <asp:Label ID="lblColor" runat="server" CssClass="dropdown-label" Text="Colour:"></asp:Label>
                     <asp:DropDownList ID="ddlColor" runat="server" CssClass="dropdown-select" ToolTip="Please select a colour" Width="126px">
@@ -242,7 +237,7 @@
                     </asp:DropDownList>
                 </div>
 
-                 <!-- Quantity Section -->
+                <!-- Quantity Section -->
                 <div class="quantity-section">
                     <asp:Label ID="lblQuantity" runat="server" CssClass="quantity-label" Text="Quantity:"></asp:Label>
                     <asp:TextBox ID="txtQuantity" runat="server" CssClass="quantity-input" Text="1" TextMode="Number" />
@@ -253,7 +248,7 @@
                     </asp:SqlDataSource>
                 </div>
 
-                <asp:Button ID="btnAddToCart" runat="server" CssClass="btn-add-to-cart" 
+                <asp:Button ID="btnAddToCart" runat="server" CssClass="btn-add-to-cart"
                     Text="Add to Cart" OnClick="btnAddToCart_Click" />
             </div>
 

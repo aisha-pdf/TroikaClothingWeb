@@ -35,87 +35,60 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-        <%--header navigation navigation bar--%>
-        <asp:ContentPlaceHolder ID="WhiteNavBar" runat="server">
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-troika">
-                <div class="container">
-                    <%--toggle for navbar--%>
-                    <span class="navbar-toggler-icon"></span>
-                    <%--adding image to nav bar--%>
-                    <a class="navbar-brand" runat="server" href="~/">
-                        <img src="/Images/logo.png" alt="Troika Clothing CC" height="60" class="d-inline-block align-text-top">
-                    </a>
-                    <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                        <!-- LEFT SIDE NAVIGATION -->
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/About">About Us</a></li>
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Contact">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Products.aspx">Product Catalogue</a></li>
-
-                        </ul>
-
-                        <!-- RIGHT SIDE NAVIGATION -->
-                        <ul class="navbar-nav ms-auto">
-                            <!-- Cart  -->
-                            <li class="nav-item">
-                                <a class="nav-link" runat="server" href="~/Public Pages/Cart.aspx">🛒 Cart (<asp:Label ID="lblCartCount" runat="server" Text="0" />)
-                                </a>
-                            </li>
-
-                            <!-- When NOT logged in -->
-                            <asp:PlaceHolder ID="phLoggedOut" runat="server" Visible="true">
-                                <li class="nav-item">
-                                    <a class="nav-link" runat="server" href="~/Login.aspx">Account</a>
-                                </li>
-                            </asp:PlaceHolder>
-
-                            <!-- When logged in -->
-                            <asp:PlaceHolder ID="phLoggedIn" runat="server" Visible="false">
-                                <li class="nav-item">
-                                    <a class="nav-link" runat="server" href="~/Customer Pages/CustomerProfile">Welcome,
-                                        <asp:Label ID="lblWelcome" runat="server"></asp:Label>
-                                    </a>
-                                </li>
-
-                                <%--<li class="nav-item">
-                                    <span class="nav-link">Welcome, <asp:Label ID="lblWelcome" runat="server"/> <a class="nav-link" runat="server" href="~/Customer Pages/CustomerProfile"></a></span>
-                                </li>--%>
-                                <li class="nav-item">
-                                    <asp:LinkButton ID="btnLogout" runat="server" CssClass="nav-link" OnClick="btnLogout_Click">
-                                        Logout
-                                    </asp:LinkButton>
-                                </li>
-                            </asp:PlaceHolder>
-                        </ul>
-                    </div>
-
-                    <%-- <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/About">About Us</a></li>
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Contact">Contact</a></li>
-                            <%-- <li class="nav-item"><a class="nav-link" runat="server" href="~/Help">FAQs/Help</a></li>
-                            <li class="nav-item>
-                        </li>
-
-                        </ul>
-                    </div> --%>
-                </div>
-            </nav>
-        </asp:ContentPlaceHolder>
-
-
+       
         <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
-        <%--navy blue navigation bar with login, register etc--%>
-        <%--<nav class="navbar navbar-expand-sm navbar-troika1">
+        
+
+        <%--header navigation navigation bar--%>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-troika">
+            <div class="container">
+                <%--toggle for navbar--%>
+                <span class="navbar-toggler-icon"></span>
+                <%--adding image to nav bar--%>
+                <a class="navbar-brand" runat="server" href="~/">
+                    <img src="/Images/logo.png" alt="Troika Clothing CC" height="60" class="d-inline-block align-text-top">
+                </a>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/About">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Products.aspx">Products</a></li>
+                    </ul>
+                </div>
+        </nav>
+
+        <%--navy blue navigation bar that changes depending on who is logged in and when no one is logged in--%>
+        <nav class="navbar navbar-expand-sm navbar-troika1">
             <div class="container-fluid">
                 <ul class="navbar-nav ms-auto d-flex flex-row text-white py-2">
-                    <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Product">Product Catalogue</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Login">Login</a> </li>
+                    <!-- When NOT logged in -->
+                    <asp:PlaceHolder ID="phLoggedOut" runat="server" Visible="true">
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Cart.aspx">🛒 Cart (<asp:Label ID="lblCartCount" runat="server" Text="0" />) </a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Login.aspx">👤 Account</a></li>
+                    </asp:PlaceHolder>
+                    <!-- When as a customer logged in -->
+                    <asp:PlaceHolder ID="phCustLoggedIn" runat="server" Visible="false">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Customer Pages/CustomerProfile">🎉 Welcome,
+                        <asp:Label ID="lblWelcome" runat="server"></asp:Label></a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Cart.aspx">🛒 Cart (<asp:Label ID="Label2" runat="server" Text="0" />) </a></li>
+                        <li class="nav-item">
+                            <asp:LinkButton ID="btnLogout" runat="server" CssClass="nav-link" OnClick="btnLogout_Click">Log Out</asp:LinkButton></li>
+                    </asp:PlaceHolder>
+                    <!-- When as a admin logged in -->
+                    <asp:PlaceHolder ID="phAdmin" runat="server" Visible="false">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Admin Pages/AdminProfile">🎉 Welcome,
+                        <asp:Label ID="lblAdmin" runat="server"></asp:Label></a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Admin Pages/ProductManagement">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Admin Pages/Admin">Users</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Admin Pages/Reports">Products</a></li>
+                        <li class="nav-item">
+                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="nav-link" OnClick="btnLogout_Click">Log Out</asp:LinkButton></li>
+                    </asp:PlaceHolder>
                 </ul>
             </div>
-        </nav>--%>
+        </nav>
+
 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">

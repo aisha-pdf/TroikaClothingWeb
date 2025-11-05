@@ -76,23 +76,52 @@ namespace TroikaClothingWeb
             {
                 bool loggedIn = (Session != null && Session["Username"] != null && Session["Role"] != null);
 
-                if (phLoggedIn != null) phLoggedIn.Visible = loggedIn;
-                if (phLoggedOut != null) phLoggedOut.Visible = !loggedIn;
-
-                // Set welcome label
-                if (loggedIn && lblWelcome != null)
+                //if custmer is logged in show customer navbar
+                if (loggedIn && Session["Role"].ToString() == "Customer")
                 {
-                    lblWelcome.Text = Session["Username"].ToString();
+                    phCustLoggedIn.Visible = true;
+                    phLoggedOut.Visible = false;
+                    phAdmin.Visible= false;
+
+                    //set welcome label
+                    if (loggedIn && lblWelcome != null)
+                    {
+                        lblWelcome.Text = Session["Username"].ToString();
+                    }
+
+                    //Handle cart count safely
+                    if (lblCartCount != null)
+                    {
+                        var cart = ShoppingCart.Get(Session);
+                        lblCartCount.Text = (cart != null ? cart.Count : 0).ToString();
+                    }
                 }
 
-                // Handle cart count safely
-                if (lblCartCount != null)
+                //if no one is logged in show logged out navbar
+                if (!loggedIn)
                 {
-                    var cart = ShoppingCart.Get(Session);
-                    lblCartCount.Text = (cart != null ? cart.Count : 0).ToString();
+                    phLoggedOut.Visible = true;
+                    phAdmin.Visible = false;
+                    phCustLoggedIn.Visible = false;
+
+                    //Handle cart count safely
+                    if (lblCartCount != null)
+                    {
+                        var cart = ShoppingCart.Get(Session);
+                        lblCartCount.Text = (cart != null ? cart.Count : 0).ToString();
+                    }
+                }
+                
+                //if admin logged in show admin nav bar
+                if (loggedIn && Session["Role"].ToString() == "Administrator")
+                {
+                    phAdmin.Visible = true;
+                    phCustLoggedIn.Visible = false;
+                    phLoggedOut.Visible = false;
+                    lblAdmin.Text = Session["Username"].ToString();
                 }
             }
-            catch
+            catch 
             {
                 // Fail silently — we don’t want layout to crash
                 if (lblCartCount != null) lblCartCount.Text = "0";

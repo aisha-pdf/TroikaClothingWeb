@@ -1,17 +1,5 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="TroikaClothingWeb._Default" %>
 
-<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
-    <%--navy blue navigation bar with login, register etc--%>
-    <nav class="navbar navbar-expand-sm navbar-troika1">
-        <div class="container-fluid">
-            <ul class="navbar-nav ms-auto d-flex flex-row text-white py-2">
-                <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Public Pages/Products">Product Catalogue</a></li>
-                <li class="nav-item"><a class="nav-link text-white" runat="server" href="~/Login">Login</a> </li>
-            </ul>
-        </div>
-    </nav>
-</asp:Content>
-
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <%-- displays the category list and products side-by-side --%>
     <div class="row mt-4">
