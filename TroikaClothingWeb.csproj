@@ -164,6 +164,15 @@
     <Content Include="Customer Pages\CustomerProfile.aspx" />
     <Content Include="Customer Pages\HomePage.aspx" />
     <Content Include="ForgotPassword.aspx" />
+    <Content Include="Images\Reports\Monthly Performance Report.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Reports\Sales Report 2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Reports\Sales Report.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Public Pages\About.aspx" />
     <Content Include="Account\AddPhoneNumber.aspx" />
     <Content Include="Account\Confirm.aspx" />
@@ -219,6 +228,7 @@
     <Content Include="Public Pages\Products.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Customer Pages\SaleHistory.aspx" />
+    <Content Include="Reports.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -559,6 +569,13 @@
     </Compile>
     <Compile Include="Customer Pages\SaleHistory.aspx.designer.cs">
       <DependentUpon>SaleHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
