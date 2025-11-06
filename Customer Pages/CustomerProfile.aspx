@@ -7,6 +7,7 @@
     </p>
     <h4>Manage your account</h4>
 
+    <div>
     <div class="container mt-4">
         <div class="row">
             <!-- account details boxes -->
@@ -76,7 +77,8 @@
                         </div>
                     </EditItemTemplate>
                 </asp:FormView>
-<asp:Button ID="btnCloseAccount" runat="server" Text="Close Account" Width="545px" ForeColor="White" BackColor="Red" Height="43px"  OnClientClick="return confirm('Are you sure you want to delete your account? This cannot be undone');" OnClick="btnCloseAccount_Click"/>            
+
+
                 <asp:SqlDataSource ID="DSCloseLogin" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteLogin] WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role AND (([Status] = @original_Status) OR ([Status] IS NULL AND @original_Status IS NULL))" InsertCommand="INSERT INTO [WebsiteLogin] ([Username], [Password], [Role], [Status]) VALUES (@Username, @Password, @Role, @Status)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteLogin]" UpdateCommand="UPDATE WebsiteLogin SET Status = 'Inactive' WHERE (Username = @Username)">
                     <DeleteParameters>
                         <asp:Parameter Name="original_ID" Type="Int32" />
@@ -200,7 +202,7 @@
                     ForeColor="Black" GridLines="None" Width="100%" OnItemCommand="DetailsView1_ItemCommand"
                     OnItemUpdating="DetailsView1_ItemUpdating" OnItemUpdated="DetailsView1_ItemUpdated" Height="156px">
 
-                   
+
                     <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" CssClass="p-2" />
                     <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
                     <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
@@ -261,17 +263,15 @@
                         </asp:TemplateField>
                     </Fields>
                 </asp:DetailsView>
+                </div>
 
-                <%-- <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" DefaultMode="Edit" DataSourceID="DSAddress" Width="100%" OnItemCommand="DetailsView1_ItemCommand" BorderColor="White">
-                    <HeaderStyle CssClass="p-2" />
-                    <Fields>
-                        <asp:BoundField DataField="streetAddress" HeaderText="streetAddress" SortExpression="streetAddress" />
-                        <asp:BoundField DataField="suburb" HeaderText="suburb" SortExpression="suburb" />
-                        <asp:BoundField DataField="postCode" HeaderText="postCode" SortExpression="postCode" />
-                        
-                    </Fields>
-                </asp:DetailsView>
-            </div>--%>
+                <div class="form-group mt-4 text-center">
+                    <asp:Button ID="btnCloseAccount" runat="server" Text="Close Account"
+                        CssClass="menu-btn close-btn"
+                        OnClientClick="return confirm('Are you sure you want to delete your account? This cannot be undone');"
+                        OnClick="btnCloseAccount_Click" />
+                </div>
+
 
                 <asp:SqlDataSource ID="DSAddress" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT streetAddress, suburb, postCode, phoneNum FROM Customer WHERE (customerID = @CusID)" UpdateCommand="UPDATE Customer SET streetAddress = @streetAddress, suburb = @suburb, postCode = @postCode, phoneNum = @phoneNum WHERE (customerID = @CusID)">
                     <SelectParameters>
@@ -323,6 +323,29 @@
                     .action-btn:hover {
                         background: #8365A8;
                     }
+
+                .close-btn {
+                    background: #dc3545; /* Bootstrap red */
+                    color: white;
+                    border: none;
+                    padding: 10px;
+                    text-align: left;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    width: 100%;
+                    font-size: 14px;
+                }
+
+                    .close-btn:hover {
+                        background: #c82333; /* Darker red on hover */
+                    }
+
+                .center-btn {
+                    width: auto; /* make the button shrink to fit text */
+                    display: inline-block;
+                    text-align: center;
+                    padding: 10px 20px;
+                }
             </style>
         </div>
     </div>
