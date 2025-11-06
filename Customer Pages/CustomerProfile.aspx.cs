@@ -277,5 +277,56 @@ namespace TroikaClothingWeb.Customer_Pages
                 LblMessage.Text = "Error while updating: " + ex.Message;
             }
         }
+
+        protected void btnCloseAccount_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TextBox txtUsername = (TextBox)CustomerForm.FindControl("Username");
+                TextBox txtEmail = (TextBox)CustomerForm.FindControl("Email");
+
+                if (txtUsername == null)
+                {
+                    LblMessage.ForeColor = System.Drawing.Color.Red;
+                    LblMessage.Text = "Username not found.";
+                    return;
+                }
+            
+                DSCloseLogin.UpdateParameters["Username"].DefaultValue = txtUsername.Text;
+                DSCloseRegister.UpdateParameters["Username"].DefaultValue = txtUsername.Text;
+               
+                Boolean find = false;
+
+                foreach (GridViewRow row in gvCustomer.Rows)
+                {
+                    if(row.Cells[1].Text == txtEmail.Text)
+                    {
+                        DSCloseCustomer.UpdateParameters["customerID"].DefaultValue = row.Cells[0].Text;
+                        find = true;
+                        break;
+                    }
+
+                }
+
+                if (find == true)
+                {
+                    DSCloseCustomer.Update();
+                    DSCloseLogin.Update();
+                    DSCloseRegister.Update();
+                    Response.Redirect("~/Login.aspx");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LblMessage.ForeColor = System.Drawing.Color.Red;
+                LblMessage.Text = "Error while updating: " + ex.Message;
+            }
+
+            if (!IsPostBack)
+            {
+                CustomerForm.DataBind();
+            }
+        }
     }
 }

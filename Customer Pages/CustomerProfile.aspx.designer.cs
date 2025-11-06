@@ -51,6 +51,60 @@ namespace TroikaClothingWeb.Customer_Pages
         protected global::System.Web.UI.WebControls.FormView CustomerForm;
 
         /// <summary>
+        /// btnCloseAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCloseAccount;
+
+        /// <summary>
+        /// DSCloseLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DSCloseLogin;
+
+        /// <summary>
+        /// DSCloseRegister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DSCloseRegister;
+
+        /// <summary>
+        /// DSCloseCustomer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DSCloseCustomer;
+
+        /// <summary>
+        /// gvCustomer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvCustomer;
+
+        /// <summary>
+        /// DSCustomer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DSCustomer;
+
+        /// <summary>
         /// DetailsView1 control.
         /// </summary>
         /// <remarks>
