@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="TroikaClothingWeb.Register" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="min-height: 90vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background-color:#f8f8f8; padding:30px 10px;">
+    <div style="min-height: 90vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:30px 10px;">
 
         <!-- Page heading -->
         <h1 style="color:#4B0082; text-align:center; margin-bottom:25px; font-weight:700;">Register</h1>

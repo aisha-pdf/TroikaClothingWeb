@@ -9,8 +9,8 @@
         :root {
             --troika-navy: #3D304C; /* dark purple background */
             --troika-white: #ffffff;
-            --troika-cream: #FFF9F3; /* main cream for cards */
-            --troika-cream-2: #FFF5EB; /* slightly different cream if needed */
+            --troika-cream: #f8f8f8; ; /* main cream for cards */
+            --troika-cream-2: #f3f3f3; /* slightly different cream if needed */
             --troika-light-accent: #644F7D; /* purple accent */
             --troika-deep-green: #2C5F2D;
             --troika-light-address: #D8CDEB; /* lighter purple for address container */

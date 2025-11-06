@@ -8,7 +8,7 @@
             --troika-white: #ffffff;
             --troika-light-accent: #644F7D;
             --troika-deep-green: #2C5F2D;
-            --troika-cream: #F5F5DC;
+            --troika-cream: #f8f8f8; ;
         }
 
         .product-detail-container {
