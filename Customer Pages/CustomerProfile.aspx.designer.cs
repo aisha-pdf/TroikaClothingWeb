@@ -15,39 +15,57 @@ namespace TroikaClothingWeb.Customer_Pages
     {
 
         /// <summary>
-        /// dvWebProfile control.
+        /// ErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView dvWebProfile;
+        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
 
         /// <summary>
-        /// WebProfileDS control.
+        /// LblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource WebProfileDS;
+        protected global::System.Web.UI.WebControls.Label LblMessage;
 
         /// <summary>
-        /// dvCustomerProfile control.
+        /// DSWebDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView dvCustomerProfile;
+        protected global::System.Web.UI.WebControls.SqlDataSource DSWebDetails;
 
         /// <summary>
-        /// ProfileDS control.
+        /// CustomerForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource ProfileDS;
+        protected global::System.Web.UI.WebControls.FormView CustomerForm;
+
+        /// <summary>
+        /// DetailsView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
+
+        /// <summary>
+        /// DSAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DSAddress;
     }
 }
