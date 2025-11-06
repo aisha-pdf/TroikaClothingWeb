@@ -1,66 +1,65 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="TroikaClothingWeb._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- displays the category list and products side-by-side --%>
-    <div class="row mt-4">
-        <!-- Categories bar - Left Column -->
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header text-white">
-                    <h5>Categories</h5>
+
+    <!-- Homepage Main Section -->
+    <section class="py-5" style="background-color: #ffffff;">
+        <div class="container text-center">
+            <div class="row justify-content-center gy-4">
+
+                <!-- About Us Card -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 text-center shadow-sm"
+                        style="border-radius: 20px; background-color: #3D304C; color: white; min-height: 420px; padding: 25px;">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <img src="Images/1.png" alt="About Us" class="mb-4" style="width: 150px;">
+                                <h4 class="card-title fw-bold">ABOUT US</h4>
+                                <p class="card-text mt-3">
+                                    Learn more about our journey, values, and the team dedicated to bringing you the best.
+                                </p>
+                            </div>
+                            <a href="Public Pages/About.aspx" class="btn btn-light mt-4">Learn More</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <ul class="list-unstyled">
-                        3
-                        <li class="py-1">Just Dropped</li>
-                        <li class="py-1">Hot Trends</li>
-                        <li class="py-1">Winter Newness</li>
-                        <li class="py-1">Sweat Tops</li>
-                        <li class="py-1">Dresses</li>
-                        <li class="py-1">Pants</li>
-                        <li class="py-1">Sleepwear</li>
-                        <li class="py-1">View All</li>
-                    </ul>
+
+                <!-- Contact Card -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 text-center shadow-sm"
+                        style="border-radius: 20px; background-color: #3D304C; color: white; min-height: 420px; padding: 25px;">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <img src="Images/2.png" alt="Contact" class="mb-4" style="width: 150px;">
+                                <h4 class="card-title fw-bold">CONTACT</h4>
+                                <p class="card-text mt-3">
+                                    Get in touch with us for inquiries, support, or just to say hello!
+                                </p>
+                            </div>
+                            <a href="Public Pages/Contact.aspx" class="btn btn-light mt-4">Contact Us</a>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Browse Collection Card -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 text-center shadow-sm"
+                        style="border-radius: 20px; background-color: #3D304C; color: white; min-height: 420px; padding: 25px;">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <img src="Images/3.png" alt="Products" class="mb-4" style="width: 150px;">
+                                <h4 class="card-title fw-bold">BROWSE OUR COLLECTION</h4>
+                                <p class="card-text mt-3">
+                                    Explore our range of quality products designed to meet your needs and preferences.
+                                </p>
+                            </div>
+                            <a href="Public Pages/Products.aspx" class="btn btn-light mt-4">View Catalogue</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
+    </section>
 
-        <!-- Featured Products section - Right Column -->
-        <div class="col-md-9">
-            <h3>Featured Products</h3>
-            <div class="row">
-                <!-- Product 1 -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 product-card">
-                        <img src="/Images/evening silk gown.jpeg" class="card-img-top fixed-img" alt="Product 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Evening Silk Gown Green</h5>
-                            <p class="card-text">R1099.99</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 product-card">
-                        <img src="/Images/formal linen blazer.jpeg" class="card-img-top fixed-img" alt="Product 2">
-                        <div class="card-body">
-                            <h5 class="card-title">Formal Linen Blazer</h5>
-                            <p class="card-text">R399.99</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 product-card">
-                        <img src="/Images/light blue maxi dress.jpeg" class="card-img-top fixed-img" alt="Product 2">
-                        <div class="card-body">
-                            <h5 class="card-title">Light Blue Maxi Dress</h5>
-                            <p class="card-text">R549.99</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 </asp:Content>

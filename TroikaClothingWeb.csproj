@@ -164,6 +164,9 @@
     <Content Include="Customer Pages\CustomerProfile.aspx" />
     <Content Include="Customer Pages\HomePage.aspx" />
     <Content Include="ForgotPassword.aspx" />
+    <Content Include="Images\1.png" />
+    <Content Include="Images\2.png" />
+    <Content Include="Images\3.png" />
     <Content Include="Images\Image_not_available.png" />
     <Content Include="Images\Reports\Monthly Performance Report.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
