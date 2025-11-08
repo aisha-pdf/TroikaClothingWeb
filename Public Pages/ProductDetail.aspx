@@ -98,21 +98,12 @@
             border-radius: 4px;
             font-size: 15px;
             background-color: #fff;
-        }
-
-
-        .quantity-section {
-            margin: 30px 0;
+            border: 1px solid #ddd;
         }
 
         .quantity-input {
-            width: 100px;
-            padding: 12px;
-            border: 2px solid var(--troika-light-accent);
-            border-radius: 4px;
+            width: 80px;
             text-align: center;
-            font-size: 16px;
-            font-weight: 500;
         }
 
         .btn-add-to-cart {
@@ -126,13 +117,14 @@
             font-size: 15px;
             transition: background 0.3s ease, transform 0.2s ease;
             width: fit-content;
+            margin-top: 10px;
         }
 
-            .btn-add-to-cart:hover {
-                background: #234823;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            }
+        .btn-add-to-cart:hover {
+            background: #234823;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
 
         .btn-back {
             padding: 8px 16px;
@@ -149,14 +141,73 @@
             margin-bottom: 20px;
         }
 
-            .btn-back:hover {
-                background: var(--troika-light-accent);
+        .btn-back:hover {
+            background: var(--troika-light-accent);
+            color: var(--troika-white);
+        }
+
+         /* Related Products Styles */
+        .related-product-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 15px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 200px; 
+        }
+
+        .related-product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .related-product-link {
+            text-decoration: none; 
+            color: inherit;
+            text-align: center;
+        }
+
+        .related-product-name {
+            font-weight: bold;
+            margin-top: 5px;
+            display: block;
+            color: #3D304C;
+        }
+
+        .related-product-price {
+            font-weight: 600;
+            color: #2C5F2D;
+            margin-top: 2px;
+        }
+
+        /* Center DataList */
+        #dlRelatedProducts {
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            #dlRelatedProducts {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
+            .related-product-item {
+                width: 180px;
+            }
+        }
+
         @media (max-width: 768px) {
-            .product-detail {
-                grid-template-columns: 1fr;
-                text-align: center;
+            .related-product-item {
+                width: 45%;
+                margin: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .related-product-item {
+                width: 90%;
+                margin: 8px 0;
             }
         }
     </style>
@@ -168,13 +219,13 @@
 
         <div class="product-detail">
 
-            <!-- Left: Product Image -->
+            <!-- Left side of the pagee: Product Image -->
             <div class="product-image-section">
                 <asp:Image ID="imgProduct" runat="server" CssClass="main-product-image"
                     ImageUrl="~/images/image-placeholder.png" AlternateText="Product Image" />
             </div>
 
-            <!-- Right: Product Info -->
+            <!-- Right side of the page : Product Info -->
             <div class="product-info-section">
                 <asp:Label ID="lblCategory" runat="server" CssClass="product-category-badge" Text="Category"></asp:Label>
                 <asp:Label ID="lblProductName" runat="server" CssClass="product-title" Text="Product Name"></asp:Label>
@@ -182,8 +233,7 @@
                 <asp:Label ID="lblProductDescription" runat="server" CssClass="product-description"
                     Text="Product description will appear here."></asp:Label>
 
-
-                <!-- Color Section -->
+                <!-- Colour Section -->
                 <div class="dropdown-section">
                     <asp:Label ID="lblColor" runat="server" CssClass="dropdown-label" Text="Colour:"></asp:Label>
                     <asp:DropDownList ID="ddlColor" runat="server" CssClass="dropdown-select" ToolTip="Please select a colour" Width="126px">
@@ -238,14 +288,10 @@
                 </div>
 
                 <!-- Quantity Section -->
-                <div class="quantity-section">
-                    <asp:Label ID="lblQuantity" runat="server" CssClass="quantity-label" Text="Quantity:"></asp:Label>
-                    <asp:TextBox ID="txtQuantity" runat="server" CssClass="quantity-input" Text="1" TextMode="Number" />
-                    <asp:SqlDataSource ID="SqlDataSourceProduct" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT * FROM [Product] WHERE ([ProductID] = @ProductID)">
-                        <SelectParameters>
-                            <asp:QueryStringParameter Name="ProductID" QueryStringField="id" Type="String" />
-                        </SelectParameters>
-                    </asp:SqlDataSource>
+                <div class="dropdown-section">
+                    <asp:Label ID="lblQuantity" runat="server" CssClass="dropdown-label" Text="Quantity:"></asp:Label>
+                    <asp:TextBox ID="txtQuantity" runat="server" CssClass="dropdown-select quantity-input" 
+                        Text="1" TextMode="Number" Width="80px" />
                 </div>
 
                 <asp:Button ID="btnAddToCart" runat="server" CssClass="btn-add-to-cart"
@@ -255,4 +301,20 @@
         </div>
     </div>
 
+        <!-- Related Products Section - shows similar products-->
+    <h3 style="margin-top:40px; color:#3D304C; text-align:center;">You May Also Like</h3>
+    <asp:DataList ID="dlRelatedProducts" runat="server" RepeatColumns="4" CellPadding="15" 
+        HorizontalAlign="Center">
+        <ItemTemplate>
+            <div class="related-product-item">
+                <asp:HyperLink ID="hlRelatedProduct" runat="server" NavigateUrl='<%# Eval("DetailUrl") %>' CssClass="related-product-link">
+                    <asp:Image ID="imgRelated" runat="server" ImageUrl='<%# Eval("ImagePath") %>' Width="170px" Height="200px" Style="border-radius:8px; box-shadow:0 3px 6px rgba(0,0,0,0.1);" />
+                    <br />
+                    <asp:Label ID="lblRelatedName" runat="server" Text='<%# Eval("ProductName") %>' CssClass="related-product-name"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblRelatedPrice" runat="server" Text='<%# "R" + Eval("Price") %>' CssClass="related-product-price"></asp:Label>
+                </asp:HyperLink>
+            </div>
+        </ItemTemplate>
+    </asp:DataList>
 </asp:Content>

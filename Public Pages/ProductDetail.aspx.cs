@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TroikaClothingWeb.Models;
-using static System.Collections.Specialized.BitVector32;
 
 namespace TroikaClothingWeb.Public_Pages
 {
@@ -21,12 +18,12 @@ namespace TroikaClothingWeb.Public_Pages
             if (!IsPostBack)
             {
                 LoadProductDetails();
+                LoadRelatedProducts(); 
             }
         }
 
         private void LoadProductDetails()
         {
-            // Get ProductID from query string
             string productId = Request.QueryString["id"];
             if (string.IsNullOrEmpty(productId))
             {
@@ -39,9 +36,7 @@ namespace TroikaClothingWeb.Public_Pages
             using (SqlConnection con = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
-                // ProductID is a string
                 cmd.Parameters.AddWithValue("@ProductID", productId);
-
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -52,19 +47,10 @@ namespace TroikaClothingWeb.Public_Pages
                     lblCategory.Text = reader["Category"].ToString();
                     lblProductPrice.Text = "R" + Convert.ToDecimal(reader["Price"]).ToString("0.00");
 
-                    // Handle image
-                    // Use handler to serve the image
                     if (reader["Picture"] != DBNull.Value)
-                    {
-                        // Stream via image handler
                         imgProduct.ImageUrl = $"~/Public Pages/ProductImageHandler.ashx?id={HttpUtility.UrlEncode(productId)}";
-
-
-                    }
                     else
-                    {
                         imgProduct.ImageUrl = "~/images/image-placeholder.png";
-                    }
                 }
                 else
                 {
@@ -72,60 +58,83 @@ namespace TroikaClothingWeb.Public_Pages
                 }
             }
         }
-        protected void btnAddToCart_Click(object sender, EventArgs e)
+
+        private void LoadRelatedProducts() //shows similar products from the same category and reloads the page once clicked
+        {
+            string productId = Request.QueryString["id"];
+            string category = lblCategory.Text;
+
+            if (string.IsNullOrEmpty(productId) || string.IsNullOrEmpty(category)) return;
+
+            //selects 4 products from the same category excluding the current product
+            DataTable dtRelated = new DataTable();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(  
+                "SELECT TOP 4 ProductID, ProductName, Price, Picture FROM Product WHERE Category = @Category AND ProductID <> @ProductID AND Status='Active'", con))
             {
-                // Require login as Customer
-                if (Session["Role"] == null || Session["Role"].ToString() != "Customer")
+                cmd.Parameters.AddWithValue("@Category", category);
+                cmd.Parameters.AddWithValue("@ProductID", productId);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtRelated);
+            }
+
+            // Add image path and detail URL for each related product
+            dtRelated.Columns.Add("ImagePath", typeof(string));
+            dtRelated.Columns.Add("DetailUrl", typeof(string));
+            foreach (DataRow row in dtRelated.Rows)
+            {
+                string id = row["ProductID"].ToString();
+                row["ImagePath"] = $"~/Public Pages/ProductImageHandler.ashx?id={HttpUtility.UrlEncode(id)}";
+                row["DetailUrl"] = $"~/Public Pages/ProductDetail.aspx?id={HttpUtility.UrlEncode(id)}";
+            }
+
+            dlRelatedProducts.DataSource = dtRelated;
+            dlRelatedProducts.DataBind();
+        }
+
+        protected void btnAddToCart_Click(object sender, EventArgs e)
+        {
+            if (Session["Role"] == null || Session["Role"].ToString() != "Customer")
+            {
+                Session["ReturnUrl"] = Request.RawUrl;
+                Response.Redirect("~/Login.aspx");
+                return;
+            }
+
+            string productId = Request.QueryString["id"];
+            if (string.IsNullOrWhiteSpace(productId)) return;
+
+            string name = "", imageUrl = "";
+            decimal price = 0;
+
+            using (var con = new SqlConnection(connectionString))
+            using (var cmd = new SqlCommand("SELECT ProductName, Price FROM Product WHERE ProductID = @id AND Status='Active'", con))
+            {
+                cmd.Parameters.AddWithValue("@id", productId);
+                con.Open();
+                using (var r = cmd.ExecuteReader())
                 {
-                    // send them to login, then back here
-                    Session["ReturnUrl"] = Request.RawUrl;
-                    Response.Redirect("~/Login.aspx");
-                    return;
+                    if (!r.Read()) return;
+                    name = r["ProductName"].ToString();
+                    price = Convert.ToDecimal(r["Price"]);
                 }
+            }
 
-                string productId = Request.QueryString["id"];
-                if (string.IsNullOrWhiteSpace(productId)) return;
-
-                // Load the product’s name and price from DB 
-                string cs = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
-                string name = "", imageUrl = "", category = "";
-                decimal price = 0;
-
-                using (var con = new SqlConnection(cs))
-                using (var cmd = new SqlCommand(
-                    "SELECT ProductName, Price FROM Product WHERE ProductID = @id AND Status='Active'", con))
-                {
-                    cmd.Parameters.AddWithValue("@id", productId);
-                    con.Open();
-                    using (var r = cmd.ExecuteReader())
-                    {
-                        if (!r.Read()) return;
-                        name = r["ProductName"].ToString();
-                        price = Convert.ToDecimal(r["Price"]);
-                    }
-                }
-
-            // Use the same handler you already have for images
-            // ImageUrl = '<%# ResolveUrl("~/Admin Pages/ProductImageHandler.ashx?id=" + Eval("ProductID") + "&v=" + DateTime.Now.Ticks) %>'
             imageUrl = ResolveUrl($"~/Public Pages/ProductImageHandler.ashx?id={HttpUtility.UrlEncode(productId)}");
 
             var item = new CartItem
-                {
-                    ProductID = productId,
-                    ProductName = name,
-                    UnitPrice = price,
-                    Quantity = int.TryParse(txtQuantity.Text, out var q) ? Math.Max(1, q) : 1,
-                    Colour = ddlColor.SelectedValue,
-                    ClothingSize = ddlSize.SelectedValue,
-                    ImageUrl = imageUrl
-                };
+            {
+                ProductID = productId,
+                ProductName = name,
+                UnitPrice = price,
+                Quantity = int.TryParse(txtQuantity.Text, out var q) ? Math.Max(1, q) : 1,
+                Colour = ddlColor.SelectedValue,
+                ClothingSize = ddlSize.SelectedValue,
+                ImageUrl = imageUrl
+            };
 
-                ShoppingCart.AddOrIncrease(Session, item);
-
-                // Redirect to Cart
-                Response.Redirect("~/Public Pages/Cart.aspx");
-            }
-
-
-}
+            ShoppingCart.AddOrIncrease(Session, item);
+            Response.Redirect("~/Public Pages/Cart.aspx");
+        }
+    }
 }
