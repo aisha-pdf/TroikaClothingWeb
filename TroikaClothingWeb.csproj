@@ -167,6 +167,7 @@
     <Content Include="Images\1.png" />
     <Content Include="Images\2.png" />
     <Content Include="Images\3.png" />
+    <Content Include="Images\banner.png" />
     <Content Include="Images\Image_not_available.png" />
     <Content Include="Images\Reports\Monthly Performance Report.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
