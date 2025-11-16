@@ -59,6 +59,18 @@ namespace TroikaClothingWeb.Public_Pages
             }
         }
 
+
+        protected void btnSizeGuide_Click(object sender, EventArgs e)
+        {
+            pnlOverlay.Visible = true;
+        }
+
+        protected void btnClosePopup_Click(object sender, EventArgs e)
+        {
+            pnlOverlay.Visible = false;
+        }
+
+
         private void LoadRelatedProducts() //shows similar products from the same category and reloads the page once clicked
         {
             string productId = Request.QueryString["id"];
