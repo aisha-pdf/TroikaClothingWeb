@@ -495,7 +495,7 @@ namespace TroikaClothingWeb.Admin_Pages
                 if (lastID.StartsWith("P", StringComparison.OrdinalIgnoreCase) && lastID.Length >= 2)
                     int.TryParse(lastID.Substring(1), out numberPart);
                 numberPart++;
-                string newID = "P" + numberPart.ToString("D3");
+                string newID = "P" + numberPart.ToString("D5");
                 return newID;
             }
             return "P000";

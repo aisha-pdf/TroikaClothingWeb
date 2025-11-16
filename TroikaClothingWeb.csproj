@@ -178,6 +178,7 @@
     <Content Include="Images\Reports\Sales Report.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\size guide.jpg" />
     <Content Include="Public Pages\About.aspx" />
     <Content Include="Account\AddPhoneNumber.aspx" />
     <Content Include="Account\Confirm.aspx" />

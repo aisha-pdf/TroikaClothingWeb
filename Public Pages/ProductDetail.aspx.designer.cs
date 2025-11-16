@@ -105,6 +105,15 @@ namespace TroikaClothingWeb.Public_Pages
         protected global::System.Web.UI.WebControls.DropDownList ddlSize;
 
         /// <summary>
+        /// btnSizeGuide control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSizeGuide;
+
+        /// <summary>
         /// lblQuantity control.
         /// </summary>
         /// <remarks>
@@ -139,5 +148,32 @@ namespace TroikaClothingWeb.Public_Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList dlRelatedProducts;
+
+        /// <summary>
+        /// pnlOverlay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlOverlay;
+
+        /// <summary>
+        /// imgSizeGuide control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgSizeGuide;
+
+        /// <summary>
+        /// btnClosePopup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClosePopup;
     }
 }
