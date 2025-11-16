@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -170,23 +171,26 @@ namespace TroikaClothingWeb
         // --- Generate CustomerID in format CUS000 ---
         private string GenerateNextCustomerID()
         {
-            string cs = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
-            int next = 1;
+            DataView dv = (DataView)SqlDsLastID.Select(DataSourceSelectArguments.Empty);
 
-            using (SqlConnection con = new SqlConnection(cs))
+            if (dv != null && dv.Count > 0)
             {
-                con.Open();
-                using (SqlCommand cmd = new SqlCommand(@"
-                    SELECT MAX(CAST(SUBSTRING(customerID, 4, 3) AS INT)) 
-                    FROM Customer WHERE customerID LIKE 'CUS%'", con))
+                string lastID = dv[0]["customerID"].ToString();  // get last CustomerID
+                int numberPart = 0;
+
+                // Check it starts with "C" and has at least one more character
+                if (lastID.StartsWith("C", StringComparison.OrdinalIgnoreCase) && lastID.Length >= 2)
                 {
-                    object result = cmd.ExecuteScalar();
-                    if (result != DBNull.Value && result != null)
-                        next = Convert.ToInt32(result) + 1;
+                    int.TryParse(lastID.Substring(1), out numberPart);  // parse the numeric part
                 }
+
+                numberPart++;  // increment
+                string newID = "C" + numberPart.ToString("D3");  // format with 3 digits
+                return newID;
             }
 
-            return "CUS" + next.ToString("000");
+            // Default if no customers exist yet
+            return "C001";
         }
     }
 }

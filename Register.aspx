@@ -131,6 +131,7 @@
                     <asp:Parameter Name="original_Password" Type="String" />
                 </UpdateParameters>
             </asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDsLastID" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT TOP (1) customerID FROM Customer ORDER BY customerID DESC"></asp:SqlDataSource>
             <asp:SqlDataSource ID="InsertLoginDS" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteLogin] WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role" InsertCommand="INSERT INTO WebsiteLogin(Username, Password, Role, Status) VALUES (@Username, @Password, @Role, @Status)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteLogin]" UpdateCommand="UPDATE [WebsiteLogin] SET [Username] = @Username, [Password] = @Password, [Role] = @Role WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role">
                 <DeleteParameters>
                     <asp:Parameter Name="original_ID" Type="Int32" />
