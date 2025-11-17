@@ -31,7 +31,7 @@
                 <br />
 
                 <!-- FormView for Customer Info -->
-                <asp:FormView ID="CustomerForm" runat="server" DefaultMode="Edit" DataSourceID="DSWebDetails" OnItemCommand="CustomerForm_ItemCommand" OnItemUpdating="CustomerForm_ItemUpdating" Width="544px">
+                <asp:FormView ID="CustomerForm" runat="server" DefaultMode="Edit" DataSourceID="DSWebDetails" OnItemCommand="CustomerForm_ItemCommand" OnItemUpdating="CustomerForm_ItemUpdating" Width="544px" OnDataBound="CustomerForm_DataBound" OnPageIndexChanging="CustomerForm_PageIndexChanging">
                     <EditItemTemplate>
                         <div class="form-group mb-3">
                             <label>Name:</label>
@@ -59,14 +59,15 @@
 
                         <div class="form-group mb-3">
                             <label>Password:</label>
-                            <asp:TextBox ID="Password" runat="server" CssClass="form-control"
-                                Text='<%# Bind("Password") %>' />
+                            <asp:TextBox ID="Password" runat="server" CssClass="form-control" TextMode="Password" />
+                            <asp:Button ID="btnShowHide" runat="server" Text="Show Password" OnClick="btnShowHide_Click" />
+                            <asp:Button ID="ChangePassword" runat="server" Text="Change Password" OnClick="ChangePassword_Click" />
                         </div>
 
                         <div class="form-group mb-3">
                             <label>Phone Number:</label>
-                            <asp:TextBox ID="PhoneNumber" runat="server" CssClass="form-control"
-                                Text='<%# Bind("PhoneNumber") %>' />
+                            <asp:TextBox ID="PhoneNumber" runat="server" CssClass="form-control" 
+                               Text='<%# Bind("PhoneNumber") %>' />
                         </div>
 
                         <div class="form-group mt-4 button-group">

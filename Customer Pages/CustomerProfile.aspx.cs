@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -23,7 +24,7 @@ namespace TroikaClothingWeb.Customer_Pages
                 {
                     DSWebDetails.DataBind();
                     this.DataBind(); // fills textboxes with data
-                    
+
                 }
                 else
                 {
@@ -69,7 +70,7 @@ namespace TroikaClothingWeb.Customer_Pages
             string customerID = GetCustomerIDByUsername(username);
             DSAddress.SelectParameters["CusID"].DefaultValue = customerID;
             DSAddress.UpdateParameters["CusID"].DefaultValue = customerID;
-           
+
         }
 
         //protected void Page_PreRender(object sender, EventArgs e)
@@ -291,15 +292,15 @@ namespace TroikaClothingWeb.Customer_Pages
                     LblMessage.Text = "Username not found.";
                     return;
                 }
-            
+
                 DSCloseLogin.UpdateParameters["Username"].DefaultValue = txtUsername.Text;
                 DSCloseRegister.UpdateParameters["Username"].DefaultValue = txtUsername.Text;
-               
+
                 Boolean find = false;
 
                 foreach (GridViewRow row in gvCustomer.Rows)
                 {
-                    if(row.Cells[1].Text == txtEmail.Text)
+                    if (row.Cells[1].Text == txtEmail.Text)
                     {
                         DSCloseCustomer.UpdateParameters["customerID"].DefaultValue = row.Cells[0].Text;
                         find = true;
@@ -326,6 +327,49 @@ namespace TroikaClothingWeb.Customer_Pages
             if (!IsPostBack)
             {
                 CustomerForm.DataBind();
+            }
+        }
+        protected void btnShowHide_Click(object sender, EventArgs e)
+        {
+            TextBox txtPassword = (TextBox)CustomerForm.FindControl("Password");
+            Button btnShowHide=(Button)CustomerForm.FindControl("btnShowHide");
+
+            if (txtPassword != null && btnShowHide!=null)
+            {
+                string value=txtPassword.Text;
+
+                if (txtPassword.TextMode == TextBoxMode.Password)
+                {
+                    txtPassword.TextMode = TextBoxMode.SingleLine;
+                    btnShowHide.Text = "Hide Password";
+                }
+                else
+                {
+                    txtPassword.TextMode = TextBoxMode.Password;
+                    txtPassword.Attributes["value"] = value;
+                    btnShowHide.Text = "Show Password";
+                }
+
+            }
+        }
+        protected void ChangePassword_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ForgotPassword.aspx");
+        }
+
+        protected void CustomerForm_PageIndexChanging(object sender, FormViewPageEventArgs e)
+        {
+
+        }
+
+        protected void CustomerForm_DataBound(object sender, EventArgs e)
+        {
+            TextBox txtPassword = (TextBox)CustomerForm.FindControl("Password");
+
+            if (txtPassword != null && CustomerForm.DataItem != null)
+            {
+                string real = ((DataRowView)CustomerForm.DataItem)["Password"].ToString();
+                txtPassword.Attributes["value"] = real;
             }
         }
     }
