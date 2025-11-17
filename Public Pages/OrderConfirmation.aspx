@@ -140,7 +140,13 @@
         <div class="receipt">
             <div class="card">
                 <div class="title">Thank you! Your order is confirmed.</div>
-                <div class="muted">Receipt <span class="badge"><asp:Label ID="lblReceipt" runat="server"/></span></div>
+                <div class="muted" style="text-align:center;font-size:18px;font-weight:700;">Receipt ID:</div>
+                <div style="text-align:center;margin-top:6px;">
+                  <span class="badge" style="display:inline-block;font-size:20px;padding:8px 12px;border-radius:8px;background:var(--troika-light-accent);color:#fff;">
+                    <asp:Label ID="lblReceipt" runat="server"/>
+                  </span>
+                </div>
+
 
                 <div class="grid" style="margin-top:16px;">
                     <!-- LEFT: Items -->
@@ -176,7 +182,12 @@
                         <div class="card-right">
                             <div class="line"><span>Order date</span><span><asp:Label ID="lblDate" runat="server"/></span></div>
                             <div class="line"><span>Payment method</span><span><asp:Label ID="lblPaymentMethod" runat="server"/></span></div>
+                            <div class="d-flex justify-content-between text-muted">
+                                <span>VAT Included</span>
+                            </div>
                             <div class="line"><span>Subtotal</span><span>R<asp:Label ID="lblSubtotal" runat="server"/></span></div>
+
+
                             <div class="line"><span>Delivery</span><span><asp:Label ID="lblDelivery" runat="server"/></span></div>
                             <div class="line total"><span>Total paid</span><span>R<asp:Label ID="lblTotal" runat="server"/></span></div>
 

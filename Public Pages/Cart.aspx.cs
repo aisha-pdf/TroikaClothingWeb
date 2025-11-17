@@ -324,7 +324,7 @@ namespace TroikaClothingWeb.Public_Pages
                 using (var cmd = new SqlCommand(@"
             SELECT MAX(CAST(SUBSTRING(receiptNum, 4, 3) AS INT)) 
             FROM Sale 
-            WHERE receiptNum LIKE 'REC%'", con))
+            WHERE receiptNum LIKE 'R%'", con))
                 {
                     var obj = cmd.ExecuteScalar();
                     if (obj != DBNull.Value && obj != null)
@@ -332,8 +332,9 @@ namespace TroikaClothingWeb.Public_Pages
                 }
             }
 
-            return "REC" + next.ToString("000");
+            return "R" + next.ToString("00000");
         }
+
 
         private string GetCustomerIDByUsername(string username)
         {

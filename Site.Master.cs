@@ -94,6 +94,8 @@ namespace TroikaClothingWeb
                     {
                         var cart = ShoppingCart.Get(Session);
                         lblCartCount.Text = (cart != null ? cart.Count : 0).ToString();
+                        var label2 = this.FindControl("Label2") as Label;
+                        if (label2 != null) label2.Text = lblCartCount.Text;
                     }
                 }
 
@@ -109,6 +111,8 @@ namespace TroikaClothingWeb
                     {
                         var cart = ShoppingCart.Get(Session);
                         lblCartCount.Text = (cart != null ? cart.Count : 0).ToString();
+                        var label2 = this.FindControl("Label2") as Label;
+                        if (label2 != null) label2.Text = lblCartCount.Text;
                     }
                 }
                 
@@ -123,7 +127,7 @@ namespace TroikaClothingWeb
             }
             catch 
             {
-                // Fail silently — we don’t want layout to crash
+                
                 if (lblCartCount != null) lblCartCount.Text = "0";
             }
         }
