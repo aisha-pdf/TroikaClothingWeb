@@ -196,5 +196,12 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
     </asp:PlaceHolder>
+
+<%--    Botpress Web Chat Integration--%>
+
+    <script src="https://cdn.botpress.cloud/webchat/v3.4/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/11/07/14/20251107141451-6UJV4FC6.js" defer></script>
+    
+
 </body>
 </html>
