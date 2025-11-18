@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,51 +14,88 @@ namespace TroikaClothingWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Ensure only admin can access
-            if (Session["Role"] == null || Session["Role"].ToString() != "Administrator")
-            {
-                Response.Redirect("~/Login.aspx");
-            }
-
             if (!IsPostBack)
             {
-                imgReport1.Visible = false;
-                imgReport2.Visible = false;
-                btnPrint.Visible = false;
+                LoadAllCharts();
+                
             }
         }
 
-        protected void ddlReports_SelectedIndexChanged(object sender, EventArgs e)
+        private void LoadAllCharts()
         {
-            string selected = ddlReports.SelectedValue;
+            var monthly = GetMonthlySales();
+            var payment = GetPaymentMethodData();
+            var channel = GetSalesChannelData();
 
-            // Hide everything by default
-            imgReport1.Visible = false;
-            imgReport2.Visible = false;
-            btnPrint.Visible = false;
+            string monthlyJson = ToJson(monthly);
+            string paymentJson = ToJson(payment);
+            string channelJson = ToJson(channel);
 
-            if (string.IsNullOrEmpty(selected))
-                return;
-
-            if (selected == "monthlyproducts")
-            {
-                imgReport1.ImageUrl = "~/Images/Reports/Monthly Performance Report.png";
-                imgReport1.Visible = true;
-                btnPrint.Visible = true;
-            }
-            else if (selected == "sales")
-            {
-                imgReport1.ImageUrl = "~/Images/Reports/Sales Report.png";
-                imgReport2.ImageUrl = "~/Images/Reports/Sales Report 2.png";
-                imgReport1.Visible = true;
-                imgReport2.Visible = true;
-                btnPrint.Visible = true;
-            }
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "loadCharts",
+                $"loadSalesCharts({monthlyJson}, {paymentJson}, {channelJson});",
+                true
+            );
         }
 
-        protected void btnPrint_Click(object sender, EventArgs e)
+        private DataTable GetMonthlySales()
         {
-
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ReportsConnectionString"].ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(@"
+        SELECT 
+        CAST(YEAR(dateOfIssue) AS VARCHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(dateOfIssue) AS VARCHAR(2)), 2) AS Month,
+        SUM(paymentTotal) AS TotalSales
+        FROM dbo.Sale
+        WHERE salesStatus = 'Completed'
+        GROUP BY YEAR(dateOfIssue), MONTH(dateOfIssue)
+        ORDER BY YEAR(dateOfIssue), MONTH(dateOfIssue);
+            ", con))
+            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+            {
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
         }
+
+        private DataTable GetPaymentMethodData()
+        {
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ReportsConnectionString"].ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(@"
+        SELECT paymentMethod, COUNT(*) AS TotalCount
+        FROM dbo.Sale
+        WHERE salesStatus='Completed'
+        GROUP BY paymentMethod;", con))
+            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+            {
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+
+        private DataTable GetSalesChannelData()
+        {
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ReportsConnectionString"].ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(@"
+        SELECT saleChannel, COUNT(*) AS TotalSales
+        FROM dbo.Sale
+        WHERE salesStatus='Completed'
+        GROUP BY saleChannel;", con))
+            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+            {
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+
+        public string ToJson(DataTable dt)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
+        }
+
     }
 }

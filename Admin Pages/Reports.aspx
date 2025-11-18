@@ -1,76 +1,111 @@
-﻿<%@ Page Title="Reports" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="TroikaClothingWeb.Reports" %>
+﻿
+
+<%@ Page Title="Reports" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="TroikaClothingWeb.Reports" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #f8f8f8; padding: 30px 10px;">
+    <div style="min-height: 90vh; padding: 30px 10px; background-color: #f8f8f8;">
 
-        <!-- Page heading -->
-        <h1 style="color: #4B0082; text-align: center; margin-bottom: 25px; font-weight: 700;">View Reports</h1>
+        <h1 style="color: #4B0082; text-align: center; margin-bottom: 25px; font-weight: 700;">
+            View Reports
+        </h1>
 
-        <!-- Dropdown -->
-        <asp:DropDownList ID="ddlReports" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlReports_SelectedIndexChanged"
-            CssClass="form-control" Style="width: 300px; margin-bottom: 20px;">
-            <asp:ListItem Text="-- Select Report --" Value="" />
-            <asp:ListItem Text="Sales Report" Value="sales" />
-            <asp:ListItem Text="Monthly Products Report" Value="monthlyproducts" />
-        </asp:DropDownList>
+        
 
-        <!-- Image container with flexbox -->
-        <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 20px;">
-            <!-- First image -->
-            <asp:Image ID="imgReport1" runat="server" CssClass="img-thumbnail" Width="600px" Visible="false" />
+        <!-- 3 charts -->
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:flex-start;
+            width:100%;
+            box-sizing:border-box;
+            gap:40px;
+            flex-wrap:wrap;
+        ">
 
-            <!-- Second image -->
-            <asp:Image ID="imgReport2" runat="server" CssClass="img-thumbnail" Width="600px" Visible="false" />
+            <!-- Chart 1 -->
+            <div style="flex: 1; min-width: 350px; max-width: 500px;"> 
+                <h4 style="text-align:center; margin-bottom:10px;">Monthly Sales Totals</h4>
+                <div style="border: 2px solid #ccc; padding:20px; border-radius:10px; background:white; height:300px;">
+                    <canvas id="revChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2 -->
+            <div style="flex: 1; min-width: 350px; max-width: 500px;">
+                <h4 style="text-align:center; margin-bottom:10px;">Preferred Payment Method</h4>
+                <div style="border: 2px solid #ccc; padding:20px; border-radius:10px; background:white; height:300px;">
+                    <canvas id="topProductsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Third Chart: Sales Channel -->
+            <div style="flex: 1; min-width: 350px; max-width: 500px;">
+                <h4 style="text-align:center; margin-bottom:10px;">Sales Channel (FrontEnd vs Website)</h4>
+                <div style="border: 2px solid #ccc; padding:20px; border-radius:10px; background:white; height:300px;">
+                <canvas id="channelChart"></canvas>
+               </div>
+            </div>
+
+
         </div>
-        <asp:Button ID="btnPrint" runat="server" Text="Print Report"
-            CssClass="btn btn-primary mt-3"
-            OnClientClick="printReport(); return false;"
-            Visible="false" OnClick="btnPrint_Click" />
 
-
-        <script type="text/javascript">
-            function printReport() {
-                var printWindow = window.open('', '_blank');
-                var content = '';
-
-                var img1 = document.getElementById('<%= imgReport1.ClientID %>');
-        var img2 = document.getElementById('<%= imgReport2.ClientID %>');
-
-                if (img1 && img1.style.display !== 'none' && img1.src) {
-                    content += '<img src="' + img1.src + '" style="width:100%; margin-bottom:20px;" />';
-                }
-                if (img2 && img2.style.display !== 'none' && img2.src) {
-                    content += '<img src="' + img2.src + '" style="width:100%;" />';
-                }
-
-                printWindow.document.write('<html><head><title>Print Report</title></head><body>' + content + '</body></html>');
-                printWindow.document.close();
-                printWindow.focus();
-                printWindow.print();
-            }
-        </script>
-        <script type="text/javascript">
-            function printReport() {
-                var printWindow = window.open('', '_blank');
-                var content = '';
-
-                var img1 = document.getElementById('<%= imgReport1.ClientID %>');
-        var img2 = document.getElementById('<%= imgReport2.ClientID %>');
-
-                if (img1 && img1.style.display !== 'none' && img1.src) {
-                    content += '<img src="' + img1.src + '" style="width:100%; margin-bottom:20px;" />';
-                }
-                if (img2 && img2.style.display !== 'none' && img2.src) {
-                    content += '<img src="' + img2.src + '" style="width:100%;" />';
-                }
-
-                printWindow.document.write('<html><head><title>Print Report</title></head><body>' + content + '</body></html>');
-                printWindow.document.close();
-                printWindow.focus();
-                printWindow.print();
-            }
-        </script>
-
+        
     </div>
-</asp:Content>
+    <asp:Literal ID="litDbTest" runat="server" />
+    <script>
+        function loadSalesCharts(monthlyData, paymentData, channelData) {
 
+            // ------- Monthly Revenue -------
+            const months = monthlyData.map(x => x.Month);
+            const totals = monthlyData.map(x => x.TotalSales);
+
+            new Chart(document.getElementById("revChart"), {
+                type: "bar",
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: "Total Monthly Sales",
+                        data: totals,
+                        backgroundColor: "rgba(75, 192, 192, 0.6)", // soft teal color
+                        borderColor: "rgba(75, 192, 192, 1)",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+
+            // ------- Payment Method Pie Chart -------
+            new Chart(document.getElementById("topProductsChart"), {
+                type: "pie",
+                data: {
+                    labels: paymentData.map(x => x.paymentMethod),
+                    datasets: [{
+                        data: paymentData.map(x => x.TotalCount)
+                    }]
+                }
+            });
+
+            // ------- Sales Channel Bar Chart -------
+            new Chart(document.getElementById("channelChart"), {
+                type: "bar",
+                data: {
+                    labels: channelData.map(x => x.saleChannel),
+                    datasets: [{
+                        label: "Sales Count",
+                        data: channelData.map(x => x.TotalSales),
+                        borderWidth: 1
+                    }]
+                }
+            });
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</asp:Content>
