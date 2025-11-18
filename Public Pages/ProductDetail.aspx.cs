@@ -146,7 +146,33 @@ namespace TroikaClothingWeb.Public_Pages
             };
 
             ShoppingCart.AddOrIncrease(Session, item);
-            Response.Redirect("~/Public Pages/Cart.aspx");
+            //  Response.Redirect("~/Public Pages/Cart.aspx");  //this line opens the cart page directly after adding an item
+
+            // Update master page cart count
+            UpdateMasterPageCartCount();
+
+            lblStatus.Text = $"{name} added to cart successfully!";
+            lblStatus.Visible = true;
+
         }
+
+
+
+        private void UpdateMasterPageCartCount()
+        {
+            // Get reference to the master page
+            SiteMaster master = Page.Master as SiteMaster;
+            if (master != null)
+            {
+                // Update cart count in master page
+                var cart = ShoppingCart.Get(Session);
+                int cartCount = cart != null ? cart.Count : 0;
+
+                // Update the cart count label
+                master.UpdateCartCount(cartCount);
+            }
+        }
+
+
     }
 }

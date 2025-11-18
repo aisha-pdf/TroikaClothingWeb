@@ -132,6 +132,16 @@ namespace TroikaClothingWeb
             }
         }
 
+        public void UpdateCartCount(int count)
+        {
+            if (lblCartCount != null)
+            {
+                lblCartCount.Text = count.ToString();
+                var label2 = this.FindControl("Label2") as Label;
+                if (label2 != null) label2.Text = count.ToString();
+            }
+        }
+
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             // Clear session and go to home

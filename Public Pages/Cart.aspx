@@ -298,12 +298,10 @@
 
                     <!-- RIGHT: Summary -->
                     <div class="panel">
-                        <div class="total">Subtotal: R<asp:Label ID="lblSubtotal" runat="server" /></div>>
-
-                        <div class="d-flex justify-content-between text-muted">
-                            <span> VAT Included </span>
+                        <div class="total">Subtotal: R<asp:Label ID="lblSubtotal" runat="server" />
+                           
                         </div>
-
+                        <div class="muted">VAT Included</div>
 
                         <div class="muted" style="margin-bottom: 6px;">Delivery:
                             <asp:Label ID="lblDelivery" runat="server" /></div>

@@ -51,8 +51,8 @@
                         <asp:Button ID="btnAddToCart" runat="server" 
                             CommandName="ViewDetails" 
                             CommandArgument='<%# Eval("ProductID") %>'
-                            Text="Add to Cart" 
-                            CssClass="add-to-cart-btn" />
+                            Text="View details" 
+                            CssClass="view-details-btn" />
                     </div>
                 </ItemTemplate>
             </asp:DataList>
@@ -67,6 +67,7 @@
             --troika-light-accent: #644F7D;
             --troika-deep-green: #2C5F2D;
             --troika-cream: #F5F5DC;
+            --troika-dark-purple: #4A3660;
         }
 
         /* Styles for the product page */
@@ -244,12 +245,12 @@
             margin-bottom: 15px;
         }
 
-        /* Add to Cart button styling */
-        .add-to-cart-btn {
+        /* View Details button styling */
+        .view-details-btn {
             width: 100%;
             padding: 10px;
-            background: var(--troika-deep-green);
-            color: var(--troika-white);
+            background: var(--troika-dark-purple);
+            color: var(--troika-cream);
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -259,8 +260,9 @@
             margin-top: auto;
         }
 
-        .add-to-cart-btn:hover {
-            background: #234823;
+        .view-details-btn:hover {
+            background: var(--troika-light-accent);
+            color: var(--troika-white);
         }
 
         /* No products message styling */

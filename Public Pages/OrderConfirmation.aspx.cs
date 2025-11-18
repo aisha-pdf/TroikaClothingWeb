@@ -330,61 +330,91 @@ namespace TroikaClothingWeb.Public_Pages
             }
         }
 
+
+
+
         protected void btnSavePdf_Click(object sender, EventArgs e)
         {
             try
             {
-                // Capture receipt HTML
+                // Build full HTML for the PDF
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append("<html><head>");
-                sb.Append("<style>");
-                sb.Append(@"body { font-family: 'Segoe UI', sans-serif; color: #111827; margin: 30px; }
-                    h2 { color: #4F46E5; }
-                    .section { margin-bottom: 20px; }
-                    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-                    th, td { border: 1px solid #e5e7eb; padding: 8px; text-align: left; }
-                    th { background: #f9fafb; }");
-                sb.Append("</style>");
-                sb.Append("</head><body>");
-                sb.Append($"<h2>Troika Clothing — Order Receipt #{lblReceipt.Text}</h2>");
-                sb.Append($"<p><b>Date:</b> {lblDate.Text}<br/>");
-                sb.Append($"<b>Payment method:</b> {lblPaymentMethod.Text}<br/>");
-                sb.Append($"<b>Sale channel:</b> {lblChannel.Text}</p>");
 
-                sb.Append("<div class='section'><h3>Items</h3><table>");
-                sb.Append("<tr><th>Product</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr>");
+                sb.Append("<html><head>");
+                sb.Append("<meta charset='utf-8' />");
+                sb.Append("<meta name='viewport' content='width=device-width, initial-scale=1' />");
+
+                // Include your receipt styles
+                sb.Append("<style>");
+                sb.Append(@"
+            body { font-family: 'Segoe UI', sans-serif; color: #3D304C; margin: 30px; background:#ffffff; }
+            h2 { text-align:center; font-size:28px; margin-bottom:20px; }
+            .pdf-box { max-width:900px; margin:0 auto; border:2px solid #3D304C; border-radius:14px; padding:28px; background:#f8f8f8; }
+            table { width:100%; border-collapse:collapse; margin-top:15px; }
+            th, td { border-bottom:1px solid #3D304C; padding:10px; font-size:14px; }
+            th { background:#2A1E37; color:#fff; text-align:left; }
+            td { background:#fff; }
+            .totals div { display:flex; justify-content:space-between; padding:6px 0; }
+            .total-final { font-size:20px; font-weight:700; color:#2C5F2D; }
+            .address-box { background:#D8CDEB; padding:12px; border-radius:10px; margin-top:10px; }
+            .section-title { font-weight:700; font-size:18px; margin-top:25px; border-bottom:2px solid #3D304C; padding-bottom:6px; }
+            .footer { margin-top:40px; text-align:center; font-size:12px; color:#6b7280; }
+        ");
+                sb.Append("</style></head><body>");
+
+                sb.Append($"<h2>Troika Clothing — Order Receipt #{lblReceipt.Text}</h2>");
+                sb.Append("<div class='pdf-box'>");
+
+                // Receipt ID
+                sb.Append($"<div style='margin-bottom:20px;'><strong>Receipt ID:</strong> {lblReceipt.Text}</div>");
+
+                // ===== ITEMS =====
+                sb.Append("<div class='section-title'>Items</div>");
+                sb.Append("<table>");
+                sb.Append("<tr><th>Item</th><th style='text-align:right;'>Amount</th></tr>");
+
                 foreach (RepeaterItem item in rptItems.Items)
                 {
                     var lblName = item.FindControl("lblProductName") as Label;
                     var lblQty = item.FindControl("lblQuantity") as Label;
                     var lblUnit = item.FindControl("lblUnitPrice") as Label;
-                    var lblTotal = item.FindControl("lblLineTotal") as Label;
+                    var lblLine = item.FindControl("lblLineTotal") as Label;
+
+                    string details = item.FindControl("lblQuantity") != null
+                        ? $"Qty: {lblQty.Text} • Unit: R{lblUnit.Text}"
+                        : "";
 
                     sb.Append("<tr>");
-                    sb.Append($"<td>{(lblName != null ? lblName.Text : "")}</td>");
-                    sb.Append($"<td>{(lblQty != null ? lblQty.Text : "")}</td>");
-                    sb.Append($"<td>{(lblUnit != null ? lblUnit.Text : "")}</td>");
-                    sb.Append($"<td>{(lblTotal != null ? lblTotal.Text : "")}</td>");
+                    sb.Append($"<td><strong>{lblName?.Text}</strong><br><span style='font-size:12px;'>{details}</span></td>");
+                    sb.Append($"<td style='text-align:right;'>R{lblLine?.Text}</td>");
                     sb.Append("</tr>");
                 }
-                sb.Append("</table></div>");
 
-                sb.Append("<div class='section'>");
-                sb.Append($"<p><b>Subtotal:</b> R{lblSubtotal.Text}<br/>");
-                sb.Append($"<b>Delivery:</b> {lblDelivery.Text}<br/>");
-                sb.Append($"<b>Total:</b> R{lblTotal.Text}</p>");
+                sb.Append("</table>");
+
+                // ===== SUMMARY =====
+                sb.Append("<div class='section-title'>Summary</div>");
+                sb.Append("<div class='totals'>");
+                sb.Append($"<div><span>Order date</span><span>{lblDate.Text}</span></div>");
+                sb.Append($"<div><span>Payment method</span><span>{lblPaymentMethod.Text}</span></div>");
+                sb.Append($"<div><span>Subtotal</span><span>R{lblSubtotal.Text}</span></div>");
+                sb.Append($"<div><span>Delivery</span><span>{lblDelivery.Text}</span></div>");
+                sb.Append($"<div class='total-final'><span>Total paid</span><span>R{lblTotal.Text}</span></div>");
+                sb.Append($"<div><span>Estimated delivery</span><span>{lblEta.Text}</span></div>");
                 sb.Append("</div>");
 
-                sb.Append("<div class='section'><h3>Shipping Address</h3>");
-                sb.Append($"<p>{lblShipName.Text}<br/>{lblShipStreet.Text}<br/>{lblShipSuburb.Text}<br/>{lblShipPost.Text}</p>");
-                sb.Append($"<p><b>Estimated delivery:</b> {lblEta.Text}</p>");
+                // ===== SHIPPING =====
+                sb.Append("<div class='section-title'>Shipping Address</div>");
+                sb.Append("<div class='address-box'>");
+                sb.Append($"{lblShipName.Text}<br>{lblShipStreet.Text}<br>{lblShipSuburb.Text}<br>{lblShipPost.Text}");
                 sb.Append("</div>");
-                sb.Append("<p style='color:#6b7280'>Thank you for shopping with Troika Clothing!</p>");
+
+                sb.Append("</div>"); // pdf-box
+                sb.Append("<div class='footer'>Thank you for shopping with Troika Clothing.</div>");
                 sb.Append("</body></html>");
 
+                // Return HTML as downloadable file
                 string htmlContent = sb.ToString();
-
-                // Convert HTML to PDF using browser print dialog
                 Response.Clear();
                 Response.Buffer = true;
                 Response.AddHeader("content-disposition", $"attachment; filename=TroikaReceipt_{lblReceipt.Text}.html");

@@ -147,6 +147,19 @@
                 color: var(--troika-white);
             }
 
+        /* Status message style */
+        .status-message {
+            color: #2C5F2D;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: rgba(44, 95, 45, 0.1);
+            border-radius: 4px;
+            border-left: 3px solid #2C5F2D;
+            display: inline-block;
+        }
+
         /* Size Guide Link Style */
         .size-guide-link {
             background: none !important;
@@ -344,6 +357,9 @@
 
                 <asp:Button ID="btnAddToCart" runat="server" CssClass="btn-add-to-cart"
                     Text="Add to Cart" OnClick="btnAddToCart_Click" />
+                
+                <!-- Status Message -->
+                <asp:Label ID="lblStatus" runat="server" CssClass="status-message" Visible="false" />
             </div>
 
         </div>
@@ -509,6 +525,4 @@
             }
         }
     </style>
-
-
 </asp:Content>
