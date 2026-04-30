@@ -1,13 +1,14 @@
-﻿using SendGrid;
-using SendGrid.Helpers.Mail;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 
 namespace TroikaClothingWeb.Public_Pages
 {
@@ -284,15 +285,16 @@ namespace TroikaClothingWeb.Public_Pages
 
         private async Task SendReceiptEmailAsync(string receipt, string htmlBody)
         {
-            string apiKey = ConfigurationManager.AppSettings["SendGridApiKey"];
-            var client = new SendGridClient(apiKey);
+            string fromEmail = ConfigurationManager.AppSettings["GmailEmail"];
+            string appPassword = ConfigurationManager.AppSettings["GmailAppPassword"];
 
             string toEmail = null;
+
             using (var con = new SqlConnection(cs))
             using (var cmd = new SqlCommand(@"
-                SELECT c.email FROM Sale s
-                JOIN Customer c ON c.customerID = s.CustomerID
-                WHERE s.receiptNum = @r", con))
+        SELECT c.email FROM Sale s
+        JOIN Customer c ON c.customerID = s.CustomerID
+        WHERE s.receiptNum = @r", con))
             {
                 cmd.Parameters.AddWithValue("@r", receipt);
                 con.Open();
@@ -304,14 +306,20 @@ namespace TroikaClothingWeb.Public_Pages
             if (string.IsNullOrWhiteSpace(toEmail))
                 throw new Exception("No email address on file for this order.");
 
-            var from = new EmailAddress("troikasales123@gmail.com", "Troika Clothing");
-            var to = new EmailAddress(toEmail);
-            var subject = $"Your Troika Clothing Order #{receipt}";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, null, htmlBody);
+            var message = new MailMessage();
+            message.From = new MailAddress(fromEmail, "Troika Clothing");
+            message.Subject = $"Your Troika Clothing Order #{receipt}";
+            message.Body = htmlBody;
+            message.IsBodyHtml = true;
+            message.To.Add(toEmail);
 
-            var response = await client.SendEmailAsync(msg);
-            if (response.StatusCode != System.Net.HttpStatusCode.Accepted)
-                throw new Exception("SendGrid API returned: " + response.StatusCode);
+            using (var smtp = new SmtpClient("smtp.gmail.com", 587))
+            {
+                smtp.Credentials = new NetworkCredential(fromEmail, appPassword);
+                smtp.EnableSsl = true;
+
+                await smtp.SendMailAsync(message);
+            }
         }
 
         protected async void btnEmail_Click(object sender, EventArgs e)
