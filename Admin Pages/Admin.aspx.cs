@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System;
+using TroikaClothingWeb.Services;
 
 namespace TroikaClothingWeb
 {
@@ -11,11 +7,8 @@ namespace TroikaClothingWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Ensure only admin can access
-            if (Session["Role"] == null || Session["Role"].ToString() != "Administrator")
-            {
+            if (!AuthService.IsInRole(Session, "Administrator"))
                 Response.Redirect("~/Login.aspx");
-            }
         }
 
         protected void btnUserList_Click(object sender, EventArgs e)
@@ -23,12 +16,10 @@ namespace TroikaClothingWeb
             Response.Redirect("Admin.aspx");
         }
 
-
         protected void btnProfile_Click(object sender, EventArgs e)
         {
             Response.Redirect("AdminProfile.aspx");
         }
-
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {

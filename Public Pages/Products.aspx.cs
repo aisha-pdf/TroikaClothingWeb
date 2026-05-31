@@ -1,125 +1,72 @@
 ﻿using System;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
 using System.Web.UI.WebControls;
+using TroikaClothingWeb.Models;
+using TroikaClothingWeb.Services;
 
 namespace TroikaClothingWeb
 {
     public partial class Products : System.Web.UI.Page
     {
-        
-        string connectionString = ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString;
+        private readonly ProductService _productService = new ProductService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                LoadProducts();
-               // ddlCategory.SelectedValue = "all";
+                BindCategories();
+                BindProducts();
             }
         }
 
-        // Load all products, or filter by category and search term
-        private void LoadProducts(string category = "all", string search = "")
+        private void BindCategories()
         {
-            string query = "SELECT ProductID, ProductName, Description, Category, Price, Picture FROM Product WHERE Status = 'Active'";
-            bool hasCondition = false;
+            ddlCategory.Items.Clear();
+            ddlCategory.Items.Add(new ListItem("All Categories", "all"));
 
-            if (category != "all" || !string.IsNullOrEmpty(search))
+            foreach (string category in _productService.GetCategories())
             {
-                if (category != "all")
-                {
-                    query += " AND Category = @Category";
-                }
-                if (!string.IsNullOrEmpty(search))
-                {
-                    query += " AND (ProductName LIKE @Search OR Description LIKE @Search)";
-                }
-            }
-
-            DataTable dt = new DataTable();
-            using (SqlConnection con = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand(query, con))
-            {
-                if (category != "all")
-                    cmd.Parameters.AddWithValue("@Category", category);
-                if (!string.IsNullOrEmpty(search))
-                    cmd.Parameters.AddWithValue("@Search", "%" + search + "%");
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }
-
-            // Compute and attach ImageUrl for display — use the handler to stream images
-            dt.Columns.Add("ImageUrl", typeof(string));
-            foreach (DataRow row in dt.Rows)
-            {
-                // Use handler for database-stored images to avoid large base64 inline blocks
-                if (row["Picture"] != DBNull.Value)
-                {
-                    row["ImageUrl"] = $"~/Public Pages/ProductImageHandler.ashx?id={row["ProductID"]}";
-                }
-                else
-                {
-                    row["ImageUrl"] = "~/images/no-image.png"; // fallback image file on disk
-                }
-            }
-
-            // Bind results to DataList
-            if (dt.Rows.Count > 0)
-            {
-                dlProducts.DataSource = dt;
-                dlProducts.DataBind();
-                lblNoProducts.Visible = false;
-            }
-            else
-            {
-                dlProducts.DataSource = null;
-                dlProducts.DataBind();
-                lblNoProducts.Visible = true;
+                ddlCategory.Items.Add(new ListItem(category, category));
             }
         }
 
-        // Handles Search button click
+        private void BindProducts()
+        {
+            ProductSearchCriteria criteria = new ProductSearchCriteria
+            {
+                Category = ddlCategory.SelectedValue,
+                SearchText = txtSearch.Text.Trim()
+            };
+
+            var products = _productService.SearchProducts(criteria);
+            dlProducts.DataSource = products;
+            dlProducts.DataBind();
+            lblNoProducts.Visible = products.Count == 0;
+        }
+
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadProducts(ddlCategory.SelectedValue, txtSearch.Text.Trim());
+            BindProducts();
         }
 
-        // Handles category filter change
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadProducts(ddlCategory.SelectedValue, txtSearch.Text.Trim());
-
-           
+            BindProducts();
         }
 
-        // Handles "View Details" button click inside DataList
         protected void dlProducts_ItemCommand(object source, DataListCommandEventArgs e)
         {
             if (e.CommandName == "ViewDetails")
             {
                 string productId = e.CommandArgument.ToString();
-                // Navigate to product detail page
-                Response.Redirect($"ProductDetail.aspx?id={productId}");
+                Response.Redirect("ProductDetail.aspx?id=" + Server.UrlEncode(productId));
             }
-        }
-
-        protected void ddlCategory_DataBound(object sender, EventArgs e)
-        {
-            // Insert "All Categories" as the first item AFTER data is bound
-            ddlCategory.Items.Insert(0, new ListItem("All Categories", "all"));
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            // Clear both the search text and the category filter
             txtSearch.Text = string.Empty;
             ddlCategory.SelectedValue = "all";
-
-            // Reload all products
-            LoadProducts("all", "");
+            BindProducts();
         }
     }
 }

@@ -1,0 +1,1120 @@
+/*
+    TroikaTheme.css
+    Centralised theme and reusable component styling.
+    Use these variables/classes instead of hardcoded inline styles on each ASPX page.
+*/
+
+/* -------------------- THEME VARIABLES -------------------- */
+
+:root,
+body[data-theme="light"] {
+    --troika-bg: #ffffff;
+    --troika-surface: #ffffff;
+    --troika-surface-alt: #f7f8fa;
+    --troika-text: #1f1f1f;
+    --troika-heading-text: #111111;
+    --troika-muted-text: #6b7280;
+    --troika-border: #e5e7eb;
+    --troika-primary: #3D304C;
+    --troika-primary-hover: #644F7D;
+    --troika-secondary: #F5F5DC;
+    --troika-success: #2C5F2D;
+    --troika-danger: #b42318;
+    --troika-btn-bg: #3D304C;
+    --troika-btn-text: #ffffff;
+    --troika-btn-hover-bg: #644F7D;
+    --troika-table-bg: #ffffff;
+    --troika-table-text: #1f1f1f;
+    --troika-table-header-bg: #f3f4f6;
+    --troika-table-header-text: #111111;
+    --troika-input-bg: #ffffff;
+    --troika-input-text: #1f1f1f;
+    --troika-placeholder-text: #6b7280;
+    --troika-card-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    --troika-card-shadow-hover: 0 8px 18px rgba(0,0,0,0.16);
+}
+
+body[data-theme="dark"] {
+    --troika-bg: #121018;
+    --troika-surface: #1c1724;
+    --troika-surface-alt: #251f2f;
+    --troika-text: #f5f3f7;
+    --troika-heading-text: #ffffff;
+    --troika-muted-text: #d6d0df;
+    --troika-border: #3b3048;
+    --troika-primary: #d9c8f0;
+    --troika-primary-hover: #b99cdd;
+    --troika-secondary: #2b2433;
+    --troika-success: #79c783;
+    --troika-danger: #ff9a90;
+    --troika-btn-bg: #d9c8f0;
+    --troika-btn-text: #121018;
+    --troika-btn-hover-bg: #b99cdd;
+    --troika-table-bg: #1c1724;
+    --troika-table-text: #f5f3f7;
+    --troika-table-header-bg: #2b2433;
+    --troika-table-header-text: #ffffff;
+    --troika-input-bg: #251f2f;
+    --troika-input-text: #f5f3f7;
+    --troika-placeholder-text: #c9c3d4;
+    --troika-card-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    --troika-card-shadow-hover: 0 8px 24px rgba(0,0,0,0.50);
+}
+
+/* -------------------- GLOBAL BASE STYLES -------------------- */
+
+html,
+body {
+    background: var(--troika-bg) !important;
+    color: var(--troika-text) !important;
+}
+
+body {
+    min-height: 100vh;
+}
+
+/* General text elements */
+p,
+span,
+div,
+label,
+small,
+strong,
+em,
+li,
+td,
+th,
+.form-label,
+.card-text,
+.profile-text,
+.sale-history-text,
+.about-text,
+.product-detail-text {
+    color: var(--troika-text);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6,
+.troika-page-title,
+.page-title,
+.section-title,
+.admin-title,
+.report-title,
+.report-heading,
+.chart-title,
+.product-detail-title,
+.about-title,
+.profile-title,
+.sale-history-title,
+.auth-title {
+    color: var(--troika-heading-text) !important;
+}
+
+/* Muted/secondary text */
+.troika-muted,
+.text-muted,
+.subtitle,
+.description,
+.product-description,
+small {
+    color: var(--troika-muted-text) !important;
+}
+
+/* Links */
+a {
+    color: var(--troika-primary);
+}
+
+    a:hover {
+        color: var(--troika-primary-hover);
+    }
+
+/* -------------------- NAVBAR / DROPDOWN -------------------- */
+
+.navbar-troika {
+    background-color: var(--troika-surface) !important;
+    border-bottom: 2px solid var(--troika-primary);
+}
+
+    .navbar-troika .navbar-brand,
+    .navbar-troika .nav-link {
+        color: var(--troika-primary) !important;
+        font-weight: 500;
+    }
+
+.navbar-troika1 {
+    background-color: var(--troika-primary) !important;
+    border-bottom: 2px solid var(--troika-surface);
+}
+
+    .navbar-troika1 .navbar-brand,
+    .navbar-troika1 .nav-link {
+        color: var(--troika-bg) !important;
+        font-weight: 400;
+    }
+
+/* Dark mode navbar readable text */
+body[data-theme="dark"] .navbar-troika1 .navbar-brand,
+body[data-theme="dark"] .navbar-troika1 .nav-link {
+    color: #121018 !important;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+.nav-item.dropdown .dropdown-menu {
+    margin-top: 0;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: auto;
+    right: 0;
+    z-index: 3000 !important;
+    background: var(--troika-surface) !important;
+    border-color: var(--troika-border) !important;
+}
+
+.dropdown-item {
+    color: var(--troika-text) !important;
+    background: var(--troika-surface) !important;
+}
+
+    .dropdown-item:hover {
+        color: var(--troika-btn-text) !important;
+        background: var(--troika-primary-hover) !important;
+    }
+
+.navbar,
+.container-fluid,
+body {
+    overflow: visible !important;
+}
+
+/* -------------------- PAGE LAYOUT -------------------- */
+
+.troika-page {
+    background: var(--troika-bg);
+    color: var(--troika-text);
+    min-height: 80vh;
+    padding: 30px 15px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.troika-page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--troika-heading-text) !important;
+    font-weight: 600;
+}
+
+.troika-section {
+    max-width: 1180px;
+    margin: 32px auto;
+}
+
+.troika-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.troika-form-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* -------------------- FORMS / INPUTS -------------------- */
+
+.troika-form-control,
+.troika-input,
+.troika-select,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+select,
+textarea,
+.form-control {
+    border: 1px solid var(--troika-border) !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+    background: var(--troika-input-bg) !important;
+    color: var(--troika-input-text) !important;
+}
+
+.troika-input {
+    width: 300px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--troika-placeholder-text) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.form-control:focus {
+    outline: none !important;
+    border-color: var(--troika-primary) !important;
+    box-shadow: 0 0 0 2px rgba(217, 200, 240, 0.25) !important;
+}
+
+label,
+.form-label {
+    color: var(--troika-text) !important;
+}
+
+/* -------------------- BUTTONS -------------------- */
+
+.troika-btn,
+.search-button,
+.view-details-btn,
+.add-to-cart-btn,
+.menu-btn,
+button,
+.btn,
+input[type="submit"],
+input[type="button"] {
+    background: var(--troika-btn-bg) !important;
+    color: var(--troika-btn-text) !important;
+    border: 1px solid var(--troika-btn-bg) !important;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: background 0.2s ease, transform 0.1s ease;
+    text-decoration: none;
+}
+
+    .troika-btn:hover,
+    .search-button:hover,
+    .view-details-btn:hover,
+    .add-to-cart-btn:hover,
+    .menu-btn:hover,
+    button:hover,
+    .btn:hover,
+    input[type="submit"]:hover,
+    input[type="button"]:hover {
+        background: var(--troika-btn-hover-bg) !important;
+        border-color: var(--troika-btn-hover-bg) !important;
+        color: var(--troika-btn-text) !important;
+        transform: translateY(-1px);
+    }
+
+.troika-btn-secondary {
+    background: var(--troika-surface) !important;
+    color: var(--troika-primary) !important;
+    border: 1px solid var(--troika-primary) !important;
+}
+
+    .troika-btn-secondary:hover {
+        background: var(--troika-surface-alt) !important;
+        color: var(--troika-primary-hover) !important;
+    }
+
+.theme-toggle-btn {
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+/* Fix homepage button/link readability */
+.home-button,
+.home-button a,
+.quick-button,
+.quick-button a,
+.menu-btn,
+.menu-btn a {
+    color: var(--troika-btn-text) !important;
+}
+
+/* -------------------- CARDS -------------------- */
+
+.troika-card,
+.troika-auth-card,
+.troika-report-card,
+.troika-profile-card,
+.report-card,
+.profile-card,
+.checkout-card,
+.admin-card,
+.card {
+    background: var(--troika-surface) !important;
+    color: var(--troika-text) !important;
+    border: 1px solid var(--troika-border) !important;
+    border-radius: 14px;
+    box-shadow: var(--troika-card-shadow);
+    padding: 24px;
+}
+
+    .troika-card *,
+    .troika-auth-card *,
+    .troika-report-card *,
+    .troika-profile-card *,
+    .report-card *,
+    .profile-card *,
+    .checkout-card *,
+    .admin-card *,
+    .card * {
+        color: inherit;
+    }
+
+.troika-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+    .troika-grid > * {
+        flex: 1 1 280px;
+    }
+
+/* -------------------- PRODUCT GRID -------------------- */
+
+.products-grid-container {
+    width: 100%;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.product-card {
+    background: var(--troika-surface) !important;
+    color: var(--troika-text) !important;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--troika-card-shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--troika-border) !important;
+}
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--troika-card-shadow-hover);
+        border-color: var(--troika-primary-hover) !important;
+    }
+
+.product-card-link {
+    text-decoration: none;
+    color: inherit !important;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.product-image {
+    height: 320px;
+    background: var(--troika-surface-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-name {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--troika-primary) !important;
+}
+
+.product-description {
+    color: var(--troika-muted-text) !important;
+    font-size: 14px;
+    margin-bottom: 15px;
+    flex-grow: 1;
+    line-height: 1.4;
+}
+
+.product-category {
+    display: inline-block;
+    background: var(--troika-secondary) !important;
+    color: var(--troika-primary) !important;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.product-price {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--troika-text) !important;
+    margin-bottom: 15px;
+}
+
+.no-products {
+    display: block;
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: var(--troika-muted-text) !important;
+}
+
+/* -------------------- PRODUCT DETAIL PAGE -------------------- */
+
+.product-detail-container,
+.product-detail-container p,
+.product-detail-container span,
+.product-detail-container div,
+.product-detail-container label,
+.product-detail-container td,
+.product-detail-container li {
+    color: var(--troika-text) !important;
+}
+
+    .product-detail-container h1,
+    .product-detail-container h2,
+    .product-detail-container h3,
+    .product-detail-container .product-title,
+    .product-detail-container .product-name {
+        color: var(--troika-heading-text) !important;
+    }
+
+    .product-detail-container .price,
+    .product-detail-container .product-price {
+        color: var(--troika-primary) !important;
+    }
+
+/* -------------------- ABOUT PAGE -------------------- */
+
+.about-container,
+.about-container p,
+.about-container span,
+.about-container div,
+.about-container li {
+    color: var(--troika-text) !important;
+}
+
+    .about-container h1,
+    .about-container h2,
+    .about-container h3,
+    .about-container h4 {
+        color: var(--troika-heading-text) !important;
+    }
+
+/* -------------------- AUTH PAGES: LOGIN / REGISTER / FORGOT PASSWORD -------------------- */
+
+.auth-container,
+.login-container,
+.register-container,
+.forgot-password-container,
+.auth-container p,
+.login-container p,
+.register-container p,
+.forgot-password-container p,
+.auth-container span,
+.login-container span,
+.register-container span,
+.forgot-password-container span,
+.auth-container label,
+.login-container label,
+.register-container label,
+.forgot-password-container label {
+    color: var(--troika-text) !important;
+}
+
+    .auth-container h1,
+    .auth-container h2,
+    .login-container h1,
+    .login-container h2,
+    .register-container h1,
+    .register-container h2,
+    .forgot-password-container h1,
+    .forgot-password-container h2 {
+        color: var(--troika-heading-text) !important;
+    }
+
+    /* Useful if your login/register forms use Bootstrap panels/cards */
+    .login-container .card,
+    .register-container .card,
+    .forgot-password-container .card,
+    .auth-container .card {
+        background: var(--troika-surface) !important;
+        color: var(--troika-text) !important;
+        border-color: var(--troika-border) !important;
+    }
+
+/* -------------------- CUSTOMER PROFILE / SALE HISTORY -------------------- */
+
+.profile-container,
+.customer-profile-container,
+.sale-history-container,
+.profile-container p,
+.customer-profile-container p,
+.sale-history-container p,
+.profile-container span,
+.customer-profile-container span,
+.sale-history-container span,
+.profile-container label,
+.customer-profile-container label,
+.sale-history-container label,
+.profile-container div,
+.customer-profile-container div,
+.sale-history-container div {
+    color: var(--troika-text) !important;
+}
+
+    .profile-container h1,
+    .profile-container h2,
+    .customer-profile-container h1,
+    .customer-profile-container h2,
+    .sale-history-container h1,
+    .sale-history-container h2 {
+        color: var(--troika-heading-text) !important;
+    }
+
+/* -------------------- REPORTS PAGE -------------------- */
+
+.reports-container,
+.reports-container p,
+.reports-container span,
+.reports-container div,
+.reports-container label,
+.reports-container td {
+    color: var(--troika-text) !important;
+}
+
+    .reports-container h1,
+    .reports-container h2,
+    .reports-container h3,
+    .report-title,
+    .report-heading,
+    .chart-title {
+        color: var(--troika-heading-text) !important;
+    }
+
+canvas {
+    background: transparent !important;
+}
+
+/* -------------------- TABLES / GRIDVIEWS -------------------- */
+
+.troika-table,
+.table,
+.gridview,
+table {
+    background: var(--troika-table-bg) !important;
+    color: var(--troika-table-text) !important;
+    border-color: var(--troika-border) !important;
+}
+
+    .troika-table th,
+    .table th,
+    .gridview th,
+    table th {
+        background: var(--troika-table-header-bg) !important;
+        color: var(--troika-table-header-text) !important;
+        border-color: var(--troika-border) !important;
+    }
+
+    .troika-table td,
+    .table td,
+    .gridview td,
+    table td {
+        background: var(--troika-table-bg) !important;
+        color: var(--troika-table-text) !important;
+        border-color: var(--troika-border) !important;
+    }
+
+    /* ASP.NET GridView specific fixes */
+    .gridview a,
+    table a {
+        color: var(--troika-primary) !important;
+    }
+
+    .gridview input,
+    .gridview select,
+    .gridview textarea,
+    table input,
+    table select,
+    table textarea {
+        background: var(--troika-input-bg) !important;
+        color: var(--troika-input-text) !important;
+        border-color: var(--troika-border) !important;
+    }
+
+/* ProductManagement dark mode GridView fix */
+.product-management-container,
+.product-management-container p,
+.product-management-container span,
+.product-management-container div,
+.product-management-container label,
+.product-management-container td,
+.product-management-container th {
+    color: var(--troika-text) !important;
+}
+
+    .product-management-container h1,
+    .product-management-container h2,
+    .product-management-container h3 {
+        color: var(--troika-heading-text) !important;
+    }
+
+/* -------------------- ADMIN LAYOUT -------------------- */
+
+.admin-layout,
+.troika-admin-layout {
+    display: flex;
+    min-height: 80vh;
+    background: var(--troika-bg) !important;
+}
+
+.admin-sidebar,
+.troika-admin-sidebar {
+    width: 220px;
+    padding: 20px;
+    color: var(--troika-bg) !important;
+    background: var(--troika-primary) !important;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+    .admin-sidebar *,
+    .troika-admin-sidebar * {
+        color: var(--troika-bg) !important;
+    }
+
+body[data-theme="dark"] .admin-sidebar,
+body[data-theme="dark"] .troika-admin-sidebar {
+    color: #121018 !important;
+}
+
+    body[data-theme="dark"] .admin-sidebar *,
+    body[data-theme="dark"] .troika-admin-sidebar * {
+        color: #121018 !important;
+    }
+
+.admin-content,
+.troika-admin-content {
+    flex: 1;
+    background: var(--troika-surface-alt) !important;
+    color: var(--troika-text) !important;
+    padding: 30px;
+}
+
+/* -------------------- STATUS TEXT -------------------- */
+
+.troika-danger-text,
+.validation-error,
+.error-message,
+.text-danger {
+    color: var(--troika-danger) !important;
+}
+
+.troika-success-text,
+.success-message,
+.text-success {
+    color: var(--troika-success) !important;
+}
+
+/* -------------------- DARK MODE FALLBACK FIXES -------------------- */
+
+/*
+   These selectors help override old hardcoded inline/class colours
+   that may still exist on individual ASPX pages.
+*/
+
+body[data-theme="dark"] p,
+body[data-theme="dark"] span,
+body[data-theme="dark"] div,
+body[data-theme="dark"] label,
+body[data-theme="dark"] li,
+body[data-theme="dark"] td {
+    color: var(--troika-text);
+}
+
+body[data-theme="dark"] h1,
+body[data-theme="dark"] h2,
+body[data-theme="dark"] h3,
+body[data-theme="dark"] h4,
+body[data-theme="dark"] h5,
+body[data-theme="dark"] h6 {
+    color: var(--troika-heading-text) !important;
+}
+
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .container,
+body[data-theme="dark"] .panel,
+body[data-theme="dark"] .well {
+    background-color: var(--troika-surface) !important;
+    color: var(--troika-text) !important;
+    border-color: var(--troika-border) !important;
+}
+
+/* Avoid making script/style/admin hidden areas visible accidentally */
+script,
+style,
+head,
+title,
+meta,
+link {
+    display: none !important;
+}
+
+/* -------------------- RESPONSIVE DESIGN -------------------- */
+
+@media (max-width: 1200px) {
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .product-image {
+        height: 280px;
+    }
+
+    .troika-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .troika-form-row {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .troika-input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .product-image {
+        height: 240px;
+    }
+
+    .admin-layout,
+    .troika-admin-layout {
+        flex-direction: column;
+    }
+
+    .admin-sidebar,
+    .troika-admin-sidebar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image {
+        height: 280px;
+    }
+}
+
+/* -------------------- ADMIN USER LIST PAGE DARK/LIGHT MODE FIX -------------------- */
+
+.admin-page-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    min-height: 80vh !important;
+    width: 100% !important;
+    background: var(--troika-bg) !important;
+    color: var(--troika-text) !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* LEFT SIDEBAR - keeps buttons on the left like original */
+.admin-side-menu {
+    width: 260px !important;
+    min-width: 260px !important;
+    padding: 35px 20px 20px 120px !important;
+    background: var(--troika-bg) !important;
+    color: var(--troika-text) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    box-sizing: border-box !important;
+}
+
+/* Sidebar buttons */
+.admin-menu-btn {
+    background: var(--troika-btn-bg) !important;
+    color: var(--troika-btn-text) !important;
+    border: 1px solid var(--troika-btn-bg) !important;
+    padding: 12px 18px !important;
+    text-align: left !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    width: 220px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}
+
+    .admin-menu-btn:hover {
+        background: var(--troika-btn-hover-bg) !important;
+        border-color: var(--troika-btn-hover-bg) !important;
+        color: var(--troika-btn-text) !important;
+    }
+
+/* RIGHT CONTENT AREA - moves grid to the right */
+.admin-main-content {
+    flex: 1 !important;
+    background: var(--troika-bg) !important;
+    color: var(--troika-text) !important;
+    padding: 20px 40px 30px 80px !important;
+    box-sizing: border-box !important;
+}
+
+/* Content block around title + grid */
+.admin-content-card {
+    background: var(--troika-surface-alt) !important;
+    color: var(--troika-text) !important;
+    padding: 35px !important;
+    border: 1px solid var(--troika-border) !important;
+    box-shadow: none !important;
+    max-width: 1400px !important;
+    min-height: 540px !important;
+    box-sizing: border-box !important;
+}
+
+/* Heading */
+.admin-page-heading {
+    color: var(--troika-heading-text) !important;
+    margin-bottom: 25px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+}
+
+/* Grid wrapper */
+.admin-grid-wrapper {
+    overflow-x: auto !important;
+    background: transparent !important;
+    color: var(--troika-text) !important;
+}
+
+/* Main GridView */
+.admin-user-grid {
+    width: 100% !important;
+    max-width: 1180px !important;
+    background: var(--troika-table-bg) !important;
+    color: var(--troika-table-text) !important;
+    border-collapse: collapse !important;
+    border: none !important;
+}
+
+    /* Grid cells */
+    .admin-user-grid th,
+    .admin-user-grid td {
+        background: var(--troika-table-bg) !important;
+        color: var(--troika-table-text) !important;
+        border-color: var(--troika-border) !important;
+        padding: 10px 12px !important;
+    }
+
+    /* Header row */
+    .admin-user-grid th,
+    .admin-grid-header th,
+    .admin-grid-header td {
+        background: var(--troika-table-header-bg) !important;
+        color: var(--troika-table-header-text) !important;
+        font-weight: 700 !important;
+        text-decoration: underline !important;
+    }
+
+/* Normal rows */
+.admin-grid-row td,
+.admin-grid-alt-row td {
+    background: var(--troika-table-bg) !important;
+    color: var(--troika-table-text) !important;
+}
+
+/* Hover row */
+.admin-user-grid tr:hover td {
+    background: var(--troika-surface-alt) !important;
+    color: var(--troika-text) !important;
+}
+
+/* Selected row after clicking Select */
+.admin-user-grid .admin-grid-selected-row td,
+.admin-grid-selected-row td {
+    background: var(--troika-primary-hover) !important;
+    color: var(--troika-btn-text) !important;
+    font-weight: 700 !important;
+}
+
+/* Selected row links */
+.admin-user-grid .admin-grid-selected-row a,
+.admin-grid-selected-row a {
+    color: var(--troika-btn-text) !important;
+    font-weight: 700 !important;
+}
+
+/* Edit row */
+.admin-grid-edit-row td {
+    background: var(--troika-secondary) !important;
+    color: var(--troika-primary) !important;
+    font-weight: 600 !important;
+}
+
+/* Pager */
+.admin-grid-pager td {
+    background: var(--troika-table-bg) !important;
+    color: var(--troika-table-text) !important;
+    text-align: center !important;
+}
+
+.admin-grid-pager a,
+.admin-grid-pager span {
+    color: var(--troika-primary) !important;
+    font-weight: 600 !important;
+    padding: 0 3px !important;
+}
+
+/* Edit/Select links */
+.admin-user-grid a {
+    color: var(--troika-primary) !important;
+    font-weight: 500 !important;
+    text-decoration: underline !important;
+}
+
+    .admin-user-grid a:hover {
+        color: var(--troika-primary-hover) !important;
+    }
+
+/* Inputs inside GridView edit mode */
+.admin-user-grid input,
+.admin-user-grid select,
+.admin-user-grid textarea {
+    background: var(--troika-input-bg) !important;
+    color: var(--troika-input-text) !important;
+    border: 1px solid var(--troika-border) !important;
+    border-radius: 5px !important;
+    padding: 6px !important;
+}
+
+/* Dark mode stronger overrides */
+body[data-theme="dark"] .admin-content-card {
+    background: #1c1724 !important;
+    color: #f5f3f7 !important;
+    border-color: #3b3048 !important;
+}
+
+body[data-theme="dark"] .admin-page-heading {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .admin-user-grid,
+body[data-theme="dark"] .admin-user-grid td {
+    background: #1c1724 !important;
+    color: #f5f3f7 !important;
+    border-color: #3b3048 !important;
+}
+
+    body[data-theme="dark"] .admin-user-grid th {
+        background: #2b2433 !important;
+        color: #ffffff !important;
+    }
+
+body[data-theme="dark"] .admin-grid-row td,
+body[data-theme="dark"] .admin-grid-alt-row td {
+    background: #1c1724 !important;
+    color: #f5f3f7 !important;
+}
+
+body[data-theme="dark"] .admin-user-grid tr:hover td {
+    background: #251f2f !important;
+    color: #ffffff !important;
+}
+
+/* Dark selected row */
+body[data-theme="dark"] .admin-user-grid .admin-grid-selected-row td,
+body[data-theme="dark"] .admin-grid-selected-row td {
+    background: #b99cdd !important;
+    color: #121018 !important;
+    font-weight: 700 !important;
+}
+
+body[data-theme="dark"] .admin-user-grid .admin-grid-selected-row a,
+body[data-theme="dark"] .admin-grid-selected-row a {
+    color: #121018 !important;
+    font-weight: 700 !important;
+}
+
+body[data-theme="dark"] .admin-user-grid a {
+    color: #d9c8f0 !important;
+}
+
+body[data-theme="dark"] .admin-menu-btn {
+    background: #d9c8f0 !important;
+    color: #121018 !important;
+    border-color: #d9c8f0 !important;
+}
+
+    body[data-theme="dark"] .admin-menu-btn:hover {
+        background: #b99cdd !important;
+        color: #121018 !important;
+    }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .admin-page-container {
+        flex-direction: column !important;
+    }
+
+    .admin-side-menu {
+        width: 100% !important;
+        min-width: 100% !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        padding: 20px !important;
+    }
+
+    .admin-menu-btn {
+        width: auto !important;
+        min-width: 130px !important;
+    }
+
+    .admin-main-content {
+        padding: 20px !important;
+    }
+}

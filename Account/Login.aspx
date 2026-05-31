@@ -1,64 +1,114 @@
-﻿<%@ Page Title="Log in" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TroikaClothingWeb.Account.Login" Async="true" %>
+﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TroikaClothingWeb.Login" %>
 
-<%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <main aria-labelledby="title">
-        <h2 id="title"><%: Title %>.</h2>
-        <div class="col-md-8">
-            <section id="loginForm">
-                <div class="row">
-                    <h4>Use a local account to log in.</h4>
-                    <hr />
-                    <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
-                        <p class="text-danger">
-                            <asp:Literal runat="server" ID="FailureText" />
-                        </p>
-                    </asp:PlaceHolder>
-                    <div class="row">
-                        <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-2 col-form-label">Email</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="Email" CssClass="form-control" TextMode="Email" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
-                                CssClass="text-danger" ErrorMessage="The email field is required." />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 col-form-label">Password</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="offset-md-2 col-md-10">
-                            <div class="checkbox">
-                                <asp:CheckBox runat="server" ID="RememberMe" />
-                                <asp:Label runat="server" AssociatedControlID="RememberMe">Remember me?</asp:Label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-offset-md-2 col-md-10">
-                            <asp:Button runat="server" OnClick="LogIn" Text="Log in" CssClass="btn btn-outline-dark" />
-                        </div>
-                    </div>
+    <main class="troika-page auth-container login-container">
+        <div class="login-page-wrapper">
+            <div class="login-card troika-auth-card">
+
+                <h2 class="auth-title login-title">Login</h2>
+
+                <div class="login-field">
+                    <asp:Label ID="lblUsername" runat="server" Text="Username:" AssociatedControlID="txtUsername" CssClass="form-label" />
+                    <asp:TextBox ID="txtUsername" runat="server"
+                        CssClass="form-control"
+                        MaxLength="6" />
                 </div>
-                <p>
-                    <asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Disabled">Register as a new user</asp:HyperLink>
-                </p>
-                <p>
-                    <%-- Enable this once you have account confirmation enabled for password reset functionality
-                    <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" ViewStateMode="Disabled">Forgot your password?</asp:HyperLink>
-                    --%>
-                </p>
-            </section>
-        </div>
 
-        <div class="col-md-4">
-            <section id="socialLoginForm">
-                <uc:OpenAuthProviders runat="server" ID="OpenAuthLogin" />
-            </section>
+                <div class="login-field">
+                    <asp:Label ID="lblPassword" runat="server" Text="Password:" AssociatedControlID="txtPassword" CssClass="form-label" />
+                    <asp:TextBox ID="txtPassword" runat="server"
+                        TextMode="Password"
+                        MaxLength="8"
+                        CssClass="form-control" />
+                </div>
+
+                <div class="login-password-toggle">
+                    <input type="checkbox" id="chkShowPwd" onclick="togglePassword()" />
+                    <label for="chkShowPwd">Show password</label>
+                </div>
+
+                <asp:Button ID="btnLogin" runat="server"
+                    Text="Login"
+                    OnClick="btnLogin_Click"
+                    CssClass="troika-btn login-btn" />
+
+                <asp:Label ID="lblMessage" runat="server"
+                    CssClass="login-message text-danger" />
+
+                <asp:SqlDataSource ID="LoginDatasource" runat="server"
+                    ConflictDetection="CompareAllValues"
+                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
+                    DeleteCommand="DELETE FROM [WebsiteLogin] WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role"
+                    InsertCommand="INSERT INTO [WebsiteLogin] ([Username], [Password], [Role]) VALUES (@Username, @Password, @Role)"
+                    OldValuesParameterFormatString="original_{0}"
+                    SelectCommand="SELECT ID, Username, Password, Role, Status FROM WebsiteLogin WHERE (Password COLLATE SQL_Latin1_General_CP1_CS_AS = @Password) AND (Username COLLATE SQL_Latin1_General_CP1_CS_AS = @Username)"
+                    UpdateCommand="UPDATE [WebsiteLogin] SET [Username] = @Username, [Password] = @Password, [Role] = @Role WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role">
+
+                    <DeleteParameters>
+                        <asp:Parameter Name="original_ID" Type="Int32" />
+                        <asp:Parameter Name="original_Username" Type="String" />
+                        <asp:Parameter Name="original_Password" Type="String" />
+                        <asp:Parameter Name="original_Role" Type="String" />
+                    </DeleteParameters>
+
+                    <InsertParameters>
+                        <asp:Parameter Name="Username" Type="String" />
+                        <asp:Parameter Name="Password" Type="String" />
+                        <asp:Parameter Name="Role" Type="String" />
+                    </InsertParameters>
+
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="txtPassword" Name="Password" PropertyName="Text" Type="String" />
+                        <asp:ControlParameter ControlID="txtUsername" Name="Username" PropertyName="Text" Type="String" />
+                    </SelectParameters>
+
+                    <UpdateParameters>
+                        <asp:Parameter Name="Username" Type="String" />
+                        <asp:Parameter Name="Password" Type="String" />
+                        <asp:Parameter Name="Role" Type="String" />
+                        <asp:Parameter Name="original_ID" Type="Int32" />
+                        <asp:Parameter Name="original_Username" Type="String" />
+                        <asp:Parameter Name="original_Password" Type="String" />
+                        <asp:Parameter Name="original_Role" Type="String" />
+                    </UpdateParameters>
+                </asp:SqlDataSource>
+
+                <div class="login-link-row">
+                    <span>Don't have an account?</span>
+                    <a href="Register.aspx">Register here</a>
+                </div>
+
+                <div class="login-link-row">
+                    <span>Forgot Password?</span>
+                    <a href="ForgotPassword.aspx">Reset Password</a>
+                </div>
+
+            </div>
         </div>
     </main>
+
+    <script type="text/javascript">
+        function togglePassword() {
+            var pwd = document.getElementById('<%= txtPassword.ClientID %>');
+            if (!pwd) return;
+            pwd.type = (pwd.type === 'password') ? 'text' : 'password';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var chk = document.getElementById('chkShowPwd');
+            var lbl = document.querySelector('label[for="chkShowPwd"]');
+
+            if (lbl && chk) {
+                lbl.addEventListener('keydown', function (e) {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                        e.preventDefault();
+                        chk.checked = !chk.checked;
+                        togglePassword();
+                    }
+                });
+            }
+        });
+    </script>
+
 </asp:Content>

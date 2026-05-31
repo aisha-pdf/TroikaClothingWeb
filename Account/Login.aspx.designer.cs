@@ -7,72 +7,74 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TroikaClothingWeb.Account {
-    
-    
-    public partial class Login {
-        
+namespace TroikaClothingWeb
+{
+
+
+    public partial class Login
+    {
+
         /// <summary>
-        /// ErrorMessage control.
+        /// lblUsername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder ErrorMessage;
-        
+        protected global::System.Web.UI.WebControls.Label lblUsername;
+
         /// <summary>
-        /// FailureText control.
+        /// txtUsername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal FailureText;
-        
+        protected global::System.Web.UI.WebControls.TextBox txtUsername;
+
         /// <summary>
-        /// Email control.
+        /// lblPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Email;
-        
+        protected global::System.Web.UI.WebControls.Label lblPassword;
+
         /// <summary>
-        /// Password control.
+        /// txtPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Password;
-        
+        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+
         /// <summary>
-        /// RememberMe control.
+        /// btnLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox RememberMe;
-        
+        protected global::System.Web.UI.WebControls.Button btnLogin;
+
         /// <summary>
-        /// RegisterHyperLink control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink RegisterHyperLink;
-        
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+
         /// <summary>
-        /// OpenAuthLogin control.
+        /// LoginDatasource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::TroikaClothingWeb.Account.OpenAuthProviders OpenAuthLogin;
+        protected global::System.Web.UI.WebControls.SqlDataSource LoginDatasource;
     }
 }

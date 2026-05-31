@@ -4,21 +4,17 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-        /* --- Root Layout --- */
-        body, html {
-            font-family: "Segoe UI", Roboto, Arial, sans-serif;
-            background-color: #f7f8fa;
-            color: #333;
-            margin: 0;
-            padding: 0;
+        .product-management-container {
+            background: var(--troika-bg);
+            color: var(--troika-text);
+            min-height: 80vh;
         }
 
-        /* --- Sidebar --- */
         .menu-btn {
-            background: linear-gradient(135deg, #6c5a7a, #5b4c67);
-            border: none;
+            background: var(--troika-btn-bg) !important;
+            border: 1px solid var(--troika-btn-bg) !important;
             padding: 12px 14px;
-            color: #fff;
+            color: var(--troika-btn-text) !important;
             text-align: left;
             border-radius: 8px;
             cursor: pointer;
@@ -26,178 +22,185 @@
             transition: background 0.2s ease, transform 0.1s ease;
         }
 
-            .menu-btn:hover {
-                background: linear-gradient(135deg, #5b4c67, #4a3c56);
-                transform: translateY(-2px);
-            }
+        .menu-btn:hover {
+            background: var(--troika-btn-hover-bg) !important;
+            border-color: var(--troika-btn-hover-bg) !important;
+            transform: translateY(-2px);
+        }
 
-        /* --- Section Titles --- */
         .section-title {
             font-weight: 600;
             font-size: 1.4rem;
             margin-bottom: 18px;
-            color: #3D304C;
+            color: var(--troika-heading-text) !important;
         }
 
-        /* --- Toolbar (filter + sort) --- */
         .toolbar {
             display: flex;
             gap: 10px;
             align-items: center;
             justify-content: center;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
             margin: 0 auto 16px auto;
-            background: #fff;
+            flex-wrap: wrap;
+            background: var(--troika-surface) !important;
+            color: var(--troika-text) !important;
             padding: 10px 14px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--troika-border);
             border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: var(--troika-card-shadow);
         }
 
-            .toolbar span {
-                font-weight: 500;
-                color: #3D304C;
-                margin-right: 4px;
-            }
+        .toolbar span {
+            font-weight: 500;
+            color: var(--troika-text) !important;
+            margin-right: 4px;
+        }
 
-            .toolbar select,
-            .toolbar input[type=text] {
-                padding: 6px 8px;
-                border: 1px solid #ccc;
-                border-radius: 6px;
-                min-width: 180px;
-            }
+        .toolbar select,
+        .toolbar input[type=text] {
+            padding: 6px 8px;
+            border: 1px solid var(--troika-border);
+            border-radius: 6px;
+            min-width: 180px;
+            background: var(--troika-input-bg) !important;
+            color: var(--troika-input-text) !important;
+        }
 
-                .toolbar input[type=text]:focus,
-                .toolbar select:focus {
-                    border-color: #3D304C;
-                    outline: none;
-                    box-shadow: 0 0 0 2px rgba(61,48,76,0.2);
-                }
+        .toolbar input[type=text]:focus,
+        .toolbar select:focus {
+            border-color: var(--troika-primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(217,200,240,0.25);
+        }
 
-        /* --- GridView Container --- */
         .grid-wrapper {
             overflow-x: auto;
-            background: #fff;
+            background: var(--troika-surface) !important;
+            color: var(--troika-text) !important;
             padding: 10px;
             border-radius: 10px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            border: 1px solid var(--troika-border);
+            box-shadow: var(--troika-card-shadow);
         }
 
-        /* --- GridView styling --- */
         .grid {
             width: 100%;
             border-collapse: collapse;
             table-layout: fixed;
             border-radius: 8px;
             overflow: hidden;
+            background: var(--troika-table-bg) !important;
+            color: var(--troika-table-text) !important;
         }
 
-            .grid th {
-                background-color: #3D304C;
-                color: white;
-                font-weight: 600;
-                text-align: left;
-                padding: 12px 10px;
-                border-bottom: 2px solid #ddd;
-                white-space: normal !important;
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                text-overflow: clip;
-                line-height: 1.3;
-            }
+        .grid th {
+            background-color: var(--troika-table-header-bg) !important;
+            color: var(--troika-table-header-text) !important;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 2px solid var(--troika-border);
+            white-space: normal !important;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            text-overflow: clip;
+            line-height: 1.3;
+        }
 
-            .grid td {
-                padding: 12px 10px;
-                border-bottom: 1px solid #eee;
-                border-right: 1px solid #eee;
-                vertical-align: middle;
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                text-overflow: ellipsis;
-            }
-            /* --- GridView action buttons (Edit + Change Status) --- */
-            /* --- GridView action buttons (vertical + centered) --- */
-            .grid .actions {
-                display: flex;
-                flex-direction: column; /* stack vertically */
-                justify-content: center; /* center vertically in the cell */
-                align-items: center; /* center horizontally */
-                gap: 20px; /* small space between buttons */
-                height: 100%; /* ensure full cell height for centering */
-            }
+        .grid td {
+            background-color: var(--troika-table-bg) !important;
+            color: var(--troika-table-text) !important;
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--troika-border);
+            border-right: 1px solid var(--troika-border);
+            vertical-align: middle;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            text-overflow: ellipsis;
+        }
 
-                .grid .actions .btn:first-child {
-                    margin-bottom: 10px;
-                }
+        .grid tr:hover td {
+            background-color: var(--troika-surface-alt) !important;
+            color: var(--troika-text) !important;
+        }
 
+        .grid a {
+            color: var(--troika-btn-text) !important;
+        }
 
-            .grid td:last-child {
-                vertical-align: middle; /* align the cell content vertically */
-                text-align: center; /* ensure buttons are centered horizontally */
-            }
+        .grid .actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 100%;
+        }
 
-                .grid td:last-child a,
-                .grid td:last-child button {
-                    display: inline-block;
-                }
+        .grid .actions .btn:first-child {
+            margin-bottom: 10px;
+        }
 
-            .grid .actions .btn {
-                min-width: 130px;
-                text-align: center;
-            }
+        .grid td:last-child {
+            vertical-align: middle;
+            text-align: center;
+        }
 
+        .grid td:last-child a,
+        .grid td:last-child button {
+            display: inline-block;
+        }
 
+        .grid .actions .btn {
+            min-width: 130px;
+            text-align: center;
+        }
 
-            .grid tr:hover td {
-                background-color: #f6f3fa;
-            }
+        .grid td:nth-child(7),
+        .grid th:nth-child(7) {
+            width: 130px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
 
-            /* --- Image column (7th col, adjust index if needed) --- */
-            .grid td:nth-child(7),
-            .grid th:nth-child(7) {
-                width: 130px;
-                text-align: center;
-                vertical-align: middle;
-                white-space: nowrap;
-            }
+        .grid img {
+            max-width: 110px;
+            max-height: 110px;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            box-shadow: 0 0 4px rgba(0,0,0,0.15);
+            display: block;
+            margin: 0 auto;
+        }
 
-            /* --- Product Image Styling --- */
-            .grid img {
-                max-width: 110px;
-                max-height: 110px;
-                object-fit: cover;
-                aspect-ratio: 1 / 1;
-                border-radius: 8px;
-                box-shadow: 0 0 4px rgba(0,0,0,0.15);
-                display: block;
-                margin: 0 auto;
-            }
+        .grid input[type="text"],
+        .grid input[type="number"],
+        .grid select,
+        .grid textarea {
+            width: 95% !important;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+            padding: 6px 8px;
+            background: var(--troika-input-bg) !important;
+            color: var(--troika-input-text) !important;
+            border: 1px solid var(--troika-border) !important;
+        }
 
-            /* --- Prevent stretching in edit mode --- */
-            .grid input[type="text"],
-            .grid input[type="number"],
-            .grid select,
-            .grid textarea {
-                width: 95% !important;
-                box-sizing: border-box;
-                font-size: 0.95rem;
-                padding: 6px 8px;
-            }
+        .grid input[type="file"] {
+            width: 95% !important;
+            font-size: 0.85rem;
+            color: var(--troika-text) !important;
+        }
 
-            .grid input[type="file"] {
-                width: 95% !important;
-                font-size: 0.85rem;
-            }
-
-        /* --- Form for Add/Edit --- */
         .form-card {
-            background: #fff;
+            background: var(--troika-surface) !important;
+            color: var(--troika-text) !important;
             padding: 24px;
             border-radius: 12px;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid var(--troika-border);
+            box-shadow: var(--troika-card-shadow);
             max-width: 700px;
         }
 
@@ -205,49 +208,56 @@
             display: grid;
             grid-template-columns: 160px 1fr;
             gap: 10px 16px;
+            background: var(--troika-surface) !important;
+            color: var(--troika-text) !important;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--troika-border);
+            box-shadow: var(--troika-card-shadow);
+            max-width: 800px;
         }
 
-            .form-grid label {
-                align-self: center;
-                font-weight: 500;
-                color: #3D304C;
-            }
+        .form-grid label {
+            align-self: center;
+            font-weight: 500;
+            color: var(--troika-text) !important;
+        }
 
         .field-input {
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--troika-border) !important;
             border-radius: 6px;
             width: 100%;
-            background-color: #fafafa;
+            background-color: var(--troika-input-bg) !important;
+            color: var(--troika-input-text) !important;
             transition: border-color 0.2s ease;
         }
 
-            .field-input:focus {
-                border-color: #3D304C;
-                background-color: #fff;
-                outline: none;
-                box-shadow: 0 0 0 2px rgba(61,48,76,0.2);
-            }
+        .field-input:focus {
+            border-color: var(--troika-primary) !important;
+            background-color: var(--troika-input-bg) !important;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(217,200,240,0.25);
+        }
 
         .input-invalid {
-            border-color: #d93025 !important;
-            background-color: #fff5f5;
+            border-color: var(--troika-danger) !important;
         }
 
         .error-label {
-            color: #d93025;
+            color: var(--troika-danger) !important;
             font-size: 0.86rem;
             margin-top: -4px;
             margin-bottom: 6px;
         }
 
         .success {
-            color: #1a7f37;
-            font-weight: 500;
+            color: var(--troika-success) !important;
+            font-weight: 600;
             margin-top: 10px;
+            display: block;
         }
 
-        /* --- Action Buttons --- */
         .actions {
             display: flex;
             gap: 8px;
@@ -265,39 +275,37 @@
         }
 
         .btn-primary {
-            background: #3D304C;
-            color: #fff;
+            background: var(--troika-btn-bg) !important;
+            color: var(--troika-btn-text) !important;
         }
 
-            .btn-primary:hover {
-                background: #2f243a;
-                transform: translateY(-2px);
-            }
+        .btn-primary:hover {
+            background: var(--troika-btn-hover-bg) !important;
+            color: var(--troika-btn-text) !important;
+            transform: translateY(-2px);
+        }
 
         .btn-light {
-            background: #f3f3f3;
-            color: #333;
+            background: var(--troika-surface-alt) !important;
+            color: var(--troika-text) !important;
+            border: 1px solid var(--troika-border) !important;
         }
 
-            .btn-light:hover {
-                background: #e8e8e8;
-            }
+        .btn-light:hover {
+            background: var(--troika-secondary) !important;
+            color: var(--troika-primary) !important;
+        }
 
         .btn-danger {
-            background: #c0392b;
-            color: #fff;
+            background: var(--troika-danger) !important;
+            color: var(--troika-bg) !important;
         }
 
-            .btn-danger:hover {
-                background: #a93226;
-            }
-
-        /* --- Sidebar container --- */
         .sidebar {
             width: 220px;
-            background-color: #3D304C;
+            background-color: var(--troika-primary) !important;
             padding: 20px;
-            color: white;
+            color: var(--troika-bg) !important;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -306,19 +314,32 @@
             box-shadow: 2px 0 8px rgba(0,0,0,0.15);
         }
 
-        /* --- Layout Container --- */
+        body[data-theme="dark"] .sidebar {
+            color: #121018 !important;
+        }
+
         .main-container {
             display: flex;
             min-height: 80vh;
             gap: 0;
+            background: var(--troika-bg) !important;
         }
 
         .content-wrapper {
             flex: 1;
             padding: 24px;
+            background: var(--troika-surface-alt) !important;
+            color: var(--troika-text) !important;
         }
 
-        /* --- Responsive improvements --- */
+        #imgEditCurrent {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #imgEditCurrent.loading {
+            opacity: 0.5;
+        }
+
         @media (max-width: 992px) {
             .form-grid {
                 grid-template-columns: 1fr;
@@ -340,41 +361,22 @@
                 flex-direction: column;
             }
 
-            .grid td, .grid th {
+            .grid td,
+            .grid th {
                 max-width: none;
             }
         }
-
-        .success {
-            color: #1a7f37;
-            font-weight: 600;
-            margin-top: 10px;
-            display: block;
-        }
-
-        #imgEditCurrent {
-            transition: opacity 0.3s ease-in-out;
-        }
-
-            #imgEditCurrent.loading {
-                opacity: 0.5;
-            }
     </style>
 
+    <div class="product-management-container main-container">
 
-    <!-- Sidebar and Content Wrapper -->
-    <div style="display: flex; min-height: 80vh;">
-
-        <!-- Sidebar -->
-        <div style="width: 220px; padding: 20px; color: white; display: flex; flex-direction: column; gap: 15px;">
+        <div class="sidebar">
             <asp:Button ID="btnViewProducts" runat="server" Text="View Products" CssClass="menu-btn" OnClick="btnViewProducts_Click" />
             <asp:Button ID="btnShowAdd" runat="server" Text="Add New Product" CssClass="menu-btn" OnClick="btnShowAdd_Click" />
         </div>
 
-        <!-- Main content -->
-        <div style="flex: 1; padding: 20px;">
+        <div class="content-wrapper">
 
-            <!-- LIST PANEL -->
             <div class="grid-wrapper">
                 <asp:Panel ID="PanelList" runat="server" Visible="true">
                     <div class="section-title">Products</div>
@@ -402,7 +404,7 @@
                         <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-light" OnClick="btnClear_Click" />
                     </div>
 
-                    <asp:GridView ID="GridViewProducts" runat="server" CssClass="grid" AutoGenerateColumns="False"
+                    <asp:GridView ID="GridViewProducts" runat="server" CssClass="grid gridview troika-table" AutoGenerateColumns="False"
                         DataKeyNames="ProductID" DataSourceID="SqlDSProducts"
                         AllowPaging="true" PageSize="10"
                         OnRowCommand="GridViewProducts_RowCommand"
@@ -411,52 +413,37 @@
                             <asp:BoundField DataField="ProductID" HeaderText="ID" ReadOnly="true" />
 
                             <asp:TemplateField HeaderText="Name">
-                                <ItemTemplate>
-                                    <%# Eval("ProductName") %>
-                                </ItemTemplate>
+                                <ItemTemplate><%# Eval("ProductName") %></ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtProductNameEdit" runat="server"
-                                        Text='<%# Bind("ProductName") %>' CssClass="field-input" />
+                                    <asp:TextBox ID="txtProductNameEdit" runat="server" Text='<%# Bind("ProductName") %>' CssClass="field-input" />
                                 </EditItemTemplate>
                             </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Description">
-                                <ItemTemplate>
-                                    <%# Eval("Description") %>
-                                </ItemTemplate>
+                                <ItemTemplate><%# Eval("Description") %></ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtDescriptionEdit" runat="server"
-                                        Text='<%# Bind("Description") %>' CssClass="field-input" />
+                                    <asp:TextBox ID="txtDescriptionEdit" runat="server" Text='<%# Bind("Description") %>' CssClass="field-input" />
                                 </EditItemTemplate>
                             </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Category">
-                                <ItemTemplate>
-                                    <%# Eval("Category") %>
-                                </ItemTemplate>
+                                <ItemTemplate><%# Eval("Category") %></ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtCategoryEdit" runat="server"
-                                        Text='<%# Bind("Category") %>' CssClass="field-input" />
+                                    <asp:TextBox ID="txtCategoryEdit" runat="server" Text='<%# Bind("Category") %>' CssClass="field-input" />
                                 </EditItemTemplate>
                             </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Production Time (in days)">
-                                <ItemTemplate>
-                                    <%# Eval("ProductionTime") %>
-                                </ItemTemplate>
+                                <ItemTemplate><%# Eval("ProductionTime") %></ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtProductionTimeEdit" runat="server"
-                                        Text='<%# Bind("ProductionTime") %>' CssClass="field-input" />
+                                    <asp:TextBox ID="txtProductionTimeEdit" runat="server" Text='<%# Bind("ProductionTime") %>' CssClass="field-input" />
                                 </EditItemTemplate>
                             </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Price">
-                                <ItemTemplate>
-                                    <%# "R" + Eval("Price", "{0:N2}") %>
-                                </ItemTemplate>
+                                <ItemTemplate><%# "R" + Eval("Price", "{0:N2}") %></ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtPriceEdit" runat="server"
-                                        Text='<%# Bind("Price") %>' CssClass="field-input" />
+                                    <asp:TextBox ID="txtPriceEdit" runat="server" Text='<%# Bind("Price") %>' CssClass="field-input" />
                                 </EditItemTemplate>
                             </asp:TemplateField>
 
@@ -472,9 +459,7 @@
                             </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Status">
-                                <ItemTemplate>
-                                    <%# Eval("Status") %>
-                                </ItemTemplate>
+                                <ItemTemplate><%# Eval("Status") %></ItemTemplate>
                                 <EditItemTemplate>
                                     <asp:DropDownList ID="ddlStatusEdit" runat="server" SelectedValue='<%# Bind("Status") %>'>
                                         <asp:ListItem Text="Active" Value="Active"></asp:ListItem>
@@ -482,7 +467,6 @@
                                     </asp:DropDownList>
                                 </EditItemTemplate>
                             </asp:TemplateField>
-
 
                             <asp:TemplateField HeaderText="Actions">
                                 <ItemTemplate>
@@ -496,8 +480,6 @@
                                         Text="Change Status" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-
-
                         </Columns>
                     </asp:GridView>
 
@@ -510,7 +492,6 @@
                         </SelectParameters>
                     </asp:SqlDataSource>
 
-
                     <asp:SqlDataSource ID="SqlDSUpdateProduct" runat="server"
                         ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
                         UpdateCommand="UPDATE Product
@@ -522,13 +503,9 @@
                                        Status=@Status
                                    WHERE ProductID=@ProductID"></asp:SqlDataSource>
 
-
                     <asp:SqlDataSource ID="SqlDSUpdateImage" runat="server"
                         ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
                         UpdateCommand="UPDATE Product SET Picture=@Picture WHERE ProductID=@ProductID"></asp:SqlDataSource>
-
-
-
 
                     <asp:SqlDataSource ID="SqlDSToggle" runat="server"
                         ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
@@ -540,15 +517,12 @@
                 </asp:Panel>
             </div>
 
-
-            <!-- EDIT PANEL -->
             <asp:Panel ID="PanelEdit" runat="server" Visible="false">
                 <div class="section-title">Edit Product</div>
 
                 <asp:HiddenField ID="hfEditProductID" runat="server" />
 
                 <div class="form-grid">
-
                     <label>Product ID</label>
                     <div>
                         <asp:TextBox ID="txtEditProductID" runat="server" CssClass="field-input" ReadOnly="true" />
@@ -613,8 +587,6 @@
                 </div>
             </asp:Panel>
 
-
-            <!-- ADD PANEL -->
             <asp:Panel ID="PanelAdd" runat="server" Visible="false">
                 <div class="section-title">Add Product</div>
 
@@ -701,13 +673,11 @@
                             CausesValidation="false"
                             OnClientClick="return confirm('Any unsaved data will be lost. Do you want to continue?');" />
                     </div>
+
                     <div></div>
                     <asp:Label ID="lblAddResult" runat="server" CssClass="success" />
-
                 </div>
             </asp:Panel>
-
-
         </div>
     </div>
 
@@ -729,13 +699,11 @@
                             previewImg.src = e.target.result;
                             previewImg.classList.remove("loading");
                         };
-                        reader.readAsDataURL(uploadInput.files[0]);
 
+                        reader.readAsDataURL(uploadInput.files[0]);
                     }
                 });
             }
         });
     </script>
-
-
 </asp:Content>

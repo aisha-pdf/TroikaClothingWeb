@@ -12,6 +12,7 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="<%= ResolveUrl("~/Content/TroikaTheme.css") %>" rel="stylesheet" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -54,6 +55,7 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/About">About Us</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Products.aspx">Products</a></li>
+                        <li class="nav-item"><button id="btnThemeToggle" type="button" class="troika-btn troika-btn-secondary theme-toggle-btn" onclick="TroikaTheme.toggle()">🌙 Dark mode</button></li>
                     </ul>
                 </div>
         </nav>
@@ -107,80 +109,7 @@
                 </ul>
             </div>
         </nav>
-
-        <style>
-            /* Ensure dropdown shows on hover and stays open */
-            .nav-item.dropdown:hover .dropdown-menu {
-                display: block;
-                margin-top: 0;
-            }
-
-            /* Prevent flicker when moving between button and menu */
-            .nav-item.dropdown .dropdown-menu {
-                margin-top: 0;
-            }
-
-            /* Make sure it's visible above all other sections */
-            .dropdown-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: auto;
-                right: 0;
-                z-index: 3000 !important;
-            }
-
-            /* Fix overflow issues */
-            .navbar,
-            .container-fluid,
-            body {
-                overflow: visible !important;
-            }
-        </style>
-
-        <%--        <style>
-            /* Ensure the navbar and dropdown are visible above everything */
-            .navbar {
-                position: relative;
-                z-index: 2000;
-            }
-
-            /* Make sure dropdown menus show properly */
-            .nav-item.dropdown:hover .dropdown-menu {
-                display: block;
-                margin-top: 0;
-            }
-
-            /* Prevent the dropdown from being cut off */
-            .dropdown-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: auto;
-                right: 0;
-                z-index: 3000 !important;
-                overflow: visible;
-            }
-
-            /* Ensure parent containers don’t hide it */
-            .navbar,
-            .container-fluid,
-            body {
-                overflow: visible !important;
-            }
-
-            .container,
-            .row {
-                overflow: visible !important;
-                position: static !important;
-            }
-
-            .dropdown:hover > .dropdown-menu {
-                display: block;
-            }
-        </style>--%>
-
-        <%--content from other pages go here--%>
+<%--content from other pages go here--%>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
@@ -203,5 +132,6 @@
 <script src="https://files.bpcontent.cloud/2025/11/07/14/20251107141451-6UJV4FC6.js" defer></script>
     
 
+    <script src="<%= ResolveUrl("~/Scripts/theme-toggle.js") %>"></script>
 </body>
 </html>
