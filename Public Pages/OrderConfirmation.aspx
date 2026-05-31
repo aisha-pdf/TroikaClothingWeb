@@ -2,27 +2,38 @@
     CodeBehind="OrderConfirmation.aspx.cs" Inherits="TroikaClothingWeb.Public_Pages.OrderConfirmation" Async="true" %>
 
 <asp:Content ID="Main" ContentPlaceHolderID="MainContent" runat="server">
+
     <style>
         :root {
-            --troika-navy: #3D304C; /* dark purple background */
-            --troika-white: #ffffff;
-            --troika-cream: #FFF9F3; /* main cream for cards */
-            --troika-cream-2: #FFF5EB; /* slightly different cream if needed */
-            --troika-light-accent: #644F7D; /* purple accent */
-            --troika-deep-green: #2C5F2D; /* green for primary buttons */
-            --card-border: #3D304C;
-            --muted-text: #6b7280;
+            --receipt-page-bg: #ffffff;
+            --receipt-main-bg: #3D304C;
+            --receipt-card-bg: #FFF9F3;
+            --receipt-item-bg: #FFF5EB;
+            --receipt-text-dark: #1f1f1f;
+            --receipt-text-purple: #3D304C;
+            --receipt-muted: #6b7280;
+            --receipt-border: #3D304C;
+            --receipt-light-purple: #D8CDEB;
+            --receipt-purple-hover: #644F7D;
+            --receipt-success: #2C5F2D;
         }
 
-        body {
-            background: var(--troika-navy);
-            font-family: "Segoe UI", Roboto, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        body[data-theme="dark"] {
+            --receipt-page-bg: #121018;
+            --receipt-main-bg: #1c1724;
+            --receipt-card-bg: #FFF9F3;
+            --receipt-item-bg: #FFF5EB;
+            --receipt-text-dark: #1f1f1f;
+            --receipt-text-purple: #3D304C;
+            --receipt-muted: #6b7280;
+            --receipt-border: #3b3048;
+            --receipt-light-purple: #D8CDEB;
         }
 
         .receipt-shell {
             padding: 40px 16px;
+            background: var(--receipt-page-bg) !important;
+            min-height: 80vh;
         }
 
         .receipt {
@@ -30,157 +41,238 @@
             margin: 0 auto;
         }
 
-        /* Main container card (purple) */
-        .card {
-            background: var(--troika-navy);
+        .receipt-card {
+            background: var(--receipt-main-bg) !important;
             border-radius: 12px;
-            padding: 24px;
+            padding: 28px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-            border: 2px solid var(--card-border);
+            border: 2px solid var(--receipt-border);
+            color: #ffffff !important;
         }
 
-        .title {
-            font-size: 28px;
+            .receipt-card .title {
+                font-size: 28px;
+                font-weight: 700;
+                color: #ffffff !important;
+                margin-bottom: 18px;
+            }
+
+        .receipt-id-label {
+            text-align: center;
+            font-size: 18px;
             font-weight: 700;
-            color: var(--troika-cream);
-            margin-bottom: 18px;
+            color: #ffffff !important;
         }
 
-        .muted {
-            color: var(--muted-text);
-            font-size: 14px;
-        }
-
-        /* Badge color lighter for visibility */
         .badge {
             display: inline-block;
-            padding: .15rem .5rem;
-            border-radius: 999px;
-            font-size: 12px;
-            background: rgba(255,255,255,0.15);
-            color: var(--troika-cream);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 20px;
+            background: #644F7D !important;
+            color: #ffffff !important;
             border: 1px solid rgba(255,255,255,0.3);
+            font-weight: 700;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 20px;
+            background: #644F7D !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-weight: 700;
+        }
+
+            .badge,
+            .badge span,
+            .badge label,
+            .badge * {
+                color: #ffffff !important;
+            }
+
+        #MainContent_lblReceipt {
+            color: #ffffff !important;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr 1.45fr;
             gap: 22px;
-        }
-
-        @media(max-width:900px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
+            align-items: start;
+            margin-top: 22px;
         }
 
         .items {
             margin-top: 10px;
         }
 
-        .item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-radius: 10px;
-            background: var(--troika-cream-2);
-            border: 1px solid var(--card-border);
-            margin-bottom: 8px;
-        }
-
-        .item-name {
-            font-weight: 600;
-            color: var(--troika-navy);
-        }
-
-        .small {
-            font-size: 12px;
-            color: var(--muted-text);
-            margin-top: 4px;
-        }
-
-        /* Item/Amount header lighter */
         .line {
             display: flex;
             justify-content: space-between;
             padding: 10px 0;
-            border-bottom: 1px dashed var(--card-border);
-            color: var(--troika-cream-2);
+            border-bottom: 1px dashed var(--receipt-border);
+            color: var(--receipt-text-purple) !important;
             font-weight: 600;
         }
 
-            .line:last-child {
-                border-bottom: 0;
+        .items > .line {
+            color: #ffffff !important;
+            border-bottom: 1px dashed rgba(255,255,255,0.35);
+        }
+
+            .items > .line span {
+                color: #ffffff !important;
+            }
+
+        .line span,
+        .line label {
+            color: inherit !important;
+        }
+
+        .line:last-child {
+            border-bottom: 0;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px;
+            border-radius: 10px;
+            background: var(--receipt-item-bg) !important;
+            border: 1px solid var(--receipt-border);
+            margin-bottom: 8px;
+            color: var(--receipt-text-dark) !important;
+        }
+
+            .item *,
+            .item span,
+            .item div {
+                color: var(--receipt-text-dark) !important;
+            }
+
+        .item-name {
+            font-weight: 700;
+            color: var(--receipt-text-purple) !important;
+        }
+
+        .small {
+            font-size: 12px;
+            color: var(--receipt-muted) !important;
+            margin-top: 4px;
+        }
+
+            .small * {
+                color: var(--receipt-muted) !important;
+            }
+
+        .card-right {
+            background: var(--receipt-card-bg) !important;
+            border-radius: 12px;
+            padding: 24px;
+            border: 2px solid var(--receipt-border);
+            color: var(--receipt-text-purple) !important;
+        }
+
+            .card-right *,
+            .card-right span,
+            .card-right label,
+            .card-right div {
+                color: var(--receipt-text-purple) !important;
+            }
+
+            .card-right .text-muted,
+            .card-right .muted {
+                color: var(--receipt-muted) !important;
             }
 
         .total {
-            font-weight: 700;
+            font-weight: 800;
             font-size: 18px;
-            color: var(--troika-navy);
+            color: var(--receipt-text-purple) !important;
+        }
+
+        .panel-bottom {
+            margin-top: 16px;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .btn {
-            border: 0;
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-weight: 600;
+            border: 0 !important;
+            border-radius: 8px !important;
+            padding: 10px 14px !important;
+            font-weight: 700 !important;
             cursor: pointer;
             font-size: 14px;
+            text-decoration: none !important;
+            display: inline-block;
         }
 
+        .btn-light-purple,
         .btn-primary {
-            background: var(--troika-deep-green);
-            color: #fff;
+            background: #D8CDEB !important;
+            color: #121018 !important;
+            border: 1px solid #D8CDEB !important;
         }
 
+            .btn-light-purple:hover,
             .btn-primary:hover {
-                background: #234823;
+                background: #cbb7e8 !important;
+                color: #121018 !important;
+                border-color: #cbb7e8 !important;
             }
 
-        .btn-light-purple {
-            background: var(--troika-light-accent);
-            color: #fff;
+        body[data-theme="light"] .btn-light-purple,
+        body[data-theme="light"] .btn-primary {
+            background: #3D304C !important;
+            color: #ffffff !important;
+            border: 1px solid #3D304C !important;
         }
 
-            .btn-light-purple:hover {
-                background: #523d6f;
+            body[data-theme="light"] .btn-light-purple:hover,
+            body[data-theme="light"] .btn-primary:hover {
+                background: #644F7D !important;
+                color: #ffffff !important;
+                border-color: #644F7D !important;
             }
 
-        .panel-bottom {
-            margin-top: 12px;
-            display: flex;
-            gap: 8px;
-            justify-content: flex-start;
+        #MainContent_lblEmailStatus {
+            display: block;
+            margin-top: 10px;
+            font-weight: 700;
         }
 
-        /* Right summary panel now cream */
-        .card-right {
-            background: var(--troika-cream);
-            border-radius: 12px;
-            padding: 24px;
-            border: 2px solid var(--card-border);
+        @media(max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-bottom {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
         }
-
-            .card-right .line {
-                color: var(--troika-navy);
-            }
-
-            .card-right .total {
-                color: var(--troika-navy);
-            }
-
-            .card-right .btn-light-purple, .card-right .btn-primary {
-                color: #fff;
-            }
     </style>
+
     <div class="receipt-shell">
         <div class="receipt">
-            <div class="card">
+            <div class="receipt-card">
                 <div class="title">Thank you! Your order is confirmed.</div>
-                <div class="muted" style="text-align: center; font-size: 18px; font-weight: 700; color: var(--troika-cream);">Receipt ID:</div>
+                <div class="receipt-id-label">Receipt ID:</div>
                 <div style="text-align: center; margin-top: 6px;">
-                    <span class="badge" style="display: inline-block; font-size: 20px; padding: 8px 12px; border-radius: 8px; background: var(--troika-light-accent); color: #fff;">
+                    <span class="badge">
                         <asp:Label ID="lblReceipt" runat="server" />
                     </span>
                 </div>
