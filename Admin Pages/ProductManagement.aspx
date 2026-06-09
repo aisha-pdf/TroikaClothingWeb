@@ -22,11 +22,11 @@
             transition: background 0.2s ease, transform 0.1s ease;
         }
 
-        .menu-btn:hover {
-            background: var(--troika-btn-hover-bg) !important;
-            border-color: var(--troika-btn-hover-bg) !important;
-            transform: translateY(-2px);
-        }
+            .menu-btn:hover {
+                background: var(--troika-btn-hover-bg) !important;
+                border-color: var(--troika-btn-hover-bg) !important;
+                transform: translateY(-2px);
+            }
 
         .section-title {
             font-weight: 600;
@@ -50,28 +50,28 @@
             box-shadow: var(--troika-card-shadow);
         }
 
-        .toolbar span {
-            font-weight: 500;
-            color: var(--troika-text) !important;
-            margin-right: 4px;
-        }
+            .toolbar span {
+                font-weight: 500;
+                color: var(--troika-text) !important;
+                margin-right: 4px;
+            }
 
-        .toolbar select,
-        .toolbar input[type=text] {
-            padding: 6px 8px;
-            border: 1px solid var(--troika-border);
-            border-radius: 6px;
-            min-width: 180px;
-            background: var(--troika-input-bg) !important;
-            color: var(--troika-input-text) !important;
-        }
+            .toolbar select,
+            .toolbar input[type=text] {
+                padding: 6px 8px;
+                border: 1px solid var(--troika-border);
+                border-radius: 6px;
+                min-width: 180px;
+                background: var(--troika-input-bg) !important;
+                color: var(--troika-input-text) !important;
+            }
 
-        .toolbar input[type=text]:focus,
-        .toolbar select:focus {
-            border-color: var(--troika-primary);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(217,200,240,0.25);
-        }
+                .toolbar input[type=text]:focus,
+                .toolbar select:focus {
+                    border-color: var(--troika-primary);
+                    outline: none;
+                    box-shadow: 0 0 0 2px rgba(217,200,240,0.25);
+                }
 
         .grid-wrapper {
             overflow-x: auto;
@@ -93,106 +93,106 @@
             color: var(--troika-table-text) !important;
         }
 
-        .grid th {
-            background-color: var(--troika-table-header-bg) !important;
-            color: var(--troika-table-header-text) !important;
-            font-weight: 600;
-            text-align: left;
-            padding: 12px 10px;
-            border-bottom: 2px solid var(--troika-border);
-            white-space: normal !important;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            text-overflow: clip;
-            line-height: 1.3;
-        }
+            .grid th {
+                background-color: var(--troika-table-header-bg) !important;
+                color: var(--troika-table-header-text) !important;
+                font-weight: 600;
+                text-align: left;
+                padding: 12px 10px;
+                border-bottom: 2px solid var(--troika-border);
+                white-space: normal !important;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                text-overflow: clip;
+                line-height: 1.3;
+            }
 
-        .grid td {
-            background-color: var(--troika-table-bg) !important;
-            color: var(--troika-table-text) !important;
-            padding: 12px 10px;
-            border-bottom: 1px solid var(--troika-border);
-            border-right: 1px solid var(--troika-border);
-            vertical-align: middle;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            text-overflow: ellipsis;
-        }
+            .grid td {
+                background-color: var(--troika-table-bg) !important;
+                color: var(--troika-table-text) !important;
+                padding: 12px 10px;
+                border-bottom: 1px solid var(--troika-border);
+                border-right: 1px solid var(--troika-border);
+                vertical-align: middle;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                text-overflow: ellipsis;
+            }
 
-        .grid tr:hover td {
-            background-color: var(--troika-surface-alt) !important;
-            color: var(--troika-text) !important;
-        }
+            .grid tr:hover td {
+                background-color: var(--troika-surface-alt) !important;
+                color: var(--troika-text) !important;
+            }
 
-        .grid a {
-            color: var(--troika-btn-text) !important;
-        }
+            .grid a {
+                color: var(--troika-btn-text) !important;
+            }
 
-        .grid .actions {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            height: 100%;
-        }
+            .grid .actions {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                height: 100%;
+            }
 
-        .grid .actions .btn:first-child {
-            margin-bottom: 10px;
-        }
+                .grid .actions .btn:first-child {
+                    margin-bottom: 10px;
+                }
 
-        .grid td:last-child {
-            vertical-align: middle;
-            text-align: center;
-        }
+            .grid td:last-child {
+                vertical-align: middle;
+                text-align: center;
+            }
 
-        .grid td:last-child a,
-        .grid td:last-child button {
-            display: inline-block;
-        }
+                .grid td:last-child a,
+                .grid td:last-child button {
+                    display: inline-block;
+                }
 
-        .grid .actions .btn {
-            min-width: 130px;
-            text-align: center;
-        }
+            .grid .actions .btn {
+                min-width: 130px;
+                text-align: center;
+            }
 
-        .grid td:nth-child(7),
-        .grid th:nth-child(7) {
-            width: 130px;
-            text-align: center;
-            vertical-align: middle;
-            white-space: nowrap;
-        }
+            .grid td:nth-child(7),
+            .grid th:nth-child(7) {
+                width: 130px;
+                text-align: center;
+                vertical-align: middle;
+                white-space: nowrap;
+            }
 
-        .grid img {
-            max-width: 110px;
-            max-height: 110px;
-            object-fit: cover;
-            aspect-ratio: 1 / 1;
-            border-radius: 8px;
-            box-shadow: 0 0 4px rgba(0,0,0,0.15);
-            display: block;
-            margin: 0 auto;
-        }
+            .grid img {
+                max-width: 110px;
+                max-height: 110px;
+                object-fit: cover;
+                aspect-ratio: 1 / 1;
+                border-radius: 8px;
+                box-shadow: 0 0 4px rgba(0,0,0,0.15);
+                display: block;
+                margin: 0 auto;
+            }
 
-        .grid input[type="text"],
-        .grid input[type="number"],
-        .grid select,
-        .grid textarea {
-            width: 95% !important;
-            box-sizing: border-box;
-            font-size: 0.95rem;
-            padding: 6px 8px;
-            background: var(--troika-input-bg) !important;
-            color: var(--troika-input-text) !important;
-            border: 1px solid var(--troika-border) !important;
-        }
+            .grid input[type="text"],
+            .grid input[type="number"],
+            .grid select,
+            .grid textarea {
+                width: 95% !important;
+                box-sizing: border-box;
+                font-size: 0.95rem;
+                padding: 6px 8px;
+                background: var(--troika-input-bg) !important;
+                color: var(--troika-input-text) !important;
+                border: 1px solid var(--troika-border) !important;
+            }
 
-        .grid input[type="file"] {
-            width: 95% !important;
-            font-size: 0.85rem;
-            color: var(--troika-text) !important;
-        }
+            .grid input[type="file"] {
+                width: 95% !important;
+                font-size: 0.85rem;
+                color: var(--troika-text) !important;
+            }
 
         .form-card {
             background: var(--troika-surface) !important;
@@ -217,11 +217,11 @@
             max-width: 800px;
         }
 
-        .form-grid label {
-            align-self: center;
-            font-weight: 500;
-            color: var(--troika-text) !important;
-        }
+            .form-grid label {
+                align-self: center;
+                font-weight: 500;
+                color: var(--troika-text) !important;
+            }
 
         .field-input {
             padding: 10px;
@@ -233,12 +233,12 @@
             transition: border-color 0.2s ease;
         }
 
-        .field-input:focus {
-            border-color: var(--troika-primary) !important;
-            background-color: var(--troika-input-bg) !important;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(217,200,240,0.25);
-        }
+            .field-input:focus {
+                border-color: var(--troika-primary) !important;
+                background-color: var(--troika-input-bg) !important;
+                outline: none;
+                box-shadow: 0 0 0 2px rgba(217,200,240,0.25);
+            }
 
         .input-invalid {
             border-color: var(--troika-danger) !important;
@@ -274,16 +274,42 @@
             transition: background 0.2s ease, transform 0.1s ease;
         }
 
+
+        /* Product ID is generated automatically, so make it look locked */
+        .readonly-product-id,
+        .readonly-product-id:focus {
+            background: var(--troika-surface-alt) !important;
+            color: var(--troika-muted-text) !important;
+            border: 1px dashed var(--troika-border) !important;
+            cursor: not-allowed !important;
+            box-shadow: none !important;
+            font-weight: 600 !important;
+        }
+
+        body[data-theme="dark"] .readonly-product-id,
+        body[data-theme="dark"] .readonly-product-id:focus {
+            background: #18131f !important;
+            color: #c9c3d4 !important;
+            border-color: #3b3048 !important;
+        }
+
+        .readonly-help-text {
+            margin-top: 5px;
+            font-size: 12px;
+            color: var(--troika-muted-text) !important;
+        }
+
+
         .btn-primary {
             background: var(--troika-btn-bg) !important;
             color: var(--troika-btn-text) !important;
         }
 
-        .btn-primary:hover {
-            background: var(--troika-btn-hover-bg) !important;
-            color: var(--troika-btn-text) !important;
-            transform: translateY(-2px);
-        }
+            .btn-primary:hover {
+                background: var(--troika-btn-hover-bg) !important;
+                color: var(--troika-btn-text) !important;
+                transform: translateY(-2px);
+            }
 
         .btn-light {
             background: var(--troika-surface-alt) !important;
@@ -291,10 +317,10 @@
             border: 1px solid var(--troika-border) !important;
         }
 
-        .btn-light:hover {
-            background: var(--troika-secondary) !important;
-            color: var(--troika-primary) !important;
-        }
+            .btn-light:hover {
+                background: var(--troika-secondary) !important;
+                color: var(--troika-primary) !important;
+            }
 
         .btn-danger {
             background: var(--troika-danger) !important;
@@ -336,9 +362,9 @@
             transition: opacity 0.3s ease-in-out;
         }
 
-        #imgEditCurrent.loading {
-            opacity: 0.5;
-        }
+            #imgEditCurrent.loading {
+                opacity: 0.5;
+            }
 
         @media (max-width: 992px) {
             .form-grid {
@@ -366,6 +392,15 @@
                 max-width: none;
             }
         }
+
+        const productIdInput = document.getElementById("<%= txtProductID.ClientID %>");
+        if (productIdInput) {
+            productIdInput .addEventListener("focus", function () {
+        productIdInput.blur();
+         });
+        }
+
+
     </style>
 
     <div class="product-management-container main-container">
@@ -377,124 +412,132 @@
 
         <div class="content-wrapper">
 
-            <div class="grid-wrapper">
-                <asp:Panel ID="PanelList" runat="server" Visible="true">
-                    <div class="section-title">Products</div>
+            <asp:Panel ID="PanelList" runat="server" Visible="true" CssClass="grid-wrapper">
+                <div class="section-title">Products</div>
 
-                    <div class="toolbar">
-                        <span>Status:</span>
-                        <asp:DropDownList ID="ddlStatusFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
-                            <asp:ListItem Text="Active" Value="Active" Selected="True" />
-                            <asp:ListItem Text="Inactive" Value="Inactive" />
-                            <asp:ListItem Text="All" Value="All" />
-                        </asp:DropDownList>
+                <div class="toolbar">
+                    <span>Status:</span>
+                    <asp:DropDownList ID="ddlStatusFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
+                        <asp:ListItem Text="Active" Value="Active" Selected="True" />
+                        <asp:ListItem Text="Inactive" Value="Inactive" />
+                        <asp:ListItem Text="All" Value="All" />
+                    </asp:DropDownList>
 
-                        <span>Sort by:</span>
-                        <asp:DropDownList ID="ddlSort" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSort_SelectedIndexChanged">
-                            <asp:ListItem Text="Product Name (A → Z)" Value="ProductName ASC" />
-                            <asp:ListItem Text="Product Name (Z → A)" Value="ProductName DESC" />
-                            <asp:ListItem Text="Price (Low → High)" Value="Price ASC" Selected="True" />
-                            <asp:ListItem Text="Price (High → Low)" Value="Price DESC" />
-                            <asp:ListItem Text="Newest (ID DESC)" Value="ProductID DESC" />
-                            <asp:ListItem Text="Oldest (ID ASC)" Value="ProductID ASC" />
-                        </asp:DropDownList>
+                    <span>Sort by:</span>
+                    <asp:DropDownList ID="ddlSort" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSort_SelectedIndexChanged">
+                        <asp:ListItem Text="Product Name (A → Z)" Value="ProductName ASC" />
+                        <asp:ListItem Text="Product Name (Z → A)" Value="ProductName DESC" />
+                        <asp:ListItem Text="Price (Low → High)" Value="Price ASC" Selected="True" />
+                        <asp:ListItem Text="Price (High → Low)" Value="Price DESC" />
+                        <asp:ListItem Text="Newest (ID DESC)" Value="ProductID DESC" />
+                        <asp:ListItem Text="Oldest (ID ASC)" Value="ProductID ASC" />
+                    </asp:DropDownList>
 
-                        <asp:TextBox ID="txtSearch" runat="server" placeholder="Search name/description..." />
-                        <asp:Button ID="btnApply" runat="server" Text="Apply" CssClass="btn btn-primary" OnClick="btnApply_Click" />
-                        <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-light" OnClick="btnClear_Click" />
-                    </div>
+                    <asp:TextBox ID="txtSearch" runat="server" placeholder="Search name/description..." />
+                    <asp:Button ID="btnApply" runat="server" Text="Apply" CssClass="btn btn-primary" OnClick="btnApply_Click" />
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-light" OnClick="btnClear_Click" />
+                </div>
 
-                    <asp:GridView ID="GridViewProducts" runat="server" CssClass="grid gridview troika-table" AutoGenerateColumns="False"
-                        DataKeyNames="ProductID" DataSourceID="SqlDSProducts"
-                        AllowPaging="true" PageSize="10"
-                        OnRowCommand="GridViewProducts_RowCommand"
-                        OnRowDataBound="GridViewProducts_RowDataBound">
-                        <Columns>
-                            <asp:BoundField DataField="ProductID" HeaderText="ID" ReadOnly="true" />
+                <asp:GridView ID="GridViewProducts" runat="server" CssClass="grid gridview troika-table" AutoGenerateColumns="False"
+                    DataKeyNames="ProductID" DataSourceID="SqlDSProducts"
+                    AllowPaging="true" PageSize="10"
+                    OnRowCommand="GridViewProducts_RowCommand"
+                    OnRowDataBound="GridViewProducts_RowDataBound">
 
-                            <asp:TemplateField HeaderText="Name">
-                                <ItemTemplate><%# Eval("ProductName") %></ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="txtProductNameEdit" runat="server" Text='<%# Bind("ProductName") %>' CssClass="field-input" />
-                                </EditItemTemplate>
-                            </asp:TemplateField>
+                    <PagerSettings Mode="NumericFirstLast"
+                        FirstPageText="« First"
+                        LastPageText="Last »"
+                        PageButtonCount="7" />
 
-                            <asp:TemplateField HeaderText="Description">
-                                <ItemTemplate><%# Eval("Description") %></ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="txtDescriptionEdit" runat="server" Text='<%# Bind("Description") %>' CssClass="field-input" />
-                                </EditItemTemplate>
-                            </asp:TemplateField>
+                    <PagerStyle CssClass="product-grid-pager" />
 
-                            <asp:TemplateField HeaderText="Category">
-                                <ItemTemplate><%# Eval("Category") %></ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="txtCategoryEdit" runat="server" Text='<%# Bind("Category") %>' CssClass="field-input" />
-                                </EditItemTemplate>
-                            </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Production Time (in days)">
-                                <ItemTemplate><%# Eval("ProductionTime") %></ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="txtProductionTimeEdit" runat="server" Text='<%# Bind("ProductionTime") %>' CssClass="field-input" />
-                                </EditItemTemplate>
-                            </asp:TemplateField>
+                    <Columns>
+                        <asp:BoundField DataField="ProductID" HeaderText="ID" ReadOnly="true" />
 
-                            <asp:TemplateField HeaderText="Price">
-                                <ItemTemplate><%# "R" + Eval("Price", "{0:N2}") %></ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="txtPriceEdit" runat="server" Text='<%# Bind("Price") %>' CssClass="field-input" />
-                                </EditItemTemplate>
-                            </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Name">
+                            <ItemTemplate><%# Eval("ProductName") %></ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtProductNameEdit" runat="server" Text='<%# Bind("ProductName") %>' CssClass="field-input" />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Picture">
-                                <ItemTemplate>
-                                    <asp:Image ID="imgProduct" runat="server"
-                                        ImageUrl='<%# ResolveUrl("~/Admin Pages/ProductImageHandler.ashx?id=" + Eval("ProductID") + "&v=" + DateTime.Now.Ticks) %>'
-                                        Width="100" Height="100" />
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:FileUpload ID="fuEdit" runat="server" />
-                                </EditItemTemplate>
-                            </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Description">
+                            <ItemTemplate><%# Eval("Description") %></ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtDescriptionEdit" runat="server" Text='<%# Bind("Description") %>' CssClass="field-input" />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Status">
-                                <ItemTemplate><%# Eval("Status") %></ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:DropDownList ID="ddlStatusEdit" runat="server" SelectedValue='<%# Bind("Status") %>'>
-                                        <asp:ListItem Text="Active" Value="Active"></asp:ListItem>
-                                        <asp:ListItem Text="Inactive" Value="Inactive"></asp:ListItem>
-                                    </asp:DropDownList>
-                                </EditItemTemplate>
-                            </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Category">
+                            <ItemTemplate><%# Eval("Category") %></ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtCategoryEdit" runat="server" Text='<%# Bind("Category") %>' CssClass="field-input" />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Actions">
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="lnkEdit" runat="server" CssClass="btn btn-primary"
-                                        CommandName="EditProduct"
-                                        CommandArgument='<%# Eval("ProductID") %>'
-                                        Text="Edit" />
-                                    <asp:LinkButton ID="lnkToggle" runat="server" CssClass="btn btn-light"
-                                        CommandName="ToggleStatus"
-                                        CommandArgument='<%# Eval("ProductID") %>'
-                                        Text="Change Status" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
+                        <asp:TemplateField HeaderText="Production Time (in days)">
+                            <ItemTemplate><%# Eval("ProductionTime") %></ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtProductionTimeEdit" runat="server" Text='<%# Bind("ProductionTime") %>' CssClass="field-input" />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
 
-                    <asp:SqlDataSource ID="SqlDSProducts" runat="server"
-                        ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                        SelectCommand="SELECT * FROM Product WHERE Status = @Status"
-                        OnSelecting="SqlDSProducts_Selecting">
-                        <SelectParameters>
-                            <asp:Parameter Name="Status" DefaultValue="Active" Type="String" />
-                        </SelectParameters>
-                    </asp:SqlDataSource>
+                        <asp:TemplateField HeaderText="Price">
+                            <ItemTemplate><%# "R" + Eval("Price", "{0:N2}") %></ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtPriceEdit" runat="server" Text='<%# Bind("Price") %>' CssClass="field-input" />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
 
-                    <asp:SqlDataSource ID="SqlDSUpdateProduct" runat="server"
-                        ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                        UpdateCommand="UPDATE Product
+                        <asp:TemplateField HeaderText="Picture">
+                            <ItemTemplate>
+                                <asp:Image ID="imgProduct" runat="server"
+                                    ImageUrl='<%# ResolveUrl("~/Admin Pages/ProductImageHandler.ashx?id=" + Eval("ProductID") + "&v=" + DateTime.Now.Ticks) %>'
+                                    Width="100" Height="100" />
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:FileUpload ID="fuEdit" runat="server" />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Status">
+                            <ItemTemplate><%# Eval("Status") %></ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:DropDownList ID="ddlStatusEdit" runat="server" SelectedValue='<%# Bind("Status") %>'>
+                                    <asp:ListItem Text="Active" Value="Active"></asp:ListItem>
+                                    <asp:ListItem Text="Inactive" Value="Inactive"></asp:ListItem>
+                                </asp:DropDownList>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Actions">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lnkEdit" runat="server" CssClass="btn btn-primary"
+                                    CommandName="EditProduct"
+                                    CommandArgument='<%# Eval("ProductID") %>'
+                                    Text="Edit" />
+                                <asp:LinkButton ID="lnkToggle" runat="server" CssClass="btn btn-light"
+                                    CommandName="ToggleStatus"
+                                    CommandArgument='<%# Eval("ProductID") %>'
+                                    Text="Change Status" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+
+                <asp:SqlDataSource ID="SqlDSProducts" runat="server"
+                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
+                    SelectCommand="SELECT * FROM Product WHERE Status = @Status"
+                    OnSelecting="SqlDSProducts_Selecting">
+                    <SelectParameters>
+                        <asp:Parameter Name="Status" DefaultValue="Active" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+
+                <asp:SqlDataSource ID="SqlDSUpdateProduct" runat="server"
+                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
+                    UpdateCommand="UPDATE Product
                                    SET ProductName=@ProductName,
                                        [Description]=@Description,
                                        Category=@Category,
@@ -503,19 +546,19 @@
                                        Status=@Status
                                    WHERE ProductID=@ProductID"></asp:SqlDataSource>
 
-                    <asp:SqlDataSource ID="SqlDSUpdateImage" runat="server"
-                        ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                        UpdateCommand="UPDATE Product SET Picture=@Picture WHERE ProductID=@ProductID"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="SqlDSUpdateImage" runat="server"
+                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
+                    UpdateCommand="UPDATE Product SET Picture=@Picture WHERE ProductID=@ProductID"></asp:SqlDataSource>
 
-                    <asp:SqlDataSource ID="SqlDSToggle" runat="server"
-                        ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                        UpdateCommand="UPDATE Product SET Status = CASE WHEN Status='Active' THEN 'Inactive' ELSE 'Active' END WHERE ProductID=@ProductID">
-                        <UpdateParameters>
-                            <asp:Parameter Name="ProductID" Type="String" />
-                        </UpdateParameters>
-                    </asp:SqlDataSource>
-                </asp:Panel>
-            </div>
+                <asp:SqlDataSource ID="SqlDSToggle" runat="server"
+                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
+                    UpdateCommand="UPDATE Product SET Status = CASE WHEN Status='Active' THEN 'Inactive' ELSE 'Active' END WHERE ProductID=@ProductID">
+                    <UpdateParameters>
+                        <asp:Parameter Name="ProductID" Type="String" />
+                    </UpdateParameters>
+                </asp:SqlDataSource>
+            </asp:Panel>
+
 
             <asp:Panel ID="PanelEdit" runat="server" Visible="false">
                 <div class="section-title">Edit Product</div>
@@ -614,7 +657,14 @@
                 <div class="form-grid">
                     <label for="txtProductID">Product ID</label>
                     <div>
-                        <asp:TextBox ID="txtProductID" runat="server" CssClass="field-input" ReadOnly="true" />
+                        <asp:TextBox ID="txtProductID" runat="server"
+                            CssClass="field-input readonly-product-id"
+                            ReadOnly="true"
+                            TabIndex="-1"
+                            ToolTip="Product ID is generated automatically" />
+
+                        
+
                         <asp:Label ID="lblProductIDError" runat="server" CssClass="error-label" />
                     </div>
 

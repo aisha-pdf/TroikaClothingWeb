@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-        /* -------------------- ABOUT PAGE LIGHT/DARK MODE FIX -------------------- */
+        /* -------------------- ABOUT PAGE LIGHT/DARK MODE  -------------------- */
 
         .about-page-wrapper {
             background: var(--troika-bg) !important;

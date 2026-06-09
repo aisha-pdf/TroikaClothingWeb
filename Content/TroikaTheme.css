@@ -328,7 +328,7 @@ input[type="button"] {
     white-space: nowrap;
 }
 
-/* Fix homepage button/link readability */
+/*  homepage button/link readability */
 .home-button,
 .home-button a,
 .quick-button,
@@ -1116,5 +1116,413 @@ body[data-theme="dark"] .admin-menu-btn {
 
     .admin-main-content {
         padding: 20px !important;
+    }
+}
+
+/* improving nav bar visibility and login page */
+
+/* ---------- SECOND NAVBAR READABILITY ---------- */
+
+/* Light mode: second navbar is dark purple, so text must be white */
+body[data-theme="light"] .navbar-troika1 {
+    background-color: #3D304C !important;
+}
+
+    body[data-theme="light"] .navbar-troika1 .nav-link,
+    body[data-theme="light"] .navbar-troika1 .nav-link *,
+    body[data-theme="light"] .navbar-troika1 .nav-link span,
+    body[data-theme="light"] .navbar-troika1 .nav-link label,
+    body[data-theme="light"] .navbar-troika1 a,
+    body[data-theme="light"] .navbar-troika1 a *,
+    body[data-theme="light"] .navbar-troika1 .navbar-nav *,
+    body[data-theme="light"] .navbar-troika1 input,
+    body[data-theme="light"] .navbar-troika1 button {
+        color: #ffffff !important;
+    }
+
+/* Dark mode: second navbar is light purple, so text must be dark */
+body[data-theme="dark"] .navbar-troika1 {
+    background-color: #d9c8f0 !important;
+}
+
+    body[data-theme="dark"] .navbar-troika1 .nav-link,
+    body[data-theme="dark"] .navbar-troika1 .nav-link *,
+    body[data-theme="dark"] .navbar-troika1 .nav-link span,
+    body[data-theme="dark"] .navbar-troika1 .nav-link label,
+    body[data-theme="dark"] .navbar-troika1 a,
+    body[data-theme="dark"] .navbar-troika1 a *,
+    body[data-theme="dark"] .navbar-troika1 .navbar-nav *,
+    body[data-theme="dark"] .navbar-troika1 input,
+    body[data-theme="dark"] .navbar-troika1 button {
+        color: #121018 !important;
+    }
+
+/* Make welcome username and cart count labels inherit the navbar link colour */
+.navbar-troika1 asp\:Label,
+.navbar-troika1 span,
+.navbar-troika1 label {
+    color: inherit !important;
+}
+
+/* Specific ASP.NET generated IDs fallback */
+#lblWelcome,
+#lblAdmin,
+#lblCartCount,
+#Label2,
+[id$="lblWelcome"],
+[id$="lblAdmin"],
+[id$="lblCartCount"],
+[id$="Label2"] {
+    color: inherit !important;
+}
+
+
+/* ---------- LOGIN PAGE INPUT CONSISTENCY ---------- */
+
+
+
+/* Dark mode normal textbox/password */
+body[data-theme="dark"] .login-card .login-input,
+body[data-theme="dark"] .login-card input[type="text"],
+body[data-theme="dark"] .login-card input[type="password"] {
+    background: #251f2f !important;
+    color: #ffffff !important;
+    border-color: #3b3048 !important;
+    caret-color: #ffffff !important;
+}
+
+/* Fix Chrome autofill making username textbox white/blue in dark mode */
+body[data-theme="dark"] .login-card input:-webkit-autofill,
+body[data-theme="dark"] .login-card input:-webkit-autofill:hover,
+body[data-theme="dark"] .login-card input:-webkit-autofill:focus,
+body[data-theme="dark"] .login-card input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #251f2f inset !important;
+    box-shadow: 0 0 0 1000px #251f2f inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #ffffff !important;
+    border: 1px solid #3b3048 !important;
+}
+
+/* Light mode autofill consistency */
+body[data-theme="light"] .login-card input:-webkit-autofill,
+body[data-theme="light"] .login-card input:-webkit-autofill:hover,
+body[data-theme="light"] .login-card input:-webkit-autofill:focus,
+body[data-theme="light"] .login-card input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #1f1f1f !important;
+    caret-color: #1f1f1f !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+/* ---------- LOGIN PAGE INPUT CONSISTENCY ---------- */
+
+/* Normal login input styling */
+.login-original-card .login-original-input,
+.login-original-card input[type="text"],
+.login-original-card input[type="password"] {
+    background: var(--troika-input-bg) !important;
+    color: var(--troika-input-text) !important;
+    border: 1px solid var(--troika-border) !important;
+    caret-color: var(--troika-input-text) !important;
+}
+
+/* Dark mode login inputs */
+body[data-theme="dark"] .login-original-card .login-original-input,
+body[data-theme="dark"] .login-original-card input[type="text"],
+body[data-theme="dark"] .login-original-card input[type="password"] {
+    background: #251f2f !important;
+    color: #ffffff !important;
+    border-color: #3b3048 !important;
+    caret-color: #ffffff !important;
+}
+
+/* Chrome/Edge autofill fix: stops username textbox becoming white in dark mode */
+body[data-theme="dark"] .login-original-card input:-webkit-autofill,
+body[data-theme="dark"] .login-original-card input:-webkit-autofill:hover,
+body[data-theme="dark"] .login-original-card input:-webkit-autofill:focus,
+body[data-theme="dark"] .login-original-card input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #251f2f inset !important;
+    box-shadow: 0 0 0 1000px #251f2f inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #ffffff !important;
+    border: 1px solid #3b3048 !important;
+}
+
+/* Light mode autofill fix */
+body[data-theme="light"] .login-original-card input:-webkit-autofill,
+body[data-theme="light"] .login-original-card input:-webkit-autofill:hover,
+body[data-theme="light"] .login-original-card input:-webkit-autofill:focus,
+body[data-theme="light"] .login-original-card input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #1f1f1f !important;
+    caret-color: #1f1f1f !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+
+/* ---------- PRODUCT MANAGEMENT CHANGE STATUS BUTTON ---------- */
+
+/* Make Change Status readable in BOTH modes */
+.product-management-container .grid .btn-light,
+.product-management-container .grid a.btn-light,
+.product-management-container .grid input.btn-light,
+.product-management-container .grid td:last-child .btn-light,
+.product-management-container .grid td:last-child a.btn-light {
+    background: #644F7D !important;
+    color: #ffffff !important;
+    border: 1px solid #644F7D !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    opacity: 1 !important;
+    min-width: 105px !important;
+    padding: 9px 12px !important;
+    border-radius: 7px !important;
+    display: inline-block !important;
+    text-decoration: none !important;
+}
+
+    /* Hover state */
+    .product-management-container .grid .btn-light:hover,
+    .product-management-container .grid a.btn-light:hover,
+    .product-management-container .grid input.btn-light:hover,
+    .product-management-container .grid td:last-child .btn-light:hover,
+    .product-management-container .grid td:last-child a.btn-light:hover {
+        background: #3D304C !important;
+        color: #ffffff !important;
+        border-color: #3D304C !important;
+    }
+
+/* Dark mode Change Status */
+body[data-theme="dark"] .product-management-container .grid .btn-light,
+body[data-theme="dark"] .product-management-container .grid a.btn-light,
+body[data-theme="dark"] .product-management-container .grid input.btn-light,
+body[data-theme="dark"] .product-management-container .grid td:last-child .btn-light,
+body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-light {
+    background: #d9c8f0 !important;
+    color: #121018 !important;
+    border: 1px solid #d9c8f0 !important;
+    font-weight: 800 !important;
+}
+
+    /* Dark mode hover */
+    body[data-theme="dark"] .product-management-container .grid .btn-light:hover,
+    body[data-theme="dark"] .product-management-container .grid a.btn-light:hover,
+    body[data-theme="dark"] .product-management-container .grid input.btn-light:hover,
+    body[data-theme="dark"] .product-management-container .grid td:last-child .btn-light:hover,
+    body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-light:hover {
+        background: #b99cdd !important;
+        color: #121018 !important;
+        border-color: #b99cdd !important;
+    }
+
+/* 
+   PRODUCT MANAGEMENT PAGE - make Edit and Change Status buttons more visible and consistent in both modes
+ */
+
+
+/* ---------- ACTION BUTTONS: Edit + Change Status ---------- */
+
+.product-management-container .grid td:last-child {
+    text-align: center !important;
+    vertical-align: middle !important;
+    white-space: normal !important;
+    width: 145px !important;
+}
+
+.product-management-container .grid th:last-child {
+    width: 145px !important;
+    text-align: center !important;
+}
+
+/* Same shape, spacing and text weight for BOTH buttons */
+.product-management-container .grid td:last-child .btn,
+.product-management-container .grid td:last-child a.btn,
+.product-management-container .grid td:last-child input.btn,
+.product-management-container .grid td:last-child button.btn {
+    display: block !important;
+    width: 115px !important;
+    min-width: 115px !important;
+    max-width: 115px !important;
+    margin: 7px auto !important;
+    padding: 9px 10px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important; /* less bold, same as normal Edit button style */
+    line-height: 1.25 !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    box-sizing: border-box !important;
+    opacity: 1 !important;
+    white-space: normal !important;
+}
+
+/* Light mode Edit */
+body[data-theme="light"] .product-management-container .grid td:last-child .btn-primary,
+body[data-theme="light"] .product-management-container .grid td:last-child a.btn-primary {
+    background: #3D304C !important;
+    color: #ffffff !important;
+    border: 1px solid #3D304C !important;
+}
+
+/* Light mode Change Status */
+body[data-theme="light"] .product-management-container .grid td:last-child .btn-light,
+body[data-theme="light"] .product-management-container .grid td:last-child a.btn-light {
+    background: #644F7D !important;
+    color: #ffffff !important;
+    border: 1px solid #644F7D !important;
+}
+
+    /* Light mode hover */
+    body[data-theme="light"] .product-management-container .grid td:last-child .btn-primary:hover,
+    body[data-theme="light"] .product-management-container .grid td:last-child .btn-light:hover,
+    body[data-theme="light"] .product-management-container .grid td:last-child a.btn-primary:hover,
+    body[data-theme="light"] .product-management-container .grid td:last-child a.btn-light:hover {
+        background: #8365A8 !important;
+        color: #ffffff !important;
+        border-color: #8365A8 !important;
+        transform: translateY(-1px) !important;
+    }
+
+/* Dark mode Edit + Change Status */
+body[data-theme="dark"] .product-management-container .grid td:last-child .btn-primary,
+body[data-theme="dark"] .product-management-container .grid td:last-child .btn-light,
+body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-primary,
+body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-light {
+    background: #d9c8f0 !important;
+    color: #121018 !important;
+    border: 1px solid #d9c8f0 !important;
+    font-weight: 500 !important; /* prevents Change Status from becoming extra bold */
+}
+
+    /* Dark mode hover */
+    body[data-theme="dark"] .product-management-container .grid td:last-child .btn-primary:hover,
+    body[data-theme="dark"] .product-management-container .grid td:last-child .btn-light:hover,
+    body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-primary:hover,
+    body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-light:hover {
+        background: #b99cdd !important;
+        color: #121018 !important;
+        border-color: #b99cdd !important;
+        transform: translateY(-1px) !important;
+    }
+
+
+/* ---------- GRIDVIEW ---------- */
+
+/* Pager row/cell */
+.product-management-container .grid .product-grid-pager,
+.product-management-container .grid .product-grid-pager td,
+.product-management-container .grid tr.product-grid-pager,
+.product-management-container .grid tr.product-grid-pager td {
+    background: transparent !important;
+    border: none !important;
+    padding: 18px 0 8px 0 !important;
+    text-align: center !important;
+}
+
+    /* Stop ASP.NET nested pager table from stretching/breaking */
+    .product-management-container .grid .product-grid-pager table,
+    .product-management-container .grid tr.product-grid-pager table {
+        width: auto !important;
+        margin: 0 auto !important;
+        border-collapse: separate !important;
+        border-spacing: 8px 0 !important;
+        background: transparent !important;
+    }
+
+        /* Pager number cells */
+        .product-management-container .grid .product-grid-pager table td,
+        .product-management-container .grid tr.product-grid-pager table td {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            width: auto !important;
+            min-width: 0 !important;
+        }
+
+    /* Pager links */
+    .product-management-container .grid .product-grid-pager a,
+    .product-management-container .grid tr.product-grid-pager a {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 38px !important;
+        height: 38px !important;
+        padding: 0 12px !important;
+        border-radius: 8px !important;
+        background: var(--troika-btn-bg) !important;
+        color: var(--troika-btn-text) !important;
+        border: 1px solid var(--troika-btn-bg) !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+        line-height: 1 !important;
+    }
+
+    /* Current page number is usually rendered as a span */
+    .product-management-container .grid .product-grid-pager span,
+    .product-management-container .grid tr.product-grid-pager span {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 38px !important;
+        height: 38px !important;
+        padding: 0 12px !important;
+        border-radius: 8px !important;
+        background: #D8CDEB !important;
+        color: #121018 !important;
+        border: 1px solid #D8CDEB !important;
+        text-decoration: none !important;
+        font-weight: 600 !important;
+        line-height: 1 !important;
+    }
+
+    /* Hover */
+    .product-management-container .grid .product-grid-pager a:hover,
+    .product-management-container .grid tr.product-grid-pager a:hover {
+        background: var(--troika-btn-hover-bg) !important;
+        border-color: var(--troika-btn-hover-bg) !important;
+        color: var(--troika-btn-text) !important;
+        transform: translateY(-1px) !important;
+    }
+
+/* Dark mode pager */
+body[data-theme="dark"] .product-management-container .grid .product-grid-pager a,
+body[data-theme="dark"] .product-management-container .grid tr.product-grid-pager a {
+    background: #d9c8f0 !important;
+    color: #121018 !important;
+    border-color: #d9c8f0 !important;
+}
+
+    body[data-theme="dark"] .product-management-container .grid .product-grid-pager a:hover,
+    body[data-theme="dark"] .product-management-container .grid tr.product-grid-pager a:hover {
+        background: #b99cdd !important;
+        color: #121018 !important;
+        border-color: #b99cdd !important;
+    }
+
+body[data-theme="dark"] .product-management-container .grid .product-grid-pager span,
+body[data-theme="dark"] .product-management-container .grid tr.product-grid-pager span {
+    background: #644F7D !important;
+    color: #ffffff !important;
+    border-color: #644F7D !important;
+}
+
+
+/* Mobile: keep pager neat */
+@media (max-width: 768px) {
+    .product-management-container .grid .product-grid-pager table,
+    .product-management-container .grid tr.product-grid-pager table {
+        border-spacing: 5px 6px !important;
+    }
+
+    .product-management-container .grid .product-grid-pager a,
+    .product-management-container .grid .product-grid-pager span,
+    .product-management-container .grid tr.product-grid-pager a,
+    .product-management-container .grid tr.product-grid-pager span {
+        min-width: 34px !important;
+        height: 34px !important;
+        padding: 0 9px !important;
+        font-size: 13px !important;
     }
 }
