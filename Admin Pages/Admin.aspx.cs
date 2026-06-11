@@ -26,5 +26,7 @@ namespace TroikaClothingWeb
             Session.Clear();
             Response.Redirect("~/Login.aspx");
         }
+
+       
     }
 }

@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-        /* ---------- ADMIN PAGE LOCAL FIX ---------- */
+        /* ---------- ADMIN PAGE layout changes for theme switch ---------- */
 
         .admin-local-page {
             display: flex !important;
@@ -18,7 +18,6 @@
             box-sizing: border-box !important;
         }
 
-        /* LEFT BUTTON AREA */
         .admin-local-sidebar {
             width: 230px !important;
             min-width: 230px !important;
@@ -44,13 +43,12 @@
             font-weight: 600 !important;
         }
 
-            .admin-local-btn:hover {
-                background: var(--troika-btn-hover-bg) !important;
-                border-color: var(--troika-btn-hover-bg) !important;
-                color: var(--troika-btn-text) !important;
-            }
+        .admin-local-btn:hover {
+            background: var(--troika-btn-hover-bg) !important;
+            border-color: var(--troika-btn-hover-bg) !important;
+            color: var(--troika-btn-text) !important;
+        }
 
-        /* RIGHT CONTENT AREA */
         .admin-local-content {
             flex: 1 !important;
             padding: 20px 40px 30px 20px !important;
@@ -89,30 +87,30 @@
             color: var(--troika-table-text) !important;
         }
 
-            .admin-local-grid th,
-            .admin-local-grid td {
-                background: var(--troika-table-bg) !important;
-                color: var(--troika-table-text) !important;
-                padding: 10px 12px !important;
-                border-color: var(--troika-border) !important;
-            }
+        .admin-local-grid th,
+        .admin-local-grid td {
+            background: var(--troika-table-bg) !important;
+            color: var(--troika-table-text) !important;
+            padding: 10px 12px !important;
+            border-color: var(--troika-border) !important;
+        }
 
-            .admin-local-grid th {
-                background: var(--troika-table-header-bg) !important;
-                color: var(--troika-table-header-text) !important;
-                font-weight: 700 !important;
-                text-decoration: underline !important;
-            }
+        .admin-local-grid th {
+            background: var(--troika-table-header-bg) !important;
+            color: var(--troika-table-header-text) !important;
+            font-weight: 700 !important;
+            text-decoration: underline !important;
+        }
 
-            .admin-local-grid a {
-                color: var(--troika-primary) !important;
-                font-weight: 500 !important;
-                text-decoration: underline !important;
-            }
+        .admin-local-grid a {
+            color: var(--troika-primary) !important;
+            font-weight: 500 !important;
+            text-decoration: underline !important;
+        }
 
-                .admin-local-grid a:hover {
-                    color: var(--troika-primary-hover) !important;
-                }
+        .admin-local-grid a:hover {
+            color: var(--troika-primary-hover) !important;
+        }
 
         .admin-local-row td,
         .admin-local-alt-row td {
@@ -125,7 +123,6 @@
             color: var(--troika-text) !important;
         }
 
-        /* SELECTED ROW HIGHLIGHT */
         .admin-local-selected-row td {
             background: var(--troika-primary-hover) !important;
             color: var(--troika-btn-text) !important;
@@ -156,6 +153,27 @@
             padding: 0 3px !important;
         }
 
+        .admin-validation-summary {
+            color: #d60000 !important;
+            margin-bottom: 15px !important;
+            font-weight: 600 !important;
+        }
+
+        .admin-validation-error {
+            color: #d60000 !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+        }
+
+        .admin-edit-input {
+            width: 140px !important;
+            padding: 6px !important;
+            border-radius: 4px !important;
+            border: 1px solid var(--troika-border) !important;
+            background: var(--troika-bg) !important;
+            color: var(--troika-text) !important;
+        }
+
         /* DARK MODE EXTRA OVERRIDES */
         body[data-theme="dark"] .admin-local-card {
             background: #1c1724 !important;
@@ -173,10 +191,10 @@
             color: #f5f3f7 !important;
         }
 
-            body[data-theme="dark"] .admin-local-grid th {
-                background: #2b2433 !important;
-                color: #ffffff !important;
-            }
+        body[data-theme="dark"] .admin-local-grid th {
+            background: #2b2433 !important;
+            color: #ffffff !important;
+        }
 
         body[data-theme="dark"] .admin-local-selected-row td {
             background: #b99cdd !important;
@@ -199,10 +217,16 @@
             border-color: #d9c8f0 !important;
         }
 
-            body[data-theme="dark"] .admin-local-btn:hover {
-                background: #b99cdd !important;
-                color: #121018 !important;
-            }
+        body[data-theme="dark"] .admin-local-btn:hover {
+            background: #b99cdd !important;
+            color: #121018 !important;
+        }
+
+        body[data-theme="dark"] .admin-edit-input {
+            background: #121018 !important;
+            color: #f5f3f7 !important;
+            border-color: #3b3048 !important;
+        }
 
         @media (max-width: 900px) {
             .admin-local-page {
@@ -228,7 +252,6 @@
             }
         }
 
-        /* Keep Edit/Select links readable on hover and selected rows */
         .admin-local-grid tr:hover a,
         .admin-local-grid tr:hover td a {
             color: var(--troika-table-text) !important;
@@ -236,13 +259,11 @@
             text-decoration: underline !important;
         }
 
-        /* In dark mode, keep links readable when hovering normal rows */
         body[data-theme="dark"] .admin-local-grid tr:hover a,
         body[data-theme="dark"] .admin-local-grid tr:hover td a {
             color: #f5f3f7 !important;
         }
 
-        /* In selected row, make Edit/Select match the selected row text */
         .admin-local-selected-row a,
         .admin-local-selected-row td a {
             color: var(--troika-btn-text) !important;
@@ -250,7 +271,6 @@
             text-decoration: underline !important;
         }
 
-        /* Dark mode selected row uses dark text on purple highlight */
         body[data-theme="dark"] .admin-local-selected-row a,
         body[data-theme="dark"] .admin-local-selected-row td a {
             color: #121018 !important;
@@ -259,18 +279,22 @@
 
     <div class="admin-local-page">
 
-        <!-- Left Sidebar -->
         <div class="admin-local-sidebar">
-            <asp:Button ID="btnUserList" runat="server" Text="User List" CssClass="admin-local-btn" OnClick="btnUserList_Click" />
-            <asp:Button ID="btnProfile" runat="server" Text="Profile" CssClass="admin-local-btn" OnClick="btnProfile_Click" />
-            <asp:Button ID="btnLogout" runat="server" Text="Log Out" CssClass="admin-local-btn" OnClick="btnLogout_Click" />
+            <asp:Button ID="btnUserList" runat="server" Text="User List" CssClass="admin-local-btn" OnClick="btnUserList_Click" CausesValidation="False" />
+            <asp:Button ID="btnProfile" runat="server" Text="Profile" CssClass="admin-local-btn" OnClick="btnProfile_Click" CausesValidation="False" />
+            <asp:Button ID="btnLogout" runat="server" Text="Log Out" CssClass="admin-local-btn" OnClick="btnLogout_Click" CausesValidation="False" />
         </div>
 
-        <!-- Right Main Content -->
         <div class="admin-local-content">
             <div class="admin-local-card">
 
                 <h2 class="admin-local-heading">USER MANAGEMENT - USER LIST</h2>
+
+                <asp:ValidationSummary ID="UpdateValidationSummary"
+                    runat="server"
+                    ValidationGroup="UpdateUserValidation"
+                    CssClass="admin-validation-summary"
+                    HeaderText="Please fix the following before updating the user:" />
 
                 <div class="admin-local-grid-wrapper">
                     <asp:GridView ID="GridView1"
@@ -286,12 +310,173 @@
                         Width="100%">
 
                         <Columns>
-                            <asp:CommandField ShowEditButton="True" ShowSelectButton="True" />
+
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lnkEdit"
+                                        runat="server"
+                                        CommandName="Edit"
+                                        Text="Edit"
+                                        CausesValidation="False" />
+
+                                    &nbsp;
+
+                                    <asp:LinkButton ID="lnkSelect"
+                                        runat="server"
+                                        CommandName="Select"
+                                        Text="Select"
+                                        CausesValidation="False" />
+                                </ItemTemplate>
+
+                                <EditItemTemplate>
+                                    <asp:LinkButton ID="lnkUpdate"
+                                        runat="server"
+                                        CommandName="Update"
+                                        Text="Update"
+                                        ValidationGroup="UpdateUserValidation"
+                                        CausesValidation="True" />
+
+                                    &nbsp;
+
+                                    <asp:LinkButton ID="lnkCancel"
+                                        runat="server"
+                                        CommandName="Cancel"
+                                        Text="Cancel"
+                                        CausesValidation="False" />
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
                             <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" />
-                            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                            <asp:BoundField DataField="Surname" HeaderText="Surname" SortExpression="Surname" />
-                            <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-                            <asp:BoundField DataField="PhoneNumber" HeaderText="PhoneNumber" SortExpression="PhoneNumber" />
+
+                            <asp:TemplateField HeaderText="Name" SortExpression="Name">
+                                <ItemTemplate>
+                                    <%# Eval("Name") %>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtEditName"
+                                        runat="server"
+                                        Text='<%# Bind("Name") %>'
+                                        CssClass="admin-edit-input"
+                                        MaxLength="50" />
+
+                                    <asp:RequiredFieldValidator ID="rfvEditName"
+                                        runat="server"
+                                        ControlToValidate="txtEditName"
+                                        ErrorMessage="Name is required."
+                                        Text="*"
+                                        CssClass="admin-validation-error"
+                                        Display="Dynamic"
+                                        ValidationGroup="UpdateUserValidation" />
+
+                                    <asp:RegularExpressionValidator ID="revEditName"
+                                        runat="server"
+                                        ControlToValidate="txtEditName"
+                                        ValidationExpression="^[A-Za-z\s'-]{2,50}$"
+                                        ErrorMessage="Name must only contain letters and must be 2 to 50 characters."
+                                        Text="*"
+                                        CssClass="admin-validation-error"
+                                        Display="Dynamic"
+                                        ValidationGroup="UpdateUserValidation" />
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Surname" SortExpression="Surname">
+                                <ItemTemplate>
+                                    <%# Eval("Surname") %>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtEditSurname"
+                                        runat="server"
+                                        Text='<%# Bind("Surname") %>'
+                                        CssClass="admin-edit-input"
+                                        MaxLength="50" />
+
+                                    <asp:RequiredFieldValidator ID="rfvEditSurname"
+                                        runat="server"
+                                        ControlToValidate="txtEditSurname"
+                                        ErrorMessage="Surname is required."
+                                        Text="*"
+                                        CssClass="admin-validation-error"
+                                        Display="Dynamic"
+                                        ValidationGroup="UpdateUserValidation" />
+
+                                    <asp:RegularExpressionValidator ID="revEditSurname"
+                                        runat="server"
+                                        ControlToValidate="txtEditSurname"
+                                        ValidationExpression="^[A-Za-z\s'-]{2,50}$"
+                                        ErrorMessage="Surname must only contain letters and must be 2 to 50 characters."
+                                        Text="*"
+                                        CssClass="admin-validation-error"
+                                        Display="Dynamic"
+                                        ValidationGroup="UpdateUserValidation" />
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Email" SortExpression="Email">
+                                <ItemTemplate>
+                                    <%# Eval("Email") %>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtEditEmail"
+                                        runat="server"
+                                        Text='<%# Bind("Email") %>'
+                                        CssClass="admin-edit-input"
+                                        MaxLength="100"
+                                        TextMode="Email" />
+
+                                    <asp:RequiredFieldValidator ID="rfvEditEmail"
+                                        runat="server"
+                                        ControlToValidate="txtEditEmail"
+                                        ErrorMessage="Email is required."
+                                        Text="*"
+                                        CssClass="admin-validation-error"
+                                        Display="Dynamic"
+                                        ValidationGroup="UpdateUserValidation" />
+
+                                    <asp:RegularExpressionValidator ID="revEditEmail"
+                                        runat="server"
+                                        ControlToValidate="txtEditEmail"
+                                        ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+                                        ErrorMessage="Enter a valid email address."
+                                        Text="*"
+                                        CssClass="admin-validation-error"
+                                        Display="Dynamic"
+                                        ValidationGroup="UpdateUserValidation" />
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="PhoneNumber" SortExpression="PhoneNumber">
+                                <ItemTemplate>
+                                    <%# Eval("PhoneNumber") %>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtEditPhoneNumber"
+                                        runat="server"
+                                        Text='<%# Bind("PhoneNumber") %>'
+                                        CssClass="admin-edit-input"
+                                        MaxLength="10" />
+
+                                    <asp:RequiredFieldValidator ID="rfvEditPhoneNumber"
+                                        runat="server"
+                                        ControlToValidate="txtEditPhoneNumber"
+                                        ErrorMessage="Phone number is required."
+                                        Text="*"
+                                        CssClass="admin-validation-error"
+                                        Display="Dynamic"
+                                        ValidationGroup="UpdateUserValidation" />
+
+                                    <asp:RegularExpressionValidator ID="revEditPhoneNumber"
+                                        runat="server"
+                                        ControlToValidate="txtEditPhoneNumber"
+                                        ValidationExpression="^0[0-9]{9}$"
+                                        ErrorMessage="Phone number must be 10 digits and start with 0."
+                                        Text="*"
+                                        CssClass="admin-validation-error"
+                                        Display="Dynamic"
+                                        ValidationGroup="UpdateUserValidation" />
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
                         </Columns>
 
                         <HeaderStyle CssClass="admin-local-header" Font-Bold="True" />
@@ -308,33 +493,44 @@
                     runat="server"
                     ConflictDetection="CompareAllValues"
                     ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                    DeleteCommand="DELETE FROM [WebsiteRegister] WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email"
-                    InsertCommand="INSERT INTO [WebsiteRegister] ([Name], [Surname], [Email]) VALUES (@Name, @Surname, @Email)"
                     OldValuesParameterFormatString="original_{0}"
                     SelectCommand="SELECT ID, Name, Surname, Email, PhoneNumber FROM WebsiteRegister"
-                    UpdateCommand="UPDATE [WebsiteRegister] SET [Name] = @Name, [Surname] = @Surname, [Email] = @Email WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email">
+                    UpdateCommand="UPDATE [WebsiteRegister]
+                                   SET [Name] = @Name,
+                                       [Surname] = @Surname,
+                                       [Email] = @Email,
+                                       [PhoneNumber] = @PhoneNumber
+                                   WHERE [ID] = @original_ID
+                                     AND [Name] = @original_Name
+                                     AND [Surname] = @original_Surname
+                                     AND [Email] = @original_Email
+                                     AND [PhoneNumber] = @original_PhoneNumber"
+                    DeleteCommand="DELETE FROM [WebsiteRegister]
+                                   WHERE [ID] = @original_ID
+                                     AND [Name] = @original_Name
+                                     AND [Surname] = @original_Surname
+                                     AND [Email] = @original_Email
+                                     AND [PhoneNumber] = @original_PhoneNumber">
 
                     <DeleteParameters>
                         <asp:Parameter Name="original_ID" Type="Int32" />
                         <asp:Parameter Name="original_Name" Type="String" />
                         <asp:Parameter Name="original_Surname" Type="String" />
                         <asp:Parameter Name="original_Email" Type="String" />
+                        <asp:Parameter Name="original_PhoneNumber" Type="String" />
                     </DeleteParameters>
-
-                    <InsertParameters>
-                        <asp:Parameter Name="Name" Type="String" />
-                        <asp:Parameter Name="Surname" Type="String" />
-                        <asp:Parameter Name="Email" Type="String" />
-                    </InsertParameters>
 
                     <UpdateParameters>
                         <asp:Parameter Name="Name" Type="String" />
                         <asp:Parameter Name="Surname" Type="String" />
                         <asp:Parameter Name="Email" Type="String" />
+                        <asp:Parameter Name="PhoneNumber" Type="String" />
+
                         <asp:Parameter Name="original_ID" Type="Int32" />
                         <asp:Parameter Name="original_Name" Type="String" />
                         <asp:Parameter Name="original_Surname" Type="String" />
                         <asp:Parameter Name="original_Email" Type="String" />
+                        <asp:Parameter Name="original_PhoneNumber" Type="String" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
 
