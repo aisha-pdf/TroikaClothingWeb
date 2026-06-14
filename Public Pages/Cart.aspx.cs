@@ -1,26 +1,21 @@
 using System;
 using System.Linq;
 using System.Web.UI.WebControls;
+using TroikaClothingWeb.Common;
 using TroikaClothingWeb.Models;
 using TroikaClothingWeb.Services;
 
 namespace TroikaClothingWeb.Public_Pages
 {
-    public partial class Cart : System.Web.UI.Page
+    public partial class Cart : CustomerPage
     {
-        private readonly UserService _userService = new UserService();
-        private readonly ProductService _productService = new ProductService();
-        private readonly CheckoutService _checkoutService = new CheckoutService();
+        private readonly UserService _userService = ServiceFactory.CreateUserService();
+        private readonly ProductService _productService = ServiceFactory.CreateProductService();
+        private readonly CheckoutService _checkoutService = ServiceFactory.CreateCheckoutService();
+        private readonly CartService _cartService = ServiceFactory.CreateCartService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!AuthService.IsInRole(Session, "Customer") || Session["Username"] == null)
-            {
-                Session["ReturnUrl"] = "~/Public Pages/Cart.aspx";
-                Response.Redirect("~/Login.aspx");
-                return;
-            }
-
             rptCart.ItemCommand += rptCart_ItemCommand;
             btnBack.PostBackUrl = ResolveUrl("~/Public Pages/Products.aspx");
 
@@ -33,8 +28,7 @@ namespace TroikaClothingWeb.Public_Pages
 
         private void LoadSavedAddress()
         {
-            string username = Session["Username"] == null ? null : Session["Username"].ToString();
-            CustomerAddress address = _userService.GetCustomerAddressForUsername(username);
+            CustomerAddress address = _userService.GetCustomerAddressForUsername(CurrentUsername);
 
             if (address == null) return;
 
@@ -49,21 +43,20 @@ namespace TroikaClothingWeb.Public_Pages
 
         private void BindCart()
         {
-            var cart = ShoppingCart.Get(Session);
-            phEmpty.Visible = cart.Count == 0;
-            phCart.Visible = cart.Count > 0;
+            var cartItems = _cartService.GetItems(Session);
+            string estimatedDelivery = _productService.CalculateEstimatedDelivery(cartItems);
+            CartSummary summary = _cartService.GetSummary(Session, estimatedDelivery);
 
-            rptCart.DataSource = cart;
+            phEmpty.Visible = !summary.HasItems;
+            phCart.Visible = summary.HasItems;
+
+            rptCart.DataSource = summary.Items;
             rptCart.DataBind();
 
-            decimal subtotal = ShoppingCart.Total(Session);
-            decimal delivery = subtotal > 500 ? 0 : 80;
-            decimal grandTotal = subtotal + delivery;
-
-            lblEstDelivery.Text = _productService.CalculateEstimatedDelivery(cart);
-            lblSubtotal.Text = subtotal.ToString("0.00");
-            lblDelivery.Text = delivery == 0 ? "Free" : string.Format("R{0:0.00}", delivery);
-            lblTotal.Text = grandTotal.ToString("0.00");
+            lblEstDelivery.Text = summary.EstimatedDeliveryText;
+            lblSubtotal.Text = summary.Subtotal.ToString("0.00");
+            lblDelivery.Text = summary.DeliveryDisplayText;
+            lblTotal.Text = summary.GrandTotal.ToString("0.00");
         }
 
         protected void rptCart_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -78,11 +71,11 @@ namespace TroikaClothingWeb.Public_Pages
                 var txt = (TextBox)e.Item.FindControl("txtQty");
                 int quantity;
                 if (int.TryParse(txt.Text, out quantity) && quantity > 0)
-                    ShoppingCart.UpdateQuantity(Session, productId, colour, size, quantity);
+                    _cartService.UpdateQuantity(Session, productId, colour, size, quantity);
             }
             else if (e.CommandName == "remove")
             {
-                ShoppingCart.Remove(Session, productId, colour, size);
+                _cartService.Remove(Session, productId, colour, size);
             }
 
             BindCart();
@@ -90,14 +83,13 @@ namespace TroikaClothingWeb.Public_Pages
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            ShoppingCart.Clear(Session);
+            _cartService.Clear(Session);
             BindCart();
         }
 
         protected void btnCheckout_Click(object sender, EventArgs e)
         {
-            string username = Session["Username"] == null ? null : Session["Username"].ToString();
-            var result = _checkoutService.PlaceOrder(username, ddlPayment.SelectedValue, ShoppingCart.Get(Session));
+            var result = _checkoutService.PlaceOrder(CurrentUsername, ddlPayment.SelectedValue, _cartService.GetItems(Session));
 
             if (!result.Success)
             {
@@ -109,14 +101,13 @@ namespace TroikaClothingWeb.Public_Pages
 
             lblMessage.ForeColor = System.Drawing.Color.Green;
             lblMessage.Text = result.Message;
-            ShoppingCart.Clear(Session);
+            _cartService.Clear(Session);
             Response.Redirect("~/Public Pages/OrderConfirmation.aspx?receipt=" + result.ReceiptNumber);
         }
 
         protected void btnSaveAddress_Click(object sender, EventArgs e)
         {
-            string username = Session["Username"] == null ? null : Session["Username"].ToString();
-            var result = _userService.SaveCustomerAddress(username, txtStreet.Text, txtSuburb.Text, txtPostCode.Text);
+            var result = _userService.SaveCustomerAddress(CurrentUsername, txtStreet.Text, txtSuburb.Text, txtPostCode.Text);
 
             lblMessage.ForeColor = result.Success ? System.Drawing.Color.Green : System.Drawing.Color.Red;
             lblMessage.Text = result.Message;

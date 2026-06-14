@@ -1,0 +1,341 @@
+.customer-profile-page {
+    background: var(--troika-bg) !important;
+    color: var(--troika-text) !important;
+    min-height: 80vh;
+}
+
+.customer-profile-section {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.customer-profile-title {
+    color: var(--troika-heading-text) !important;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.customer-profile-layout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    gap: 26px;
+    align-items: start;
+}
+
+/* LIGHT MODE PANELS - softer purple card background */
+.customer-profile-card,
+.customer-close-card {
+    background: #f4efff !important;
+    color: var(--troika-text) !important;
+    border: 1px solid #d8c8f0 !important;
+    border-radius: 14px;
+    padding: 28px;
+    box-sizing: border-box;
+    box-shadow: 0 14px 28px rgba(72, 48, 96, 0.10);
+}
+
+.customer-close-card {
+    margin: 30px auto 0 auto;
+    max-width: 720px;
+    text-align: center;
+}
+
+.customer-profile-subtitle {
+    color: var(--troika-heading-text) !important;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.customer-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.customer-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.customer-form-group-full {
+    grid-column: 1 / -1;
+}
+
+.customer-form-group label {
+    color: var(--troika-text) !important;
+    font-weight: 700;
+}
+
+.customer-input {
+    width: 100% !important;
+    background: var(--troika-input-bg) !important;
+    color: var(--troika-input-text) !important;
+    border: 1px solid var(--troika-border) !important;
+    border-radius: 7px !important;
+    padding: 10px 12px !important;
+    box-sizing: border-box;
+}
+
+    .customer-input[readonly] {
+        opacity: 0.82;
+        cursor: not-allowed;
+    }
+
+.customer-help-text,
+.customer-warning-text {
+    color: var(--troika-muted, #666666) !important;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.customer-warning-text {
+    max-width: 520px;
+    margin: 0 auto 18px auto;
+}
+
+/* PASSWORD FIELD ROW */
+.customer-password-row {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+}
+
+.customer-password-input {
+    flex: 1 1 auto;
+}
+
+.customer-password-toggle {
+    flex: 0 0 auto;
+    min-width: 155px !important;
+    margin: 0 !important;
+    white-space: nowrap;
+}
+
+/* BUTTON LAYOUT */
+.customer-button-row,
+.customer-inline-button-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.customer-inline-button-row {
+    margin-top: 10px;
+}
+
+.customer-close-card .customer-button-row {
+    justify-content: center;
+}
+
+.customer-save-btn,
+.customer-secondary-btn,
+.customer-close-btn {
+    width: auto !important;
+    min-width: 185px;
+    text-align: center !important;
+    font-weight: 700 !important;
+    border-radius: 7px !important;
+    padding: 12px 18px !important;
+    cursor: pointer;
+}
+
+.customer-profile-page input[type="submit"],
+.customer-profile-page input[type="button"],
+.customer-profile-page button {
+    font-weight: 700 !important;
+    opacity: 1 !important;
+}
+
+/* DARKER GREEN SAVE BUTTONS - LIGHT MODE */
+.customer-profile-page .menu-btn.customer-save-btn,
+.customer-profile-page input.customer-save-btn {
+    background: #14532d !important;
+    color: #ffffff !important;
+    border: 1px solid #14532d !important;
+}
+
+    .customer-profile-page .menu-btn.customer-save-btn:hover,
+    .customer-profile-page input.customer-save-btn:hover {
+        background: #0f3f23 !important;
+        color: #ffffff !important;
+        border-color: #0f3f23 !important;
+    }
+
+/* SECONDARY BUTTONS - LIGHT MODE */
+.customer-profile-page .menu-btn.customer-secondary-btn,
+.customer-profile-page input.customer-secondary-btn {
+    background: #4a3760 !important;
+    color: #ffffff !important;
+    border: 1px solid #4a3760 !important;
+}
+
+    .customer-profile-page .menu-btn.customer-secondary-btn:hover,
+    .customer-profile-page input.customer-secondary-btn:hover {
+        background: #372848 !important;
+        color: #ffffff !important;
+        border-color: #372848 !important;
+    }
+
+/* CLOSE ACCOUNT BUTTON - LIGHT MODE */
+.customer-profile-page .menu-btn.customer-close-btn,
+.customer-profile-page input.customer-close-btn {
+    background: #b91c1c !important;
+    color: #ffffff !important;
+    border: 1px solid #b91c1c !important;
+}
+
+    .customer-profile-page .menu-btn.customer-close-btn:hover,
+    .customer-profile-page input.customer-close-btn:hover {
+        background: #991b1b !important;
+        color: #ffffff !important;
+        border-color: #991b1b !important;
+    }
+
+.customer-small-btn {
+    min-width: 170px !important;
+    padding: 9px 14px !important;
+    font-size: 13px !important;
+}
+
+.customer-profile-page .customer-secondary-btn {
+    min-height: 44px;
+}
+
+.customer-profile-message {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+/* VALIDATION */
+.customer-validation-summary {
+    color: #b00020 !important;
+    margin-bottom: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.5;
+}
+
+    .customer-validation-summary ul {
+        margin-top: 8px;
+        padding-left: 20px;
+    }
+
+
+.customer-validation-error {
+    color: #b00020 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1.35;
+    margin-top: 4px;
+}
+
+/* DARK MODE */
+body[data-theme="dark"] .customer-profile-card,
+body[data-theme="dark"] .customer-close-card {
+    background: #1c1724 !important;
+    color: #f5f3f7 !important;
+    border-color: #3b3048 !important;
+    box-shadow: none;
+}
+
+body[data-theme="dark"] .customer-input {
+    background: #121018 !important;
+    color: #f5f3f7 !important;
+    border-color: #3b3048 !important;
+}
+
+body[data-theme="dark"] .customer-help-text,
+body[data-theme="dark"] .customer-warning-text {
+    color: #b8afc6 !important;
+}
+
+body[data-theme="dark"] .customer-validation-summary {
+    color: #ff8a8a !important;
+}
+
+body[data-theme="dark"] .customer-validation-error {
+    color: #ff8a8a !important;
+}
+
+/* DARKER GREEN SAVE BUTTONS - DARK MODE */
+body[data-theme="dark"] .customer-profile-page .menu-btn.customer-save-btn,
+body[data-theme="dark"] .customer-profile-page input.customer-save-btn {
+    background: #166534 !important;
+    color: #ffffff !important;
+    border-color: #166534 !important;
+}
+
+    body[data-theme="dark"] .customer-profile-page .menu-btn.customer-save-btn:hover,
+    body[data-theme="dark"] .customer-profile-page input.customer-save-btn:hover {
+        background: #14532d !important;
+        color: #ffffff !important;
+        border-color: #14532d !important;
+    }
+
+/* SECONDARY BUTTONS - DARK MODE */
+body[data-theme="dark"] .customer-profile-page .menu-btn.customer-secondary-btn,
+body[data-theme="dark"] .customer-profile-page input.customer-secondary-btn {
+    background: #d9c8f0 !important;
+    color: #121018 !important;
+    border-color: #d9c8f0 !important;
+}
+
+    body[data-theme="dark"] .customer-profile-page .menu-btn.customer-secondary-btn:hover,
+    body[data-theme="dark"] .customer-profile-page input.customer-secondary-btn:hover {
+        background: #b99cdd !important;
+        color: #121018 !important;
+        border-color: #b99cdd !important;
+    }
+
+/* CLOSE ACCOUNT BUTTON - DARK MODE */
+body[data-theme="dark"] .customer-profile-page .menu-btn.customer-close-btn,
+body[data-theme="dark"] .customer-profile-page input.customer-close-btn {
+    background: #b91c1c !important;
+    color: #ffffff !important;
+    border-color: #b91c1c !important;
+}
+
+    body[data-theme="dark"] .customer-profile-page .menu-btn.customer-close-btn:hover,
+    body[data-theme="dark"] .customer-profile-page input.customer-close-btn:hover {
+        background: #991b1b !important;
+        color: #ffffff !important;
+        border-color: #991b1b !important;
+    }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .customer-profile-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .customer-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .customer-button-row,
+    .customer-inline-button-row {
+        flex-direction: column;
+    }
+
+    .customer-save-btn,
+    .customer-secondary-btn,
+    .customer-close-btn {
+        width: 100% !important;
+    }
+
+    .customer-close-card {
+        max-width: 100%;
+    }
+
+    .customer-password-row {
+        flex-direction: column;
+    }
+
+    .customer-password-toggle {
+        width: 100% !important;
+    }
+}

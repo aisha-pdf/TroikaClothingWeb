@@ -51,20 +51,20 @@
     <Reference Include="Azure.Identity, Version=1.14.2.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>packages\Azure.Identity.1.14.2\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <Private>False</Private>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine">
+      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <Private>False</Private>
+    <Reference Include="CrystalDecisions.ReportSource">
+      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <Private>False</Private>
+    <Reference Include="CrystalDecisions.Shared">
+      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <Private>False</Private>
+    <Reference Include="CrystalDecisions.Web">
+      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Web.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <Private>False</Private>
+    <Reference Include="CrystalDecisions.Windows.Forms">
+      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
@@ -316,7 +316,6 @@
     <Content Include="Account\Confirm.aspx" />
     <Content Include="Account\Forgot.aspx" />
     <Content Include="Account\Lockout.aspx" />
-    <Content Include="Account\Login.aspx" />
     <Content Include="Account\Manage.aspx" />
     <Content Include="Account\ManageLogins.aspx" />
     <Content Include="Account\ManagePassword.aspx" />
@@ -347,6 +346,8 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\theme-toggle.js" />
+    <Content Include="Content\TroikaTheme.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -474,13 +475,6 @@
     </Compile>
     <Compile Include="Account\Lockout.aspx.designer.cs">
       <DependentUpon>Lockout.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Manage.aspx.cs">
       <DependentUpon>Manage.aspx</DependentUpon>
@@ -627,6 +621,26 @@
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Data\Db.cs" />
+    <Compile Include="Models\CustomerAddress.cs" />
+    <Compile Include="Models\OperationResult.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductSearchCriteria.cs" />
+    <Compile Include="Models\SaleChartRow.cs" />
+    <Compile Include="Models\UserAccount.cs" />
+    <Compile Include="Repositories\IProductRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\IReportRepository.cs" />
+    <Compile Include="Repositories\ReportRepository.cs" />
+    <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\CheckoutService.cs" />
+    <Compile Include="Services\ImageService.cs" />
+    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Services\ThemeService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Public Pages\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>

@@ -42,6 +42,24 @@ namespace TroikaClothingWeb.Admin_Pages
         protected global::System.Web.UI.WebControls.Button btnLogout;
 
         /// <summary>
+        /// lblProfileMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProfileMessage;
+
+        /// <summary>
+        /// ProfileValidationSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ProfileValidationSummary;
+
+        /// <summary>
         /// DetailsView1 control.
         /// </summary>
         /// <remarks>

@@ -1,0 +1,201 @@
+/* Phase 7: extracted admin profile page styles from AdminProfile.aspx */
+
+.admin-profile-page {
+            display: flex;
+            min-height: 80vh;
+            background: var(--troika-bg) !important;
+            color: var(--troika-text) !important;
+        }
+
+        .admin-profile-sidebar {
+            width: 220px;
+            min-width: 220px;
+            padding: 20px;
+            background: var(--troika-bg) !important;
+            color: var(--troika-text) !important;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-sizing: border-box;
+        }
+
+        .admin-profile-btn {
+            background: var(--troika-btn-bg) !important;
+            color: var(--troika-btn-text) !important;
+            border: 1px solid var(--troika-btn-bg) !important;
+            padding: 10px;
+            text-align: left;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .admin-profile-btn:hover {
+            background: var(--troika-btn-hover-bg) !important;
+            border-color: var(--troika-btn-hover-bg) !important;
+            color: var(--troika-btn-text) !important;
+        }
+
+        .admin-profile-content {
+            flex: 1;
+            background: var(--troika-surface-alt) !important;
+            color: var(--troika-text) !important;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .admin-profile-heading {
+            color: var(--troika-heading-text) !important;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .admin-profile-details {
+            width: 646px !important;
+            max-width: 100%;
+            background: var(--troika-table-bg) !important;
+            color: var(--troika-table-text) !important;
+            border-collapse: collapse !important;
+            border: none !important;
+        }
+
+        .admin-profile-details td,
+        .admin-profile-details th {
+            background: var(--troika-table-bg) !important;
+            color: var(--troika-table-text) !important;
+            border-color: var(--troika-border) !important;
+            padding: 10px 12px !important;
+        }
+
+        .admin-profile-field-header td,
+        .admin-profile-field-header th,
+        .admin-profile-details .admin-profile-field-header {
+            background: var(--troika-table-header-bg) !important;
+            color: var(--troika-table-header-text) !important;
+            font-weight: 700 !important;
+        }
+
+        .admin-profile-row td,
+        .admin-profile-alt-row td {
+            background: var(--troika-table-bg) !important;
+            color: var(--troika-table-text) !important;
+        }
+
+        .admin-profile-command-row td {
+            background: var(--troika-table-bg) !important;
+            color: var(--troika-table-text) !important;
+            font-weight: 700 !important;
+        }
+
+        .admin-profile-edit-row td {
+            background: var(--troika-surface-alt) !important;
+            color: var(--troika-text) !important;
+        }
+
+        .admin-profile-details a {
+            color: var(--troika-primary) !important;
+            font-weight: 600 !important;
+            text-decoration: underline !important;
+        }
+
+        .admin-profile-details a:hover {
+            color: var(--troika-primary-hover) !important;
+        }
+
+        .admin-profile-details input,
+        .admin-profile-details select,
+        .admin-profile-details textarea {
+            background: var(--troika-input-bg) !important;
+            color: var(--troika-input-text) !important;
+            border: 1px solid var(--troika-border) !important;
+            border-radius: 6px !important;
+            padding: 8px !important;
+            width: 260px !important;
+            max-width: 100% !important;
+        }
+
+        .admin-validation-summary {
+            color: #d60000 !important;
+            margin-bottom: 15px !important;
+            font-weight: 600 !important;
+        }
+
+        .admin-validation-error {
+            color: #d60000 !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            margin-left: 6px !important;
+        }
+
+        .admin-profile-message {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        body[data-theme="dark"] .admin-profile-content {
+            background: #1c1724 !important;
+            color: #f5f3f7 !important;
+        }
+
+        body[data-theme="dark"] .admin-profile-heading {
+            color: #ffffff !important;
+        }
+
+        body[data-theme="dark"] .admin-profile-details,
+        body[data-theme="dark"] .admin-profile-details td,
+        body[data-theme="dark"] .admin-profile-details th {
+            background: #1c1724 !important;
+            color: #f5f3f7 !important;
+            border-color: #3b3048 !important;
+        }
+
+        body[data-theme="dark"] .admin-profile-field-header td,
+        body[data-theme="dark"] .admin-profile-field-header th {
+            background: #2b2433 !important;
+            color: #ffffff !important;
+        }
+
+        body[data-theme="dark"] .admin-profile-details a {
+            color: #d9c8f0 !important;
+        }
+
+        body[data-theme="dark"] .admin-profile-details a:hover {
+            color: #b99cdd !important;
+        }
+
+        body[data-theme="dark"] .admin-profile-btn {
+            background: #d9c8f0 !important;
+            color: #121018 !important;
+            border-color: #d9c8f0 !important;
+        }
+
+        body[data-theme="dark"] .admin-profile-btn:hover {
+            background: #b99cdd !important;
+            color: #121018 !important;
+        }
+
+        @media (max-width: 900px) {
+            .admin-profile-page {
+                flex-direction: column;
+            }
+
+            .admin-profile-sidebar {
+                width: 100%;
+                min-width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .admin-profile-btn {
+                width: auto;
+                min-width: 130px;
+            }
+
+            .admin-profile-content {
+                padding: 20px;
+            }
+        }

@@ -9,6 +9,11 @@ namespace TroikaClothingWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack && string.Equals(Request.QueryString["reset"], "success", StringComparison.OrdinalIgnoreCase))
+            {
+                lblMessage.Text = "Password reset successfully. You can now log in with your new password.";
+                lblMessage.ForeColor = System.Drawing.Color.Green;
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

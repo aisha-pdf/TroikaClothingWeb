@@ -1526,3 +1526,192 @@ body[data-theme="dark"] .product-management-container .grid tr.product-grid-page
         font-size: 13px !important;
     }
 }
+
+/* -------------------- PROFILE DROPDOWN CONTRAST FIX --------------------
+   Keeps customer profile dropdown readable in both light and dark mode.
+   Logout is styled as a red destructive action.
+*/
+.navbar-troika1 .dropdown-menu {
+    background: var(--troika-surface) !important;
+    border: 1px solid var(--troika-border) !important;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16) !important;
+}
+
+.navbar-troika1 .dropdown-menu .dropdown-item {
+    color: var(--troika-text) !important;
+    background: var(--troika-surface) !important;
+    font-weight: 600 !important;
+}
+
+.navbar-troika1 .dropdown-menu .dropdown-item:hover,
+.navbar-troika1 .dropdown-menu .dropdown-item:focus {
+    color: var(--troika-btn-text) !important;
+    background: var(--troika-primary-hover) !important;
+}
+
+.navbar-troika1 .dropdown-menu .dropdown-logout,
+.navbar-troika1 .dropdown-menu .dropdown-logout:visited {
+    color: #b00020 !important;
+    background: var(--troika-surface) !important;
+    font-weight: 700 !important;
+}
+
+.navbar-troika1 .dropdown-menu .dropdown-logout:hover,
+.navbar-troika1 .dropdown-menu .dropdown-logout:focus {
+    color: #ffffff !important;
+    background: #b00020 !important;
+}
+
+body[data-theme="dark"] .navbar-troika1 .dropdown-menu {
+    background: #1c1724 !important;
+    border-color: #3b3048 !important;
+}
+
+body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item {
+    color: #f5f3f7 !important;
+    background: #1c1724 !important;
+}
+
+body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item:hover,
+body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item:focus {
+    color: #121018 !important;
+    background: #d9c8f0 !important;
+}
+
+body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout,
+body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:visited {
+    color: #ff6b6b !important;
+    background: #1c1724 !important;
+}
+
+body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:hover,
+body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
+    color: #ffffff !important;
+    background: #b91c1c !important;
+}
+
+
+.navbar-troika1 .nav-item.dropdown {
+    position: relative !important;
+}
+
+.navbar-troika1 .dropdown-menu {
+    display: none;
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    min-width: 230px !important;
+    z-index: 9999 !important;
+    padding: 8px 0 !important;
+    margin-top: 0 !important;
+    border-radius: 8px !important;
+    border: 1px solid #d8c8f0 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+.navbar-troika1 .nav-item.dropdown:hover .dropdown-menu,
+.navbar-troika1 .nav-item.dropdown:focus-within .dropdown-menu {
+    display: block !important;
+}
+
+/* Normal dropdown items - light mode */
+.navbar-troika1 .dropdown-menu li,
+.navbar-troika1 .dropdown-menu li a,
+.navbar-troika1 .dropdown-menu .dropdown-item,
+.navbar-troika1 .dropdown-menu .dropdown-item:link,
+.navbar-troika1 .dropdown-menu .dropdown-item:visited,
+.navbar-troika1 .dropdown-menu .dropdown-item span {
+    color: #1f1f1f !important;
+    background-color: #ffffff !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    opacity: 1 !important;
+}
+
+    /* Normal dropdown hover - light mode */
+    .navbar-troika1 .dropdown-menu .dropdown-item:hover,
+    .navbar-troika1 .dropdown-menu .dropdown-item:focus {
+        color: #ffffff !important;
+        background-color: #644F7D !important;
+        text-decoration: none !important;
+    }
+
+/* Divider */
+.navbar-troika1 .dropdown-menu .dropdown-divider {
+    border-top: 1px solid #e5e7eb !important;
+    margin: 6px 0 !important;
+}
+
+/* Logout item - light mode */
+.navbar-troika1 .dropdown-menu .dropdown-logout,
+.navbar-troika1 .dropdown-menu .dropdown-logout:link,
+.navbar-troika1 .dropdown-menu .dropdown-logout:visited,
+.navbar-troika1 .dropdown-menu .dropdown-logout span {
+    color: #b00020 !important;
+    background-color: #ffffff !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+}
+
+    /* Logout hover - light mode */
+    .navbar-troika1 .dropdown-menu .dropdown-logout:hover,
+    .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
+        color: #ffffff !important;
+        background-color: #b00020 !important;
+        text-decoration: none !important;
+    }
+
+/* Dark mode dropdown container */
+body[data-theme="dark"] .navbar-troika1 .dropdown-menu {
+    background-color: #1c1724 !important;
+    border-color: #3b3048 !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55) !important;
+}
+
+    /* Normal dropdown items - dark mode */
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu li,
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu li a,
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item,
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item:link,
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item:visited,
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item span {
+        color: #f5f3f7 !important;
+        background-color: #1c1724 !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
+        opacity: 1 !important;
+    }
+
+        /* Normal dropdown hover - dark mode */
+        body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item:hover,
+        body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item:focus {
+            color: #121018 !important;
+            background-color: #d9c8f0 !important;
+            text-decoration: none !important;
+        }
+
+    /* Divider - dark mode */
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-divider {
+        border-top: 1px solid #3b3048 !important;
+    }
+
+    /* Logout item - dark mode */
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout,
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:link,
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:visited,
+    body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout span {
+        color: #ff6b6b !important;
+        background-color: #1c1724 !important;
+        font-weight: 800 !important;
+        text-decoration: none !important;
+    }
+
+        /* Logout hover - dark mode */
+        body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:hover,
+        body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
+            color: #ffffff !important;
+            background-color: #b91c1c !important;
+            text-decoration: none !important;
+        }

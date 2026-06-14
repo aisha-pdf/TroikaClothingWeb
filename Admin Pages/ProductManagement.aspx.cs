@@ -1,53 +1,57 @@
-﻿using System;
-using System.Data;
-using System.Data.SqlClient;
+using System;
 using System.Globalization;
 using System.IO;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml.Linq;
+using TroikaClothingWeb.Common;
+using TroikaClothingWeb.Models;
+using TroikaClothingWeb.Services;
 
 namespace TroikaClothingWeb.Admin_Pages
 {
-    public partial class ProductManagement : System.Web.UI.Page
+    public partial class ProductManagement : AdminPage
     {
-        private string ConnStr => System.Configuration.ConfigurationManager
-                                    .ConnectionStrings["LoginConnectionString"].ConnectionString;
+        private readonly ProductManagementService _productManagementService = ServiceFactory.CreateProductManagementService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                // Always show product list by default
-                PanelList.Visible = true;
-                PanelAdd.Visible = false;
-
-                // Default filter value
+                ShowList();
                 ddlStatusFilter.SelectedValue = "Active";
                 ddlSort.SelectedValue = "ProductID ASC";
-
-                // Get next product ID for add form
-                txtProductID.Text = GetNextProductID();
-
-                // Bind gridview to show all active products from DB
-                GridViewProducts.DataBind();
+                txtProductID.Text = _productManagementService.GetNextProductId();
+                BindProductGrid();
             }
         }
 
-        //Sidebar buttons
+        private void BindProductGrid()
+        {
+            GridViewProducts.DataSource = _productManagementService.GetProductsForAdmin(
+                ddlStatusFilter.SelectedValue,
+                txtSearch.Text,
+                ddlSort.SelectedValue);
+            GridViewProducts.DataBind();
+        }
+
+        protected void GridViewProducts_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewProducts.PageIndex = e.NewPageIndex;
+            BindProductGrid();
+        }
+
         protected void btnViewProducts_Click(object sender, EventArgs e)
         {
             ShowList();
             ddlStatusFilter.SelectedValue = "Active";
             ddlSort.SelectedValue = "ProductID ASC";
-            GridViewProducts.DataBind();
+            BindProductGrid();
         }
 
         protected void btnShowAdd_Click(object sender, EventArgs e)
         {
             ShowAdd();
             ClearAddForm();
-            txtProductID.Text = GetNextProductID();
+            txtProductID.Text = _productManagementService.GetNextProductId();
         }
 
         protected void btnCancelAdd_Click(object sender, EventArgs e)
@@ -55,23 +59,22 @@ namespace TroikaClothingWeb.Admin_Pages
             ShowList();
         }
 
-        //Filtering/Sorting
         protected void ddlStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewProducts.PageIndex = 0;
-            GridViewProducts.DataBind();
+            BindProductGrid();
         }
 
         protected void ddlSort_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewProducts.PageIndex = 0;
-            GridViewProducts.DataBind();
+            BindProductGrid();
         }
 
         protected void btnApply_Click(object sender, EventArgs e)
         {
             GridViewProducts.PageIndex = 0;
-            GridViewProducts.DataBind();
+            BindProductGrid();
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
@@ -79,179 +82,47 @@ namespace TroikaClothingWeb.Admin_Pages
             ddlStatusFilter.SelectedValue = "Active";
             ddlSort.SelectedValue = "ProductID ASC";
             txtSearch.Text = string.Empty;
-            GridViewProducts.DataBind();
+            BindProductGrid();
         }
 
-
-
-        protected void SqlDSProducts_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
-        {
-            string filter = ddlStatusFilter.SelectedValue;
-            string baseQuery = "SELECT ProductID, ProductName, [Description], Category, ProductionTime, Price, Picture, Status FROM Product";
-
-            string whereClause = "";
-            if (filter == "Active" || filter == "Inactive")
-                whereClause = " WHERE Status = @Status";
-            else
-                whereClause = " WHERE 1=1";
-
-            if (!string.IsNullOrWhiteSpace(txtSearch.Text))
-                whereClause += " AND (ProductName LIKE @Q OR [Description] LIKE @Q)";
-
-            string orderBy = " ORDER BY " + ddlSort.SelectedValue;
-
-            e.Command.CommandText = baseQuery + whereClause + orderBy;
-            e.Command.Parameters.Clear();
-
-            if (filter == "Active" || filter == "Inactive")
-                e.Command.Parameters.Add(new SqlParameter("@Status", filter));
-
-            if (!string.IsNullOrWhiteSpace(txtSearch.Text))
-                e.Command.Parameters.Add(new SqlParameter("@Q", "%" + txtSearch.Text.Trim() + "%"));
-        }
-
-
-        //Grid: toggle status
         protected void GridViewProducts_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "ToggleStatus")
             {
-                string productId = e.CommandArgument.ToString();
-                SqlDSToggle.UpdateParameters["ProductID"].DefaultValue = productId;
-                SqlDSToggle.Update();
-                GridViewProducts.DataBind();
+                OperationResult result = _productManagementService.ToggleProductStatus(e.CommandArgument.ToString());
+                lblAddResult.Text = result.Message;
+                BindProductGrid();
+                ShowList();
                 return;
             }
 
             if (e.CommandName == "EditProduct")
             {
-                string productId = e.CommandArgument.ToString();
-                LoadProductForEdit(productId);
+                LoadProductForEdit(e.CommandArgument.ToString());
                 return;
             }
         }
 
-
         protected void btnUpdateProduct_Click(object sender, EventArgs e)
         {
-            string productId = hfEditProductID.Value;
-
-            //Validate required fields
-            string name = txtEditName.Text.Trim();
-            string desc = txtEditDesc.Text.Trim();
-            string category = txtEditCategory.Text.Trim();
-            string productionTime = txtEditProductionTime.Text.Trim();
-            string priceText = txtEditPrice.Text.Trim();
-            string status = ddlEditStatus.SelectedValue;
-
-            lblEditResult.ForeColor = System.Drawing.ColorTranslator.FromHtml("#d93025");
-
-            //vadidation
             ResetEditValidationStyles();
-            bool valid = true;
 
-            // Product Name
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                MarkInvalid(txtEditName, lblEditNameError, "Name is required.");
-                valid = false;
-            }
+            ProductSaveRequest request = BuildEditRequest();
+            OperationResult result = _productManagementService.UpdateProduct(request);
 
-            // Description
-            if (string.IsNullOrWhiteSpace(desc))
+            if (!result.Success)
             {
-                MarkInvalid(txtEditDesc, lblEditDescError, "Description is required.");
-                valid = false;
-            }
-
-            // Category
-            if (string.IsNullOrWhiteSpace(category))
-            {
-                MarkInvalid(txtEditCategory, lblEditCategoryError, "Category is required.");
-                valid = false;
-            }
-
-            // Production Time
-            if (string.IsNullOrWhiteSpace(productionTime))
-            {
-                MarkInvalid(txtEditProductionTime, lblEditProductionTimeError, "Production time is required.");
-                valid = false;
-            }
-
-            // Price
-            if (!decimal.TryParse(priceText, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal price))
-            {
-                MarkInvalid(txtEditPrice, lblEditPriceError, "Enter a valid price (e.g., 199.99).");
-                valid = false;
-            }
-            else if (price <= 0)
-            {
-                MarkInvalid(txtEditPrice, lblEditPriceError, "Price must be greater than zero.");
-                valid = false;
-            }
-
-            if (!valid)
-            {
-                lblEditResult.Text = "Please correct the highlighted fields.";
+                ShowProductErrors(result, true);
+                lblEditResult.Text = result.Message;
                 lblEditResult.ForeColor = System.Drawing.ColorTranslator.FromHtml("#d93025");
                 ShowEdit();
                 return;
             }
 
-
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(ConnStr))
-                using (SqlCommand cmd = new SqlCommand(@"
-            UPDATE Product
-            SET ProductName=@ProductName,
-                [Description]=@Description,
-                Category=@Category,
-                ProductionTime=@ProductionTime,
-                Price=@Price,
-                Status=@Status
-            WHERE ProductID=@ProductID", conn))
-                {
-                    cmd.Parameters.AddWithValue("@ProductID", productId);
-                    cmd.Parameters.AddWithValue("@ProductName", name);
-                    cmd.Parameters.AddWithValue("@Description", desc);
-                    cmd.Parameters.AddWithValue("@Category", category);
-                    cmd.Parameters.AddWithValue("@ProductionTime", productionTime);
-                    cmd.Parameters.Add("@Price", SqlDbType.Decimal).Value = price;
-                    cmd.Parameters.AddWithValue("@Status", status);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-
-                if (fuEditPicture.HasFile)
-                {
-                    using (SqlConnection conn = new SqlConnection(ConnStr))
-                    using (SqlCommand cmd = new SqlCommand(
-                        "UPDATE Product SET Picture=@Picture WHERE ProductID=@ProductID", conn))
-                    {
-                        cmd.Parameters.Add("@ProductID", SqlDbType.VarChar).Value = productId;
-                        cmd.Parameters.Add("@Picture", SqlDbType.Image).Value = fuEditPicture.FileBytes;
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                // Success
-                lblEditResult.Text = "Product updated successfully!";
-                lblEditResult.ForeColor = System.Drawing.ColorTranslator.FromHtml("#1a7f37");
-
-                // Refresh Grid and show list
-                GridViewProducts.DataBind();
-                ShowList();
-            }
-            catch (Exception ex)
-            {
-                lblEditResult.Text = "Error updating product: " + ex.Message;
-                lblEditResult.ForeColor = System.Drawing.ColorTranslator.FromHtml("#d93025");
-                ShowEdit();
-            }
+            lblEditResult.Text = result.Message;
+            lblEditResult.ForeColor = System.Drawing.ColorTranslator.FromHtml("#1a7f37");
+            BindProductGrid();
+            ShowList();
         }
 
         protected void btnCancelEdit_Click(object sender, EventArgs e)
@@ -265,240 +136,242 @@ namespace TroikaClothingWeb.Admin_Pages
             {
                 Image img = e.Row.FindControl("imgProduct") as Image;
                 if (img != null)
-                {
-                    // Force refetch
                     img.ImageUrl += "&v=" + DateTime.Now.Ticks.ToString();
-                }
             }
-        }
-
-        //Grid: updating
-        protected void SqlDSProducts_Updating(object sender, SqlDataSourceCommandEventArgs e)
-        {
-           
-            GridViewRow row = GridViewProducts.Rows[GridViewProducts.EditIndex];
-            if (row == null) return;
-
-          
-            FileUpload fu = (FileUpload)row.FindControl("fuEdit");
-
-     
-            if (e.Command.Parameters.Contains("@Picture"))
-                e.Command.Parameters.RemoveAt("@Picture");
-
-            SqlParameter picParam = new SqlParameter("@Picture", System.Data.SqlDbType.Image);
-
-            if (fu != null && fu.HasFile)
-            {
-                using (BinaryReader br = new BinaryReader(fu.PostedFile.InputStream))
-                {
-                    byte[] bytes = br.ReadBytes(fu.PostedFile.ContentLength);
-                    picParam.Value = bytes;
-                }
-            }
-            else
-            {
-                // No new image uploaded
-                picParam.Value = DBNull.Value;
-            }
-
-            e.Command.Parameters.Add(picParam);
-
-            // Ensure Status is preserved correctly
-            if (!e.Command.Parameters.Contains("@Status"))
-            {
-                DropDownList ddlStatus = (DropDownList)row.FindControl("ddlStatusEdit");
-                string statusValue = ddlStatus != null ? ddlStatus.SelectedValue : "Active";
-                e.Command.Parameters.Add(new SqlParameter("@Status", statusValue));
-            }
-        }
-
-        protected void GridViewProducts_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            e.Cancel = true;
-            GridViewRow row = GridViewProducts.Rows[e.RowIndex];
-            string productId = e.Keys["ProductID"].ToString();
-
-            string name = (row.FindControl("txtProductNameEdit") as TextBox)?.Text.Trim();
-            string desc = (row.FindControl("txtDescriptionEdit") as TextBox)?.Text.Trim();
-            string category = (row.FindControl("txtCategoryEdit") as TextBox)?.Text.Trim();
-            string productionTime = (row.FindControl("txtProductionTimeEdit") as TextBox)?.Text.Trim();
-            string priceText = (row.FindControl("txtPriceEdit") as TextBox)?.Text.Trim();
-            string status = (row.FindControl("ddlStatusEdit") as DropDownList)?.SelectedValue ?? "Active";
-
-            if (string.IsNullOrEmpty(name)) name = "(Unnamed)";
-            if (!decimal.TryParse(priceText, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal price))
-                price = 0;
-
-            // Perform the update
-            using (SqlConnection conn = new SqlConnection(ConnStr))
-            using (SqlCommand cmd = new SqlCommand(@"
-                UPDATE Product
-                SET ProductName=@ProductName,
-                    [Description]=@Description,
-                    Category=@Category,
-                    ProductionTime=@ProductionTime,
-                    Price=@Price,
-                    Status=@Status
-                WHERE ProductID=@ProductID", conn))
-            {
-                cmd.Parameters.AddWithValue("@ProductID", productId);
-                cmd.Parameters.AddWithValue("@ProductName", name);
-                cmd.Parameters.AddWithValue("@Description", desc);
-                cmd.Parameters.AddWithValue("@Category", category);
-                cmd.Parameters.AddWithValue("@ProductionTime", productionTime);
-                cmd.Parameters.Add("@Price", SqlDbType.Decimal).Value = price;
-                cmd.Parameters.AddWithValue("@Status", status);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
-
-            //Handle image upload 
-            FileUpload fu = (FileUpload)row.FindControl("fuEdit");
-            if (fu != null && fu.HasFile)
-            {
-                using (SqlConnection conn = new SqlConnection(ConnStr))
-                using (SqlCommand cmd = new SqlCommand(
-                    "UPDATE Product SET Picture=@Picture WHERE ProductID=@ProductID", conn))
-                {
-                    cmd.Parameters.Add("@ProductID", SqlDbType.VarChar).Value = productId;
-                    cmd.Parameters.Add("@Picture", SqlDbType.Image).Value = fu.FileBytes;
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
-            GridViewProducts.EditIndex = -1;
-            GridViewProducts.DataBind();
         }
 
         protected void GridViewProducts_RowEditing(object sender, GridViewEditEventArgs e)
         {
             e.Cancel = true;
             GridViewProducts.EditIndex = e.NewEditIndex;
-            GridViewProducts.DataBind();
+            BindProductGrid();
         }
 
         protected void GridViewProducts_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             e.Cancel = true;
             GridViewProducts.EditIndex = -1;
-            GridViewProducts.DataBind();
+            BindProductGrid();
         }
 
+        protected void GridViewProducts_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            e.Cancel = true;
 
+            GridViewRow row = GridViewProducts.Rows[e.RowIndex];
+            string productId = e.Keys["ProductID"].ToString();
 
-        // Add new product
+            ProductSaveRequest request = new ProductSaveRequest
+            {
+                ProductID = productId,
+                ProductName = GetTextBoxValue(row, "txtProductNameEdit"),
+                Description = GetTextBoxValue(row, "txtDescriptionEdit"),
+                Category = GetTextBoxValue(row, "txtCategoryEdit"),
+                ProductionTimeText = GetTextBoxValue(row, "txtProductionTimeEdit"),
+                PriceText = GetTextBoxValue(row, "txtPriceEdit"),
+                Status = GetDropDownValue(row, "ddlStatusEdit", "Active"),
+                PictureBytes = GetFileBytes(row, "fuEdit")
+            };
+
+            OperationResult result = _productManagementService.UpdateProduct(request);
+
+            if (!result.Success)
+            {
+                lblAddResult.Text = result.Message;
+                return;
+            }
+
+            GridViewProducts.EditIndex = -1;
+            BindProductGrid();
+        }
+
         protected void btnSaveProduct_Click(object sender, EventArgs e)
         {
             ResetValidationStyles();
-            bool ok = true;
 
-            if (string.IsNullOrWhiteSpace(txtName.Text)) { MarkInvalid(txtName, lblNameError, "Product name is required."); ok = false; }
-            if (string.IsNullOrWhiteSpace(txtDesc.Text)) { MarkInvalid(txtDesc, lblDescError, "Description is required."); ok = false; }
-            if (string.IsNullOrWhiteSpace(txtCategory.Text)) { MarkInvalid(txtCategory, lblCategoryError, "Category is required."); ok = false; }
-            if (string.IsNullOrWhiteSpace(txtProductionTime.Text)) { MarkInvalid(txtProductionTime, lblProductionTimeError, "Production time is required."); ok = false; }
+            ProductSaveRequest request = BuildAddRequest();
+            OperationResult result = _productManagementService.AddProduct(request);
 
-            decimal price;
-            if (!decimal.TryParse(txtPrice.Text, out price))
+            if (!result.Success)
             {
-                MarkInvalid(txtPrice, lblPriceError, "Enter a valid price (e.g., 199.99).");
-                ok = false;
-            }
-            else if (Convert.ToDecimal(txtPrice.Text) <= 0)
-            {
-                MarkInvalid(txtPrice, lblPriceError, "Price must be greater than zero.");
-                ok = false;
+                ShowProductErrors(result, false);
+                lblAddResult.Text = result.Message;
+                return;
             }
 
-            if (!ok) return;
-
-            byte[] imageBytes = null;
-            if (fuPicture.HasFile)
-            {
-                using (BinaryReader br = new BinaryReader(fuPicture.PostedFile.InputStream))
-                    imageBytes = br.ReadBytes(fuPicture.PostedFile.ContentLength);
-            }
-
-            string insertSql = @"INSERT INTO Product(ProductID, ProductName, [Description], Category, ProductionTime, Price, Picture, Status)
-                         VALUES(@ProductID, @ProductName, @Description, @Category, @ProductionTime, @Price, @Picture, @Status)";
-
-            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["LoginConnectionString"].ConnectionString))
-            using (SqlCommand cmd = new SqlCommand(insertSql, conn))
-            {
-                cmd.Parameters.AddWithValue("@ProductID", txtProductID.Text.Trim());
-                cmd.Parameters.AddWithValue("@ProductName", txtName.Text.Trim());
-                cmd.Parameters.AddWithValue("@Description", txtDesc.Text.Trim());
-                cmd.Parameters.AddWithValue("@Category", txtCategory.Text.Trim());
-                cmd.Parameters.AddWithValue("@ProductionTime", txtProductionTime.Text.Trim());
-                cmd.Parameters.AddWithValue("@Price", price);
-                cmd.Parameters.Add("@Picture", System.Data.SqlDbType.Image).Value = (object)imageBytes ?? DBNull.Value;
-                cmd.Parameters.AddWithValue("@Status", ddlStatusAdd.SelectedValue);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
-            }
-
-            string tempID = txtProductID.Text;
-            lblAddResult.Text = "Product added successfully with product ID: " + tempID;
+            lblAddResult.Text = result.Message;
             ClearAddForm();
-            txtProductID.Text = GetNextProductID();
-            GridViewProducts.DataBind();
+            txtProductID.Text = _productManagementService.GetNextProductId();
+            BindProductGrid();
         }
 
+        private ProductSaveRequest BuildAddRequest()
+        {
+            return new ProductSaveRequest
+            {
+                ProductID = txtProductID.Text.Trim(),
+                ProductName = txtName.Text.Trim(),
+                Description = txtDesc.Text.Trim(),
+                Category = txtCategory.Text.Trim(),
+                ProductionTimeText = txtProductionTime.Text.Trim(),
+                PriceText = txtPrice.Text.Trim(),
+                Status = ddlStatusAdd.SelectedValue,
+                PictureBytes = fuPicture.HasFile ? ReadFileBytes(fuPicture) : null
+            };
+        }
+
+        private ProductSaveRequest BuildEditRequest()
+        {
+            return new ProductSaveRequest
+            {
+                ProductID = hfEditProductID.Value,
+                ProductName = txtEditName.Text.Trim(),
+                Description = txtEditDesc.Text.Trim(),
+                Category = txtEditCategory.Text.Trim(),
+                ProductionTimeText = txtEditProductionTime.Text.Trim(),
+                PriceText = txtEditPrice.Text.Trim(),
+                Status = ddlEditStatus.SelectedValue,
+                PictureBytes = fuEditPicture.HasFile ? ReadFileBytes(fuEditPicture) : null
+            };
+        }
+
+        private static byte[] ReadFileBytes(FileUpload upload)
+        {
+            if (upload == null || !upload.HasFile)
+                return null;
+
+            using (BinaryReader reader = new BinaryReader(upload.PostedFile.InputStream))
+            {
+                return reader.ReadBytes(upload.PostedFile.ContentLength);
+            }
+        }
+
+        private static byte[] GetFileBytes(GridViewRow row, string controlId)
+        {
+            FileUpload upload = row.FindControl(controlId) as FileUpload;
+            return ReadFileBytes(upload);
+        }
+
+        private static string GetTextBoxValue(GridViewRow row, string controlId)
+        {
+            TextBox textBox = row.FindControl(controlId) as TextBox;
+            return textBox == null ? string.Empty : textBox.Text.Trim();
+        }
+
+        private static string GetDropDownValue(GridViewRow row, string controlId, string defaultValue)
+        {
+            DropDownList dropDown = row.FindControl(controlId) as DropDownList;
+            return dropDown == null ? defaultValue : dropDown.SelectedValue;
+        }
+
+        private void LoadProductForEdit(string productId)
+        {
+            Product product = _productManagementService.GetProductForAdmin(productId);
+
+            if (product == null)
+            {
+                lblAddResult.Text = "Product could not be found.";
+                ShowList();
+                return;
+            }
+
+            hfEditProductID.Value = product.ProductID;
+            txtEditProductID.Text = product.ProductID;
+            txtEditName.Text = product.ProductName;
+            txtEditDesc.Text = product.Description;
+            txtEditCategory.Text = product.Category;
+            txtEditProductionTime.Text = product.ProductionTime.ToString(CultureInfo.InvariantCulture);
+            txtEditPrice.Text = product.Price.ToString(CultureInfo.InvariantCulture);
+            ddlEditStatus.SelectedValue = product.Status;
+
+            imgEditCurrent.ImageUrl = ResolveUrl("~/Admin Pages/ProductImageHandler.ashx?id=" + productId + "&v=" + DateTime.Now.Ticks);
+            ShowEdit();
+        }
 
         private void ClearAddForm()
         {
             ResetValidationStyles();
-            txtName.Text = "";
-            txtDesc.Text = "";
-            txtCategory.Text = "";
-            txtProductionTime.Text = "";
-            txtPrice.Text = "";
+            txtName.Text = string.Empty;
+            txtDesc.Text = string.Empty;
+            txtCategory.Text = string.Empty;
+            txtProductionTime.Text = string.Empty;
+            txtPrice.Text = string.Empty;
             ddlStatusAdd.SelectedValue = "Active";
             ddlSort.SelectedValue = "ProductID ASC";
         }
 
+        private void ShowProductErrors(OperationResult result, bool editMode)
+        {
+            ProductValidationResult validationResult = result as ProductValidationResult;
+            if (validationResult == null)
+                return;
+
+            foreach (var error in validationResult.FieldErrors)
+            {
+                if (editMode)
+                    MarkEditFieldInvalid(error.Key, error.Value);
+                else
+                    MarkAddFieldInvalid(error.Key, error.Value);
+            }
+        }
+
+        private void MarkAddFieldInvalid(string fieldName, string message)
+        {
+            if (fieldName == "ProductID") MarkInvalid(txtProductID, lblProductIDError, message);
+            if (fieldName == "ProductName") MarkInvalid(txtName, lblNameError, message);
+            if (fieldName == "Description") MarkInvalid(txtDesc, lblDescError, message);
+            if (fieldName == "Category") MarkInvalid(txtCategory, lblCategoryError, message);
+            if (fieldName == "ProductionTime") MarkInvalid(txtProductionTime, lblProductionTimeError, message);
+            if (fieldName == "Price") MarkInvalid(txtPrice, lblPriceError, message);
+            if (fieldName == "Status") lblStatusError.Text = message;
+        }
+
+        private void MarkEditFieldInvalid(string fieldName, string message)
+        {
+            if (fieldName == "ProductName") MarkInvalid(txtEditName, lblEditNameError, message);
+            if (fieldName == "Description") MarkInvalid(txtEditDesc, lblEditDescError, message);
+            if (fieldName == "Category") MarkInvalid(txtEditCategory, lblEditCategoryError, message);
+            if (fieldName == "ProductionTime") MarkInvalid(txtEditProductionTime, lblEditProductionTimeError, message);
+            if (fieldName == "Price") MarkInvalid(txtEditPrice, lblEditPriceError, message);
+        }
+
         private void ResetValidationStyles()
         {
-
             lblProductIDError.Text = lblNameError.Text = lblDescError.Text =
                 lblCategoryError.Text = lblProductionTimeError.Text = lblPriceError.Text =
-                lblPictureError.Text = lblStatusError.Text = "";
+                lblPictureError.Text = lblStatusError.Text = string.Empty;
 
-            txtProductID.CssClass = txtProductID.CssClass.Replace(" input-invalid", "");
-            txtName.CssClass = txtName.CssClass.Replace(" input-invalid", "");
-            txtDesc.CssClass = txtDesc.CssClass.Replace(" input-invalid", "");
-            txtCategory.CssClass = txtCategory.CssClass.Replace(" input-invalid", "");
-            txtProductionTime.CssClass = txtProductionTime.CssClass.Replace(" input-invalid", "");
-            txtPrice.CssClass = txtPrice.CssClass.Replace(" input-invalid", "");
+            RemoveInvalidClass(txtProductID);
+            RemoveInvalidClass(txtName);
+            RemoveInvalidClass(txtDesc);
+            RemoveInvalidClass(txtCategory);
+            RemoveInvalidClass(txtProductionTime);
+            RemoveInvalidClass(txtPrice);
         }
 
-        private void MarkInvalid(WebControl ctl, Label lbl, string message)
+        private void ResetEditValidationStyles()
         {
-            if (!ctl.CssClass.Contains("input-invalid"))
-                ctl.CssClass += " input-invalid";
-            lbl.Text = message;
+            lblEditNameError.Text = lblEditDescError.Text = lblEditCategoryError.Text =
+                lblEditProductionTimeError.Text = lblEditPriceError.Text = string.Empty;
+
+            RemoveInvalidClass(txtEditName);
+            RemoveInvalidClass(txtEditDesc);
+            RemoveInvalidClass(txtEditCategory);
+            RemoveInvalidClass(txtEditProductionTime);
+            RemoveInvalidClass(txtEditPrice);
         }
 
-        //Next ID generator
-        public string GetNextProductID()
+        private static void MarkInvalid(WebControl control, Label label, string message)
         {
-            DataView dv = (DataView)SqlDslastID.Select(DataSourceSelectArguments.Empty);
+            if (!control.CssClass.Contains("input-invalid"))
+                control.CssClass += " input-invalid";
 
-            if (dv != null && dv.Count > 0)
-            {
-                string lastID = dv[0]["ProductID"].ToString();
-                int numberPart = 0;
-                if (lastID.StartsWith("P", StringComparison.OrdinalIgnoreCase) && lastID.Length >= 2)
-                    int.TryParse(lastID.Substring(1), out numberPart);
-                numberPart++;
-                string newID = "P" + numberPart.ToString("D5");
-                return newID;
-            }
-            return "P000";
+            label.Text = message;
+        }
+
+        private static void RemoveInvalidClass(WebControl control)
+        {
+            control.CssClass = control.CssClass.Replace(" input-invalid", string.Empty).Replace("input-invalid", string.Empty).Trim();
         }
 
         private void ShowList()
@@ -523,55 +396,10 @@ namespace TroikaClothingWeb.Admin_Pages
             PanelEdit.Visible = true;
         }
 
-        private void LoadProductForEdit(string productId)
-        {
-            using (SqlConnection conn = new SqlConnection(ConnStr))
-            using (SqlCommand cmd = new SqlCommand(
-                @"SELECT ProductID, ProductName, [Description], Category, ProductionTime, Price, Status
-          FROM Product WHERE ProductID=@id", conn))
-            {
-                cmd.Parameters.AddWithValue("@id", productId);
-                conn.Open();
-                using (SqlDataReader rd = cmd.ExecuteReader())
-                {
-                    if (rd.Read())
-                    {
-                        hfEditProductID.Value = rd["ProductID"].ToString();
-                        txtEditProductID.Text = rd["ProductID"].ToString();
-                        txtEditName.Text = rd["ProductName"].ToString();
-                        txtEditDesc.Text = rd["Description"].ToString();
-                        txtEditCategory.Text = rd["Category"].ToString();
-                        txtEditProductionTime.Text = rd["ProductionTime"].ToString();
-                        txtEditPrice.Text = Convert.ToDecimal(rd["Price"]).ToString(CultureInfo.InvariantCulture);
-                        ddlEditStatus.SelectedValue = rd["Status"].ToString();
-                    }
-                }
-            }
-
-            // Load current image preview via handler
-            imgEditCurrent.ImageUrl = ResolveUrl("~/Admin Pages/ProductImageHandler.ashx?id=" + productId + "&v=" + DateTime.Now.Ticks);
-
-            ShowEdit();
-        }
-
-        private void ResetEditValidationStyles()
-        {
-            lblEditNameError.Text = lblEditDescError.Text = lblEditCategoryError.Text =
-                lblEditProductionTimeError.Text = lblEditPriceError.Text = "";
-
-            txtEditName.CssClass = txtEditName.CssClass.Replace(" input-invalid", "");
-            txtEditDesc.CssClass = txtEditDesc.CssClass.Replace(" input-invalid", "");
-            txtEditCategory.CssClass = txtEditCategory.CssClass.Replace(" input-invalid", "");
-            txtEditProductionTime.CssClass = txtEditProductionTime.CssClass.Replace(" input-invalid", "");
-            txtEditPrice.CssClass = txtEditPrice.CssClass.Replace(" input-invalid", "");
-        }
-
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
             Response.Redirect("~/Login.aspx");
         }
-
-
     }
 }

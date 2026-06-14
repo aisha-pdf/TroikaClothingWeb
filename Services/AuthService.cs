@@ -21,12 +21,18 @@ namespace TroikaClothingWeb.Services
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
                 return OperationResult.Fail("Please enter your username and password.");
 
-            var user = _userRepository.GetLoginByUsernameAndPassword(username.Trim(), password.Trim());
-            if (user == null || !string.Equals(user.Username, username.Trim(), StringComparison.Ordinal))
+            string cleanUsername = username.Trim();
+            string cleanPassword = password.Trim();
+
+            var user = _userRepository.GetLoginByUsernameAndPassword(cleanUsername, cleanPassword);
+            if (user == null || !string.Equals(user.Username, cleanUsername, StringComparison.Ordinal))
                 return OperationResult.Fail("Invalid username or password.");
 
             if (!string.Equals(user.Status, "Active", StringComparison.OrdinalIgnoreCase))
-                return OperationResult.Fail("Your account is not active. Please contact the administrator.");
+            {
+                return OperationResult.Fail(
+                    "Your account is not active or your customer profile could not be verified. Please contact the administrator.");
+            }
 
             session["Username"] = user.Username;
             session["Role"] = user.Role;

@@ -1,409 +1,12 @@
-﻿<%@ Page Title="Product Management" Language="C#" MasterPageFile="~/Site.Master"
+<%@ Page Title="Product Management" Language="C#" MasterPageFile="~/Site.Master"
     AutoEventWireup="true" CodeBehind="ProductManagement.aspx.cs"
     Inherits="TroikaClothingWeb.Admin_Pages.ProductManagement" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <style>
-        .product-management-container {
-            background: var(--troika-bg);
-            color: var(--troika-text);
-            min-height: 80vh;
-        }
 
-        .menu-btn {
-            background: var(--troika-btn-bg) !important;
-            border: 1px solid var(--troika-btn-bg) !important;
-            padding: 12px 14px;
-            color: var(--troika-btn-text) !important;
-            text-align: left;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.2s ease, transform 0.1s ease;
-        }
+    <link href="<%= ResolveUrl("~/Content/ProductManagement.css") %>" rel="stylesheet" />
 
-            .menu-btn:hover {
-                background: var(--troika-btn-hover-bg) !important;
-                border-color: var(--troika-btn-hover-bg) !important;
-                transform: translateY(-2px);
-            }
-
-        .section-title {
-            font-weight: 600;
-            font-size: 1.4rem;
-            margin-bottom: 18px;
-            color: var(--troika-heading-text) !important;
-        }
-
-        .toolbar {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px auto;
-            flex-wrap: wrap;
-            background: var(--troika-surface) !important;
-            color: var(--troika-text) !important;
-            padding: 10px 14px;
-            border: 1px solid var(--troika-border);
-            border-radius: 8px;
-            box-shadow: var(--troika-card-shadow);
-        }
-
-            .toolbar span {
-                font-weight: 500;
-                color: var(--troika-text) !important;
-                margin-right: 4px;
-            }
-
-            .toolbar select,
-            .toolbar input[type=text] {
-                padding: 6px 8px;
-                border: 1px solid var(--troika-border);
-                border-radius: 6px;
-                min-width: 180px;
-                background: var(--troika-input-bg) !important;
-                color: var(--troika-input-text) !important;
-            }
-
-                .toolbar input[type=text]:focus,
-                .toolbar select:focus {
-                    border-color: var(--troika-primary);
-                    outline: none;
-                    box-shadow: 0 0 0 2px rgba(217,200,240,0.25);
-                }
-
-        .grid-wrapper {
-            overflow-x: auto;
-            background: var(--troika-surface) !important;
-            color: var(--troika-text) !important;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid var(--troika-border);
-            box-shadow: var(--troika-card-shadow);
-        }
-
-        .grid {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-            border-radius: 8px;
-            overflow: hidden;
-            background: var(--troika-table-bg) !important;
-            color: var(--troika-table-text) !important;
-        }
-
-            .grid th {
-                background-color: var(--troika-table-header-bg) !important;
-                color: var(--troika-table-header-text) !important;
-                font-weight: 600;
-                text-align: left;
-                padding: 12px 10px;
-                border-bottom: 2px solid var(--troika-border);
-                white-space: normal !important;
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                text-overflow: clip;
-                line-height: 1.3;
-            }
-
-            .grid td {
-                background-color: var(--troika-table-bg) !important;
-                color: var(--troika-table-text) !important;
-                padding: 12px 10px;
-                border-bottom: 1px solid var(--troika-border);
-                border-right: 1px solid var(--troika-border);
-                vertical-align: middle;
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                text-overflow: ellipsis;
-            }
-
-            .grid tr:hover td {
-                background-color: var(--troika-surface-alt) !important;
-                color: var(--troika-text) !important;
-            }
-
-            .grid a {
-                color: var(--troika-btn-text) !important;
-            }
-
-            .grid .actions {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 20px;
-                height: 100%;
-            }
-
-                .grid .actions .btn:first-child {
-                    margin-bottom: 10px;
-                }
-
-            .grid td:last-child {
-                vertical-align: middle;
-                text-align: center;
-            }
-
-                .grid td:last-child a,
-                .grid td:last-child button {
-                    display: inline-block;
-                }
-
-            .grid .actions .btn {
-                min-width: 130px;
-                text-align: center;
-            }
-
-            .grid td:nth-child(7),
-            .grid th:nth-child(7) {
-                width: 130px;
-                text-align: center;
-                vertical-align: middle;
-                white-space: nowrap;
-            }
-
-            .grid img {
-                max-width: 110px;
-                max-height: 110px;
-                object-fit: cover;
-                aspect-ratio: 1 / 1;
-                border-radius: 8px;
-                box-shadow: 0 0 4px rgba(0,0,0,0.15);
-                display: block;
-                margin: 0 auto;
-            }
-
-            .grid input[type="text"],
-            .grid input[type="number"],
-            .grid select,
-            .grid textarea {
-                width: 95% !important;
-                box-sizing: border-box;
-                font-size: 0.95rem;
-                padding: 6px 8px;
-                background: var(--troika-input-bg) !important;
-                color: var(--troika-input-text) !important;
-                border: 1px solid var(--troika-border) !important;
-            }
-
-            .grid input[type="file"] {
-                width: 95% !important;
-                font-size: 0.85rem;
-                color: var(--troika-text) !important;
-            }
-
-        .form-card {
-            background: var(--troika-surface) !important;
-            color: var(--troika-text) !important;
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid var(--troika-border);
-            box-shadow: var(--troika-card-shadow);
-            max-width: 700px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 160px 1fr;
-            gap: 10px 16px;
-            background: var(--troika-surface) !important;
-            color: var(--troika-text) !important;
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid var(--troika-border);
-            box-shadow: var(--troika-card-shadow);
-            max-width: 800px;
-        }
-
-            .form-grid label {
-                align-self: center;
-                font-weight: 500;
-                color: var(--troika-text) !important;
-            }
-
-        .field-input {
-            padding: 10px;
-            border: 1px solid var(--troika-border) !important;
-            border-radius: 6px;
-            width: 100%;
-            background-color: var(--troika-input-bg) !important;
-            color: var(--troika-input-text) !important;
-            transition: border-color 0.2s ease;
-        }
-
-            .field-input:focus {
-                border-color: var(--troika-primary) !important;
-                background-color: var(--troika-input-bg) !important;
-                outline: none;
-                box-shadow: 0 0 0 2px rgba(217,200,240,0.25);
-            }
-
-        .input-invalid {
-            border-color: var(--troika-danger) !important;
-        }
-
-        .error-label {
-            color: var(--troika-danger) !important;
-            font-size: 0.86rem;
-            margin-top: -4px;
-            margin-bottom: 6px;
-        }
-
-        .success {
-            color: var(--troika-success) !important;
-            font-weight: 600;
-            margin-top: 10px;
-            display: block;
-        }
-
-        .actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 14px;
-        }
-
-        .btn {
-            padding: 8px 14px;
-            border: 0;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: background 0.2s ease, transform 0.1s ease;
-        }
-
-
-        /* Product ID is generated automatically, so make it look locked */
-        .readonly-product-id,
-        .readonly-product-id:focus {
-            background: var(--troika-surface-alt) !important;
-            color: var(--troika-muted-text) !important;
-            border: 1px dashed var(--troika-border) !important;
-            cursor: not-allowed !important;
-            box-shadow: none !important;
-            font-weight: 600 !important;
-        }
-
-        body[data-theme="dark"] .readonly-product-id,
-        body[data-theme="dark"] .readonly-product-id:focus {
-            background: #18131f !important;
-            color: #c9c3d4 !important;
-            border-color: #3b3048 !important;
-        }
-
-        .readonly-help-text {
-            margin-top: 5px;
-            font-size: 12px;
-            color: var(--troika-muted-text) !important;
-        }
-
-
-        .btn-primary {
-            background: var(--troika-btn-bg) !important;
-            color: var(--troika-btn-text) !important;
-        }
-
-            .btn-primary:hover {
-                background: var(--troika-btn-hover-bg) !important;
-                color: var(--troika-btn-text) !important;
-                transform: translateY(-2px);
-            }
-
-        .btn-light {
-            background: var(--troika-surface-alt) !important;
-            color: var(--troika-text) !important;
-            border: 1px solid var(--troika-border) !important;
-        }
-
-            .btn-light:hover {
-                background: var(--troika-secondary) !important;
-                color: var(--troika-primary) !important;
-            }
-
-        .btn-danger {
-            background: var(--troika-danger) !important;
-            color: var(--troika-bg) !important;
-        }
-
-        .sidebar {
-            width: 220px;
-            background-color: var(--troika-primary) !important;
-            padding: 20px;
-            color: var(--troika-bg) !important;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            border-top-right-radius: 12px;
-            border-bottom-right-radius: 12px;
-            box-shadow: 2px 0 8px rgba(0,0,0,0.15);
-        }
-
-        body[data-theme="dark"] .sidebar {
-            color: #121018 !important;
-        }
-
-        .main-container {
-            display: flex;
-            min-height: 80vh;
-            gap: 0;
-            background: var(--troika-bg) !important;
-        }
-
-        .content-wrapper {
-            flex: 1;
-            padding: 24px;
-            background: var(--troika-surface-alt) !important;
-            color: var(--troika-text) !important;
-        }
-
-        #imgEditCurrent {
-            transition: opacity 0.3s ease-in-out;
-        }
-
-            #imgEditCurrent.loading {
-                opacity: 0.5;
-            }
-
-        @media (max-width: 992px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .toolbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .sidebar {
-                width: 100%;
-                border-radius: 0;
-                flex-direction: row;
-                justify-content: space-around;
-            }
-
-            .main-container {
-                flex-direction: column;
-            }
-
-            .grid td,
-            .grid th {
-                max-width: none;
-            }
-        }
-
-        const productIdInput = document.getElementById("<%= txtProductID.ClientID %>");
-        if (productIdInput) {
-            productIdInput .addEventListener("focus", function () {
-        productIdInput.blur();
-         });
-        }
-
-
-    </style>
-
-    <div class="product-management-container main-container">
+<div class="product-management-container main-container">
 
         <div class="sidebar">
             <asp:Button ID="btnViewProducts" runat="server" Text="View Products" CssClass="menu-btn" OnClick="btnViewProducts_Click" />
@@ -439,10 +42,10 @@
                 </div>
 
                 <asp:GridView ID="GridViewProducts" runat="server" CssClass="grid gridview troika-table" AutoGenerateColumns="False"
-                    DataKeyNames="ProductID" DataSourceID="SqlDSProducts"
-                    AllowPaging="true" PageSize="10"
+                    DataKeyNames="ProductID" AllowPaging="true" PageSize="10"
                     OnRowCommand="GridViewProducts_RowCommand"
-                    OnRowDataBound="GridViewProducts_RowDataBound">
+                    OnRowDataBound="GridViewProducts_RowDataBound"
+                    OnPageIndexChanging="GridViewProducts_PageIndexChanging">
 
                     <PagerSettings Mode="NumericFirstLast"
                         FirstPageText="« First"
@@ -526,37 +129,9 @@
                     </Columns>
                 </asp:GridView>
 
-                <asp:SqlDataSource ID="SqlDSProducts" runat="server"
-                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                    SelectCommand="SELECT * FROM Product WHERE Status = @Status"
-                    OnSelecting="SqlDSProducts_Selecting">
-                    <SelectParameters>
-                        <asp:Parameter Name="Status" DefaultValue="Active" Type="String" />
-                    </SelectParameters>
-                </asp:SqlDataSource>
 
-                <asp:SqlDataSource ID="SqlDSUpdateProduct" runat="server"
-                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                    UpdateCommand="UPDATE Product
-                                   SET ProductName=@ProductName,
-                                       [Description]=@Description,
-                                       Category=@Category,
-                                       ProductionTime=@ProductionTime,
-                                       Price=@Price,
-                                       Status=@Status
-                                   WHERE ProductID=@ProductID"></asp:SqlDataSource>
 
-                <asp:SqlDataSource ID="SqlDSUpdateImage" runat="server"
-                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                    UpdateCommand="UPDATE Product SET Picture=@Picture WHERE ProductID=@ProductID"></asp:SqlDataSource>
 
-                <asp:SqlDataSource ID="SqlDSToggle" runat="server"
-                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                    UpdateCommand="UPDATE Product SET Status = CASE WHEN Status='Active' THEN 'Inactive' ELSE 'Active' END WHERE ProductID=@ProductID">
-                    <UpdateParameters>
-                        <asp:Parameter Name="ProductID" Type="String" />
-                    </UpdateParameters>
-                </asp:SqlDataSource>
             </asp:Panel>
 
 
@@ -633,26 +208,7 @@
             <asp:Panel ID="PanelAdd" runat="server" Visible="false">
                 <div class="section-title">Add Product</div>
 
-                <asp:SqlDataSource ID="SqlDslastID" runat="server"
-                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                    SelectCommand="SELECT TOP 1 ProductID FROM Product ORDER BY ProductID DESC"></asp:SqlDataSource>
 
-                <asp:SqlDataSource ID="SqlDSInsert" runat="server"
-                    ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                    InsertCommand="
-                        INSERT INTO Product(ProductID, ProductName, [Description], Category, ProductionTime, Price, Picture, Status)
-                        VALUES(@ProductID, @ProductName, @Description, @Category, @ProductionTime, @Price, @Picture, @Status)">
-                    <InsertParameters>
-                        <asp:Parameter Name="ProductID" Type="String" />
-                        <asp:Parameter Name="ProductName" Type="String" />
-                        <asp:Parameter Name="Description" Type="String" />
-                        <asp:Parameter Name="Category" Type="String" />
-                        <asp:Parameter Name="ProductionTime" Type="String" />
-                        <asp:Parameter Name="Price" Type="Decimal" />
-                        <asp:Parameter Name="Picture" Type="Object" />
-                        <asp:Parameter Name="Status" Type="String" />
-                    </InsertParameters>
-                </asp:SqlDataSource>
 
                 <div class="form-grid">
                     <label for="txtProductID">Product ID</label>
@@ -732,28 +288,11 @@
     </div>
 
     <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function () {
-            const uploadInput = document.getElementById("fuEditPicture");
-            const previewImg = document.getElementById("imgEditCurrent");
-
-            if (uploadInput && previewImg) {
-                uploadInput.addEventListener("change", function () {
-                    if (uploadInput.files && uploadInput.files[0]) {
-                        const reader = new FileReader();
-
-                        reader.onloadstart = function () {
-                            previewImg.classList.add("loading");
-                        };
-
-                        reader.onload = function (e) {
-                            previewImg.src = e.target.result;
-                            previewImg.classList.remove("loading");
-                        };
-
-                        reader.readAsDataURL(uploadInput.files[0]);
-                    }
-                });
-            }
-        });
+        window.troikaProductManagementConfig = {
+            uploadInputId: "<%= fuEditPicture.ClientID %>",
+            previewImageId: "<%= imgEditCurrent.ClientID %>",
+            productIdInputId: "<%= txtProductID.ClientID %>"
+        };
     </script>
+    <script src="<%= ResolveUrl("~/Scripts/product-management.js") %>"></script>
 </asp:Content>

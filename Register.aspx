@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="TroikaClothingWeb.Register" %>
+<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="TroikaClothingWeb.Register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -211,7 +211,7 @@
 
             <!-- Phone Number -->
             <div class="register-local-field">
-                <asp:Label ID="lblPhoneNum" runat="server" Text="Phone Number (10 characters):" AssociatedControlID="txtPhoneNum"></asp:Label>
+                <asp:Label ID="lblPhoneNum" runat="server" Text="Phone Number:" AssociatedControlID="txtPhoneNum"></asp:Label>
                 <asp:TextBox ID="txtPhoneNum" runat="server" MaxLength="10" CssClass="register-local-input"></asp:TextBox>
             </div>
 
@@ -223,7 +223,7 @@
 
             <!-- Password -->
             <div class="register-local-field" style="margin-bottom:8px;">
-                <asp:Label ID="lblPassword" runat="server" Text="Password (8 digits):" AssociatedControlID="txtPassword" />
+                <asp:Label ID="lblPassword" runat="server" Text="Password (6-8 characters, include uppercase, lowercase, number and special character):" AssociatedControlID="txtPassword" />
                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="8" CssClass="register-local-input" />
             </div>
 
@@ -278,63 +278,11 @@
 
             <asp:Label ID="lblMessage" runat="server" CssClass="register-local-message" />
 
-            <asp:SqlDataSource ID="RegisterDataSource" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteRegister] WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email AND [Username] = @original_Username AND [Password] = @original_Password" InsertCommand="INSERT INTO WebsiteRegister(Name, Surname, Email, Username, Password, Status, PhoneNumber) VALUES (@Name, @Surname, @Email, @Username, @Password, 'Active', @PhoneNum)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteRegister]" UpdateCommand="UPDATE [WebsiteRegister] SET [Name] = @Name, [Surname] = @Surname, [Email] = @Email, [Username] = @Username, [Password] = @Password WHERE [ID] = @original_ID AND [Name] = @original_Name AND [Surname] = @original_Surname AND [Email] = @original_Email AND [Username] = @original_Username AND [Password] = @original_Password">
-                <DeleteParameters>
-                    <asp:Parameter Name="original_ID" Type="Int32" />
-                    <asp:Parameter Name="original_Name" Type="String" />
-                    <asp:Parameter Name="original_Surname" Type="String" />
-                    <asp:Parameter Name="original_Email" Type="String" />
-                    <asp:Parameter Name="original_Username" Type="String" />
-                    <asp:Parameter Name="original_Password" Type="String" />
-                </DeleteParameters>
-                <InsertParameters>
-                    <asp:ControlParameter ControlID="txtName" Name="Name" PropertyName="Text" Type="String" />
-                    <asp:ControlParameter ControlID="txtSurname" Name="Surname" PropertyName="Text" Type="String" />
-                    <asp:ControlParameter ControlID="txtEmail" Name="Email" PropertyName="Text" Type="String" />
-                    <asp:ControlParameter ControlID="txtUsername" Name="Username" PropertyName="Text" Type="String" />
-                    <asp:ControlParameter ControlID="txtPassword" Name="Password" PropertyName="Text" Type="String" />
-                    <asp:ControlParameter ControlID="txtPhoneNum" Name="PhoneNum" PropertyName="Text" />
-                </InsertParameters>
-                <UpdateParameters>
-                    <asp:Parameter Name="Name" Type="String" />
-                    <asp:Parameter Name="Surname" Type="String" />
-                    <asp:Parameter Name="Email" Type="String" />
-                    <asp:Parameter Name="Username" Type="String" />
-                    <asp:Parameter Name="Password" Type="String" />
-                    <asp:Parameter Name="original_ID" Type="Int32" />
-                    <asp:Parameter Name="original_Name" Type="String" />
-                    <asp:Parameter Name="original_Surname" Type="String" />
-                    <asp:Parameter Name="original_Email" Type="String" />
-                    <asp:Parameter Name="original_Username" Type="String" />
-                    <asp:Parameter Name="original_Password" Type="String" />
-                </UpdateParameters>
-            </asp:SqlDataSource>
+            
 
-            <asp:SqlDataSource ID="SqlDsLastID" runat="server" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" SelectCommand="SELECT TOP (1) customerID FROM Customer ORDER BY customerID DESC"></asp:SqlDataSource>
+            
 
-            <asp:SqlDataSource ID="InsertLoginDS" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>" DeleteCommand="DELETE FROM [WebsiteLogin] WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role" InsertCommand="INSERT INTO WebsiteLogin(Username, Password, Role, Status) VALUES (@Username, @Password, @Role, @Status)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [WebsiteLogin]" UpdateCommand="UPDATE [WebsiteLogin] SET [Username] = @Username, [Password] = @Password, [Role] = @Role WHERE [ID] = @original_ID AND [Username] = @original_Username AND [Password] = @original_Password AND [Role] = @original_Role">
-                <DeleteParameters>
-                    <asp:Parameter Name="original_ID" Type="Int32" />
-                    <asp:Parameter Name="original_Username" Type="String" />
-                    <asp:Parameter Name="original_Password" Type="String" />
-                    <asp:Parameter Name="original_Role" Type="String" />
-                </DeleteParameters>
-                <InsertParameters>
-                    <asp:ControlParameter ControlID="txtUsername" Name="Username" PropertyName="Text" Type="String" />
-                    <asp:ControlParameter ControlID="txtPassword" Name="Password" PropertyName="Text" Type="String" />
-                    <asp:Parameter DefaultValue="Customer" Name="Role" Type="String" />
-                    <asp:Parameter DefaultValue="Active" Name="Status" />
-                </InsertParameters>
-                <UpdateParameters>
-                    <asp:Parameter Name="Username" Type="String" />
-                    <asp:Parameter Name="Password" Type="String" />
-                    <asp:Parameter Name="Role" Type="String" />
-                    <asp:Parameter Name="original_ID" Type="Int32" />
-                    <asp:Parameter Name="original_Username" Type="String" />
-                    <asp:Parameter Name="original_Password" Type="String" />
-                    <asp:Parameter Name="original_Role" Type="String" />
-                </UpdateParameters>
-            </asp:SqlDataSource>
+            
 
         </div>
     </div>

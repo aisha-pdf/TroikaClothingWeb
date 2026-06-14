@@ -145,7 +145,7 @@
                         <asp:Button ID="btnAddToCart" runat="server"
                             CommandName="ViewDetails"
                             CommandArgument='<%# Eval("ProductID") %>'
-                            Text="Add to Cart"
+                            Text="View details"
                             CssClass="add-to-cart-btn" />
                     </div>
                 </ItemTemplate>

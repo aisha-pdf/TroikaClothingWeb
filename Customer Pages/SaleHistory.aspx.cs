@@ -1,40 +1,99 @@
 using System;
+using System.Collections.Generic;
 using System.Web.UI.WebControls;
+using TroikaClothingWeb.Common;
+using TroikaClothingWeb.Models;
 using TroikaClothingWeb.Services;
 
 namespace TroikaClothingWeb.Sale_Pages
 {
-    public partial class SaleHistory : System.Web.UI.Page
+    public partial class SaleHistory : CustomerPage
     {
-        private readonly UserService _userService = new UserService();
+        private readonly SaleHistoryService _saleHistoryService = ServiceFactory.CreateSaleHistoryService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string username = Session["Username"] == null ? null : Session["Username"].ToString();
-            if (string.IsNullOrWhiteSpace(username))
+            if (!IsPostBack)
             {
-                Response.Redirect("~/Login.aspx");
-                return;
+                BindSales();
+                ClearSelectedSale();
             }
-
-            string customerID = _userService.GetCustomerIdByUsername(username);
-            SaleOrderDS.SelectParameters["CusID"].DefaultValue = customerID;
         }
 
-        protected void gvSale_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+        private void BindSales()
         {
+            IList<SaleHistoryItem> sales = _saleHistoryService.GetSalesForUsername(CurrentUsername);
+            gvSale.DataSource = sales;
+            gvSale.DataBind();
+            lblMessage.Text = sales.Count == 0 ? "No sales have been found for your account yet." : string.Empty;
+        }
+
+        protected void gvSale_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvSale.PageIndex = e.NewPageIndex;
+            BindSales();
+            RestoreSelectedSale();
         }
 
         protected void gvSale_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string receiptId = gvSale.DataKeys[gvSale.SelectedIndex].Value.ToString();
-            ProductsSold.SelectParameters["recID"].DefaultValue = receiptId;
-            lvProductsSold.DataBind();
+            if (gvSale.SelectedIndex < 0 || gvSale.SelectedDataKey == null)
+            {
+                ClearSelectedSale();
+                return;
+            }
+
+            string receiptId = Convert.ToString(gvSale.SelectedDataKey.Value);
+
+            if (string.IsNullOrWhiteSpace(receiptId))
+            {
+                ClearSelectedSale();
+                return;
+            }
+
+            hfSelectedReceipt.Value = receiptId;
+            BindProductsForReceipt(receiptId);
         }
 
-        protected string GetImageUrl(object imageObj, object nameObj)
+        private void RestoreSelectedSale()
         {
-            return ImageService.ToDataUrl(imageObj, nameObj, ResolveUrl("~/Images/Image_not_available.png"));
+            if (!string.IsNullOrWhiteSpace(hfSelectedReceipt.Value))
+                BindProductsForReceipt(hfSelectedReceipt.Value);
+        }
+
+        private void BindProductsForReceipt(string receiptId)
+        {
+            IList<SaleProductItem> products = _saleHistoryService.GetProductsForReceipt(receiptId);
+
+            foreach (SaleProductItem product in products)
+            {
+                product.ImageUrl = GetProductImageUrl(product.ProductID);
+            }
+
+            lvProductsSold.DataSource = products;
+            lvProductsSold.DataBind();
+
+            pnlNoSaleSelected.Visible = false;
+            lvProductsSold.Visible = true;
+        }
+
+        private void ClearSelectedSale()
+        {
+            hfSelectedReceipt.Value = string.Empty;
+            pnlNoSaleSelected.Visible = true;
+            lvProductsSold.Visible = false;
+        }
+
+        protected string GetProductImageUrl(object productIdObj)
+        {
+            if (productIdObj == null)
+                return ResolveUrl("~/Images/Image_not_available.png");
+
+            string productId = productIdObj.ToString();
+            if (string.IsNullOrWhiteSpace(productId))
+                return ResolveUrl("~/Images/Image_not_available.png");
+
+            return ResolveUrl("~/Public Pages/ProductImageHandler.ashx?id=" + Server.UrlEncode(productId));
         }
     }
 }

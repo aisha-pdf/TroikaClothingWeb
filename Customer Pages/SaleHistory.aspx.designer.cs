@@ -15,6 +15,24 @@ namespace TroikaClothingWeb.Sale_Pages
     {
 
         /// <summary>
+        /// hfSelectedReceipt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfSelectedReceipt;
+
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
         /// gvSale control.
         /// </summary>
         /// <remarks>
@@ -31,6 +49,15 @@ namespace TroikaClothingWeb.Sale_Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SaleOrderDS;
+
+        /// <summary>
+        /// pnlNoSaleSelected control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlNoSaleSelected;
 
         /// <summary>
         /// lvProductsSold control.

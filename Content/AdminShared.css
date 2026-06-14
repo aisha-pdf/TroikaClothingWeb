@@ -1,0 +1,159 @@
+/* Phase 5 reusable admin layout and message styles */
+
+.troika-admin-page {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    min-height: 80vh !important;
+    background: var(--troika-bg) !important;
+    color: var(--troika-text) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.troika-admin-sidebar {
+    width: 230px !important;
+    min-width: 230px !important;
+    padding: 35px 20px 20px 80px !important;
+    background: var(--troika-bg) !important;
+    color: var(--troika-text) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    box-sizing: border-box !important;
+}
+
+.troika-admin-nav-btn {
+    width: 135px !important;
+    max-width: 135px !important;
+    background: var(--troika-btn-bg) !important;
+    color: var(--troika-btn-text) !important;
+    border: 1px solid var(--troika-btn-bg) !important;
+    padding: 12px 16px !important;
+    text-align: left !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}
+
+.troika-admin-nav-btn:hover {
+    background: var(--troika-btn-hover-bg) !important;
+    border-color: var(--troika-btn-hover-bg) !important;
+    color: var(--troika-btn-text) !important;
+}
+
+.troika-admin-content {
+    flex: 1 !important;
+    padding: 20px 40px 30px 20px !important;
+    background: var(--troika-bg) !important;
+    color: var(--troika-text) !important;
+    box-sizing: border-box !important;
+}
+
+.troika-admin-card {
+    background: var(--troika-surface-alt) !important;
+    color: var(--troika-text) !important;
+    padding: 35px !important;
+    border: 1px solid var(--troika-border) !important;
+    min-height: 540px !important;
+    max-width: 1400px !important;
+    box-sizing: border-box !important;
+}
+
+.troika-admin-heading {
+    color: var(--troika-heading-text) !important;
+    margin-bottom: 25px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+}
+
+.troika-page-message {
+    display: block;
+    margin: 0 0 15px 0;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.troika-page-message-success {
+    color: #1a7f37 !important;
+    background: rgba(26, 127, 55, 0.10) !important;
+    border: 1px solid rgba(26, 127, 55, 0.35) !important;
+}
+
+.troika-page-message-error {
+    color: #d60000 !important;
+    background: rgba(214, 0, 0, 0.10) !important;
+    border: 1px solid rgba(214, 0, 0, 0.35) !important;
+}
+
+.troika-page-message-info {
+    color: var(--troika-primary) !important;
+    background: var(--troika-surface-alt) !important;
+    border: 1px solid var(--troika-border) !important;
+}
+
+body[data-theme="dark"] .troika-admin-card {
+    background: #1c1724 !important;
+    color: #f5f3f7 !important;
+    border-color: #3b3048 !important;
+}
+
+body[data-theme="dark"] .troika-admin-heading {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .troika-admin-nav-btn {
+    background: #d9c8f0 !important;
+    color: #121018 !important;
+    border-color: #d9c8f0 !important;
+}
+
+body[data-theme="dark"] .troika-admin-nav-btn:hover {
+    background: #b99cdd !important;
+    color: #121018 !important;
+}
+
+@media (max-width: 900px) {
+    .troika-admin-page {
+        flex-direction: column !important;
+    }
+
+    .troika-admin-sidebar {
+        width: 100% !important;
+        min-width: 100% !important;
+        padding: 20px !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+    }
+
+    .troika-admin-nav-btn {
+        width: auto !important;
+        min-width: 130px !important;
+        max-width: none !important;
+    }
+
+    .troika-admin-content {
+        padding: 20px !important;
+    }
+}
+
+
+/* Phase 7 additions: make shared admin controls work across all admin pages. */
+.troika-admin-sidebar .troika-admin-nav-btn:focus {
+    outline: 2px solid var(--troika-primary-hover);
+    outline-offset: 2px;
+}
+
+body[data-theme="dark"] .troika-page-message-success {
+    color: #9be7b0 !important;
+    background: rgba(26, 127, 55, 0.22) !important;
+}
+
+body[data-theme="dark"] .troika-page-message-error {
+    color: #ff9b9b !important;
+    background: rgba(214, 0, 0, 0.20) !important;
+}

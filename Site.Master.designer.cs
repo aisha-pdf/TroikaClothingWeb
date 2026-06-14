@@ -60,6 +60,24 @@ namespace TroikaClothingWeb
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
+        /// profileManageLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor profileManageLink;
+
+        /// <summary>
+        /// profileOrdersLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor profileOrdersLink;
+
+        /// <summary>
         /// btnLogout control.
         /// </summary>
         /// <remarks>

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data.SqlClient;
 using TroikaClothingWeb.Services;
+using System.Text.RegularExpressions;
 
 namespace TroikaClothingWeb.Account
 {
@@ -79,7 +80,7 @@ namespace TroikaClothingWeb.Account
                 {
                     if ((Email.Text.Length > 0) && (Email.Text.Contains("@")))
                     {
-                        if (Password.Text.Length == 8) 
+                        if (IsValidPassword(Password.Text))
                         {
                             if ((PhoneNumber.Text.Length <= 0)||(PhoneNumber.Text.Length ==10 && PhoneNumber.Text[0] == '0'))
                             {
@@ -98,7 +99,7 @@ namespace TroikaClothingWeb.Account
                         }
                         else
                         {
-                            LblMessage.Text = "Password must be exactly 8 characters long.";
+                            LblMessage.Text = "Password must be 6 to 8 characters long and include an uppercase letter, lowercase letter, number, and special character.";
                         }
                     }
                     else
@@ -118,6 +119,21 @@ namespace TroikaClothingWeb.Account
                 LblMessage.Text = "First name cannot be empty.";
             }
         }
+        private bool IsValidPassword(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                return false;
+            }
+
+            return password.Length >= 6 &&
+                   password.Length <= 8 &&
+                   Regex.IsMatch(password, @"[A-Z]") &&
+                   Regex.IsMatch(password, @"[a-z]") &&
+                   Regex.IsMatch(password, @"[0-9]") &&
+                   Regex.IsMatch(password, @"[!@#$%^&*(),.?""{}|<>]");
+        }
+
         private string GetCustomerIDByUsername(string username)
         {
             return new UserService().GetCustomerIdByUsername(username);

@@ -1,5 +1,6 @@
 using System;
 using System.Web;
+using TroikaClothingWeb.Common;
 using TroikaClothingWeb.Models;
 using TroikaClothingWeb.Services;
 
@@ -7,7 +8,8 @@ namespace TroikaClothingWeb.Public_Pages
 {
     public partial class ProductDetail : System.Web.UI.Page
     {
-        private readonly ProductService _productService = new ProductService();
+        private readonly ProductService _productService = ServiceFactory.CreateProductService();
+        private readonly CartService _cartService = ServiceFactory.CreateCartService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +28,7 @@ namespace TroikaClothingWeb.Public_Pages
             if (product == null)
             {
                 lblProductName.Text = "Product not found.";
+                btnAddToCart.Enabled = false;
                 return;
             }
 
@@ -75,17 +78,23 @@ namespace TroikaClothingWeb.Public_Pages
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,
                 UnitPrice = product.Price,
-                Quantity = int.TryParse(txtQuantity.Text, out var q) ? Math.Max(1, q) : 1,
+                Quantity = ParseQuantity(txtQuantity.Text),
                 Colour = ddlColor.SelectedValue,
                 ClothingSize = ddlSize.SelectedValue,
                 ImageUrl = ResolveUrl(product.ImageUrl)
             };
 
-            ShoppingCart.AddOrIncrease(Session, item);
+            _cartService.AddOrIncrease(Session, item);
             UpdateMasterPageCartCount();
 
             lblStatus.Text = HttpUtility.HtmlEncode(product.ProductName) + " added to cart successfully!";
             lblStatus.Visible = true;
+        }
+
+        private int ParseQuantity(string quantityText)
+        {
+            int quantity;
+            return int.TryParse(quantityText, out quantity) ? Math.Max(1, quantity) : 1;
         }
 
         private void UpdateMasterPageCartCount()
@@ -93,8 +102,7 @@ namespace TroikaClothingWeb.Public_Pages
             SiteMaster master = Page.Master as SiteMaster;
             if (master != null)
             {
-                var cart = ShoppingCart.Get(Session);
-                master.UpdateCartCount(cart != null ? cart.Count : 0);
+                master.UpdateCartCount(_cartService.GetCartCount(Session));
             }
         }
     }

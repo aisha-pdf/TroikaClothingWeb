@@ -1,30 +1,40 @@
 using System;
+using System.Globalization;
 using System.Web.UI;
+using TroikaClothingWeb.Common;
+using TroikaClothingWeb.Models;
 using TroikaClothingWeb.Services;
 
 namespace TroikaClothingWeb
 {
-    public partial class Reports : System.Web.UI.Page
+    public partial class Reports : AdminPage
     {
-        private readonly ReportService _reportService = new ReportService();
+        private readonly ReportDashboardService _reportDashboardService = ServiceFactory.CreateReportDashboardService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+            {
                 LoadAllCharts();
+            }
         }
 
         private void LoadAllCharts()
         {
+            ReportDashboardPayload payload = _reportDashboardService.GetDashboardPayload();
+
+            string script = string.Format(
+                CultureInfo.InvariantCulture,
+                "loadSalesCharts({0}, {1}, {2});",
+                payload.MonthlySalesJson,
+                payload.PaymentMethodJson,
+                payload.SalesChannelJson);
+
             ScriptManager.RegisterStartupScript(
                 this,
                 GetType(),
                 "loadCharts",
-                string.Format(
-                    "loadSalesCharts({0}, {1}, {2});",
-                    _reportService.GetMonthlySalesJson(),
-                    _reportService.GetPaymentMethodJson(),
-                    _reportService.GetSalesChannelJson()),
+                script,
                 true);
         }
     }

@@ -1,357 +1,167 @@
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Drawing;
+using TroikaClothingWeb.Common;
+using TroikaClothingWeb.Models;
 using TroikaClothingWeb.Services;
 
 namespace TroikaClothingWeb.Customer_Pages
 {
-    public partial class CustomerProfile : System.Web.UI.Page
+    public partial class CustomerProfile : CustomerPage
     {
-        string phoneNo = "";
+        private readonly CustomerProfileService _customerProfileService = ServiceFactory.CreateCustomerProfileService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //getting username and customer ID of Customer
-            string username = Session["Username"]?.ToString();
+            ConfigurePasswordToggle();
+
             if (!IsPostBack)
             {
-                if (Session["Username"] != null)
-                {
-                    DSWebDetails.DataBind();
-                    this.DataBind(); // fills textboxes with data
-
-                }
-                else
-                {
-                    Response.Redirect("~/Login.aspx"); // if not logged in
-                }
+                LoadCustomerProfile();
             }
+        }
 
-            if (CustomerForm.CurrentMode == FormViewMode.Edit)
+        protected void btnSaveProfile_Click(object sender, EventArgs e)
+        {
+            Page.Validate("ProfileValidation");
+
+            if (!Page.IsValid)
+                return;
+
+            var request = new CustomerProfileUpdateRequest
             {
-                // Try to get the phone number textbox from the FormView
-                TextBox phoneNum = (TextBox)CustomerForm.FindControl("PhoneNumber");
+                Username = CurrentUsername,
+                Name = txtName.Text,
+                Surname = txtSurname.Text,
+                Email = txtEmail.Text,
+                PhoneNumber = txtPhoneNumber.Text
+            };
 
-                if (phoneNum != null)
-                {
-                    string phoneNo = phoneNum.Text.Trim();
-
-                    // Try to get the label from the DetailsView
-                    Label lblPhone = (Label)DetailsView1.FindControl("lblPhoneNum");
-                    if (lblPhone != null)
-                    {
-                        lblPhone.Text = phoneNo;
-                    }
-                }
-            }
-
-            //TextBox phoneNum = (TextBox)CustomerForm.FindControl("PhoneNumber");
-            //if (phoneNum == null && CustomerForm.CurrentMode == FormViewMode.Edit)
-            //{
-            //    phoneNum = (TextBox)CustomerForm.Row.FindControl("PhoneNumber");
-            //    phoneNo = phoneNum.Text;
-            //    Label lblPhone = (Label)DetailsView1.FindControl("lblPhoneNumber");
-
-
-            //    if (lblPhone == null)
-            //    {
-            //        lblPhone = (Label)DetailsView1.Rows[0].FindControl("lblPhoneNumber");
-            //        lblPhone.Text = phoneNo;
-            //    }
-
-            //}
-
-
-            string customerID = GetCustomerIDByUsername(username);
-            DSAddress.SelectParameters["CusID"].DefaultValue = customerID;
-            DSAddress.UpdateParameters["CusID"].DefaultValue = customerID;
-
-        }
-
-        //protected void Page_PreRender(object sender, EventArgs e)
-        //{
-        //    if (CustomerForm.CurrentMode == FormViewMode.Edit)
-        //    {
-        //        // Try to get the phone number textbox from the FormView
-        //        TextBox phoneNum = (TextBox)CustomerForm.FindControl("PhoneNumber");
-
-        //        if (phoneNum != null)
-        //        {
-        //            string phoneNo = phoneNum.Text.Trim();
-
-        //            // Try to get the label from the DetailsView
-        //            Label lblPhone = (Label)DetailsView1.FindControl("lblPhoneNum");
-        //            if (lblPhone != null)
-        //            {
-        //                lblPhone.Text = phoneNo;
-        //            }
-        //        }
-        //    }
-        //}
-        private string GetCustomerIDByUsername(string username)
-        {
-            return new UserService().GetCustomerIdByUsername(username);
-        }
-
-        protected void SaveChanges_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void CloseAccount_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void CustomerForm_ItemCommand(object sender, FormViewCommandEventArgs e)
-        {
-            //if cancelled button is clicked reload data
-            if (e.CommandName == "Cancel")
-            {
-                CustomerForm.ChangeMode(FormViewMode.Edit);
-                CustomerForm.DataBind();
-            }
-        }
-
-        protected void CustomerForm_ItemUpdating(object sender, FormViewUpdateEventArgs e)
-        {
             try
             {
-                // 1️⃣ Get the phone number textbox from the FormView
-                TextBox txtPhone = (TextBox)CustomerForm.FindControl("PhoneNumber");
-                string newPhone = txtPhone != null ? txtPhone.Text.Trim() : "";
+                OperationResult result = _customerProfileService.UpdateProfile(request);
+                ShowMessage(result.Message, result.Success);
 
-                // 2️⃣ Update the FormView data
-                CustomerForm.UpdateItem(true);
-
-                // 3️⃣ Try to find the phone number label inside DetailsView
-                Label lblPhone = (Label)DetailsView1.FindControl("lblPhoneNumber");
-                if (lblPhone != null)
-                {
-                    lblPhone.Text = newPhone;  // update it manually
-                }
-                else
-                {
-                    // For debugging: helps if the label can’t be found
-                    LblMessage.ForeColor = System.Drawing.Color.Red;
-                    LblMessage.Text = "Warning: Phone label not found in DetailsView.";
-                }
-
-                // 4️⃣ Display success message
-                LblMessage.ForeColor = System.Drawing.Color.Green;
-                LblMessage.Text = "Your details have been updated successfully.";
+                if (result.Success)
+                    LoadCustomerProfile();
             }
             catch (Exception ex)
             {
-                // 5️⃣ Show error if something fails
-                LblMessage.ForeColor = System.Drawing.Color.Red;
-                LblMessage.Text = "Error updating record: " + ex.Message;
-                e.Cancel = true;
+                ShowMessage("Your account details could not be updated: " + ex.Message, false);
             }
         }
 
-        //protected void CustomerForm_ItemUpdating(object sender, FormViewUpdateEventArgs e)
-        //{
-        //    try
-        //    {
-        //        // perform update and display a success message
-        //        CustomerForm.UpdateItem(true);
-
-        //        //updating phonenumber label 
-        //        TextBox phoneNum = (TextBox)CustomerForm.FindControl("PhoneNumber");
-        //        phoneNo = phoneNum.Text;
-        //        Label lblPhone = (Label)DetailsView1.FindControl("lblPhoneNumber");
-        //        lblPhone.Text = phoneNo;
-
-        //        //show success message
-        //        LblMessage.ForeColor = System.Drawing.Color.Green;
-        //        LblMessage.Text = "Your details have been updated";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // show error message
-        //        LblMessage.ForeColor = System.Drawing.Color.Red;
-        //        LblMessage.Text = "Error updating record: " + ex.Message;
-
-        //        // cancel changes made
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        protected void DetailsView1_ItemCommand(object sender, DetailsViewCommandEventArgs e)
+        protected void btnSaveAddress_Click(object sender, EventArgs e)
         {
-            if (e.CommandName == "CancelChanges")
+            Page.Validate("AddressValidation");
+
+            if (!Page.IsValid)
+                return;
+
+            var request = new CustomerAddressUpdateRequest
             {
-                DetailsView1.ChangeMode(DetailsViewMode.Edit);
-                DetailsView1.DataBind();
-            }
-        }
+                Username = CurrentUsername,
+                StreetAddress = txtStreetAddress.Text,
+                Suburb = txtSuburb.Text,
+                PostCode = txtPostCode.Text
+            };
 
-        protected void DetailsView1_ItemUpdated(object sender, DetailsViewUpdatedEventArgs e)
-        {
             try
             {
-                // if update is successful
-                LblMessage.ForeColor = System.Drawing.Color.Green;
-                LblMessage.Text = "Address has been updated";
+                OperationResult result = _customerProfileService.UpdateAddress(request);
+                ShowMessage(result.Message, result.Success);
+
+                if (result.Success)
+                    LoadCustomerProfile();
             }
             catch (Exception ex)
             {
-                // show error message
-                LblMessage.ForeColor = System.Drawing.Color.Red;
-                LblMessage.Text = "Error updating record: " + ex.Message;
+                ShowMessage("Your address could not be updated: " + ex.Message, false);
             }
         }
 
-        protected void DetailsView1_ItemUpdating(object sender, DetailsViewUpdateEventArgs e)
+
+        private void ConfigurePasswordToggle()
         {
-            try
-            {
-                // getting data from text boxes
-                DetailsView dv = (DetailsView)sender;
-                TextBox txtStreet = (TextBox)dv.FindControl("txtStreetAddress");
-                TextBox txtSuburb = (TextBox)dv.FindControl("txtSuburb");
-                TextBox txtPostCode = (TextBox)dv.FindControl("txtPostCode");
+            btnShowHide.OnClientClick = "return toggleCustomerPassword('"
+                + txtPassword.ClientID
+                + "', '"
+                + btnShowHide.ClientID
+                + "');";
+        }
 
-                // validating street address
-                if (string.IsNullOrWhiteSpace(txtStreet.Text))
-                {
-                    e.Cancel = true;
-                    LblMessage.ForeColor = System.Drawing.Color.Red;
-                    LblMessage.Text = "Please fill in your street address";
-                    return;
-                }
-
-                // validating suburb
-                if (string.IsNullOrWhiteSpace(txtSuburb.Text))
-                {
-                    e.Cancel = true;
-                    LblMessage.ForeColor = System.Drawing.Color.Red;
-                    LblMessage.Text = "Please fill in your suburb";
-                    return;
-                }
-
-
-                // validating postal code
-                if (string.IsNullOrWhiteSpace(txtPostCode.Text) || txtPostCode.Text.Length != 4)
-                {
-                    e.Cancel = true;
-                    LblMessage.ForeColor = System.Drawing.Color.Red;
-                    LblMessage.Text = "Please fill in your postal code";
-                    return;
-                }
-
-
-                // Optional success message before update
-                LblMessage.ForeColor = System.Drawing.Color.Green;
-                LblMessage.Text = "Updating your address...";
-            }
-            catch (Exception ex)
-            {
-                e.Cancel = true; // Stop the update if something fails
-                LblMessage.ForeColor = System.Drawing.Color.Red;
-                LblMessage.Text = "Error while updating: " + ex.Message;
-            }
+        protected void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ForgotPassword.aspx");
         }
 
         protected void btnCloseAccount_Click(object sender, EventArgs e)
         {
             try
             {
-                TextBox txtUsername = (TextBox)CustomerForm.FindControl("Username");
-                TextBox txtEmail = (TextBox)CustomerForm.FindControl("Email");
+                OperationResult result = _customerProfileService.CloseAccount(CurrentUsername);
 
-                if (txtUsername == null)
+                if (result.Success)
                 {
-                    LblMessage.ForeColor = System.Drawing.Color.Red;
-                    LblMessage.Text = "Username not found.";
+                    Session.Clear();
+                    Response.Redirect("~/Login.aspx");
                     return;
                 }
 
-                DSCloseLogin.UpdateParameters["Username"].DefaultValue = txtUsername.Text;
-                DSCloseRegister.UpdateParameters["Username"].DefaultValue = txtUsername.Text;
-
-                Boolean find = false;
-
-                foreach (GridViewRow row in gvCustomer.Rows)
-                {
-                    if (row.Cells[1].Text == txtEmail.Text)
-                    {
-                        DSCloseCustomer.UpdateParameters["customerID"].DefaultValue = row.Cells[0].Text;
-                        find = true;
-                        break;
-                    }
-
-                }
-
-                if (find == true)
-                {
-                    DSCloseCustomer.Update();
-                    DSCloseLogin.Update();
-                    DSCloseRegister.Update();
-                    Response.Redirect("~/Login.aspx");
-                }
-
+                ShowMessage(result.Message, false);
             }
             catch (Exception ex)
             {
-                LblMessage.ForeColor = System.Drawing.Color.Red;
-                LblMessage.Text = "Error while updating: " + ex.Message;
+                ShowMessage("We could not close your account right now: " + ex.Message, false);
             }
+        }
 
-            if (!IsPostBack)
+        private void LoadCustomerProfile()
+        {
+            CustomerProfileDetails profile = _customerProfileService.GetProfile(CurrentUsername);
+
+            if (profile == null)
             {
-                CustomerForm.DataBind();
+                ShowMessage("Your customer profile could not be found. Please contact support.", false);
+                SetFormEnabled(false);
+                return;
             }
-        }
-        protected void btnShowHide_Click(object sender, EventArgs e)
-        {
-            TextBox txtPassword = (TextBox)CustomerForm.FindControl("Password");
-            Button btnShowHide=(Button)CustomerForm.FindControl("btnShowHide");
 
-            if (txtPassword != null && btnShowHide!=null)
-            {
-                string value=txtPassword.Text;
+            txtName.Text = profile.Name;
+            txtSurname.Text = profile.Surname;
+            txtEmail.Text = profile.Email;
+            txtPhoneNumber.Text = profile.PhoneNumber;
+            txtUsername.Text = profile.Username;
+            txtPassword.Text = profile.Password;
+            txtPassword.Attributes["value"] = profile.Password;
+            txtStreetAddress.Text = profile.StreetAddress;
+            txtSuburb.Text = profile.Suburb;
+            txtPostCode.Text = profile.PostCode;
 
-                if (txtPassword.TextMode == TextBoxMode.Password)
-                {
-                    txtPassword.TextMode = TextBoxMode.SingleLine;
-                    btnShowHide.Text = "Hide Password";
-                }
-                else
-                {
-                    txtPassword.TextMode = TextBoxMode.Password;
-                    txtPassword.Attributes["value"] = value;
-                    btnShowHide.Text = "Show Password";
-                }
-
-            }
-        }
-        protected void ChangePassword_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/ForgotPassword.aspx");
+            SetFormEnabled(true);
         }
 
-        protected void CustomerForm_PageIndexChanging(object sender, FormViewPageEventArgs e)
+        private void SetFormEnabled(bool enabled)
         {
-
+            txtName.Enabled = enabled;
+            txtSurname.Enabled = enabled;
+            txtEmail.Enabled = enabled;
+            txtPhoneNumber.Enabled = enabled;
+            txtPassword.Enabled = enabled;
+            btnShowHide.Enabled = enabled;
+            txtStreetAddress.Enabled = enabled;
+            txtSuburb.Enabled = enabled;
+            txtPostCode.Enabled = enabled;
+            btnSaveProfile.Enabled = enabled;
+            btnSaveAddress.Enabled = enabled;
+            btnCloseAccount.Enabled = enabled;
         }
 
-        protected void CustomerForm_DataBound(object sender, EventArgs e)
+        private void ShowMessage(string message, bool success)
         {
-            TextBox txtPassword = (TextBox)CustomerForm.FindControl("Password");
-
-            if (txtPassword != null && CustomerForm.DataItem != null)
-            {
-                string real = ((DataRowView)CustomerForm.DataItem)["Password"].ToString();
-                txtPassword.Attributes["value"] = real;
-            }
+            LblMessage.Text = message;
+            LblMessage.ForeColor = success
+                ? ColorTranslator.FromHtml("#1a7f37")
+                : ColorTranslator.FromHtml("#d60000");
         }
     }
 }
