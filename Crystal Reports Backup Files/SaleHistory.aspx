@@ -1,108 +1,106 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SaleHistory.aspx.cs" Inherits="TroikaClothingWeb.Sale_Pages.SaleHistory" %>
+<%@ Page Title="Sale History" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SaleHistory.aspx.cs" Inherits="TroikaClothingWeb.Sale_Pages.SaleHistory" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="troika-page sale-history-container">
+    <link href="<%= ResolveUrl("~/Content/SaleHistory.css") %>" rel="stylesheet" />
+
+    <div class="troika-page sale-history-page">
         <div class="troika-section">
             <h2 class="sale-history-title">SALE HISTORY</h2>
 
-            <div class="row">
-                <div class="col-md-7">
-                    <div class="troika-card">
+            <asp:HiddenField ID="hfSelectedReceipt" runat="server" />
+
+            <asp:Label ID="lblMessage"
+                runat="server"
+                CssClass="sale-history-message"
+                EnableViewState="False" />
+
+            <div class="sale-history-layout">
+                <div class="sale-history-left">
+                    <div class="troika-card sale-history-card">
                         <asp:GridView ID="gvSale"
                             runat="server"
-                            CssClass="gridview troika-table"
+                            CssClass="gridview troika-table sale-history-grid"
                             HorizontalAlign="Center"
                             AutoGenerateColumns="False"
-                            AutoGenerateSelectButton="True"
+                            AutoGenerateSelectButton="False"
                             CellPadding="4"
-                            DataKeyNames="receiptNum"
-                            DataSourceID="SaleOrderDS"
+                            DataKeyNames="ReceiptNum"
                             GridLines="None"
-                            OnSelectedIndexChanged="gvSale_SelectedIndexChanged">
+                            AllowPaging="True"
+                            PageSize="12"
+                            OnSelectedIndexChanged="gvSale_SelectedIndexChanged"
+                            OnPageIndexChanging="gvSale_PageIndexChanging">
 
                             <Columns>
-                                <asp:BoundField DataField="receiptNum" HeaderText="Receipt No." ReadOnly="True" SortExpression="receiptNum" />
-                                <asp:BoundField DataField="paymentTotal" HeaderText="Total" SortExpression="paymentTotal" />
-                                <asp:BoundField DataField="paymentMethod" HeaderText="Payment Method" SortExpression="paymentMethod" />
-                                <asp:BoundField DataField="paymentDate" HeaderText="Date" SortExpression="paymentDate" />
-                                <asp:BoundField DataField="salesStatus" HeaderText="Status" SortExpression="salesStatus" />
-                            </Columns>
-                        </asp:GridView>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="lnkSelectSale"
+                                            runat="server"
+                                            Text="Select"
+                                            CommandName="Select"
+                                            CausesValidation="False" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
 
-                        <asp:SqlDataSource ID="SaleOrderDS"
-                            runat="server"
-                            ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                            SelectCommand="SELECT receiptNum, paymentTotal, paymentMethod, paymentDate, salesStatus FROM Sale WHERE (CustomerID = @CusID)">
-                            <SelectParameters>
-                                <asp:Parameter Name="CusID" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
+                                <asp:BoundField DataField="ReceiptNum" HeaderText="Receipt No." ReadOnly="True" />
+                                <asp:BoundField DataField="PaymentTotal" HeaderText="Total" DataFormatString="{0:N2}" />
+                                <asp:BoundField DataField="PaymentMethod" HeaderText="Payment Method" />
+                                <asp:BoundField DataField="PaymentDate" HeaderText="Date" DataFormatString="{0:yyyy/MM/dd HH:mm}" />
+                                <asp:BoundField DataField="SalesStatus" HeaderText="Status" />
+                            </Columns>
+
+                            <HeaderStyle CssClass="sale-history-grid-header" />
+                            <RowStyle CssClass="sale-history-grid-row" />
+                            <AlternatingRowStyle CssClass="sale-history-grid-alt-row" />
+                            <SelectedRowStyle CssClass="sale-history-grid-selected-row" />
+                            <PagerStyle CssClass="sale-history-grid-pager" HorizontalAlign="Center" />
+                        </asp:GridView>
                     </div>
                 </div>
 
-                <div class="col-md-5">
-                    <div class="troika-card">
-                        <asp:ListView ID="lvProductsSold" runat="server" DataSourceID="ProductsSold">
+                <div class="sale-history-right">
+                    <div class="troika-card sale-products-card">
+                        <asp:Panel ID="pnlNoSaleSelected" runat="server" CssClass="sale-empty-panel">
+                            <span class="troika-muted">Select a sale to view the products purchased.</span>
+                        </asp:Panel>
+
+                        <asp:ListView ID="lvProductsSold" runat="server" DataKeyNames="ProductID">
                             <ItemTemplate>
                                 <div class="sale-product-card">
-                                    <div class="text-center">
-                                        <asp:Image ID="imgProduct" runat="server"
-                                            Width="150px" Height="150px"
-                                            ImageUrl='<%# GetImageUrl(Eval("Picture"), Eval("ProductName")) %>' />
+                                    <div class="sale-product-image-wrap">
+                                        <asp:Image ID="imgProduct"
+                                            runat="server"
+                                            CssClass="sale-product-image"
+                                            AlternateText='<%# Eval("ProductName") %>'
+                                            ImageUrl='<%# Eval("ImageUrl") %>' />
                                     </div>
 
-                                    <div class="sale-history-text mt-3">
-                                        <asp:Label ID="lblName" runat="server" Text='<%# Eval("ProductName") %>' Font-Bold="true" /><br />
-                                        <asp:Label ID="lblPrice" runat="server" Text='<%# "Price: " + Eval("Price", "{0:C}") %>' /><br />
-                                        <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("Description") %>' />
+                                    <div class="sale-history-text">
+                                        <asp:Label ID="lblName" runat="server" CssClass="sale-product-name" Text='<%# Eval("ProductName") %>' />
+                                        <asp:Label ID="lblPrice" runat="server" CssClass="sale-product-price" Text='<%# "Price: R" + Eval("Price", "{0:N2}") %>' />
+                                        <asp:Label ID="lblQuantity" runat="server" CssClass="sale-product-detail" Text='<%# "Quantity: " + Eval("Quantity") %>' />
+                                        <asp:Label ID="lblSize" runat="server" CssClass="sale-product-detail" Text='<%# "Size: " + Eval("ClothingSize") %>' />
+                                        <asp:Label ID="lblColour" runat="server" CssClass="sale-product-detail" Text='<%# "Colour: " + Eval("Colour") %>' />
+                                        <asp:Label ID="lblDescription" runat="server" CssClass="sale-product-description" Text='<%# Eval("Description") %>' />
                                     </div>
                                 </div>
                             </ItemTemplate>
 
                             <EmptyDataTemplate>
-                                <span class="troika-muted">No products found for this sale.</span>
+                                <div class="sale-empty-panel">
+                                    <span class="troika-muted">No products found for this sale.</span>
+                                </div>
                             </EmptyDataTemplate>
 
                             <LayoutTemplate>
-                                <div id="itemPlaceholderContainer" runat="server">
+                                <div id="itemPlaceholderContainer" runat="server" class="sale-products-list">
                                     <span runat="server" id="itemPlaceholder" />
-                                </div>
-                                <div>
-                                    <asp:DataPager ID="DataPager1" runat="server">
-                                        <Fields>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
-                                        </Fields>
-                                    </asp:DataPager>
                                 </div>
                             </LayoutTemplate>
                         </asp:ListView>
-
-                        <asp:SqlDataSource ID="ProductsSold"
-                            runat="server"
-                            ConnectionString="<%$ ConnectionStrings:LoginConnectionString %>"
-                            SelectCommand="SELECT Product.ProductName, Product.Description, Product.Picture, Product.Price, Product.Category, ProductSold.clothingSize, ProductSold.colour 
-                                       FROM Product 
-                                       INNER JOIN ProductSold ON Product.ProductID = ProductSold.ProductID 
-                                       WHERE (ProductSold.receiptID = @recID)">
-                            <SelectParameters>
-                                <asp:Parameter Name="recID" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <style>
-        .sale-product-card {
-            text-align: center;
-            color: var(--troika-text);
-        }
-
-        .sale-product-card img {
-            border-radius: 8px;
-            object-fit: cover;
-        }
-    </style>
 </asp:Content>

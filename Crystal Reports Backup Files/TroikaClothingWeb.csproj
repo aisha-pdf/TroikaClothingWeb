@@ -52,19 +52,19 @@
       <HintPath>packages\Azure.Identity.1.14.2\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.ReportSource">
-      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Shared">
-      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Shared.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Web">
-      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Web.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Web.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Windows.Forms">
-      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
@@ -293,6 +293,17 @@
     <Content Include="Account\UpdatePhoneNumber.aspx" />
     <Content Include="Admin Pages\AdminProfile.aspx" />
     <Content Include="Admin Pages\ProductManagement.aspx" />
+    <Content Include="Content\AdminProfile.css" />
+    <Content Include="Content\AdminShared.css" />
+    <Content Include="Content\AdminUserList.css" />
+    <Content Include="Content\CustomerProfile.css" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\ProductManagement.css" />
+    <Content Include="Content\Reports.css" />
+    <Content Include="Content\ResetPassword.css" />
+    <Content Include="Content\SaleHistory.css" />
+    <Content Include="Controls\AdminSidebar.ascx" />
+    <Content Include="Controls\PageMessage.ascx" />
     <Content Include="Customer Pages\CustomerProfile.aspx" />
     <Content Include="Customer Pages\HomePage.aspx" />
     <Content Include="ForgotPassword.aspx" />
@@ -346,6 +357,8 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\product-management.js" />
+    <Content Include="Scripts\reports-charts.js" />
     <Content Include="Scripts\theme-toggle.js" />
     <Content Include="Content\TroikaTheme.css" />
     <Content Include="Default.aspx" />
@@ -599,6 +612,30 @@
       <DependentUpon>ProductManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Common\AdminPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\CustomerPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\ServiceFactory.cs" />
+    <Compile Include="Controls\AdminSidebar.ascx.cs">
+      <DependentUpon>AdminSidebar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AdminSidebar.ascx.designer.cs">
+      <DependentUpon>AdminSidebar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PageMessage.ascx.cs">
+      <DependentUpon>PageMessage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\PageMessage.ascx.designer.cs">
+      <DependentUpon>PageMessage.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Customer Pages\CustomerProfile.aspx.cs">
       <DependentUpon>CustomerProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -620,25 +657,56 @@
     <Compile Include="ForgotPassword.aspx.designer.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminUserRecord.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Data\Db.cs" />
+    <Compile Include="Models\CartSummary.cs" />
     <Compile Include="Models\CustomerAddress.cs" />
+    <Compile Include="Models\CustomerAddressUpdateRequest.cs" />
+    <Compile Include="Models\CustomerProfileDetails.cs" />
+    <Compile Include="Models\CustomerProfileUpdateRequest.cs" />
     <Compile Include="Models\OperationResult.cs" />
+    <Compile Include="Models\OrderReceipt.cs" />
+    <Compile Include="Models\PasswordResetRequest.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductListCommand.cs" />
+    <Compile Include="Models\ProductSaveRequest.cs" />
     <Compile Include="Models\ProductSearchCriteria.cs" />
+    <Compile Include="Models\ProductValidationResult.cs" />
+    <Compile Include="Models\ReceiptLineItem.cs" />
+    <Compile Include="Models\RegisterRequest.cs" />
+    <Compile Include="Models\ReportDashboardPayload.cs" />
     <Compile Include="Models\SaleChartRow.cs" />
+    <Compile Include="Models\SaleHistoryItem.cs" />
+    <Compile Include="Models\SaleProductItem.cs" />
     <Compile Include="Models\UserAccount.cs" />
+    <Compile Include="Repositories\IOrderRepository.cs" />
     <Compile Include="Repositories\IProductRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\IReportRepository.cs" />
     <Compile Include="Repositories\ReportRepository.cs" />
+    <Compile Include="Services\AdminUserService.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\CartService.cs" />
     <Compile Include="Services\CheckoutService.cs" />
+    <Compile Include="Services\CustomerProfileService.cs" />
+    <Compile Include="Services\CustomerProfileValidationService.cs" />
     <Compile Include="Services\ImageService.cs" />
+    <Compile Include="Services\OrderConfirmationService.cs" />
+    <Compile Include="Services\PasswordResetService.cs" />
+    <Compile Include="Services\ProductManagementService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\ProductValidationService.cs" />
+    <Compile Include="Services\ReceiptEmailService.cs" />
+    <Compile Include="Services\ReceiptHtmlBuilder.cs" />
+    <Compile Include="Services\RegistrationService.cs" />
+    <Compile Include="Services\RegistrationValidationService.cs" />
+    <Compile Include="Services\ReportDashboardService.cs" />
     <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Services\SaleHistoryService.cs" />
     <Compile Include="Services\ThemeService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
