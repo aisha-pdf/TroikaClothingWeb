@@ -7,9 +7,6 @@ namespace TroikaClothingWeb.Services
 {
     public class CartService
     {
-        private const decimal FreeDeliveryThreshold = 500m;
-        private const decimal StandardDeliveryFee = 80m;
-
         public IList<CartItem> GetItems(HttpSessionState session)
         {
             return ShoppingCart.Get(session);
@@ -19,7 +16,7 @@ namespace TroikaClothingWeb.Services
         {
             IList<CartItem> items = GetItems(session);
             decimal subtotal = items.Sum(i => i.LineTotal);
-            decimal delivery = CalculateDeliveryFee(subtotal);
+            decimal delivery = DeliveryRates.CalculateFee(subtotal);
 
             return new CartSummary
             {
@@ -27,6 +24,7 @@ namespace TroikaClothingWeb.Services
                 Subtotal = subtotal,
                 DeliveryFee = delivery,
                 GrandTotal = subtotal + delivery,
+                FreeDeliveryThreshold = DeliveryRates.FreeDeliveryThreshold,
                 EstimatedDeliveryText = estimatedDeliveryText
             };
         }
@@ -39,6 +37,11 @@ namespace TroikaClothingWeb.Services
         public void UpdateQuantity(HttpSessionState session, string productId, string colour, string size, int quantity)
         {
             ShoppingCart.UpdateQuantity(session, productId, colour, size, quantity);
+        }
+
+        public void UpdateVariant(HttpSessionState session, string productId, string oldColour, string oldSize, string newColour, string newSize, int quantity)
+        {
+            ShoppingCart.UpdateVariant(session, productId, oldColour, oldSize, newColour, newSize, quantity);
         }
 
         public void Remove(HttpSessionState session, string productId, string colour, string size)
@@ -54,11 +57,6 @@ namespace TroikaClothingWeb.Services
         public int GetCartCount(HttpSessionState session)
         {
             return GetItems(session).Count;
-        }
-
-        private decimal CalculateDeliveryFee(decimal subtotal)
-        {
-            return subtotal > FreeDeliveryThreshold ? 0m : StandardDeliveryFee;
         }
     }
 }

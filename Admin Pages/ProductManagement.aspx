@@ -44,7 +44,6 @@
                 <asp:GridView ID="GridViewProducts" runat="server" CssClass="grid gridview troika-table" AutoGenerateColumns="False"
                     DataKeyNames="ProductID" AllowPaging="true" PageSize="10"
                     OnRowCommand="GridViewProducts_RowCommand"
-                    OnRowDataBound="GridViewProducts_RowDataBound"
                     OnPageIndexChanging="GridViewProducts_PageIndexChanging">
 
                     <PagerSettings Mode="NumericFirstLast"
@@ -96,7 +95,7 @@
                         <asp:TemplateField HeaderText="Picture">
                             <ItemTemplate>
                                 <asp:Image ID="imgProduct" runat="server"
-                                    ImageUrl='<%# ResolveUrl("~/Admin Pages/ProductImageHandler.ashx?id=" + Eval("ProductID") + "&v=" + DateTime.Now.Ticks) %>'
+                                    ImageUrl='<%# ResolveUrl("~/Admin Pages/ProductImageHandler.ashx?id=" + Eval("ProductID") + "&v=" + Eval("ImageVersion")) %>'
                                     Width="100" Height="100" />
                             </ItemTemplate>
                             <EditItemTemplate>

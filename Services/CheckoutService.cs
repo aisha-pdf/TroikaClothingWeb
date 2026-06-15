@@ -66,8 +66,7 @@ namespace TroikaClothingWeb.Services
             foreach (var item in cart)
                 subtotal += item.UnitPrice * item.Quantity;
 
-            decimal delivery = subtotal > 500m ? 0m : 80m;
-            return subtotal + delivery;
+            return subtotal + DeliveryRates.CalculateFee(subtotal);
         }
 
         private CheckoutResult Fail(string message)

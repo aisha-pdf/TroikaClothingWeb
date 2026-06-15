@@ -60,6 +60,24 @@ namespace TroikaClothingWeb.Public_Pages
         protected global::System.Web.UI.WebControls.Label lblDelivery;
 
         /// <summary>
+        /// dtFillCart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dtFillCart;
+
+        /// <summary>
+        /// lblDeliveryTrackerMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeliveryTrackerMsg;
+
+        /// <summary>
         /// lblTotal control.
         /// </summary>
         /// <remarks>
@@ -220,14 +238,5 @@ namespace TroikaClothingWeb.Public_Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClear;
-
-        /// <summary>
-        /// btnBack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBack;
     }
 }

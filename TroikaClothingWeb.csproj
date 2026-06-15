@@ -356,6 +356,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\delivery-tracker.js" />
     <Content Include="Scripts\product-management.js" />
     <Content Include="Scripts\theme-toggle.js" />
     <Content Include="Content\TroikaTheme.css" />
@@ -672,6 +673,7 @@
     <Compile Include="Models\PasswordResetRequest.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductListCommand.cs" />
+    <Compile Include="Models\ProductOptions.cs" />
     <Compile Include="Models\ProductSaveRequest.cs" />
     <Compile Include="Models\ProductSearchCriteria.cs" />
     <Compile Include="Models\ProductValidationResult.cs" />
@@ -695,6 +697,7 @@
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\CartService.cs" />
     <Compile Include="Services\CheckoutService.cs" />
+    <Compile Include="Services\DeliveryRates.cs" />
     <Compile Include="Services\CustomerProfileService.cs" />
     <Compile Include="Services\CustomerProfileValidationService.cs" />
     <Compile Include="Services\ImageService.cs" />

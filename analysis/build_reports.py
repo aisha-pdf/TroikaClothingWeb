@@ -1,20 +1,4 @@
 """Generate the Python-backed BI reports as JSON for the in-app dashboard.
-
-Computes the analytical reports that are awkward in T-SQL — **RFM customer
-segmentation**, **market-basket affinity**, and a **sales forecast** — and writes
-one JSON file per report into ``../App_Data/reports`` (relative to this file):
-
-    customers.json   RFM segments, new-vs-returning, top customers, repeat rate
-    basket.json      per-order basket stats, items distribution, co-purchase pairs
-    forecast.json    monthly revenue history + 3-month projection
-
-``Admin Pages/ReportDataHandler.ashx`` reads these and serves them to the
-Customers / Basket / Seasonality&Forecast reports. Re-run after data changes:
-
-    python build_reports.py
-
-Connection/config comes from the same env vars as the notebook (see README.md):
-set ``TROIKA_DB_PASSWORD`` (or ``TROIKA_USE_CSV=1`` to read ./data/*.csv).
 """
 import json
 import os

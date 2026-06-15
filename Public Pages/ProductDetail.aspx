@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProductDetail.aspx.cs" Inherits="TroikaClothingWeb.Public_Pages.ProductDetail" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="ProductDetail.aspx.cs" Inherits="TroikaClothingWeb.Public_Pages.ProductDetail" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -159,6 +159,18 @@
             background: var(--troika-btn-hover-bg) !important;
             color: var(--troika-btn-text) !important;
             text-decoration: none;
+        }
+
+        /* Back arrow rendered in CSS so it is encoding-independent */
+        .btn-back::before {
+            content: "\2190"; /* left arrow */
+            margin-right: 6px;
+        }
+
+        .status-message::before {
+            content: "\2713"; /* check mark */
+            margin-right: 6px;
+            font-weight: bold;
         }
 
         .status-message {
@@ -466,6 +478,219 @@
                 width: 80px;
             }
         }
+
+        /* -------------------- ADD-TO-CART CONFIRMATION + QUICK VIEW -------------------- */
+
+        .cart-added-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn-view-cart {
+            background: transparent !important;
+            color: var(--troika-primary) !important;
+            border: 1px solid var(--troika-primary) !important;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 16px !important;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-view-cart:hover {
+            background: var(--troika-primary) !important;
+            color: var(--troika-btn-text) !important;
+            transform: translateY(-1px);
+        }
+
+        /* Quick-view popup window (reuses .popup-overlay backdrop) */
+        .cart-quickview-window {
+            width: 480px;
+            max-width: 92vw;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: left;
+            align-items: stretch;
+            padding: 20px;
+        }
+
+        .qv-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .qv-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--troika-heading-text) !important;
+        }
+
+        .qv-close {
+            background: transparent !important;
+            color: var(--troika-text) !important;
+            border: none !important;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0 6px !important;
+            width: auto !important;
+        }
+
+        .qv-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .qv-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--troika-border);
+        }
+
+        .qv-img {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--troika-border);
+            flex-shrink: 0;
+        }
+
+        .qv-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .qv-item-name {
+            font-weight: 600;
+            color: var(--troika-heading-text) !important;
+            font-size: 14px;
+        }
+
+        .qv-item-meta {
+            margin-top: 4px;
+        }
+
+        .qv-badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            margin-right: 5px;
+            border-radius: 999px;
+            background: var(--troika-surface-alt) !important;
+            color: var(--troika-text) !important;
+            border: 1px solid var(--troika-border);
+        }
+
+        .qv-line-total {
+            font-weight: 700;
+            color: var(--troika-primary) !important;
+            white-space: nowrap;
+        }
+
+        .qv-summary {
+            margin-top: 14px;
+        }
+
+        .qv-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--troika-text) !important;
+        }
+
+        .qv-total {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--troika-heading-text) !important;
+            margin-top: 4px;
+        }
+
+        .qv-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .qv-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none !important;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .qv-btn-secondary {
+            background: transparent !important;
+            color: var(--troika-primary) !important;
+            border: 1px solid var(--troika-primary) !important;
+        }
+
+        .qv-btn-secondary:hover {
+            background: var(--troika-surface-alt) !important;
+            transform: translateY(-1px);
+        }
+
+        .qv-btn-primary {
+            background: var(--troika-btn-bg) !important;
+            color: var(--troika-btn-text) !important;
+            border: 1px solid var(--troika-btn-bg) !important;
+        }
+
+        .qv-btn-primary:hover {
+            background: var(--troika-btn-hover-bg) !important;
+            border-color: var(--troika-btn-hover-bg) !important;
+            transform: translateY(-1px);
+        }
+
+        /* Checkout = green, matching the cart page */
+        .qv-btn-success {
+            background: var(--troika-success) !important;
+            color: #fff !important;
+            border: 1px solid var(--troika-success) !important;
+        }
+
+        body[data-theme="dark"] .qv-btn-success {
+            color: #121018 !important; /* dark text on light-mint green */
+        }
+
+        .qv-btn-success:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+
+        .qv-empty {
+            padding: 24px 0;
+            text-align: center;
+            color: var(--troika-text) !important;
+        }
+
+        /* Quick-view free-delivery bar: green + a touch taller, matching the cart page */
+        .qv-summary .delivery-tracker .dt-track {
+            height: 14px;
+        }
+
+        .qv-summary .delivery-tracker .dt-fill {
+            background: #2C5F2D !important;
+        }
+
+            .qv-summary .delivery-tracker .dt-fill.is-free {
+                background: #34a853 !important;
+            }
     </style>
 
     <div class="product-detail-page">
@@ -473,7 +698,7 @@
         <div class="product-detail-container">
 
             <asp:HyperLink ID="lnkBackToProducts" runat="server" NavigateUrl="~/Public Pages/Products.aspx"
-                CssClass="btn-back" Text="← Back to Products" />
+                CssClass="btn-back" Text="Back to Products" />
 
             <div class="product-detail">
 
@@ -492,40 +717,6 @@
                     <div class="dropdown-section">
                         <asp:Label ID="lblColor" runat="server" CssClass="dropdown-label" Text="Colour:"></asp:Label>
                         <asp:DropDownList ID="ddlColor" runat="server" CssClass="dropdown-select" ToolTip="Please select a colour" Width="126px">
-                            <asp:ListItem>Black</asp:ListItem>
-                            <asp:ListItem>White</asp:ListItem>
-                            <asp:ListItem>Grey</asp:ListItem>
-                            <asp:ListItem>Navy</asp:ListItem>
-                            <asp:ListItem>Beige</asp:ListItem>
-                            <asp:ListItem>Brown</asp:ListItem>
-                            <asp:ListItem>Red</asp:ListItem>
-                            <asp:ListItem>Maroon</asp:ListItem>
-                            <asp:ListItem>Pink</asp:ListItem>
-                            <asp:ListItem>Blush</asp:ListItem>
-                            <asp:ListItem>Orange</asp:ListItem>
-                            <asp:ListItem>Mustard</asp:ListItem>
-                            <asp:ListItem>Yellow</asp:ListItem>
-                            <asp:ListItem>Green</asp:ListItem>
-                            <asp:ListItem>Olive</asp:ListItem>
-                            <asp:ListItem>Mint</asp:ListItem>
-                            <asp:ListItem>Teal</asp:ListItem>
-                            <asp:ListItem>Turquoise</asp:ListItem>
-                            <asp:ListItem>Blue</asp:ListItem>
-                            <asp:ListItem>Sky Blue</asp:ListItem>
-                            <asp:ListItem>Royal Blue</asp:ListItem>
-                            <asp:ListItem>Purple</asp:ListItem>
-                            <asp:ListItem>Lavender</asp:ListItem>
-                            <asp:ListItem>Lilac</asp:ListItem>
-                            <asp:ListItem>Burgundy</asp:ListItem>
-                            <asp:ListItem>Cream</asp:ListItem>
-                            <asp:ListItem>Khaki</asp:ListItem>
-                            <asp:ListItem>Coral</asp:ListItem>
-                            <asp:ListItem>Charcoal</asp:ListItem>
-                            <asp:ListItem>Sage</asp:ListItem>
-                            <asp:ListItem>Mocha</asp:ListItem>
-                            <asp:ListItem>Peach</asp:ListItem>
-                            <asp:ListItem>Tan</asp:ListItem>
-                            <asp:ListItem>Ivory</asp:ListItem>
                         </asp:DropDownList>
                     </div>
 
@@ -534,12 +725,6 @@
                             <asp:Label ID="lblSize" runat="server" CssClass="dropdown-label" Text="Size:"></asp:Label>
                             <div class="size-input-group">
                                 <asp:DropDownList ID="ddlSize" runat="server" CssClass="dropdown-select" ToolTip="Please select a size" Width="80px">
-                                    <asp:ListItem>XS</asp:ListItem>
-                                    <asp:ListItem>S</asp:ListItem>
-                                    <asp:ListItem>M</asp:ListItem>
-                                    <asp:ListItem>L</asp:ListItem>
-                                    <asp:ListItem>XL</asp:ListItem>
-                                    <asp:ListItem></asp:ListItem>
                                 </asp:DropDownList>
                                 <asp:Button ID="btnSizeGuide" runat="server" Text="Size Guide"
                                     CssClass="size-guide-link" OnClick="btnSizeGuide_Click" />
@@ -553,10 +738,21 @@
                             Text="1" TextMode="Number" Width="80px" />
                     </div>
 
-                    <asp:Button ID="btnAddToCart" runat="server" CssClass="btn-add-to-cart"
-                        Text="Add to Cart" OnClick="btnAddToCart_Click" />
+                    <%-- Add to Cart and View Cart both run as partial (async) postbacks so the
+                         page never reloads or bounces. The quick-view popup that View Cart opens
+                         has its own UpdatePanel (further down) wired to btnViewCart. --%>
+                    <asp:UpdatePanel ID="upAddToCart" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:Button ID="btnAddToCart" runat="server" CssClass="btn-add-to-cart"
+                                Text="Add to Cart" OnClick="btnAddToCart_Click" />
 
-                    <asp:Label ID="lblStatus" runat="server" CssClass="status-message" Visible="false" />
+                            <div class="cart-added-bar">
+                                <asp:Label ID="lblStatus" runat="server" CssClass="status-message" Visible="false" />
+                                <asp:Button ID="btnViewCart" runat="server" CssClass="btn-view-cart" Text="View Cart"
+                                    Visible="false" CausesValidation="false" OnClick="btnViewCart_Click" />
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
 
             </div>
@@ -581,6 +777,11 @@
 
     </div>
 
+    <%-- Size guide popup in its own UpdatePanel so the Size Guide button is async
+         (no full-page postback / scroll bounce). --%>
+    <asp:UpdatePanel ID="upSizeGuide" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+
     <asp:Panel ID="pnlOverlay" runat="server" CssClass="popup-overlay" Visible="false">
         <div class="popup-window">
             <div class="popup-image-container">
@@ -591,5 +792,75 @@
                 OnClick="btnClosePopup_Click" />
         </div>
     </asp:Panel>
+
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="btnSizeGuide" EventName="Click" />
+        </Triggers>
+    </asp:UpdatePanel>
+
+    <%-- Quick-view cart popup in its own UpdatePanel so "View Cart" is async (no full-page
+         postback / scroll bounce). Triggered by btnViewCart, which lives in the panel above. --%>
+    <asp:UpdatePanel ID="upCartPopup" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+
+    <asp:Panel ID="pnlCartPopup" runat="server" CssClass="popup-overlay" Visible="false">
+        <div class="popup-window cart-quickview-window">
+            <div class="qv-header">
+                <span class="qv-title">Your Cart (<asp:Label ID="lblQvCount" runat="server" Text="0" />)</span>
+                <asp:Button ID="btnCloseCartPopup" runat="server" Text="×" CssClass="qv-close"
+                    CausesValidation="false" OnClick="btnCloseCartPopup_Click" />
+            </div>
+
+            <asp:PlaceHolder ID="phQvEmpty" runat="server" Visible="false">
+                <div class="qv-empty">Your cart is empty.</div>
+            </asp:PlaceHolder>
+
+            <div class="qv-items">
+                <asp:Repeater ID="rptQuickCart" runat="server">
+                    <ItemTemplate>
+                        <div class="qv-item">
+                            <img class="qv-img" src='<%# Eval("ImageUrl") %>' alt='<%# Eval("ProductName") %>' />
+                            <div class="qv-item-info">
+                                <div class="qv-item-name"><%# Eval("ProductName") %></div>
+                                <div class="qv-item-meta">
+                                    <span class="qv-badge">Colour: <%# Eval("Colour") %></span>
+                                    <span class="qv-badge">Size: <%# Eval("ClothingSize") %></span>
+                                    <span class="qv-badge">x<%# Eval("Quantity") %></span>
+                                </div>
+                            </div>
+                            <div class="qv-line-total">R<%# string.Format("{0:0.00}", Eval("LineTotal")) %></div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+
+            <div class="qv-summary">
+                <div class="qv-row"><span>Subtotal</span><span>R<asp:Label ID="lblQvSubtotal" runat="server" /></span></div>
+                <div class="qv-row"><span>Delivery</span><span><asp:Label ID="lblQvDelivery" runat="server" /></span></div>
+
+                <div class="delivery-tracker">
+                    <div class="dt-track">
+                        <div id="dtFillPopup" runat="server" class="dt-fill"></div>
+                    </div>
+                    <asp:Label ID="lblQvTrackerMsg" runat="server" CssClass="dt-msg" />
+                </div>
+
+                <div class="qv-row qv-total"><span>Total</span><span>R<asp:Label ID="lblQvTotal" runat="server" /></span></div>
+            </div>
+
+            <div class="qv-actions">
+                <a class="qv-btn qv-btn-secondary" href='<%= ResolveUrl("~/Public Pages/Cart.aspx") %>'>Go to Cart</a>
+            </div>
+        </div>
+    </asp:Panel>
+
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="btnViewCart" EventName="Click" />
+        </Triggers>
+    </asp:UpdatePanel>
+
+    <script src="<%= ResolveUrl("~/Scripts/delivery-tracker.js") %>"></script>
 
 </asp:Content>

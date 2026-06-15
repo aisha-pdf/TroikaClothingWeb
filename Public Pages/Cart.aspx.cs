@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using TroikaClothingWeb.Common;
 using TroikaClothingWeb.Models;
@@ -17,7 +19,6 @@ namespace TroikaClothingWeb.Public_Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             rptCart.ItemCommand += rptCart_ItemCommand;
-            btnBack.PostBackUrl = ResolveUrl("~/Public Pages/Products.aspx");
 
             if (!IsPostBack)
             {
@@ -26,19 +27,36 @@ namespace TroikaClothingWeb.Public_Pages
             }
         }
 
+        // The address form's visibility is driven by the "is-open" CSS class (toggled
+        // client-side from "Edit Address"/"Cancel"), not by Visible, so toggling it no
+        // longer requires a postback. The base class list mirrors the .aspx markup.
+        private const string AddressFormBaseClass = "ec-card ec-address ec-address-form";
+
+        private void SetAddressFormOpen(bool open)
+        {
+            PanelAddress.CssClass = open ? AddressFormBaseClass + " is-open" : AddressFormBaseClass;
+        }
+
         private void LoadSavedAddress()
         {
             CustomerAddress address = _userService.GetCustomerAddressForUsername(CurrentUsername);
 
-            if (address == null) return;
+            bool hasCompleteAddress = address != null && address.IsComplete;
 
-            txtStreet.Text = address.StreetAddress;
-            txtSuburb.Text = address.Suburb;
-            txtPostCode.Text = address.PostCode;
+            if (address != null)
+            {
+                txtStreet.Text = address.StreetAddress;
+                txtSuburb.Text = address.Suburb;
+                txtPostCode.Text = address.PostCode;
+            }
 
-            PanelCurrentAddress.Visible = address.IsComplete;
-            if (address.IsComplete)
+            PanelCurrentAddress.Visible = hasCompleteAddress;
+            if (hasCompleteAddress)
                 lblCurrentAddress.Text = address.DisplayText;
+
+            // No usable saved address yet -> open the form by default so the customer can
+            // enter one before they reach checkout.
+            SetAddressFormOpen(!hasCompleteAddress);
         }
 
         private void BindCart()
@@ -56,29 +74,81 @@ namespace TroikaClothingWeb.Public_Pages
             lblEstDelivery.Text = summary.EstimatedDeliveryText;
             lblSubtotal.Text = summary.Subtotal.ToString("0.00");
             lblDelivery.Text = summary.DeliveryDisplayText;
+            lblDelivery.CssClass = summary.QualifiesForFreeDelivery ? "ec-free" : "ec-val";
             lblTotal.Text = summary.GrandTotal.ToString("0.00");
+
+            ApplyDeliveryTracker(summary, dtFillCart, lblDeliveryTrackerMsg);
+        }
+
+        private static void ApplyDeliveryTracker(CartSummary summary, HtmlGenericControl fill, Label message)
+        {
+            // Render at 0 with the goal as data-target; delivery-tracker.js animates it up.
+            fill.Attributes["data-target"] = summary.FreeDeliveryProgressPercent.ToString();
+            fill.Style["width"] = "0%";
+            fill.Attributes["class"] = "dt-fill" + (summary.QualifiesForFreeDelivery ? " is-free" : string.Empty);
+            message.Text = summary.FreeDeliveryMessage;
         }
 
         protected void rptCart_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
+            if (e.CommandName != "remove") return;
+
             var args = (e.CommandArgument ?? "").ToString().Split('|');
-            string productId = args.ElementAtOrDefault(0);
-            string colour = args.ElementAtOrDefault(1);
-            string size = args.ElementAtOrDefault(2);
-
-            if (e.CommandName == "update")
-            {
-                var txt = (TextBox)e.Item.FindControl("txtQty");
-                int quantity;
-                if (int.TryParse(txt.Text, out quantity) && quantity > 0)
-                    _cartService.UpdateQuantity(Session, productId, colour, size, quantity);
-            }
-            else if (e.CommandName == "remove")
-            {
-                _cartService.Remove(Session, productId, colour, size);
-            }
-
+            _cartService.Remove(Session, args.ElementAtOrDefault(0), args.ElementAtOrDefault(1), args.ElementAtOrDefault(2));
             BindCart();
+        }
+
+        protected void rptCart_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
+                return;
+
+            var item = (CartItem)e.Item.DataItem;
+
+            var ddlColour = (DropDownList)e.Item.FindControl("ddlColourEdit");
+            ddlColour.DataSource = ProductOptions.Colours;
+            ddlColour.DataBind();
+            SelectValue(ddlColour, item.Colour);
+
+            var ddlSize = (DropDownList)e.Item.FindControl("ddlSizeEdit");
+            ddlSize.DataSource = ProductOptions.Sizes;
+            ddlSize.DataBind();
+            SelectValue(ddlSize, item.ClothingSize);
+        }
+
+        protected void rptCart_ItemChanged(object sender, EventArgs e)
+        {
+            var row = ((Control)sender).NamingContainer as RepeaterItem;
+            if (row == null) return;
+
+            var key = (((HiddenField)row.FindControl("hfKey")).Value ?? string.Empty).Split('|');
+            string productId = key.ElementAtOrDefault(0);
+            string oldColour = key.ElementAtOrDefault(1);
+            string oldSize = key.ElementAtOrDefault(2);
+
+            string newColour = ((DropDownList)row.FindControl("ddlColourEdit")).SelectedValue;
+            string newSize = ((DropDownList)row.FindControl("ddlSizeEdit")).SelectedValue;
+
+            int qty;
+            if (!int.TryParse(((TextBox)row.FindControl("txtQty")).Text, out qty))
+                qty = 1;
+
+            _cartService.UpdateVariant(Session, productId, oldColour, oldSize, newColour, newSize, qty);
+            BindCart();
+        }
+
+        // Selects value in the list; if the stored value isn't a standard option, inserts it so nothing is lost.
+        private static void SelectValue(DropDownList ddl, string value)
+        {
+            value = value ?? string.Empty;
+            ListItem match = ddl.Items.FindByValue(value);
+            if (match == null && value.Length > 0)
+            {
+                match = new ListItem(value, value);
+                ddl.Items.Insert(0, match);
+            }
+            ddl.ClearSelection();
+            if (match != null) match.Selected = true;
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
@@ -95,7 +165,8 @@ namespace TroikaClothingWeb.Public_Pages
             {
                 lblMessage.ForeColor = System.Drawing.Color.Red;
                 lblMessage.Text = result.Message;
-                PanelAddress.Visible = result.Message.Contains("address") || result.Message.Contains("linked");
+                if (result.Message.Contains("address") || result.Message.Contains("linked"))
+                    SetAddressFormOpen(true);
                 return;
             }
 
@@ -113,20 +184,9 @@ namespace TroikaClothingWeb.Public_Pages
             lblMessage.Text = result.Message;
 
             if (result.Success)
-            {
-                PanelAddress.Visible = false;
-                LoadSavedAddress();
-            }
-        }
-
-        protected void btnToggleAddress_Click(object sender, EventArgs e)
-        {
-            PanelAddress.Visible = !PanelAddress.Visible;
-        }
-
-        protected void btnCancelAddress_Click(object sender, EventArgs e)
-        {
-            PanelAddress.Visible = false;
+                LoadSavedAddress();        // refreshes the summary and closes the form
+            else
+                SetAddressFormOpen(true);  // keep the form open so they can fix it
         }
     }
 }

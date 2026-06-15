@@ -15,7 +15,7 @@ namespace TroikaClothingWeb.Repositories
             var products = new List<Product>();
 
             string sql = @"
-                SELECT ProductID, ProductName, Description, Category, Price, ProductionTime, Status, Picture
+                SELECT ProductID, ProductName, Description, Category, Price, ProductionTime, Status, CAST(CASE WHEN Picture IS NULL THEN 0 ELSE 1 END AS bit) AS HasPicture, DATALENGTH(Picture) AS ImageVersion
                 FROM Product
                 WHERE Status = 'Active'";
 
@@ -51,7 +51,7 @@ namespace TroikaClothingWeb.Repositories
             var products = new List<Product>();
 
             const string sql = @"
-                SELECT TOP (@Limit) ProductID, ProductName, Description, Category, Price, ProductionTime, Status, Picture
+                SELECT TOP (@Limit) ProductID, ProductName, Description, Category, Price, ProductionTime, Status, CAST(CASE WHEN Picture IS NULL THEN 0 ELSE 1 END AS bit) AS HasPicture, DATALENGTH(Picture) AS ImageVersion
                 FROM Product
                 WHERE Status = 'Active' AND Category = @Category
                 ORDER BY ProductName";
@@ -98,7 +98,7 @@ namespace TroikaClothingWeb.Repositories
             if (string.IsNullOrWhiteSpace(productId)) return null;
 
             const string sql = @"
-                SELECT ProductID, ProductName, Description, Category, Price, ProductionTime, Status, Picture
+                SELECT ProductID, ProductName, Description, Category, Price, ProductionTime, Status, CAST(CASE WHEN Picture IS NULL THEN 0 ELSE 1 END AS bit) AS HasPicture, DATALENGTH(Picture) AS ImageVersion
                 FROM Product
                 WHERE ProductID = @ProductID AND Status = 'Active'";
 
@@ -120,7 +120,7 @@ namespace TroikaClothingWeb.Repositories
             if (string.IsNullOrWhiteSpace(category) || string.IsNullOrWhiteSpace(excludedProductId)) return products;
 
             const string sql = @"
-                SELECT TOP (@Limit) ProductID, ProductName, Description, Category, Price, ProductionTime, Status, Picture
+                SELECT TOP (@Limit) ProductID, ProductName, Description, Category, Price, ProductionTime, Status, CAST(CASE WHEN Picture IS NULL THEN 0 ELSE 1 END AS bit) AS HasPicture, DATALENGTH(Picture) AS ImageVersion
                 FROM Product
                 WHERE Category = @Category AND ProductID <> @ProductID AND Status = 'Active'
                 ORDER BY ProductName";
@@ -163,7 +163,7 @@ namespace TroikaClothingWeb.Repositories
             bool hasSearch = !string.IsNullOrWhiteSpace(searchText);
 
             string sql = @"
-                SELECT ProductID, ProductName, [Description], Category, Price, ProductionTime, Status, Picture
+                SELECT ProductID, ProductName, [Description], Category, Price, ProductionTime, Status, CAST(CASE WHEN Picture IS NULL THEN 0 ELSE 1 END AS bit) AS HasPicture, DATALENGTH(Picture) AS ImageVersion
                 FROM Product
                 WHERE 1 = 1";
 
@@ -214,7 +214,7 @@ namespace TroikaClothingWeb.Repositories
             if (string.IsNullOrWhiteSpace(productId)) return null;
 
             const string sql = @"
-                SELECT ProductID, ProductName, [Description], Category, Price, ProductionTime, Status, Picture
+                SELECT ProductID, ProductName, [Description], Category, Price, ProductionTime, Status, CAST(CASE WHEN Picture IS NULL THEN 0 ELSE 1 END AS bit) AS HasPicture, DATALENGTH(Picture) AS ImageVersion
                 FROM Product
                 WHERE ProductID = @ProductID";
 
@@ -364,7 +364,8 @@ namespace TroikaClothingWeb.Repositories
                 Price = reader["Price"] == DBNull.Value ? 0m : Convert.ToDecimal(reader["Price"]),
                 ProductionTime = reader["ProductionTime"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ProductionTime"]),
                 Status = reader["Status"].ToString(),
-                HasPicture = reader["Picture"] != DBNull.Value
+                HasPicture = reader["HasPicture"] != DBNull.Value && Convert.ToBoolean(reader["HasPicture"]),
+                ImageVersion = reader["ImageVersion"] == DBNull.Value ? 0L : Convert.ToInt64(reader["ImageVersion"])
             };
         }
     }

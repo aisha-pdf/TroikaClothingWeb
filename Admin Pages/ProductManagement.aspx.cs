@@ -130,16 +130,6 @@ namespace TroikaClothingWeb.Admin_Pages
             ShowList();
         }
 
-        protected void GridViewProducts_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                Image img = e.Row.FindControl("imgProduct") as Image;
-                if (img != null)
-                    img.ImageUrl += "&v=" + DateTime.Now.Ticks.ToString();
-            }
-        }
-
         protected void GridViewProducts_RowEditing(object sender, GridViewEditEventArgs e)
         {
             e.Cancel = true;
@@ -284,7 +274,7 @@ namespace TroikaClothingWeb.Admin_Pages
             txtEditPrice.Text = product.Price.ToString(CultureInfo.InvariantCulture);
             ddlEditStatus.SelectedValue = product.Status;
 
-            imgEditCurrent.ImageUrl = ResolveUrl("~/Admin Pages/ProductImageHandler.ashx?id=" + productId + "&v=" + DateTime.Now.Ticks);
+            imgEditCurrent.ImageUrl = ResolveUrl("~/Admin Pages/ProductImageHandler.ashx?id=" + productId + "&v=" + product.ImageVersion);
             ShowEdit();
         }
 

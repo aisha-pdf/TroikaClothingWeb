@@ -65,16 +65,16 @@ namespace TroikaClothingWeb.Services
         private Product PrepareProduct(Product product)
         {
             if (product == null) return null;
-            product.ImageUrl = BuildImageUrl(product.ProductID, product.HasPicture);
+            product.ImageUrl = BuildImageUrl(product.ProductID, product.HasPicture, product.ImageVersion);
             product.ImagePath = product.ImageUrl;
             product.DetailUrl = "~/Public Pages/ProductDetail.aspx?id=" + HttpUtility.UrlEncode(product.ProductID);
             return product;
         }
 
-        private static string BuildImageUrl(string productId, bool hasPicture)
+        private static string BuildImageUrl(string productId, bool hasPicture, long imageVersion)
         {
             if (!hasPicture) return "~/Images/Image_not_available.png";
-            return "~/Public Pages/ProductImageHandler.ashx?id=" + HttpUtility.UrlEncode(productId);
+            return "~/Public Pages/ProductImageHandler.ashx?id=" + HttpUtility.UrlEncode(productId) + "&v=" + imageVersion;
         }
     }
 }

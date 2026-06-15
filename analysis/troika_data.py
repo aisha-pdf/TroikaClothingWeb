@@ -1,20 +1,3 @@
-"""Shared data loading for the Troika BI Python tools.
-
-Both the analysis notebook (``troika_bi_analysis.py``) and the report builder
-(``build_reports.py``) import from here, so the connection details and the
-line-level table are defined once.
-
-Configuration (env vars; only the password must be set, the rest default to the
-project's known values):
-
-    TROIKA_DB_PASSWORD   required unless TROIKA_USE_CSV=1
-    TROIKA_DB_SERVER     default 146.230.177.46
-    TROIKA_DB_NAME       default WstGrp10
-    TROIKA_DB_USER       default WstGrp10
-    TROIKA_ODBC_DRIVER   default "ODBC Driver 17 for SQL Server"
-    TROIKA_USE_CSV=1     load ./data/*.csv instead of the live database
-    TROIKA_CSV_DIR       default "data"
-"""
 import os
 import urllib.parse
 

@@ -1,5 +1,8 @@
 using System;
+using System.Text;
 using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using TroikaClothingWeb.Common;
 using TroikaClothingWeb.Models;
 using TroikaClothingWeb.Services;
@@ -15,9 +18,19 @@ namespace TroikaClothingWeb.Public_Pages
         {
             if (!IsPostBack)
             {
+                BindOptionLists();
                 LoadProductDetails();
                 LoadRelatedProducts();
             }
+        }
+
+        private void BindOptionLists()
+        {
+            ddlColor.DataSource = ProductOptions.Colours;
+            ddlColor.DataBind();
+
+            ddlSize.DataSource = ProductOptions.Sizes;
+            ddlSize.DataBind();
         }
 
         private void LoadProductDetails()
@@ -89,6 +102,84 @@ namespace TroikaClothingWeb.Public_Pages
 
             lblStatus.Text = HttpUtility.HtmlEncode(product.ProductName) + " added to cart successfully!";
             lblStatus.Visible = true;
+            btnViewCart.Visible = true;
+
+            // Add to Cart is now an async (UpdatePanel) postback, so the master page — and
+            // its cart-count badge — is not re-rendered. Push the new count to the badge
+            // in the browser so it stays in sync without a full reload.
+            SyncCartBadgeClientSide();
+        }
+
+        private void SyncCartBadgeClientSide()
+        {
+            string count = _cartService.GetCartCount(Session).ToString();
+            var script = new StringBuilder();
+
+            foreach (string id in new[] { "lblCartCount", "Label2" })
+            {
+                var label = FindControlRecursive(Master, id) as Label;
+                if (label != null)
+                    script.AppendFormat(
+                        "var e=document.getElementById('{0}');if(e){{e.textContent='{1}';}}",
+                        label.ClientID, count);
+            }
+
+            if (script.Length > 0)
+                ScriptManager.RegisterStartupScript(btnAddToCart, typeof(ProductDetail), "syncCartBadge", script.ToString(), true);
+        }
+
+        private static Control FindControlRecursive(Control root, string id)
+        {
+            if (root == null) return null;
+            if (string.Equals(root.ID, id, StringComparison.Ordinal)) return root;
+
+            foreach (Control child in root.Controls)
+            {
+                Control found = FindControlRecursive(child, id);
+                if (found != null) return found;
+            }
+            return null;
+        }
+
+        protected void btnViewCart_Click(object sender, EventArgs e)
+        {
+            BindCartPopup();
+            pnlCartPopup.Visible = true;
+        }
+
+        protected void btnCloseCartPopup_Click(object sender, EventArgs e)
+        {
+            pnlCartPopup.Visible = false;
+        }
+
+        private void BindCartPopup()
+        {
+            CartSummary summary = _cartService.GetSummary(Session, null);
+
+            phQvEmpty.Visible = !summary.HasItems;
+
+            rptQuickCart.DataSource = summary.Items;
+            rptQuickCart.DataBind();
+
+            lblQvCount.Text = summary.ItemCount.ToString();
+            lblQvSubtotal.Text = summary.Subtotal.ToString("0.00");
+            lblQvDelivery.Text = summary.DeliveryDisplayText;
+            lblQvTotal.Text = summary.GrandTotal.ToString("0.00");
+
+            dtFillPopup.Attributes["data-target"] = summary.FreeDeliveryProgressPercent.ToString();
+            dtFillPopup.Style["width"] = "0%";
+            dtFillPopup.Attributes["class"] = "dt-fill" + (summary.QualifiesForFreeDelivery ? " is-free" : string.Empty);
+            lblQvTrackerMsg.Text = summary.FreeDeliveryMessage;
+
+            // The popup is shown via an async UpdatePanel, so page-load JS has already run and
+            // won't fill the bar. Emit the fill as part of the partial response so it animates
+            // every time the popup opens (independent of any cached delivery-tracker.js).
+            const string fillBar =
+                "(function(){var f=document.querySelectorAll('.dt-fill[data-target]');" +
+                "requestAnimationFrame(function(){requestAnimationFrame(function(){" +
+                "for(var i=0;i<f.length;i++){f[i].style.width=(f[i].getAttribute('data-target')||'0')+'%';}" +
+                "});});})();";
+            ScriptManager.RegisterStartupScript(pnlCartPopup, typeof(ProductDetail), "qvFillBar", fillBar, true);
         }
 
         private int ParseQuantity(string quantityText)

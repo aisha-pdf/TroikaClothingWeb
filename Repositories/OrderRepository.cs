@@ -111,7 +111,8 @@ namespace TroikaClothingWeb.Repositories
                        Product.Category,
                        ProductSold.quantity,
                        ProductSold.clothingSize,
-                       ProductSold.colour
+                       ProductSold.colour,
+                       DATALENGTH(Product.Picture) AS ImageVersion
                 FROM Product
                 INNER JOIN ProductSold
                     ON Product.ProductID = ProductSold.ProductID
@@ -136,7 +137,8 @@ namespace TroikaClothingWeb.Repositories
                             Category = Convert.ToString(reader["Category"]),
                             Quantity = reader["quantity"] == DBNull.Value ? 0 : Convert.ToInt32(reader["quantity"]),
                             ClothingSize = Convert.ToString(reader["clothingSize"]),
-                            Colour = Convert.ToString(reader["colour"])
+                            Colour = Convert.ToString(reader["colour"]),
+                            ImageVersion = reader["ImageVersion"] == DBNull.Value ? 0L : Convert.ToInt64(reader["ImageVersion"])
                         });
                     }
                 }
