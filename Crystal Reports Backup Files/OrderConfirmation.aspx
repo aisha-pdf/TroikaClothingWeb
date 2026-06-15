@@ -243,6 +243,20 @@
                 border-color: #644F7D !important;
             }
 
+        /* Save receipt = green with white text. Scoped under .receipt so it beats the
+           global input[type=submit] !important rule (specificity 0,1,1) in TroikaTheme.css. */
+        .receipt .btn-success {
+            background: #2C5F2D !important;
+            color: #ffffff !important;
+            border: 1px solid #2C5F2D !important;
+        }
+
+            .receipt .btn-success:hover {
+                background: #24521f !important;
+                color: #ffffff !important;
+                border-color: #24521f !important;
+            }
+
         #MainContent_lblEmailStatus {
             display: block;
             margin-top: 10px;
@@ -335,8 +349,8 @@
 
                             <div class="panel-bottom">
                                 <a class="btn btn-light-purple" href="/Public Pages/Products.aspx">← Continue shopping</a>
-                                <asp:Button ID="btnSavePdf" runat="server" Text="💾 Save receipt (PDF)" CssClass="btn btn-primary" OnClientClick="saveReceiptAsPdf(); return false;" />
-                                <asp:Button ID="btnResendEmail" runat="server" Text="✉ Resend receipt" CssClass="btn btn-light-purple" OnClick="btnEmail_Click" />
+                                <asp:Button ID="btnSavePdf" runat="server" Text="Save receipt (PDF)" CssClass="btn btn-success" OnClientClick="saveReceiptAsPdf(); return false;" />
+                                <asp:Button ID="btnResendEmail" runat="server" Text="Resend receipt" CssClass="btn btn-light-purple" OnClick="btnEmail_Click" />
                                 <asp:Label ID="lblEmailStatus" runat="server" CssClass="muted" Style="margin-left: 8px;" />
                             </div>
                         </div>
@@ -487,7 +501,7 @@
 <body>
 
     <div class="logo-box">
-        <!-- ✔ Bigger logo -->
+        <!-- Bigger logo -->
         <img src="/Images/logo.png" height="110">
     </div>
 
