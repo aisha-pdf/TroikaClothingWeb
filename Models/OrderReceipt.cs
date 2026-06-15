@@ -11,6 +11,7 @@ namespace TroikaClothingWeb.Models
         public string PaymentMethod { get; set; }
         public decimal PaymentTotal { get; set; }
         public string SaleChannel { get; set; }
+        public string SalesStatus { get; set; }
         public string CustomerID { get; set; }
         public string CustomerEmail { get; set; }
         public string CustomerName { get; set; }

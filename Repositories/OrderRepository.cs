@@ -148,7 +148,7 @@ namespace TroikaClothingWeb.Repositories
         private OrderReceipt GetReceiptHeader(string receiptNumber)
         {
             const string sql = @"
-                SELECT s.receiptNum, s.dateOfIssue, s.paymentMethod, s.paymentTotal, s.saleChannel,
+                SELECT s.receiptNum, s.dateOfIssue, s.paymentMethod, s.paymentTotal, s.saleChannel, s.salesStatus,
                        c.customerID, c.email, c.streetAddress, c.suburb, c.postCode,
                        rc.name, rc.surname
                 FROM Sale s
@@ -174,6 +174,7 @@ namespace TroikaClothingWeb.Repositories
                         PaymentMethod = Convert.ToString(reader["paymentMethod"]),
                         PaymentTotal = Convert.ToDecimal(reader["paymentTotal"]),
                         SaleChannel = Convert.ToString(reader["saleChannel"]),
+                        SalesStatus = Convert.ToString(reader["salesStatus"]),
                         CustomerID = Convert.ToString(reader["customerID"]),
                         CustomerEmail = Convert.ToString(reader["email"]),
                         CustomerName = Convert.ToString(reader["name"]),
@@ -190,7 +191,7 @@ namespace TroikaClothingWeb.Repositories
         {
             const string sql = @"
                 SELECT ps.ProductID, ps.clothingSize, ps.colour, ps.quantity,
-                       p.ProductName, p.Price, p.ProductionTime
+                       p.ProductName, p.Price, p.ProductionTime, p.Picture
                 FROM ProductSold ps
                 JOIN Product p ON p.ProductID = ps.ProductID
                 WHERE ps.receiptID = @ReceiptNumber";
@@ -211,6 +212,8 @@ namespace TroikaClothingWeb.Repositories
                         int productionTime = 0;
                         int.TryParse(Convert.ToString(reader["ProductionTime"]), out productionTime);
 
+                        byte[] picture = reader["Picture"] == DBNull.Value ? null : (byte[])reader["Picture"];
+
                         receipt.Items.Add(new ReceiptLineItem
                         {
                             ProductID = Convert.ToString(reader["ProductID"]),
@@ -220,7 +223,8 @@ namespace TroikaClothingWeb.Repositories
                             Quantity = quantity,
                             UnitPrice = unitPrice,
                             LineTotal = unitPrice * quantity,
-                            ProductionTime = productionTime
+                            ProductionTime = productionTime,
+                            Picture = picture
                         });
                     }
                 }

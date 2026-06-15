@@ -11,6 +11,9 @@ namespace TroikaClothingWeb.Models
         public decimal LineTotal { get; set; }
         public int ProductionTime { get; set; }
 
+        // Product image bytes (Product.Picture BLOB), used to embed inline thumbnails in the receipt email.
+        public byte[] Picture { get; set; }
+
         // These aliases keep the existing OrderConfirmation.aspx Repeater bindings working.
         public string clothingSize { get { return ClothingSize; } }
         public string colour { get { return Colour; } }

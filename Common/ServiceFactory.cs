@@ -59,10 +59,5 @@ namespace TroikaClothingWeb.Common
         {
             return new ReportService(new ReportRepository());
         }
-
-        public static ReportDashboardService CreateReportDashboardService()
-        {
-            return new ReportDashboardService(CreateReportService());
-        }
     }
 }

@@ -1,0 +1,122 @@
+{
+  "generatedAt": "2026-06-15",
+  "rfm": {
+    "segments": [
+      {
+        "Label": "Hibernating",
+        "Customers": 5,
+        "Revenue": 7904.83
+      },
+      {
+        "Label": "Loyal",
+        "Customers": 4,
+        "Revenue": 11992.8
+      },
+      {
+        "Label": "Champions",
+        "Customers": 3,
+        "Revenue": 118191.64
+      },
+      {
+        "Label": "New / promising",
+        "Customers": 2,
+        "Revenue": 3887.95
+      }
+    ]
+  },
+  "newVsReturning": [
+    {
+      "Label": "2025-06",
+      "New": 8,
+      "Returning": 0
+    },
+    {
+      "Label": "2025-09",
+      "New": 0,
+      "Returning": 1
+    },
+    {
+      "Label": "2025-11",
+      "New": 4,
+      "Returning": 0
+    },
+    {
+      "Label": "2026-04",
+      "New": 0,
+      "Returning": 1
+    },
+    {
+      "Label": "2026-05",
+      "New": 0,
+      "Returning": 1
+    },
+    {
+      "Label": "2026-06",
+      "New": 2,
+      "Returning": 1
+    }
+  ],
+  "topCustomers": [
+    {
+      "Customer": "mariamkhan1307@gmail.com",
+      "Orders": 79,
+      "Revenue": 104417.83,
+      "AOV": 1321.74
+    },
+    {
+      "Customer": "masaib1505@gmail.com",
+      "Orders": 10,
+      "Revenue": 8277.82,
+      "AOV": 827.78
+    },
+    {
+      "Customer": "abbaomaraisha@gmail.com",
+      "Orders": 3,
+      "Revenue": 5495.99,
+      "AOV": 1832.0
+    },
+    {
+      "Customer": "pbotha@telkomsa.net",
+      "Orders": 2,
+      "Revenue": 4994.74,
+      "AOV": 2497.37
+    },
+    {
+      "Customer": "keshamoodley@gmail.com",
+      "Orders": 2,
+      "Revenue": 3998.6,
+      "AOV": 1999.3
+    },
+    {
+      "Customer": "mthembuayanda@vodamail.co.za",
+      "Orders": 1,
+      "Revenue": 2821.12,
+      "AOV": 2821.12
+    },
+    {
+      "Customer": "meganvwyk@icloud.com",
+      "Orders": 1,
+      "Revenue": 2698.19,
+      "AOV": 2698.19
+    },
+    {
+      "Customer": "naidooj@mweb.co.za",
+      "Orders": 3,
+      "Revenue": 2219.48,
+      "AOV": 739.83
+    },
+    {
+      "Customer": "erinnaidu@gmail.com",
+      "Orders": 1,
+      "Revenue": 2048.97,
+      "AOV": 2048.97
+    },
+    {
+      "Customer": "dkhan@gmail.com",
+      "Orders": 1,
+      "Revenue": 1838.98,
+      "AOV": 1838.98
+    }
+  ],
+  "repeatRate": 0.429
+}

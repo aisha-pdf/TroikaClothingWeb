@@ -299,7 +299,6 @@
     <Content Include="Content\CustomerProfile.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\ProductManagement.css" />
-    <Content Include="Content\Reports.css" />
     <Content Include="Content\ResetPassword.css" />
     <Content Include="Content\SaleHistory.css" />
     <Content Include="Controls\AdminSidebar.ascx" />
@@ -358,7 +357,6 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\product-management.js" />
-    <Content Include="Scripts\reports-charts.js" />
     <Content Include="Scripts\theme-toggle.js" />
     <Content Include="Content\TroikaTheme.css" />
     <Content Include="Default.aspx" />
@@ -412,6 +410,7 @@
     <Content Include="Account\Web.config" />
     <Content Include="Public Pages\ProductImageHandler.ashx" />
     <Content Include="Admin Pages\ProductImageHandler.ashx" />
+    <Content Include="Admin Pages\ReportDataHandler.ashx" />
     <None Include="Properties\PublishProfiles\IST-WST-Group-10 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
@@ -604,6 +603,9 @@
     <Compile Include="Admin Pages\ProductImageHandler.ashx.cs">
       <DependentUpon>ProductImageHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Admin Pages\ReportDataHandler.ashx.cs">
+      <DependentUpon>ReportDataHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Admin Pages\ProductManagement.aspx.cs">
       <DependentUpon>ProductManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -675,7 +677,8 @@
     <Compile Include="Models\ProductValidationResult.cs" />
     <Compile Include="Models\ReceiptLineItem.cs" />
     <Compile Include="Models\RegisterRequest.cs" />
-    <Compile Include="Models\ReportDashboardPayload.cs" />
+    <Compile Include="Models\DashboardKpis.cs" />
+    <Compile Include="Models\ReportFilter.cs" />
     <Compile Include="Models\SaleChartRow.cs" />
     <Compile Include="Models\SaleHistoryItem.cs" />
     <Compile Include="Models\SaleProductItem.cs" />
@@ -704,7 +707,6 @@
     <Compile Include="Services\ReceiptHtmlBuilder.cs" />
     <Compile Include="Services\RegistrationService.cs" />
     <Compile Include="Services\RegistrationValidationService.cs" />
-    <Compile Include="Services\ReportDashboardService.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\SaleHistoryService.cs" />
     <Compile Include="Services\ThemeService.cs" />
@@ -823,6 +825,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\reports\basket.json" />
+    <Content Include="App_Data\reports\customers.json" />
+    <Content Include="App_Data\reports\forecast.json" />
+    <None Include="analysis\build_reports.py" />
+    <None Include="analysis\troika_bi_analysis.py" />
+    <None Include="analysis\troika_data.py" />
+    <None Include="REPORTS_BREAKDOWN.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
