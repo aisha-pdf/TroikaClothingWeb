@@ -272,25 +272,25 @@
             gap: 6px;
         }
 
-        .cart .qty-stepper .step-btn {
-            width: 34px;
-            height: 44px;
-            padding: 0 !important;
-            border: 1px solid #d1d5db !important;
-            border-radius: 6px !important;
-            background: #ffffff !important;
-            color: var(--cart-text-purple) !important;
-            font-size: 18px;
-            font-weight: 700;
-            line-height: 1;
-            cursor: pointer;
-        }
-
-            .cart .qty-stepper .step-btn:hover {
-                background: var(--cart-light-purple) !important;
-                border-color: var(--cart-border) !important;
+            .cart .qty-stepper .step-btn {
+                width: 34px;
+                height: 44px;
+                padding: 0 !important;
+                border: 1px solid #d1d5db !important;
+                border-radius: 6px !important;
+                background: #ffffff !important;
                 color: var(--cart-text-purple) !important;
+                font-size: 18px;
+                font-weight: 700;
+                line-height: 1;
+                cursor: pointer;
             }
+
+                .cart .qty-stepper .step-btn:hover {
+                    background: var(--cart-light-purple) !important;
+                    border-color: var(--cart-border) !important;
+                    color: var(--cart-text-purple) !important;
+                }
 
         /* ---- Free-delivery tracker label colours inside the summary panel ---- */
         .cart .panel .ec-val {
@@ -493,20 +493,33 @@
 
         /* ---- Checkout = solid green with white text; scoped under .cart + !important to
                beat the global button rule (button/input[type=button]) in TroikaTheme.css ---- */
-        .cart .btn-success {
+        /* ---- Checkout button: green with white text in both light and dark mode ---- */
+        .cart .btn-success,
+        .cart input.btn-success,
+        .cart input[type="submit"].btn-success,
+        .cart input[type="button"].btn-success {
             background: #2C5F2D !important;
             color: #ffffff !important;
             border: 1px solid #2C5F2D !important;
+            -webkit-text-fill-color: #ffffff !important;
         }
 
-            .cart .btn-success:hover {
+            .cart .btn-success:hover,
+            .cart input.btn-success:hover,
+            .cart input[type="submit"].btn-success:hover,
+            .cart input[type="button"].btn-success:hover {
                 background: #24521f !important;
                 color: #ffffff !important;
+                border-color: #24521f !important;
+                -webkit-text-fill-color: #ffffff !important;
             }
 
-            .cart .btn-success:disabled {
+            .cart .btn-success:disabled,
+            .cart input.btn-success:disabled {
                 opacity: 0.7;
                 cursor: default;
+                color: #ffffff !important;
+                -webkit-text-fill-color: #ffffff !important;
             }
 
         /* Cancel inside the address form is red; re-assert white text because the form
@@ -527,21 +540,21 @@
             margin: 12px 0 16px 0;
         }
 
-        .cart .delivery-tracker .dt-track {
-            height: 16px;
-        }
-
-        .cart .delivery-tracker .dt-fill {
-            background: #2C5F2D !important;
-        }
-
-            .cart .delivery-tracker .dt-fill.is-free {
-                background: #34a853 !important;
+            .cart .delivery-tracker .dt-track {
+                height: 16px;
             }
 
-        .cart .delivery-tracker .dt-msg {
-            font-size: 14px;
-        }
+            .cart .delivery-tracker .dt-fill {
+                background: #2C5F2D !important;
+            }
+
+                .cart .delivery-tracker .dt-fill.is-free {
+                    background: #34a853 !important;
+                }
+
+            .cart .delivery-tracker .dt-msg {
+                font-size: 14px;
+            }
 
         /* ---- Dark mode: cart item rows (surface set via vars above) + their controls ---- */
         body[data-theme="dark"] .item {

@@ -52,19 +52,19 @@
       <HintPath>packages\Azure.Identity.1.14.2\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.ReportSource">
-      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Shared">
-      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Shared.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Web">
-      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Web.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Web.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Windows.Forms">
-      <HintPath>..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win64_x64\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
@@ -311,6 +311,11 @@
     <Content Include="Images\3.png" />
     <Content Include="Images\banner.png" />
     <Content Include="Images\Image_not_available.png" />
+    <Content Include="Images\PageImages\about-cmt.jpeg" />
+    <Content Include="Images\PageImages\about-hero.jpeg" />
+    <Content Include="Images\PageImages\about-sewing.jpeg" />
+    <Content Include="Images\PageImages\about-story.jpeg" />
+    <Content Include="Images\PageImages\contact-side.jpeg" />
     <Content Include="Images\Reports\Monthly Performance Report.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -368,8 +373,13 @@
     <Content Include="Images\denim skirt.jpeg" />
     <Content Include="Images\evening silk gown.jpeg" />
     <Content Include="Images\formal linen blazer.jpeg" />
+    <Content Include="Images\hoodie-brown.jpg" />
+    <Content Include="Images\hoodie-navy.jpg" />
     <Content Include="Images\light blue maxi dress.jpeg" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo-mark.png" />
+    <Content Include="Images\outfit-burgundy.jpg" />
+    <Content Include="Images\outfit-green.jpg" />
     <Content Include="Images\red summer dress.jpeg" />
     <Content Include="Images\white linen pants.jpeg" />
     <Content Include="Images\white office shirt.jpeg" />
@@ -826,9 +836,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="App_Data\reports\basket.json" />
     <Content Include="App_Data\reports\customers.json" />
@@ -836,7 +844,6 @@
     <None Include="analysis\build_reports.py" />
     <None Include="analysis\troika_bi_analysis.py" />
     <None Include="analysis\troika_data.py" />
-    <None Include="REPORTS_BREAKDOWN.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

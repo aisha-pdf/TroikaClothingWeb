@@ -174,6 +174,7 @@
                 </div>
                 <div class="bi-actions no-print">
                     <button type="button" id="btnPrint" class="bi-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:7px"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print / Save as PDF</button>
+                    <button type="button" id="btnExport" class="bi-btn secondary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:7px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download Excel</button>
                     <button type="button" id="btnHelp" class="bi-help-btn" title="What am I looking at?" aria-label="Help">?</button>
                 </div>
             </div>
@@ -248,6 +249,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
     <script>
         (function () {
             var HANDLER_URL = encodeURI("<%= ResolveUrl("~/Admin Pages/ReportDataHandler.ashx") %>");
@@ -758,6 +760,240 @@
                     .catch(function (e) { loading.style.display = "none"; error.textContent = "Could not load report data: " + e.message; error.style.display = "block"; });
             }
 
+            // ---------- Excel export (formatted multi-sheet workbook + embedded charts) ----------
+            // Single source of truth for the look of the workbook, so every sheet is consistent.
+            var XL_BRAND = "FF4B2E83";        // Troika purple - header bands and titles
+            var XL_WHITE = "FFFFFFFF";
+            var XL_MONEY = '"R"#,##0.00';     // currency columns (matches the KPI sheet)
+            var XL_COUNT = '#,##0';           // whole-number / count columns
+            var XL_PCT = '0.0%';              // percentage columns (values stored as fractions)
+
+            var DATASET_LABELS = {
+                trend: "Sales Trend", trendDaily: "Sales Trend (Daily)", aov: "Average Order Value Trend",
+                category: "Revenue by Category", topProducts: "Top Products", payment: "Payment Methods",
+                channel: "Sales Channels", status: "Order Status", region: "Sales by Region",
+                size: "Size Breakdown", colour: "Colour Breakdown", categoryMix: "Category Mix Over Time",
+                statusTrend: "Status Trend", completion: "Completion Trend", leadTime: "Lead Time by Category",
+                delivery: "Delivery Split", byMonth: "Seasonality by Month", byWeekday: "Seasonality by Weekday",
+                byHour: "Seasonality by Hour"
+            };
+            function prettyLabel(k) {
+                return DATASET_LABELS[k] || String(k).replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, function (c) { return c.toUpperCase(); });
+            }
+            function isRowArray(v) {
+                return Array.isArray(v) && v.length > 0 && v[0] && typeof v[0] === "object" && !Array.isArray(v[0]);
+            }
+
+            // Money is reliably named "Revenue"/"Price" in the report SQL. The generic "Value" column
+            // is NOT money for most datasets (it is a COUNT for payment/status/channel/weekday/hour,
+            // units for size/colour, days for lead time, a percentage for completion) - so it must not
+            // get the R prefix. The one exception is the AOV trend, where "Value" is a money amount.
+            function isMoneyCol(name) { return /\b(revenue|price|aov|spend|cost|fee)\b/i.test(name); }
+            function isCountCol(name) { return /\b(orders?|units?|customers?|count|qty|quantity)\b/i.test(name); }
+            function isPercentCol(name) { return /\b(rate|percent|percentage|share|pct|ratio|conversion)\b/i.test(name); }
+            function isGenericValueCol(name) { return /^(value|v)$/i.test(name); }
+            var MONEY_VALUE_DATASETS = { aov: 1 };   // datasets whose generic "Value" column is money
+
+            function allIntegers(rows, key) {
+                var any = false;
+                for (var i = 0; i < rows.length; i++) {
+                    var v = rows[i][key];
+                    if (v == null || v === "" || isNaN(v) || !isFinite(v) || typeof v === "boolean") continue;
+                    any = true;
+                    if (Number(v) % 1 !== 0) return false;
+                }
+                return any;
+            }
+
+            // Pick a number format for a column, consistent with the KPI sheet. Detection runs on the
+            // display label (spaced) so camelCase keys like "CompletionRate" are matched correctly.
+            function columnNumFmt(label, rows, key, datasetKey) {
+                var genericValue = isGenericValueCol(label);
+                if (isMoneyCol(label) || (genericValue && MONEY_VALUE_DATASETS[datasetKey])) return XL_MONEY;
+                if (isPercentCol(label)) {
+                    // Only treat as % when stored as fractions (|v| <= 1); otherwise leave the raw
+                    // number so a 0-100 value isn't wrongly multiplied to a 0-10000% display.
+                    var anyNumeric = false, allFraction = true;
+                    for (var i = 0; i < rows.length; i++) {
+                        var v = rows[i][key];
+                        if (v == null || v === "" || isNaN(v) || !isFinite(v) || typeof v === "boolean") continue;
+                        anyNumeric = true;
+                        if (Math.abs(Number(v)) > 1) { allFraction = false; break; }
+                    }
+                    if (anyNumeric && allFraction) return XL_PCT;
+                }
+                if (isCountCol(label)) return XL_COUNT;
+                // Generic whole-number metric (e.g. the Value count on payment/status) -> thousands, no R.
+                if (genericValue && allIntegers(rows, key)) return XL_COUNT;
+                return null;
+            }
+
+            function styleHeaderRow(ws, colCount) {
+                var hr = ws.getRow(1);
+                hr.font = { bold: true, color: { argb: XL_WHITE } };
+                hr.fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL_BRAND } };
+                hr.alignment = { vertical: "middle" };
+                hr.height = 18;
+                ws.views = [{ state: "frozen", ySplit: 1 }];
+                if (colCount > 0) ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: colCount } };
+            }
+
+            function sheetName(raw, used) {
+                var n = String(raw).replace(/[\\\/\?\*\[\]:]/g, " ").replace(/\s+/g, " ").trim().slice(0, 28) || "Sheet";
+                var base = n, i = 2;
+                while (used[n.toLowerCase()]) { n = base.slice(0, 25) + " " + i; i++; }
+                used[n.toLowerCase()] = true; return n;
+            }
+
+            function addInfoSheet(wb, rep) {
+                var ws = wb.addWorksheet("Report Info");
+                ws.columns = [{ width: 22 }, { width: 54 }];
+                ws.mergeCells("A1:B1");
+                var title = ws.getCell("A1");
+                title.value = "Troika Business Intelligence";
+                title.font = { bold: true, size: 15, color: { argb: XL_WHITE } };
+                title.fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL_BRAND } };
+                title.alignment = { vertical: "middle" };
+                ws.getRow(1).height = 22;
+                ws.addRow([]);
+                var p = computePeriod();
+                var st = el("fStatus").value, ch = el("fChannel").value;
+                [["Report", rep.label], ["Period", p.label],
+                 ["Status filter", (st && st !== "All") ? st : "All"],
+                 ["Channel filter", (ch && ch !== "All") ? ch : "All"],
+                 ["Generated", new Date().toLocaleString("en-ZA")]
+                ].forEach(function (r) { ws.addRow(r).getCell(1).font = { bold: true }; });
+            }
+
+            function addKpiSheet(wb, k) {
+                k = k || {};
+                var ws = wb.addWorksheet("KPIs");
+                ws.columns = [{ header: "Metric", width: 24 }, { header: "Value", width: 18 }];
+                var defs = [
+                    ["Total Revenue", k.Revenue, XL_MONEY],
+                    ["Orders", k.Orders, XL_COUNT],
+                    ["Avg Order Value", k.AverageOrderValue, XL_MONEY],
+                    ["Units Sold", k.Units, XL_COUNT],
+                    ["Customers", k.Customers, XL_COUNT],
+                    ["Completion Rate", k.CompletionRate, XL_PCT]
+                ];
+                defs.forEach(function (d) {
+                    var row = ws.addRow([d[0], d[1] == null ? "" : Number(d[1])]);
+                    row.getCell(1).font = { bold: true };
+                    if (d[1] != null) row.getCell(2).numFmt = d[2];
+                });
+                styleHeaderRow(ws, 2);
+            }
+
+            function addTableSheet(wb, title, rows, used, suffix, datasetKey) {
+                var cols = [], seen = {};
+                rows.forEach(function (r) { Object.keys(r).forEach(function (c) { if (!seen[c]) { seen[c] = true; cols.push(c); } }); });
+                if (!cols.length) return;
+                var ws = wb.addWorksheet(sheetName(title + (suffix || ""), used));
+                ws.columns = cols.map(function (c) {
+                    var h = prettyLabel(c);
+                    return { header: h, key: c, width: Math.max(12, Math.min(38, h.length + 4)) };
+                });
+                rows.forEach(function (r) {
+                    var vals = cols.map(function (c) {
+                        var v = r[c];
+                        if (v != null && v !== "" && !isNaN(v) && isFinite(v) && typeof v !== "boolean") return Number(v);
+                        return v == null ? "" : v;
+                    });
+                    ws.addRow(vals);
+                });
+                cols.forEach(function (c, i) {
+                    var fmt = columnNumFmt(prettyLabel(c), rows, c, datasetKey);
+                    if (fmt) ws.getColumn(i + 1).numFmt = fmt;
+                });
+                styleHeaderRow(ws, cols.length);
+            }
+
+            // Re-render charts in light theme (if currently dark) and grab a PNG of each.
+            function captureCharts() {
+                var rep = REPORTS[state.report] || REPORTS.overview;
+                var wasDark = isDark();
+                var prep = Promise.resolve();
+                if (wasDark) { forcePrintLight = true; renderActive(lastData); prep = new Promise(function (res) { setTimeout(res, 450); }); }
+                return prep.then(function () {
+                    var jobs = (rep.cards || []).map(function (card) {
+                        var inst = charts["#" + card.id];
+                        if (!inst || typeof inst.dataURI !== "function") return null;
+                        return inst.dataURI({ scale: 2 }).then(function (out) {
+                            return (out && out.imgURI) ? { title: card.title, uri: out.imgURI } : null;
+                        }).catch(function () { return null; });
+                    }).filter(Boolean);
+                    return Promise.all(jobs);
+                }).then(function (imgs) {
+                    if (wasDark) { forcePrintLight = false; renderActive(lastData); }
+                    return imgs.filter(Boolean);
+                });
+            }
+
+            function addChartsSheet(wb, images) {
+                if (!images.length) return;
+                var ws = wb.addWorksheet("Charts");
+                ws.getColumn(1).width = 4;
+                var row = 1;
+                images.forEach(function (im) {
+                    var cell = ws.getCell(row, 2);
+                    cell.value = im.title;
+                    cell.font = { bold: true, size: 13, color: { argb: XL_BRAND } };
+                    var b64 = im.uri.indexOf(",") >= 0 ? im.uri.split(",")[1] : im.uri;
+                    var id = wb.addImage({ base64: b64, extension: "png" });
+                    ws.addImage(id, { tl: { col: 1, row: row }, ext: { width: 600, height: 320 } });
+                    row += 19;
+                });
+            }
+
+            function downloadBlob(blob, name) {
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                a.href = url; a.download = name;
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+            }
+
+            function exportExcel() {
+                var error = el("biError"), btn = el("btnExport");
+                if (!lastData) { error.textContent = "Nothing to export yet - wait for the report to load."; error.style.display = "block"; return; }
+                if (!window.ExcelJS) { error.textContent = "The Excel library is still loading - please try again in a moment."; error.style.display = "block"; return; }
+                error.style.display = "none";
+                var original = btn.innerHTML;
+                btn.disabled = true; btn.textContent = "Building Excel…";
+
+                captureCharts().then(function (images) {
+                    var d = lastData, rep = REPORTS[state.report] || REPORTS.overview, used = {};
+                    var wb = new ExcelJS.Workbook();
+                    wb.creator = "Troika BI"; wb.created = new Date();
+
+                    addInfoSheet(wb, rep);
+                    if (d.kpis && typeof d.kpis === "object") addKpiSheet(wb, d.kpis);
+
+                    var skip = { report: 1, kpis: 1, filterOptions: 1, python: 1 };
+                    Object.keys(d).forEach(function (key) {
+                        if (!skip[key] && isRowArray(d[key])) addTableSheet(wb, prettyLabel(key), d[key], used, "", key);
+                    });
+                    if (d.python && typeof d.python === "object") {
+                        Object.keys(d.python).forEach(function (key) {
+                            if (isRowArray(d.python[key])) addTableSheet(wb, prettyLabel(key), d.python[key], used, " (Py)", key);
+                        });
+                    }
+                    addChartsSheet(wb, images);
+
+                    return wb.xlsx.writeBuffer().then(function (buf) {
+                        var stamp = new Date().toISOString().slice(0, 10);
+                        downloadBlob(new Blob([buf], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }),
+                            "troika-" + state.report + "-" + stamp + ".xlsx");
+                    });
+                }).catch(function (e) {
+                    error.textContent = "Could not build the Excel file: " + (e && e.message ? e.message : e);
+                    error.style.display = "block";
+                }).then(function () {
+                    btn.disabled = false; btn.innerHTML = original;
+                });
+            }
+
             // ---------- help (context-aware, explains the report on screen) ----------
             function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 
@@ -770,6 +1006,14 @@
                 "<div class='bi-help-graph'><b>Refine.</b> Limit to a single order Status or sales Channel.</div>" +
                 "<div class='bi-help-graph'><b>Auto-apply.</b> Changes take effect immediately (there is no Apply button); Reset clears everything.</div>" +
                 "<p style='margin-top:10px;'>Note: the live reports re-query for your filters. The snapshot (Python) reports - Customers, Basket and the Forecast - always show the latest generated snapshot and are not changed by the date filter.</p>";
+
+            // Shown on every report - the two export buttons in the top-right work the same everywhere.
+            var EXPORT_HELP =
+                "<h4>Saving &amp; exporting</h4>" +
+                "<div class='bi-help-graph'><b>Download Excel.</b> Saves the report you are currently looking at - with its period and filters applied - as a formatted Excel (.xlsx) workbook. It contains a <b>Report Info</b> sheet (report name, period and filters used), a <b>KPIs</b> sheet, one sheet per table of figures, and a <b>Charts</b> sheet with each graph as an image. Money and percentage columns are formatted, and the figures are saved as real numbers so you can sort, total and pivot them in Excel.</div>" +
+                "<div class='bi-help-graph'><b>Print / Save as PDF.</b> Sends the whole dashboard on screen - the KPI cards and every chart - to your printer, or to \"Save as PDF\", for a quick visual snapshot to share or file.</div>" +
+                "<div class='bi-help-graph'><b>Which to use.</b> Choose Excel when you want to work with the numbers; choose PDF when you just want a picture of the dashboard as it looks now.</div>" +
+                "<p style='margin-top:10px;'>Both exports capture exactly what is on screen, so set the Report, Period and Refine filters first, then export.</p>";
 
             // Shown on every report - the six KPI cards across the top are the same on each screen.
             var KPI_HELP =
@@ -881,6 +1125,7 @@
                     h.graphs.map(function (g) { return "<div class='bi-help-graph'><b>" + esc(g.t) + ".</b> " + esc(g.d) + "</div>"; }).join("");
                 if (h.method) html += "<h4>How it's calculated</h4><div class='bi-help-method'>" + esc(h.method) + "</div>";
                 html += FILTER_HELP;
+                html += EXPORT_HELP;
 
                 el("helpBody").innerHTML = html;
                 el("helpOverlay").style.display = "flex";
@@ -938,6 +1183,7 @@
                     applyPreset("all");
                 });
                 el("btnPrint").addEventListener("click", printReport);
+                el("btnExport").addEventListener("click", exportExcel);
 
                 // Help modal
                 el("btnHelp").addEventListener("click", openHelp);
