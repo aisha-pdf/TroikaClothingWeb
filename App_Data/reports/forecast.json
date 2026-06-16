@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-15",
+  "generatedAt": "2026-06-16",
   "history": [
     {
       "Label": "2025-06",
@@ -10,37 +10,57 @@
       "Revenue": 680.0
     },
     {
+      "Label": "2025-10",
+      "Revenue": 21469.38
+    },
+    {
       "Label": "2025-11",
-      "Revenue": 95071.19
+      "Revenue": 84941.62
+    },
+    {
+      "Label": "2025-12",
+      "Revenue": 20749.44
+    },
+    {
+      "Label": "2026-01",
+      "Revenue": 19839.43
+    },
+    {
+      "Label": "2026-02",
+      "Revenue": 9089.71
+    },
+    {
+      "Label": "2026-03",
+      "Revenue": 8309.79
     },
     {
       "Label": "2026-04",
-      "Revenue": 1279.98
+      "Revenue": 10679.71
     },
     {
       "Label": "2026-05",
-      "Revenue": 9326.81
+      "Revenue": 65111.04
     },
     {
       "Label": "2026-06",
-      "Revenue": 17181.59
+      "Revenue": 44934.17
     }
   ],
   "forecast": [
     {
       "Label": "2026-07",
-      "Linear": 16249.76,
-      "HoltWinters": 22007.65
+      "Linear": 38180.96,
+      "HoltWinters": 36873.86
     },
     {
       "Label": "2026-08",
-      "Linear": 14131.73,
-      "HoltWinters": 22012.65
+      "Linear": 39934.73,
+      "HoltWinters": 38327.68
     },
     {
       "Label": "2026-09",
-      "Linear": 12013.7,
-      "HoltWinters": 22017.66
+      "Linear": 41688.49,
+      "HoltWinters": 39781.51
     }
   ]
 }

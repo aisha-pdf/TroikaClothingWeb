@@ -844,7 +844,6 @@
     <None Include="analysis\build_reports.py" />
     <None Include="analysis\troika_bi_analysis.py" />
     <None Include="analysis\troika_data.py" />
-    <None Include="REPORTS_BREAKDOWN.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

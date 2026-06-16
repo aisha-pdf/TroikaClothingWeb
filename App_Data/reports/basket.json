@@ -1,116 +1,116 @@
 {
-  "generatedAt": "2026-06-15",
+  "generatedAt": "2026-06-16",
   "perOrder": {
-    "avgItems": 2.76,
-    "avgValue": 1326.89,
-    "avgLines": 1.65
+    "avgItems": 2.48,
+    "avgValue": 1165.68,
+    "avgLines": 1.86
   },
   "unitsDistribution": [
     {
       "Label": "1",
-      "Value": 61
+      "Value": 76
     },
     {
       "Label": "2",
-      "Value": 26
+      "Value": 67
     },
     {
       "Label": "3",
-      "Value": 9
+      "Value": 60
     },
     {
       "Label": "4",
-      "Value": 10
+      "Value": 48
     },
     {
       "Label": "5+",
-      "Value": 5
+      "Value": 14
     }
   ],
   "affinity": [
     {
       "A": "A-line Skirt",
       "B": "Avocado PJ Set",
-      "Support": 0.018,
+      "Support": 0.0075,
       "Confidence": 0.6667,
-      "Lift": 12.33
+      "Lift": 29.44
     },
     {
       "A": "Denim Skirt",
       "B": "V-neck Blouse",
-      "Support": 0.018,
-      "Confidence": 0.4,
-      "Lift": 6.34
+      "Support": 0.0075,
+      "Confidence": 0.3333,
+      "Lift": 12.62
     },
     {
-      "A": "Summer Dress",
-      "B": "V-neck Blouse",
-      "Support": 0.036,
-      "Confidence": 0.3077,
-      "Lift": 4.88
+      "A": "Winter Coat",
+      "B": "Wool Cardigan",
+      "Support": 0.0189,
+      "Confidence": 0.3846,
+      "Lift": 10.19
     },
     {
       "A": "Linen Pants",
       "B": "Office Shirt",
-      "Support": 0.018,
+      "Support": 0.0075,
       "Confidence": 0.2857,
-      "Lift": 3.52
+      "Lift": 8.41
     },
     {
       "A": "Dotted Silk Pajama Set",
       "B": "Evening Silk Gown",
-      "Support": 0.027,
+      "Support": 0.0113,
       "Confidence": 1.0,
-      "Lift": 3.47
+      "Lift": 8.28
     },
     {
-      "A": "Denim Skirt",
-      "B": "Summer Dress",
-      "Support": 0.018,
-      "Confidence": 0.4,
-      "Lift": 3.42
+      "A": "Denim Jacket",
+      "B": "Winter Coat",
+      "Support": 0.0113,
+      "Confidence": 0.3333,
+      "Lift": 6.79
     },
     {
-      "A": "V-neck Blouse",
-      "B": "Wool Winter Coat",
-      "Support": 0.018,
+      "A": "Cat PJ Set",
+      "B": "Christmas Flannel Pajama Set",
+      "Support": 0.0113,
+      "Confidence": 0.2727,
+      "Lift": 6.02
+    },
+    {
+      "A": "Fuzzy Daisy PJ Set",
+      "B": "Winter Coat",
+      "Support": 0.0151,
       "Confidence": 0.2857,
-      "Lift": 3.17
+      "Lift": 5.82
     },
     {
-      "A": "Evening Silk Gown",
-      "B": "V-neck Blouse",
-      "Support": 0.036,
-      "Confidence": 0.125,
-      "Lift": 1.98
+      "A": "Fuzzy Daisy PJ Set",
+      "B": "Wool Cardigan",
+      "Support": 0.0113,
+      "Confidence": 0.2143,
+      "Lift": 5.68
     },
     {
-      "A": "Denim Skirt",
-      "B": "Evening Silk Gown",
-      "Support": 0.018,
-      "Confidence": 0.4,
-      "Lift": 1.39
+      "A": "Christmas Flannel Pajama Set",
+      "B": "Turtleneck Sweater",
+      "Support": 0.0113,
+      "Confidence": 0.25,
+      "Lift": 5.52
     },
     {
-      "A": "Evening Silk Gown",
-      "B": "Summer Dress",
-      "Support": 0.045,
-      "Confidence": 0.1562,
-      "Lift": 1.33
+      "A": "Denim A-Line Mini Dress",
+      "B": "Leopard Print Mini Dress",
+      "Support": 0.0151,
+      "Confidence": 0.2667,
+      "Lift": 5.44
     },
     {
-      "A": "Evening Silk Gown",
-      "B": "Linen Pants",
-      "Support": 0.018,
-      "Confidence": 0.0625,
-      "Lift": 0.99
-    },
-    {
-      "A": "Evening Silk Gown",
-      "B": "Office Shirt",
-      "Support": 0.018,
-      "Confidence": 0.0625,
-      "Lift": 0.77
+      "A": "Strawberry PJ set",
+      "B": "Wool Cardigan",
+      "Support": 0.0075,
+      "Confidence": 0.2,
+      "Lift": 5.3
     }
   ]
 }

@@ -1,26 +1,26 @@
 {
-  "generatedAt": "2026-06-15",
+  "generatedAt": "2026-06-16",
   "rfm": {
     "segments": [
       {
         "Label": "Hibernating",
-        "Customers": 5,
-        "Revenue": 7904.83
-      },
-      {
-        "Label": "Loyal",
-        "Customers": 4,
-        "Revenue": 11992.8
+        "Customers": 25,
+        "Revenue": 48301.05
       },
       {
         "Label": "Champions",
-        "Customers": 3,
-        "Revenue": 118191.64
+        "Customers": 23,
+        "Revenue": 216791.88
+      },
+      {
+        "Label": "Loyal",
+        "Customers": 7,
+        "Revenue": 28289.27
       },
       {
         "Label": "New / promising",
-        "Customers": 2,
-        "Revenue": 3887.95
+        "Customers": 6,
+        "Revenue": 10859.74
       }
     ]
   },
@@ -36,87 +36,112 @@
       "Returning": 1
     },
     {
-      "Label": "2025-11",
-      "New": 4,
+      "Label": "2025-10",
+      "New": 19,
       "Returning": 0
     },
     {
+      "Label": "2025-11",
+      "New": 10,
+      "Returning": 5
+    },
+    {
+      "Label": "2025-12",
+      "New": 6,
+      "Returning": 10
+    },
+    {
+      "Label": "2026-01",
+      "New": 8,
+      "Returning": 8
+    },
+    {
+      "Label": "2026-02",
+      "New": 2,
+      "Returning": 6
+    },
+    {
+      "Label": "2026-03",
+      "New": 1,
+      "Returning": 7
+    },
+    {
       "Label": "2026-04",
-      "New": 0,
-      "Returning": 1
+      "New": 3,
+      "Returning": 8
     },
     {
       "Label": "2026-05",
-      "New": 0,
-      "Returning": 1
+      "New": 2,
+      "Returning": 24
     },
     {
       "Label": "2026-06",
       "New": 2,
-      "Returning": 1
+      "Returning": 12
     }
   ],
   "topCustomers": [
     {
       "Customer": "mariamkhan1307@gmail.com",
-      "Orders": 79,
-      "Revenue": 104417.83,
-      "AOV": 1321.74
+      "Orders": 81,
+      "Revenue": 75368.78,
+      "AOV": 930.48
+    },
+    {
+      "Customer": "fatima64@gmail.com",
+      "Orders": 8,
+      "Revenue": 11348.77,
+      "AOV": 1418.6
+    },
+    {
+      "Customer": "fatima74@gmail.com",
+      "Orders": 6,
+      "Revenue": 10477.79,
+      "AOV": 1746.3
     },
     {
       "Customer": "masaib1505@gmail.com",
-      "Orders": 10,
-      "Revenue": 8277.82,
-      "AOV": 827.78
+      "Orders": 12,
+      "Revenue": 9147.8,
+      "AOV": 762.32
     },
     {
-      "Customer": "abbaomaraisha@gmail.com",
-      "Orders": 3,
-      "Revenue": 5495.99,
-      "AOV": 1832.0
+      "Customer": "zanele73@gmail.com",
+      "Orders": 5,
+      "Revenue": 8466.9,
+      "AOV": 1693.38
     },
     {
-      "Customer": "pbotha@telkomsa.net",
-      "Orders": 2,
-      "Revenue": 4994.74,
-      "AOV": 2497.37
+      "Customer": "ayesha81@gmail.com",
+      "Orders": 7,
+      "Revenue": 8278.8,
+      "AOV": 1182.69
     },
     {
-      "Customer": "keshamoodley@gmail.com",
-      "Orders": 2,
-      "Revenue": 3998.6,
-      "AOV": 1999.3
+      "Customer": "naledi42@gmail.com",
+      "Orders": 5,
+      "Revenue": 7837.83,
+      "AOV": 1567.57
     },
     {
-      "Customer": "mthembuayanda@vodamail.co.za",
-      "Orders": 1,
-      "Revenue": 2821.12,
-      "AOV": 2821.12
+      "Customer": "yasmin59@gmail.com",
+      "Orders": 6,
+      "Revenue": 7568.81,
+      "AOV": 1261.47
     },
     {
-      "Customer": "meganvwyk@icloud.com",
-      "Orders": 1,
-      "Revenue": 2698.19,
-      "AOV": 2698.19
+      "Customer": "karabo68@gmail.com",
+      "Orders": 9,
+      "Revenue": 7459.81,
+      "AOV": 828.87
     },
     {
-      "Customer": "naidooj@mweb.co.za",
-      "Orders": 3,
-      "Revenue": 2219.48,
-      "AOV": 739.83
-    },
-    {
-      "Customer": "erinnaidu@gmail.com",
-      "Orders": 1,
-      "Revenue": 2048.97,
-      "AOV": 2048.97
-    },
-    {
-      "Customer": "dkhan@gmail.com",
-      "Orders": 1,
-      "Revenue": 1838.98,
-      "AOV": 1838.98
+      "Customer": "thandi57@gmail.com",
+      "Orders": 5,
+      "Revenue": 7037.87,
+      "AOV": 1407.57
     }
   ],
-  "repeatRate": 0.429
+  "repeatRate": 0.721
 }
