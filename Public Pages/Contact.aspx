@@ -422,7 +422,7 @@
 
                     <p>
                         Troika Clothing C.C. is based in Durban, KwaZulu-Natal. Use the details below
-                        to reach the company directly.
+                        to reach us directly.
                     </p>
 
                     <div class="contact-detail-list">
@@ -442,7 +442,7 @@
                             <div class="contact-detail-icon">📞</div>
                             <div>
                                 <strong>Telephone</strong>
-                                <a href="tel:+27314009471">(031) 4009471</a>
+                                <a href="tel:+27314009471">(031) 400 9471</a>
                             </div>
                         </div>
 
@@ -450,7 +450,7 @@
                             <div class="contact-detail-icon">📠</div>
                             <div>
                                 <strong>Fax</strong>
-                                <span>(031) 4001729</span>
+                                <span>(031) 400 1729</span>
                             </div>
                         </div>
 
@@ -486,7 +486,7 @@
                         <h3>Here to help</h3>
                         <p>
                             For product, company, or general enquiries, please use the telephone, cellphone,
-                            or email details listed in the contact panel.
+                            or email details listed.
                         </p>
                     </div>
 

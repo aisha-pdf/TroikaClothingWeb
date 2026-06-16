@@ -38,7 +38,7 @@
             grid-template-columns: 1.05fr 0.95fr;
             gap: 46px;
             align-items: center;
-            padding: 86px 0 62px;
+            padding: 86px 0 54px;
         }
 
         .about-eyebrow {
@@ -50,7 +50,7 @@
             background: rgba(100, 79, 125, 0.13);
             border: 1px solid rgba(100, 79, 125, 0.20);
             color: var(--troika-primary);
-            font-weight: 800;
+            font-weight: 700;
             font-size: 13px;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -69,12 +69,12 @@
             animation-delay: 0.12s;
         }
 
-            .about-hero-modern h1 span {
-                color: var(--troika-primary);
-                font-family: Georgia, "Times New Roman", serif;
-                font-style: italic;
-                font-weight: 500;
-            }
+        .about-hero-modern h1 span {
+            color: var(--troika-primary);
+            font-family: Georgia, "Times New Roman", serif;
+            font-style: italic;
+            font-weight: 500;
+        }
 
         .about-hero-modern p {
             color: var(--troika-muted-text) !important;
@@ -100,7 +100,7 @@
             justify-content: center;
             border-radius: 999px;
             padding: 13px 25px;
-            font-weight: 800;
+            font-weight: 700;
             text-decoration: none !important;
             transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
@@ -180,77 +180,76 @@
             animation: softFloat 3.6s ease-in-out infinite;
         }
 
-            .floating-cmt-image img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-                transition: transform 0.7s ease;
-            }
+        .floating-cmt-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s ease;
+        }
 
-            .floating-cmt-image:hover img {
-                transform: scale(1.08);
-            }
+        .floating-cmt-image:hover img {
+            transform: scale(1.08);
+        }
 
         .modern-section {
-            margin-top: 78px;
+            margin-top: 58px;
             animation: sectionReveal 0.9s ease both;
             animation-delay: 0.2s;
         }
 
         .section-heading-modern {
             text-align: center;
-            margin-bottom: 38px;
+            margin-bottom: 30px;
         }
 
-            .section-heading-modern .section-kicker {
-                color: var(--troika-primary);
-                font-size: 13px;
-                font-weight: 850;
-                letter-spacing: 1.5px;
-                text-transform: uppercase;
-                margin-bottom: 10px;
-            }
+        .section-heading-modern .section-kicker {
+            color: var(--troika-primary);
+            font-size: 13px;
+            font-weight: 750;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
 
-            .section-heading-modern h2 {
-                color: var(--about-heading) !important;
-                font-size: clamp(32px, 4vw, 48px);
-                font-weight: 850;
-                letter-spacing: -1.1px;
-                margin-bottom: 14px;
-            }
+        .section-heading-modern h2 {
+            color: var(--about-heading) !important;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 850;
+            letter-spacing: -1.1px;
+            margin-bottom: 14px;
+        }
 
-            .section-heading-modern .dotted-line {
-                width: 190px;
-                border-top: 4px dotted var(--troika-primary-hover);
-                margin: 0 auto;
-                opacity: 0.65;
-            }
+        .section-heading-modern .dotted-line {
+            width: 190px;
+            border-top: 4px dotted var(--troika-primary-hover);
+            margin: 0 auto;
+            opacity: 0.65;
+        }
 
-        /* ---------- FIXED STORY SECTION HEIGHT ---------- */
+        /* ---------- COMPACT STORY SECTION FIX ---------- */
 
         .story-card-modern {
             display: grid;
             grid-template-columns: 0.85fr 1.15fr;
             gap: 0;
-            align-items: stretch;
+            align-items: center;
             background: var(--about-card);
             border: 1px solid var(--troika-border);
             border-radius: 36px;
             padding: 16px;
             box-shadow: var(--troika-card-shadow);
             transition: transform 0.35s ease, box-shadow 0.35s ease;
-            max-height: 520px;
-            overflow: hidden;
+            overflow: visible;
         }
 
-            .story-card-modern:hover {
-                transform: translateY(-7px);
-                box-shadow: var(--troika-card-shadow-hover);
-            }
+        .story-card-modern:hover {
+            transform: translateY(-7px);
+            box-shadow: var(--troika-card-shadow-hover);
+        }
 
         .story-image-wrap {
-            height: 488px;
+            height: 420px;
             border-radius: 28px;
             overflow: hidden;
             background: var(--about-card-soft);
@@ -259,47 +258,47 @@
             justify-content: center;
         }
 
-            .story-image-wrap img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-                display: block;
-                transition: transform 0.7s ease;
-            }
+        .story-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.7s ease;
+        }
 
-            .story-image-wrap:hover img {
-                transform: scale(1.05);
-            }
+        .story-image-wrap:hover img {
+            transform: scale(1.05);
+        }
 
         .story-text-modern {
-            padding: 34px 52px;
+            padding: 30px 48px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-            .story-text-modern h3 {
-                color: var(--about-heading) !important;
-                font-size: clamp(28px, 3vw, 40px);
-                font-weight: 850;
-                letter-spacing: -0.7px;
-                line-height: 1.15;
-                margin-bottom: 18px;
-            }
+        .story-text-modern h3 {
+            color: var(--about-heading) !important;
+            font-size: clamp(28px, 3vw, 38px);
+            font-weight: 850;
+            letter-spacing: -0.7px;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
 
-            .story-text-modern p {
-                color: var(--troika-muted-text) !important;
-                font-size: 16px;
-                line-height: 1.75;
-                margin-bottom: 16px;
-            }
+        .story-text-modern p {
+            color: var(--troika-muted-text) !important;
+            font-size: 15.5px;
+            line-height: 1.68;
+            margin-bottom: 14px;
+        }
 
         .pill-row {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 6px;
+            margin-top: 8px;
         }
 
         .fashion-pill {
@@ -309,7 +308,7 @@
             background: rgba(100, 79, 125, 0.13);
             color: var(--troika-primary);
             border: 1px solid rgba(100, 79, 125, 0.18);
-            font-weight: 750;
+            font-weight: 700;
             font-size: 13px;
         }
 
@@ -342,31 +341,31 @@
 
         .vm-card {
             padding: 38px;
-            min-height: 280px;
+            min-height: 260px;
         }
 
         .modern-feature-card {
             padding: 30px;
         }
 
-            .vm-card::before,
-            .modern-feature-card::before {
-                content: "";
-                position: absolute;
-                width: 160px;
-                height: 160px;
-                border-radius: 50%;
-                background: rgba(100, 79, 125, 0.11);
-                right: -70px;
-                top: -70px;
-            }
+        .vm-card::before,
+        .modern-feature-card::before {
+            content: "";
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: rgba(100, 79, 125, 0.11);
+            right: -70px;
+            top: -70px;
+        }
 
-            .vm-card:hover,
-            .modern-feature-card:hover {
-                transform: translateY(-8px);
-                box-shadow: var(--troika-card-shadow-hover);
-                border-color: var(--troika-primary-hover);
-            }
+        .vm-card:hover,
+        .modern-feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--troika-card-shadow-hover);
+            border-color: var(--troika-primary-hover);
+        }
 
         .vm-icon,
         .feature-icon {
@@ -422,7 +421,7 @@
         }
 
         .about-cta-modern {
-            margin-top: 84px;
+            margin-top: 64px;
             border-radius: 38px;
             padding: 54px 38px;
             background: linear-gradient(135deg, rgba(61, 48, 76, 0.96), rgba(100, 79, 125, 0.92)), var(--troika-primary);
@@ -432,27 +431,27 @@
             animation: pageFadeUp 0.95s ease both;
         }
 
-            .about-cta-modern h2 {
-                color: white !important;
-                font-size: clamp(30px, 4vw, 46px);
-                font-weight: 850;
-                letter-spacing: -1px;
-                margin-bottom: 14px;
-            }
+        .about-cta-modern h2 {
+            color: white !important;
+            font-size: clamp(30px, 4vw, 46px);
+            font-weight: 850;
+            letter-spacing: -1px;
+            margin-bottom: 14px;
+        }
 
-            .about-cta-modern p {
-                color: rgba(255,255,255,0.82) !important;
-                max-width: 730px;
-                margin: 0 auto 28px;
-                font-size: 17px;
-                line-height: 1.7;
-            }
+        .about-cta-modern p {
+            color: rgba(255,255,255,0.82) !important;
+            max-width: 730px;
+            margin: 0 auto 28px;
+            font-size: 17px;
+            line-height: 1.7;
+        }
 
-            .about-cta-modern .modern-btn-secondary {
-                background: white;
-                color: #3D304C !important;
-                border-color: white;
-            }
+        .about-cta-modern .modern-btn-secondary {
+            background: white;
+            color: #3D304C !important;
+            border-color: white;
+        }
 
         @keyframes pageFadeUp {
             from {
@@ -513,7 +512,6 @@
 
             .story-card-modern {
                 grid-template-columns: 1fr;
-                max-height: none;
             }
 
             .story-image-wrap {
@@ -550,6 +548,10 @@
                 padding-top: 48px;
             }
 
+            .modern-section {
+                margin-top: 46px;
+            }
+
             .about-image-stack {
                 min-height: auto;
             }
@@ -581,7 +583,6 @@
             .story-card-modern {
                 padding: 12px;
                 border-radius: 28px;
-                max-height: none;
             }
 
             .story-image-wrap {
@@ -620,10 +621,8 @@
                     </p>
 
                     <div class="about-hero-actions">
-                        <a href="<%= ResolveUrl("~/Public Pages/Products.aspx") %>" class="modern-btn modern-btn-primary">Shop Collection
-                        </a>
-                        <a href="<%= ResolveUrl("~/Public Pages/Contact.aspx") %>" class="modern-btn modern-btn-secondary">Contact Us
-                        </a>
+                        <a href="<%= ResolveUrl("~/Public Pages/Products.aspx") %>" class="modern-btn modern-btn-primary">Shop Collection</a>
+                        <a href="<%= ResolveUrl("~/Public Pages/Contact.aspx") %>" class="modern-btn modern-btn-secondary">Contact Us</a>
                     </div>
                 </div>
 
@@ -796,10 +795,8 @@
                 </p>
 
                 <div class="about-hero-actions" style="justify-content: center;">
-                    <a href="<%= ResolveUrl("~/Public Pages/Products.aspx") %>" class="modern-btn modern-btn-secondary">Browse Products
-                    </a>
-                    <a href="<%= ResolveUrl("~/Public Pages/Contact.aspx") %>" class="modern-btn modern-btn-secondary">Get in Touch
-                    </a>
+                    <a href="<%= ResolveUrl("~/Public Pages/Products.aspx") %>" class="modern-btn modern-btn-secondary">Browse Products</a>
+                    <a href="<%= ResolveUrl("~/Public Pages/Contact.aspx") %>" class="modern-btn modern-btn-secondary">Get in Touch</a>
                 </div>
             </section>
 

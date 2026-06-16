@@ -153,12 +153,6 @@ a {
         font-weight: 400;
     }
 
-/* Dark mode navbar readable text */
-body[data-theme="dark"] .navbar-troika1 .navbar-brand,
-body[data-theme="dark"] .navbar-troika1 .nav-link {
-    color: #121018 !important;
-}
-
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
@@ -328,7 +322,7 @@ input[type="button"] {
     white-space: nowrap;
 }
 
-/*  homepage button/link readability */
+/* homepage button/link readability */
 .home-button,
 .home-button a,
 .quick-button,
@@ -526,7 +520,7 @@ input[type="button"] {
         color: var(--troika-heading-text) !important;
     }
 
-/* -------------------- AUTH PAGES: LOGIN / REGISTER / FORGOT PASSWORD -------------------- */
+/* -------------------- AUTH PAGES -------------------- */
 
 .auth-container,
 .login-container,
@@ -558,7 +552,6 @@ input[type="button"] {
         color: var(--troika-heading-text) !important;
     }
 
-    /* Useful if your login/register forms use Bootstrap panels/cards */
     .login-container .card,
     .register-container .card,
     .forgot-password-container .card,
@@ -650,7 +643,6 @@ table {
         border-color: var(--troika-border) !important;
     }
 
-    /* ASP.NET GridView specific fixes */
     .gridview a,
     table a {
         color: var(--troika-primary) !important;
@@ -743,11 +735,6 @@ body[data-theme="dark"] .troika-admin-sidebar {
 }
 
 /* -------------------- DARK MODE FALLBACK FIXES -------------------- */
-
-/*
-   These selectors help override old hardcoded inline/class colours
-   that may still exist on individual ASPX pages.
-*/
 
 body[data-theme="dark"] p,
 body[data-theme="dark"] span,
@@ -863,7 +850,6 @@ link {
     box-sizing: border-box !important;
 }
 
-/* LEFT SIDEBAR - keeps buttons on the left like original */
 .admin-side-menu {
     width: 260px !important;
     min-width: 260px !important;
@@ -876,7 +862,6 @@ link {
     box-sizing: border-box !important;
 }
 
-/* Sidebar buttons */
 .admin-menu-btn {
     background: var(--troika-btn-bg) !important;
     color: var(--troika-btn-text) !important;
@@ -896,7 +881,6 @@ link {
         color: var(--troika-btn-text) !important;
     }
 
-/* RIGHT CONTENT AREA - moves grid to the right */
 .admin-main-content {
     flex: 1 !important;
     background: var(--troika-bg) !important;
@@ -905,7 +889,6 @@ link {
     box-sizing: border-box !important;
 }
 
-/* Content block around title + grid */
 .admin-content-card {
     background: var(--troika-surface-alt) !important;
     color: var(--troika-text) !important;
@@ -917,7 +900,6 @@ link {
     box-sizing: border-box !important;
 }
 
-/* Heading */
 .admin-page-heading {
     color: var(--troika-heading-text) !important;
     margin-bottom: 25px !important;
@@ -925,14 +907,12 @@ link {
     letter-spacing: 2px !important;
 }
 
-/* Grid wrapper */
 .admin-grid-wrapper {
     overflow-x: auto !important;
     background: transparent !important;
     color: var(--troika-text) !important;
 }
 
-/* Main GridView */
 .admin-user-grid {
     width: 100% !important;
     max-width: 1180px !important;
@@ -942,7 +922,6 @@ link {
     border: none !important;
 }
 
-    /* Grid cells */
     .admin-user-grid th,
     .admin-user-grid td {
         background: var(--troika-table-bg) !important;
@@ -951,7 +930,6 @@ link {
         padding: 10px 12px !important;
     }
 
-    /* Header row */
     .admin-user-grid th,
     .admin-grid-header th,
     .admin-grid-header td {
@@ -961,20 +939,17 @@ link {
         text-decoration: underline !important;
     }
 
-/* Normal rows */
 .admin-grid-row td,
 .admin-grid-alt-row td {
     background: var(--troika-table-bg) !important;
     color: var(--troika-table-text) !important;
 }
 
-/* Hover row */
 .admin-user-grid tr:hover td {
     background: var(--troika-surface-alt) !important;
     color: var(--troika-text) !important;
 }
 
-/* Selected row after clicking Select */
 .admin-user-grid .admin-grid-selected-row td,
 .admin-grid-selected-row td {
     background: var(--troika-primary-hover) !important;
@@ -982,21 +957,18 @@ link {
     font-weight: 700 !important;
 }
 
-/* Selected row links */
 .admin-user-grid .admin-grid-selected-row a,
 .admin-grid-selected-row a {
     color: var(--troika-btn-text) !important;
     font-weight: 700 !important;
 }
 
-/* Edit row */
 .admin-grid-edit-row td {
     background: var(--troika-secondary) !important;
     color: var(--troika-primary) !important;
     font-weight: 600 !important;
 }
 
-/* Pager */
 .admin-grid-pager td {
     background: var(--troika-table-bg) !important;
     color: var(--troika-table-text) !important;
@@ -1010,7 +982,6 @@ link {
     padding: 0 3px !important;
 }
 
-/* Edit/Select links */
 .admin-user-grid a {
     color: var(--troika-primary) !important;
     font-weight: 500 !important;
@@ -1021,7 +992,6 @@ link {
         color: var(--troika-primary-hover) !important;
     }
 
-/* Inputs inside GridView edit mode */
 .admin-user-grid input,
 .admin-user-grid select,
 .admin-user-grid textarea {
@@ -1032,7 +1002,6 @@ link {
     padding: 6px !important;
 }
 
-/* Dark mode stronger overrides */
 body[data-theme="dark"] .admin-content-card {
     background: #1c1724 !important;
     color: #f5f3f7 !important;
@@ -1066,7 +1035,6 @@ body[data-theme="dark"] .admin-user-grid tr:hover td {
     color: #ffffff !important;
 }
 
-/* Dark selected row */
 body[data-theme="dark"] .admin-user-grid .admin-grid-selected-row td,
 body[data-theme="dark"] .admin-grid-selected-row td {
     background: #b99cdd !important;
@@ -1095,7 +1063,6 @@ body[data-theme="dark"] .admin-menu-btn {
         color: #121018 !important;
     }
 
-/* Responsive */
 @media (max-width: 900px) {
     .admin-page-container {
         flex-direction: column !important;
@@ -1119,69 +1086,8 @@ body[data-theme="dark"] .admin-menu-btn {
     }
 }
 
-/* improving nav bar visibility and login page */
+/* -------------------- LOGIN PAGE INPUT CONSISTENCY -------------------- */
 
-/* ---------- SECOND NAVBAR READABILITY ---------- */
-
-/* Light mode: second navbar is dark purple, so text must be white */
-body[data-theme="light"] .navbar-troika1 {
-    background-color: #3D304C !important;
-}
-
-    body[data-theme="light"] .navbar-troika1 .nav-link,
-    body[data-theme="light"] .navbar-troika1 .nav-link *,
-    body[data-theme="light"] .navbar-troika1 .nav-link span,
-    body[data-theme="light"] .navbar-troika1 .nav-link label,
-    body[data-theme="light"] .navbar-troika1 a,
-    body[data-theme="light"] .navbar-troika1 a *,
-    body[data-theme="light"] .navbar-troika1 .navbar-nav *,
-    body[data-theme="light"] .navbar-troika1 input,
-    body[data-theme="light"] .navbar-troika1 button {
-        color: #ffffff !important;
-    }
-
-/* Dark mode: second navbar is light purple, so text must be dark */
-body[data-theme="dark"] .navbar-troika1 {
-    background-color: #d9c8f0 !important;
-}
-
-    body[data-theme="dark"] .navbar-troika1 .nav-link,
-    body[data-theme="dark"] .navbar-troika1 .nav-link *,
-    body[data-theme="dark"] .navbar-troika1 .nav-link span,
-    body[data-theme="dark"] .navbar-troika1 .nav-link label,
-    body[data-theme="dark"] .navbar-troika1 a,
-    body[data-theme="dark"] .navbar-troika1 a *,
-    body[data-theme="dark"] .navbar-troika1 .navbar-nav *,
-    body[data-theme="dark"] .navbar-troika1 input,
-    body[data-theme="dark"] .navbar-troika1 button {
-        color: #121018 !important;
-    }
-
-/* Make welcome username and cart count labels inherit the navbar link colour */
-.navbar-troika1 asp\:Label,
-.navbar-troika1 span,
-.navbar-troika1 label {
-    color: inherit !important;
-}
-
-/* Specific ASP.NET generated IDs fallback */
-#lblWelcome,
-#lblAdmin,
-#lblCartCount,
-#Label2,
-[id$="lblWelcome"],
-[id$="lblAdmin"],
-[id$="lblCartCount"],
-[id$="Label2"] {
-    color: inherit !important;
-}
-
-
-/* ---------- LOGIN PAGE INPUT CONSISTENCY ---------- */
-
-
-
-/* Dark mode normal textbox/password */
 body[data-theme="dark"] .login-card .login-input,
 body[data-theme="dark"] .login-card input[type="text"],
 body[data-theme="dark"] .login-card input[type="password"] {
@@ -1191,7 +1097,6 @@ body[data-theme="dark"] .login-card input[type="password"] {
     caret-color: #ffffff !important;
 }
 
-/* Fix Chrome autofill making username textbox white/blue in dark mode */
 body[data-theme="dark"] .login-card input:-webkit-autofill,
 body[data-theme="dark"] .login-card input:-webkit-autofill:hover,
 body[data-theme="dark"] .login-card input:-webkit-autofill:focus,
@@ -1203,7 +1108,6 @@ body[data-theme="dark"] .login-card input:-webkit-autofill:active {
     border: 1px solid #3b3048 !important;
 }
 
-/* Light mode autofill consistency */
 body[data-theme="light"] .login-card input:-webkit-autofill,
 body[data-theme="light"] .login-card input:-webkit-autofill:hover,
 body[data-theme="light"] .login-card input:-webkit-autofill:focus,
@@ -1215,9 +1119,6 @@ body[data-theme="light"] .login-card input:-webkit-autofill:active {
     border: 1px solid #e5e7eb !important;
 }
 
-/* ---------- LOGIN PAGE INPUT CONSISTENCY ---------- */
-
-/* Normal login input styling */
 .login-original-card .login-original-input,
 .login-original-card input[type="text"],
 .login-original-card input[type="password"] {
@@ -1227,7 +1128,6 @@ body[data-theme="light"] .login-card input:-webkit-autofill:active {
     caret-color: var(--troika-input-text) !important;
 }
 
-/* Dark mode login inputs */
 body[data-theme="dark"] .login-original-card .login-original-input,
 body[data-theme="dark"] .login-original-card input[type="text"],
 body[data-theme="dark"] .login-original-card input[type="password"] {
@@ -1237,7 +1137,6 @@ body[data-theme="dark"] .login-original-card input[type="password"] {
     caret-color: #ffffff !important;
 }
 
-/* Chrome/Edge autofill fix: stops username textbox becoming white in dark mode */
 body[data-theme="dark"] .login-original-card input:-webkit-autofill,
 body[data-theme="dark"] .login-original-card input:-webkit-autofill:hover,
 body[data-theme="dark"] .login-original-card input:-webkit-autofill:focus,
@@ -1249,7 +1148,6 @@ body[data-theme="dark"] .login-original-card input:-webkit-autofill:active {
     border: 1px solid #3b3048 !important;
 }
 
-/* Light mode autofill fix */
 body[data-theme="light"] .login-original-card input:-webkit-autofill,
 body[data-theme="light"] .login-original-card input:-webkit-autofill:hover,
 body[data-theme="light"] .login-original-card input:-webkit-autofill:focus,
@@ -1261,68 +1159,7 @@ body[data-theme="light"] .login-original-card input:-webkit-autofill:active {
     border: 1px solid #e5e7eb !important;
 }
 
-
-/* ---------- PRODUCT MANAGEMENT CHANGE STATUS BUTTON ---------- */
-
-/* Make Change Status readable in BOTH modes */
-.product-management-container .grid .btn-light,
-.product-management-container .grid a.btn-light,
-.product-management-container .grid input.btn-light,
-.product-management-container .grid td:last-child .btn-light,
-.product-management-container .grid td:last-child a.btn-light {
-    background: #644F7D !important;
-    color: #ffffff !important;
-    border: 1px solid #644F7D !important;
-    font-weight: 700 !important;
-    text-align: center !important;
-    opacity: 1 !important;
-    min-width: 105px !important;
-    padding: 9px 12px !important;
-    border-radius: 7px !important;
-    display: inline-block !important;
-    text-decoration: none !important;
-}
-
-    /* Hover state */
-    .product-management-container .grid .btn-light:hover,
-    .product-management-container .grid a.btn-light:hover,
-    .product-management-container .grid input.btn-light:hover,
-    .product-management-container .grid td:last-child .btn-light:hover,
-    .product-management-container .grid td:last-child a.btn-light:hover {
-        background: #3D304C !important;
-        color: #ffffff !important;
-        border-color: #3D304C !important;
-    }
-
-/* Dark mode Change Status */
-body[data-theme="dark"] .product-management-container .grid .btn-light,
-body[data-theme="dark"] .product-management-container .grid a.btn-light,
-body[data-theme="dark"] .product-management-container .grid input.btn-light,
-body[data-theme="dark"] .product-management-container .grid td:last-child .btn-light,
-body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-light {
-    background: #d9c8f0 !important;
-    color: #121018 !important;
-    border: 1px solid #d9c8f0 !important;
-    font-weight: 800 !important;
-}
-
-    /* Dark mode hover */
-    body[data-theme="dark"] .product-management-container .grid .btn-light:hover,
-    body[data-theme="dark"] .product-management-container .grid a.btn-light:hover,
-    body[data-theme="dark"] .product-management-container .grid input.btn-light:hover,
-    body[data-theme="dark"] .product-management-container .grid td:last-child .btn-light:hover,
-    body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-light:hover {
-        background: #b99cdd !important;
-        color: #121018 !important;
-        border-color: #b99cdd !important;
-    }
-
-/* 
-   PRODUCT MANAGEMENT PAGE - make Edit and Change Status buttons more visible and consistent in both modes
- */
-
-
-/* ---------- ACTION BUTTONS: Edit + Change Status ---------- */
+/* -------------------- PRODUCT MANAGEMENT ACTION BUTTONS -------------------- */
 
 .product-management-container .grid td:last-child {
     text-align: center !important;
@@ -1336,7 +1173,6 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
     text-align: center !important;
 }
 
-/* Same shape, spacing and text weight for BOTH buttons */
 .product-management-container .grid td:last-child .btn,
 .product-management-container .grid td:last-child a.btn,
 .product-management-container .grid td:last-child input.btn,
@@ -1349,7 +1185,7 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
     padding: 9px 10px !important;
     border-radius: 8px !important;
     font-size: 14px !important;
-    font-weight: 500 !important; /* less bold, same as normal Edit button style */
+    font-weight: 500 !important;
     line-height: 1.25 !important;
     text-align: center !important;
     text-decoration: none !important;
@@ -1358,7 +1194,6 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
     white-space: normal !important;
 }
 
-/* Light mode Edit */
 body[data-theme="light"] .product-management-container .grid td:last-child .btn-primary,
 body[data-theme="light"] .product-management-container .grid td:last-child a.btn-primary {
     background: #3D304C !important;
@@ -1366,7 +1201,6 @@ body[data-theme="light"] .product-management-container .grid td:last-child a.btn
     border: 1px solid #3D304C !important;
 }
 
-/* Light mode Change Status */
 body[data-theme="light"] .product-management-container .grid td:last-child .btn-light,
 body[data-theme="light"] .product-management-container .grid td:last-child a.btn-light {
     background: #644F7D !important;
@@ -1374,7 +1208,6 @@ body[data-theme="light"] .product-management-container .grid td:last-child a.btn
     border: 1px solid #644F7D !important;
 }
 
-    /* Light mode hover */
     body[data-theme="light"] .product-management-container .grid td:last-child .btn-primary:hover,
     body[data-theme="light"] .product-management-container .grid td:last-child .btn-light:hover,
     body[data-theme="light"] .product-management-container .grid td:last-child a.btn-primary:hover,
@@ -1385,7 +1218,6 @@ body[data-theme="light"] .product-management-container .grid td:last-child a.btn
         transform: translateY(-1px) !important;
     }
 
-/* Dark mode Edit + Change Status */
 body[data-theme="dark"] .product-management-container .grid td:last-child .btn-primary,
 body[data-theme="dark"] .product-management-container .grid td:last-child .btn-light,
 body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-primary,
@@ -1393,10 +1225,9 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
     background: #d9c8f0 !important;
     color: #121018 !important;
     border: 1px solid #d9c8f0 !important;
-    font-weight: 500 !important; /* prevents Change Status from becoming extra bold */
+    font-weight: 500 !important;
 }
 
-    /* Dark mode hover */
     body[data-theme="dark"] .product-management-container .grid td:last-child .btn-primary:hover,
     body[data-theme="dark"] .product-management-container .grid td:last-child .btn-light:hover,
     body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-primary:hover,
@@ -1407,10 +1238,8 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
         transform: translateY(-1px) !important;
     }
 
+/* -------------------- PRODUCT MANAGEMENT PAGER -------------------- */
 
-/* ---------- GRIDVIEW ---------- */
-
-/* Pager row/cell */
 .product-management-container .grid .product-grid-pager,
 .product-management-container .grid .product-grid-pager td,
 .product-management-container .grid tr.product-grid-pager,
@@ -1421,7 +1250,6 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
     text-align: center !important;
 }
 
-    /* Stop ASP.NET nested pager table from stretching/breaking */
     .product-management-container .grid .product-grid-pager table,
     .product-management-container .grid tr.product-grid-pager table {
         width: auto !important;
@@ -1431,7 +1259,6 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
         background: transparent !important;
     }
 
-        /* Pager number cells */
         .product-management-container .grid .product-grid-pager table td,
         .product-management-container .grid tr.product-grid-pager table td {
             background: transparent !important;
@@ -1441,7 +1268,6 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
             min-width: 0 !important;
         }
 
-    /* Pager links */
     .product-management-container .grid .product-grid-pager a,
     .product-management-container .grid tr.product-grid-pager a {
         display: inline-flex !important;
@@ -1459,7 +1285,6 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
         line-height: 1 !important;
     }
 
-    /* Current page number is usually rendered as a span */
     .product-management-container .grid .product-grid-pager span,
     .product-management-container .grid tr.product-grid-pager span {
         display: inline-flex !important;
@@ -1477,7 +1302,6 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
         line-height: 1 !important;
     }
 
-    /* Hover */
     .product-management-container .grid .product-grid-pager a:hover,
     .product-management-container .grid tr.product-grid-pager a:hover {
         background: var(--troika-btn-hover-bg) !important;
@@ -1486,7 +1310,6 @@ body[data-theme="dark"] .product-management-container .grid td:last-child a.btn-
         transform: translateY(-1px) !important;
     }
 
-/* Dark mode pager */
 body[data-theme="dark"] .product-management-container .grid .product-grid-pager a,
 body[data-theme="dark"] .product-management-container .grid tr.product-grid-pager a {
     background: #d9c8f0 !important;
@@ -1508,8 +1331,6 @@ body[data-theme="dark"] .product-management-container .grid tr.product-grid-page
     border-color: #644F7D !important;
 }
 
-
-/* Mobile: keep pager neat */
 @media (max-width: 768px) {
     .product-management-container .grid .product-grid-pager table,
     .product-management-container .grid tr.product-grid-pager table {
@@ -1527,69 +1348,7 @@ body[data-theme="dark"] .product-management-container .grid tr.product-grid-page
     }
 }
 
-/* -------------------- PROFILE DROPDOWN CONTRAST FIX --------------------
-   Keeps customer profile dropdown readable in both light and dark mode.
-   Logout is styled as a red destructive action.
-*/
-.navbar-troika1 .dropdown-menu {
-    background: var(--troika-surface) !important;
-    border: 1px solid var(--troika-border) !important;
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16) !important;
-}
-
-.navbar-troika1 .dropdown-menu .dropdown-item {
-    color: var(--troika-text) !important;
-    background: var(--troika-surface) !important;
-    font-weight: 600 !important;
-}
-
-.navbar-troika1 .dropdown-menu .dropdown-item:hover,
-.navbar-troika1 .dropdown-menu .dropdown-item:focus {
-    color: var(--troika-btn-text) !important;
-    background: var(--troika-primary-hover) !important;
-}
-
-.navbar-troika1 .dropdown-menu .dropdown-logout,
-.navbar-troika1 .dropdown-menu .dropdown-logout:visited {
-    color: #b00020 !important;
-    background: var(--troika-surface) !important;
-    font-weight: 700 !important;
-}
-
-.navbar-troika1 .dropdown-menu .dropdown-logout:hover,
-.navbar-troika1 .dropdown-menu .dropdown-logout:focus {
-    color: #ffffff !important;
-    background: #b00020 !important;
-}
-
-body[data-theme="dark"] .navbar-troika1 .dropdown-menu {
-    background: #1c1724 !important;
-    border-color: #3b3048 !important;
-}
-
-body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item {
-    color: #f5f3f7 !important;
-    background: #1c1724 !important;
-}
-
-body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item:hover,
-body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item:focus {
-    color: #121018 !important;
-    background: #d9c8f0 !important;
-}
-
-body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout,
-body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:visited {
-    color: #ff6b6b !important;
-    background: #1c1724 !important;
-}
-
-body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:hover,
-body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
-    color: #ffffff !important;
-    background: #b91c1c !important;
-}
-
+/* -------------------- PROFILE DROPDOWN CONTRAST FIX -------------------- */
 
 .navbar-troika1 .nav-item.dropdown {
     position: relative !important;
@@ -1616,7 +1375,6 @@ body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
     display: block !important;
 }
 
-/* Normal dropdown items - light mode */
 .navbar-troika1 .dropdown-menu li,
 .navbar-troika1 .dropdown-menu li a,
 .navbar-troika1 .dropdown-menu .dropdown-item,
@@ -1630,7 +1388,6 @@ body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
     opacity: 1 !important;
 }
 
-    /* Normal dropdown hover - light mode */
     .navbar-troika1 .dropdown-menu .dropdown-item:hover,
     .navbar-troika1 .dropdown-menu .dropdown-item:focus {
         color: #ffffff !important;
@@ -1638,13 +1395,11 @@ body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
         text-decoration: none !important;
     }
 
-/* Divider */
 .navbar-troika1 .dropdown-menu .dropdown-divider {
     border-top: 1px solid #e5e7eb !important;
     margin: 6px 0 !important;
 }
 
-/* Logout item - light mode */
 .navbar-troika1 .dropdown-menu .dropdown-logout,
 .navbar-troika1 .dropdown-menu .dropdown-logout:link,
 .navbar-troika1 .dropdown-menu .dropdown-logout:visited,
@@ -1655,7 +1410,6 @@ body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
     text-decoration: none !important;
 }
 
-    /* Logout hover - light mode */
     .navbar-troika1 .dropdown-menu .dropdown-logout:hover,
     .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
         color: #ffffff !important;
@@ -1663,14 +1417,12 @@ body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
         text-decoration: none !important;
     }
 
-/* Dark mode dropdown container */
 body[data-theme="dark"] .navbar-troika1 .dropdown-menu {
     background-color: #1c1724 !important;
     border-color: #3b3048 !important;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55) !important;
 }
 
-    /* Normal dropdown items - dark mode */
     body[data-theme="dark"] .navbar-troika1 .dropdown-menu li,
     body[data-theme="dark"] .navbar-troika1 .dropdown-menu li a,
     body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item,
@@ -1684,7 +1436,6 @@ body[data-theme="dark"] .navbar-troika1 .dropdown-menu {
         opacity: 1 !important;
     }
 
-        /* Normal dropdown hover - dark mode */
         body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item:hover,
         body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-item:focus {
             color: #121018 !important;
@@ -1692,12 +1443,10 @@ body[data-theme="dark"] .navbar-troika1 .dropdown-menu {
             text-decoration: none !important;
         }
 
-    /* Divider - dark mode */
     body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-divider {
         border-top: 1px solid #3b3048 !important;
     }
 
-    /* Logout item - dark mode */
     body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout,
     body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:link,
     body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:visited,
@@ -1708,7 +1457,6 @@ body[data-theme="dark"] .navbar-troika1 .dropdown-menu {
         text-decoration: none !important;
     }
 
-        /* Logout hover - dark mode */
         body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:hover,
         body[data-theme="dark"] .navbar-troika1 .dropdown-menu .dropdown-logout:focus {
             color: #ffffff !important;
@@ -1717,370 +1465,419 @@ body[data-theme="dark"] .navbar-troika1 .dropdown-menu {
         }
 
 /* -------------------- FREE DELIVERY TRACKER -------------------- */
-/* Shared by the cart page summary and the product quick-view popup. */
 
 .delivery-tracker {
     margin: 6px 0 14px 0;
 }
 
-.delivery-tracker .dt-track {
-    width: 100%;
-    height: 10px;
-    background: var(--troika-border);
-    border-radius: 999px;
-    overflow: hidden;
-}
-
-.delivery-tracker .dt-fill {
-    height: 100%;
-    width: 0;
-    background: var(--troika-primary);
-    border-radius: 999px;
-    transition: width 0.6s ease;
-}
-
-    .delivery-tracker .dt-fill.is-free {
-        background: var(--troika-success);
+    .delivery-tracker .dt-track {
+        width: 100%;
+        height: 10px;
+        background: var(--troika-border);
+        border-radius: 999px;
+        overflow: hidden;
     }
 
-.delivery-tracker .dt-msg {
-    display: block;
-    margin-top: 6px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--troika-text) !important;
-}
+    .delivery-tracker .dt-fill {
+        height: 100%;
+        width: 0;
+        background: var(--troika-primary);
+        border-radius: 999px;
+        transition: width 0.6s ease;
+    }
 
-/* ==================== REDESIGNED HEADER & FOOTER (handoff design) ====================
-   The two-tier header keeps the existing .navbar-troika / .navbar-troika1 hooks so the
-   theme colours and the customer profile-dropdown CSS/JS keep working; these rules just
-   re-lay-out and re-style it to match the handoff. Colours use theme variables so the
-   dark-mode toggle still adapts the whole chrome. */
+        .delivery-tracker .dt-fill.is-free {
+            background: var(--troika-success);
+        }
+
+    .delivery-tracker .dt-msg {
+        display: block;
+        margin-top: 6px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--troika-text) !important;
+    }
+
+/* ==================== REDESIGNED HEADER ==================== */
 
 .th-site-header {
     position: sticky;
     top: 0;
     z-index: 1030;
     font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background: var(--troika-surface) !important;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
     transition: box-shadow 0.35s ease;
 }
 
-.th-site-header.th-scrolled {
-    box-shadow: 0 6px 22px rgba(31, 24, 40, 0.16);
-}
+    .th-site-header.th-scrolled {
+        box-shadow: 0 6px 22px rgba(31, 24, 40, 0.16);
+    }
 
-/* ---------- Top tier ---------- */
-.th-site-header .th-header-top {
-    padding: 0 !important;
-    border-bottom: 2px solid var(--troika-primary);
-    min-height: 0;
-}
+    /* ---------- Top tier ---------- */
 
-.th-site-header .th-header-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px 24px;
-    /* Extra bottom padding gives the 40px theme-toggle clearance above the purple
-       bar; with only 5px its bright dark-mode border read as dipping into it. */
-    padding: 5px 28px 9px;
-}
+    .th-site-header .th-header-top {
+        background: var(--troika-surface) !important;
+        padding: 0 !important;
+        border-bottom: 1px solid var(--troika-border) !important;
+        min-height: 0 !important;
+    }
 
-.th-site-header .th-logo {
-    padding: 0;
-    margin-right: 0;
-}
+    .th-site-header .th-header-row {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        gap: 16px 28px !important;
+        padding: 10px 36px !important;
+        min-height: 86px !important;
+        background: transparent !important;
+    }
 
-.th-site-header .th-logo img {
-    height: 27px;
-    width: auto;
-    max-width: 60vw;
-    display: block;
-}
+    .th-site-header .th-logo {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
 
-/* Logo artwork is dark navy on transparent; flip it light on the dark-mode surface */
+        .th-site-header .th-logo img {
+            height: 72px !important;
+            width: auto !important;
+            max-width: 500px !important;
+            object-fit: contain !important;
+            display: block !important;
+        }
+
 body[data-theme="dark"] .th-site-header .th-logo img {
     filter: brightness(0) invert(1);
-    opacity: 0.95;
+    opacity: 0.92;
 }
 
 .th-site-header .th-nav {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-}
-
-.th-site-header .th-nav .nav-item {
-    display: flex;
-    align-items: center;
-}
-
-.th-site-header .navbar-troika .nav-link {
-    padding: 0 0 3px 0 !important;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.25s ease, color 0.2s ease;
-}
-
-.th-site-header .navbar-troika .nav-link:hover {
-    border-bottom-color: var(--troika-primary-hover);
-    color: var(--troika-primary-hover) !important;
-}
-
-/* ---------- Dark-mode toggle: inline icon + label, one line (no circle) ---------- */
-.th-site-header .th-theme-toggle {
-    margin-left: 6px;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 26px !important;
+    margin: 0 !important;
     padding: 0 !important;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    white-space: nowrap;
-    line-height: 1;
+}
+
+    .th-site-header .th-nav .nav-item {
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .th-site-header .navbar-troika .nav-link,
+    .th-site-header .th-nav .nav-link {
+        color: var(--troika-primary) !important;
+        padding: 0 0 3px 0 !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        letter-spacing: 0.35px !important;
+        text-transform: uppercase !important;
+        text-decoration: none !important;
+        border-bottom: 2px solid transparent !important;
+        transition: border-color 0.25s ease, color 0.2s ease;
+    }
+
+        .th-site-header .navbar-troika .nav-link:hover,
+        .th-site-header .th-nav .nav-link:hover {
+            color: var(--troika-primary-hover) !important;
+            border-bottom-color: var(--troika-primary-hover) !important;
+        }
+
+/* ---------- Theme toggle ---------- */
+
+.th-site-header .th-theme-toggle {
+    margin-left: 6px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
     background: transparent !important;
     color: var(--troika-primary) !important;
     border: none !important;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    transition: color 0.2s ease;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.35px !important;
+    text-transform: uppercase !important;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
     .th-site-header .th-theme-toggle:hover {
         background: transparent !important;
         color: var(--troika-primary-hover) !important;
+        box-shadow: none !important;
+        transform: translateY(-1px);
     }
 
-.th-site-header .th-theme-toggle .th-ico {
-    width: 16px;
-    height: 16px;
-    display: block;
-    flex: none;
-}
+    .th-site-header .th-theme-toggle .th-ico {
+        width: 16px !important;
+        height: 16px !important;
+        display: block !important;
+        flex: none !important;
+    }
 
-.th-site-header .th-theme-toggle .th-ico-sun {
-    display: none;
-}
+    .th-site-header .th-theme-toggle .th-ico-sun,
+    .th-site-header .th-theme-toggle .th-toggle-label-light {
+        display: none !important;
+    }
 
-body[data-theme="dark"] .th-site-header .th-theme-toggle .th-ico-moon {
-    display: none;
+body[data-theme="dark"] .th-site-header .th-theme-toggle .th-ico-moon,
+body[data-theme="dark"] .th-site-header .th-theme-toggle .th-toggle-label-dark {
+    display: none !important;
 }
 
 body[data-theme="dark"] .th-site-header .th-theme-toggle .th-ico-sun {
-    display: block;
-}
-
-/* Labels mirror the icons: "Dark Mode" in light theme, "Light Mode" in dark theme */
-.th-site-header .th-theme-toggle .th-toggle-label-light {
-    display: none;
-}
-
-body[data-theme="dark"] .th-site-header .th-theme-toggle .th-toggle-label-dark {
-    display: none;
+    display: block !important;
 }
 
 body[data-theme="dark"] .th-site-header .th-theme-toggle .th-toggle-label-light {
-    display: inline;
+    display: inline !important;
 }
 
-/* ---------- Bottom tier (purple action bar) ---------- */
-.th-site-header .th-header-bottom {
+/* ---------- Bottom tier / action bar ---------- */
+
+.th-site-header .th-header-bottom,
+body[data-theme="dark"] .th-site-header .th-header-bottom {
+    width: 100% !important;
+    height: 52px !important;
+    min-height: 52px !important;
+    background: #3D304C !important;
+    border-top: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
     padding: 0 !important;
-    border-bottom: none !important;
 }
 
-.th-site-header .th-header-bottom .container {
-    display: flex;
-}
-
-/* The global dark-mode rule (body[data-theme="dark"] .container { background: surface })
-   would paint these centered containers and split the purple bar / hide its text.
-   Keep the header's containers transparent so each tier's own background shows through. */
-.th-site-header .container {
-    background: transparent !important;
-}
-
+.th-site-header .container,
 body[data-theme="dark"] .th-site-header .container {
     background: transparent !important;
 }
 
+.th-site-header .th-header-bottom .container,
+body[data-theme="dark"] .th-site-header .th-header-bottom .container {
+    width: min(1180px, calc(100% - 32px)) !important;
+    max-width: 1180px !important;
+    height: 52px !important;
+    min-height: 52px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+}
+
 .th-site-header .th-actions-list {
+    width: auto !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 22px;
-    margin: 0;
-    padding: 8px 28px;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 22px !important;
 }
 
-.th-site-header .th-action-link {
+.th-site-header .th-action-link,
+.th-site-header .th-header-bottom .nav-link {
     display: inline-flex !important;
-    align-items: center;
-    gap: 0;
-    line-height: 1;
-    font-size: 13.5px;
-    font-weight: 500;
-    letter-spacing: 0.2px;
-    padding: 0 !important;
-}
-
-.th-site-header .th-action-ico {
-    width: 16px;
-    height: 16px;
-    flex: none;
-    margin-right: 7px;
-}
-
-.th-site-header .th-actions-list .nav-link {
-    padding: 0 !important;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-/* Keep the cart/account bar a deep purple in BOTH themes. The default dark-mode flip
-   (.navbar-troika1 -> light lavender #d9c8f0) clashed badly with the dark page, so we
-   pin it to #3D304C to stay cohesive with the dark top tier and the footer. */
-.th-site-header .th-header-bottom,
-body[data-theme="dark"] .th-site-header .th-header-bottom {
-    background: #3D304C !important;
-    border-bottom: none !important;
-}
-
-.th-site-header .th-header-bottom .nav-link,
-.th-site-header .th-header-bottom .nav-link *,
-body[data-theme="dark"] .th-site-header .th-header-bottom .nav-link,
-body[data-theme="dark"] .th-site-header .th-header-bottom .nav-link * {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    min-height: 36px !important;
+    padding: 0 8px !important;
+    border-radius: 999px !important;
+    background: transparent !important;
     color: #f3eef9 !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.1px !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
-    .th-site-header .th-header-bottom .nav-link:hover,
-    .th-site-header .th-header-bottom .nav-link:hover * {
+    .th-site-header .th-action-link:hover,
+    .th-site-header .th-header-bottom .nav-link:hover {
+        background: rgba(255, 255, 255, 0.10) !important;
         color: #ffffff !important;
+        transform: translateY(-1px);
     }
 
-/* ---------- Footer ---------- */
-/* Multi-column footer. Fixed deep purple in both themes (white logo via filter,
-   light link/text colours overriding the global a{}/heading rules). */
+.th-site-header .th-action-ico,
+.th-site-header .th-header-bottom svg {
+    width: 19px !important;
+    height: 19px !important;
+    min-width: 19px !important;
+    max-width: 19px !important;
+    min-height: 19px !important;
+    max-height: 19px !important;
+    flex: 0 0 19px !important;
+    stroke: currentColor !important;
+    color: inherit !important;
+    margin: 0 !important;
+}
+
+.th-site-header .th-action-link *,
+.th-site-header .th-header-bottom .nav-link * {
+    color: inherit !important;
+    font-weight: 400 !important;
+}
+
+.th-site-header .dropdown-toggle::after {
+    margin-left: 4px !important;
+    vertical-align: middle !important;
+}
+
+.th-site-header .th-header-bottom .nav-item {
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* -------------------- FOOTER -------------------- */
+
 .th-site-footer {
-    background:
-        radial-gradient(1100px 220px at 50% -40px, rgba(255, 255, 255, 0.05), transparent 70%),
-        #3D304C;
+    background: radial-gradient(1100px 220px at 50% -40px, rgba(255, 255, 255, 0.05), transparent 70%), #3D304C;
     border-top: 3px solid #644F7D;
     font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
-.th-site-footer .th-footer-inner {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 32px 28px 22px;
-    display: grid;
-    grid-template-columns: 1.7fr 1fr 1fr 1fr;
-    gap: 12px 30px;
-}
+    .th-site-footer .th-footer-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px 28px 22px;
+        display: grid;
+        grid-template-columns: 1.7fr 1fr 1fr 1fr;
+        gap: 12px 30px;
+    }
 
-.th-site-footer .th-footer-brand {
-    max-width: 330px;
-}
+    .th-site-footer .th-footer-brand {
+        max-width: 330px;
+    }
 
-.th-site-footer .th-footer-logo {
-    height: 26px;
-    width: auto;
-    max-width: 100%;
-    display: block;
-    margin-bottom: 12px;
-    filter: brightness(0) invert(1);
-    opacity: 0.95;
-}
-
-.th-site-footer .th-footer-blurb {
-    margin: 0 0 10px;
-    font-size: 12.5px;
-    line-height: 1.65;
-    color: #c8bcde !important;
-}
-
-.th-site-footer .th-footer-reg {
-    margin: 0;
-    font-size: 10.5px;
-    letter-spacing: 0.5px;
-    color: rgba(255, 255, 255, 0.4) !important;
-}
-
-.th-site-footer .th-footer-h {
-    margin: 4px 0 12px;
-    font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    color: #ffffff !important;
-}
-
-    /* small accent bar under each column heading */
-    .th-site-footer .th-footer-h::after {
-        content: "";
+    .th-site-footer .th-footer-logo {
+        height: 26px;
+        width: auto;
+        max-width: 100%;
         display: block;
-        width: 22px;
-        height: 2px;
-        margin-top: 7px;
-        border-radius: 2px;
-        background: #8a73b3;
+        margin-bottom: 12px;
+        filter: brightness(0) invert(1);
+        opacity: 0.95;
     }
 
-.th-site-footer .th-footer-col ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+    .th-site-footer .th-footer-blurb {
+        margin: 0 0 10px;
+        font-size: 12.5px;
+        line-height: 1.65;
+        color: #c8bcde !important;
+    }
 
-.th-site-footer .th-footer-col li {
-    margin-bottom: 8px;
-}
+    .th-site-footer .th-footer-reg {
+        margin: 0;
+        font-size: 10.5px;
+        letter-spacing: 0.5px;
+        color: rgba(255, 255, 255, 0.4) !important;
+    }
 
-.th-site-footer .th-footer-col a {
-    color: #c8bcde !important;
-    text-decoration: none;
-    font-size: 13px;
-    transition: color 0.2s ease, padding-left 0.2s ease;
-}
-
-    .th-site-footer .th-footer-col a:hover {
+    .th-site-footer .th-footer-h {
+        margin: 4px 0 12px;
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
         color: #ffffff !important;
-        padding-left: 4px;
     }
 
-.th-site-footer .th-footer-bar {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 13px 28px 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.6) !important;
-}
+        .th-site-footer .th-footer-h::after {
+            content: "";
+            display: block;
+            width: 22px;
+            height: 2px;
+            margin-top: 7px;
+            border-radius: 2px;
+            background: #8a73b3;
+        }
 
-    .th-site-footer .th-footer-bar span {
+    .th-site-footer .th-footer-col ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .th-site-footer .th-footer-col li {
+        margin-bottom: 8px;
+    }
+
+    .th-site-footer .th-footer-col a {
+        color: #c8bcde !important;
+        text-decoration: none;
+        font-size: 13px;
+        transition: color 0.2s ease, padding-left 0.2s ease;
+    }
+
+        .th-site-footer .th-footer-col a:hover {
+            color: #ffffff !important;
+            padding-left: 4px;
+        }
+
+    .th-site-footer .th-footer-bar {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 13px 28px 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        font-size: 12px;
         color: rgba(255, 255, 255, 0.6) !important;
     }
 
-    .th-site-footer .th-footer-bar .th-footer-tag {
-        font-family: 'Kaushan Script', 'Poppins', cursive;
-        font-size: 15px;
-        color: rgba(255, 255, 255, 0.85) !important;
+        .th-site-footer .th-footer-bar span {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+        .th-site-footer .th-footer-bar .th-footer-tag {
+            font-family: 'Kaushan Script', 'Poppins', cursive;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.85) !important;
+        }
+
+/* -------------------- HEADER / FOOTER RESPONSIVE -------------------- */
+
+@media (max-width: 992px) {
+    .th-site-header .th-header-row {
+        min-height: auto !important;
+        padding: 14px 24px !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 12px !important;
     }
+
+    .th-site-header .th-logo img {
+        height: 64px !important;
+        max-width: 90vw !important;
+    }
+
+    .th-site-header .th-nav {
+        justify-content: center !important;
+        gap: 18px !important;
+    }
+
+    .th-site-header .th-header-bottom .container {
+        justify-content: flex-end !important;
+    }
+}
 
 @media (max-width: 860px) {
     .th-site-footer .th-footer-inner {
@@ -2094,6 +1891,79 @@ body[data-theme="dark"] .th-site-header .th-header-bottom .nav-link * {
     }
 }
 
+@media (max-width: 640px) {
+    .th-site-header .th-header-row {
+        padding: 12px 16px !important;
+    }
+
+    .th-site-header .th-logo img {
+        height: 56px !important;
+    }
+
+    .th-site-header .th-nav {
+        width: 100% !important;
+        justify-content: center !important;
+        gap: 10px 14px !important;
+    }
+
+        .th-site-header .navbar-troika .nav-link,
+        .th-site-header .th-nav .nav-link {
+            font-size: 12.5px !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.2px !important;
+        }
+
+    .th-site-header .th-theme-toggle {
+        margin-left: 2px !important;
+        font-size: 12.5px !important;
+        font-weight: 400 !important;
+        gap: 6px !important;
+    }
+
+        .th-site-header .th-theme-toggle .th-ico {
+            width: 15px !important;
+            height: 15px !important;
+        }
+
+    .th-site-header .th-header-bottom,
+    body[data-theme="dark"] .th-site-header .th-header-bottom {
+        height: auto !important;
+        min-height: 46px !important;
+        padding: 6px 0 !important;
+    }
+
+        .th-site-header .th-header-bottom .container,
+        body[data-theme="dark"] .th-site-header .th-header-bottom .container {
+            height: auto !important;
+            min-height: 42px !important;
+            justify-content: center !important;
+        }
+
+    .th-site-header .th-actions-list {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 12px !important;
+    }
+
+    .th-site-header .th-action-link,
+    .th-site-header .th-header-bottom .nav-link {
+        min-height: 34px !important;
+        padding: 0 8px !important;
+        font-size: 13.5px !important;
+    }
+
+    .th-site-header .th-action-ico,
+    .th-site-header .th-header-bottom svg {
+        width: 18px !important;
+        height: 18px !important;
+        min-width: 18px !important;
+        max-width: 18px !important;
+        min-height: 18px !important;
+        max-height: 18px !important;
+        flex-basis: 18px !important;
+    }
+}
+
 @media (max-width: 520px) {
     .th-site-footer .th-footer-inner {
         grid-template-columns: 1fr;
@@ -2104,47 +1974,5 @@ body[data-theme="dark"] .th-site-header .th-header-bottom .nav-link * {
         flex-direction: column;
         text-align: center;
         gap: 6px;
-    }
-}
-
-/* ---------- Responsive header ---------- */
-@media (max-width: 640px) {
-    .th-site-header .th-header-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        padding: 12px 16px;
-    }
-
-    .th-site-header .th-nav {
-        width: 100%;
-        justify-content: center;
-        gap: 10px 14px;
-        margin: 0;
-    }
-
-    .th-site-header .navbar-troika .nav-link {
-        font-size: 12.5px;
-        letter-spacing: 0.2px;
-    }
-
-    .th-site-header .th-theme-toggle {
-        margin-left: 2px;
-        font-size: 12.5px;
-        gap: 6px;
-    }
-
-    .th-site-header .th-theme-toggle .th-ico {
-        width: 15px;
-        height: 15px;
-    }
-
-    .th-site-header .th-header-bottom .container {
-        justify-content: flex-end;
-    }
-
-    .th-site-header .th-actions-list {
-        padding: 4px 16px;
-        gap: 18px;
     }
 }
