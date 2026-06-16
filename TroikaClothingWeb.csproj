@@ -373,8 +373,13 @@
     <Content Include="Images\denim skirt.jpeg" />
     <Content Include="Images\evening silk gown.jpeg" />
     <Content Include="Images\formal linen blazer.jpeg" />
+    <Content Include="Images\hoodie-brown.jpg" />
+    <Content Include="Images\hoodie-navy.jpg" />
     <Content Include="Images\light blue maxi dress.jpeg" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo-mark.png" />
+    <Content Include="Images\outfit-burgundy.jpg" />
+    <Content Include="Images\outfit-green.jpg" />
     <Content Include="Images\red summer dress.jpeg" />
     <Content Include="Images\white linen pants.jpeg" />
     <Content Include="Images\white office shirt.jpeg" />

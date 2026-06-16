@@ -1750,3 +1750,401 @@ body[data-theme="dark"] .navbar-troika1 .dropdown-menu {
     font-weight: 700;
     color: var(--troika-text) !important;
 }
+
+/* ==================== REDESIGNED HEADER & FOOTER (handoff design) ====================
+   The two-tier header keeps the existing .navbar-troika / .navbar-troika1 hooks so the
+   theme colours and the customer profile-dropdown CSS/JS keep working; these rules just
+   re-lay-out and re-style it to match the handoff. Colours use theme variables so the
+   dark-mode toggle still adapts the whole chrome. */
+
+.th-site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.35s ease;
+}
+
+.th-site-header.th-scrolled {
+    box-shadow: 0 6px 22px rgba(31, 24, 40, 0.16);
+}
+
+/* ---------- Top tier ---------- */
+.th-site-header .th-header-top {
+    padding: 0 !important;
+    border-bottom: 2px solid var(--troika-primary);
+    min-height: 0;
+}
+
+.th-site-header .th-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    /* Extra bottom padding gives the 40px theme-toggle clearance above the purple
+       bar; with only 5px its bright dark-mode border read as dipping into it. */
+    padding: 5px 28px 9px;
+}
+
+.th-site-header .th-logo {
+    padding: 0;
+    margin-right: 0;
+}
+
+.th-site-header .th-logo img {
+    height: 27px;
+    width: auto;
+    max-width: 60vw;
+    display: block;
+}
+
+/* Logo artwork is dark navy on transparent; flip it light on the dark-mode surface */
+body[data-theme="dark"] .th-site-header .th-logo img {
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+}
+
+.th-site-header .th-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.th-site-header .th-nav .nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.th-site-header .navbar-troika .nav-link {
+    padding: 0 0 3px 0 !important;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.25s ease, color 0.2s ease;
+}
+
+.th-site-header .navbar-troika .nav-link:hover {
+    border-bottom-color: var(--troika-primary-hover);
+    color: var(--troika-primary-hover) !important;
+}
+
+/* ---------- Dark-mode toggle: inline icon + label, one line (no circle) ---------- */
+.th-site-header .th-theme-toggle {
+    margin-left: 6px;
+    padding: 0 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+    line-height: 1;
+    background: transparent !important;
+    color: var(--troika-primary) !important;
+    border: none !important;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
+
+    .th-site-header .th-theme-toggle:hover {
+        background: transparent !important;
+        color: var(--troika-primary-hover) !important;
+    }
+
+.th-site-header .th-theme-toggle .th-ico {
+    width: 16px;
+    height: 16px;
+    display: block;
+    flex: none;
+}
+
+.th-site-header .th-theme-toggle .th-ico-sun {
+    display: none;
+}
+
+body[data-theme="dark"] .th-site-header .th-theme-toggle .th-ico-moon {
+    display: none;
+}
+
+body[data-theme="dark"] .th-site-header .th-theme-toggle .th-ico-sun {
+    display: block;
+}
+
+/* Labels mirror the icons: "Dark Mode" in light theme, "Light Mode" in dark theme */
+.th-site-header .th-theme-toggle .th-toggle-label-light {
+    display: none;
+}
+
+body[data-theme="dark"] .th-site-header .th-theme-toggle .th-toggle-label-dark {
+    display: none;
+}
+
+body[data-theme="dark"] .th-site-header .th-theme-toggle .th-toggle-label-light {
+    display: inline;
+}
+
+/* ---------- Bottom tier (purple action bar) ---------- */
+.th-site-header .th-header-bottom {
+    padding: 0 !important;
+    border-bottom: none !important;
+}
+
+.th-site-header .th-header-bottom .container {
+    display: flex;
+}
+
+/* The global dark-mode rule (body[data-theme="dark"] .container { background: surface })
+   would paint these centered containers and split the purple bar / hide its text.
+   Keep the header's containers transparent so each tier's own background shows through. */
+.th-site-header .container {
+    background: transparent !important;
+}
+
+body[data-theme="dark"] .th-site-header .container {
+    background: transparent !important;
+}
+
+.th-site-header .th-actions-list {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 22px;
+    margin: 0;
+    padding: 8px 28px;
+}
+
+.th-site-header .th-action-link {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0;
+    line-height: 1;
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    padding: 0 !important;
+}
+
+.th-site-header .th-action-ico {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    margin-right: 7px;
+}
+
+.th-site-header .th-actions-list .nav-link {
+    padding: 0 !important;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Keep the cart/account bar a deep purple in BOTH themes. The default dark-mode flip
+   (.navbar-troika1 -> light lavender #d9c8f0) clashed badly with the dark page, so we
+   pin it to #3D304C to stay cohesive with the dark top tier and the footer. */
+.th-site-header .th-header-bottom,
+body[data-theme="dark"] .th-site-header .th-header-bottom {
+    background: #3D304C !important;
+    border-bottom: none !important;
+}
+
+.th-site-header .th-header-bottom .nav-link,
+.th-site-header .th-header-bottom .nav-link *,
+body[data-theme="dark"] .th-site-header .th-header-bottom .nav-link,
+body[data-theme="dark"] .th-site-header .th-header-bottom .nav-link * {
+    color: #f3eef9 !important;
+}
+
+    .th-site-header .th-header-bottom .nav-link:hover,
+    .th-site-header .th-header-bottom .nav-link:hover * {
+        color: #ffffff !important;
+    }
+
+/* ---------- Footer ---------- */
+/* Multi-column footer. Fixed deep purple in both themes (white logo via filter,
+   light link/text colours overriding the global a{}/heading rules). */
+.th-site-footer {
+    background:
+        radial-gradient(1100px 220px at 50% -40px, rgba(255, 255, 255, 0.05), transparent 70%),
+        #3D304C;
+    border-top: 3px solid #644F7D;
+    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.th-site-footer .th-footer-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 28px 22px;
+    display: grid;
+    grid-template-columns: 1.7fr 1fr 1fr 1fr;
+    gap: 12px 30px;
+}
+
+.th-site-footer .th-footer-brand {
+    max-width: 330px;
+}
+
+.th-site-footer .th-footer-logo {
+    height: 26px;
+    width: auto;
+    max-width: 100%;
+    display: block;
+    margin-bottom: 12px;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+}
+
+.th-site-footer .th-footer-blurb {
+    margin: 0 0 10px;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: #c8bcde !important;
+}
+
+.th-site-footer .th-footer-reg {
+    margin: 0;
+    font-size: 10.5px;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.th-site-footer .th-footer-h {
+    margin: 4px 0 12px;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #ffffff !important;
+}
+
+    /* small accent bar under each column heading */
+    .th-site-footer .th-footer-h::after {
+        content: "";
+        display: block;
+        width: 22px;
+        height: 2px;
+        margin-top: 7px;
+        border-radius: 2px;
+        background: #8a73b3;
+    }
+
+.th-site-footer .th-footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.th-site-footer .th-footer-col li {
+    margin-bottom: 8px;
+}
+
+.th-site-footer .th-footer-col a {
+    color: #c8bcde !important;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+    .th-site-footer .th-footer-col a:hover {
+        color: #ffffff !important;
+        padding-left: 4px;
+    }
+
+.th-site-footer .th-footer-bar {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 13px 28px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+    .th-site-footer .th-footer-bar span {
+        color: rgba(255, 255, 255, 0.6) !important;
+    }
+
+    .th-site-footer .th-footer-bar .th-footer-tag {
+        font-family: 'Kaushan Script', 'Poppins', cursive;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+@media (max-width: 860px) {
+    .th-site-footer .th-footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px 24px;
+    }
+
+    .th-site-footer .th-footer-brand {
+        grid-column: 1 / -1;
+        max-width: none;
+    }
+}
+
+@media (max-width: 520px) {
+    .th-site-footer .th-footer-inner {
+        grid-template-columns: 1fr;
+        padding: 36px 22px 26px;
+    }
+
+    .th-site-footer .th-footer-bar {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+    }
+}
+
+/* ---------- Responsive header ---------- */
+@media (max-width: 640px) {
+    .th-site-header .th-header-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+    }
+
+    .th-site-header .th-nav {
+        width: 100%;
+        justify-content: center;
+        gap: 10px 14px;
+        margin: 0;
+    }
+
+    .th-site-header .navbar-troika .nav-link {
+        font-size: 12.5px;
+        letter-spacing: 0.2px;
+    }
+
+    .th-site-header .th-theme-toggle {
+        margin-left: 2px;
+        font-size: 12.5px;
+        gap: 6px;
+    }
+
+    .th-site-header .th-theme-toggle .th-ico {
+        width: 15px;
+        height: 15px;
+    }
+
+    .th-site-header .th-header-bottom .container {
+        justify-content: flex-end;
+    }
+
+    .th-site-header .th-actions-list {
+        padding: 4px 16px;
+        gap: 18px;
+    }
+}

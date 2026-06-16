@@ -5,7 +5,12 @@
         document.body.setAttribute("data-theme", theme);
         var btn = document.getElementById("btnThemeToggle");
         if (btn) {
-            btn.textContent = theme === "dark" ? "☀ Light mode" : "🌙 Dark mode";
+            // The button holds two SVG icons (moon/sun) and two text labels (Dark/Light Mode),
+            // all shown/hidden purely via CSS based on body[data-theme], so we only update the
+            // accessible label/tooltip here. (Setting textContent would wipe the icons + labels.)
+            var label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+            btn.setAttribute("aria-label", label);
+            btn.setAttribute("title", label);
         }
     }
 

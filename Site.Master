@@ -15,6 +15,10 @@
     <link href="<%= ResolveUrl("~/Content/TroikaTheme.css") %>" rel="stylesheet" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Kaushan+Script&display=swap" rel="stylesheet" />
+
 </head>
 <body>
     <form runat="server">
@@ -40,50 +44,55 @@
         <%-- <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>--%>
 
 
-        <%--header navigation navigation bar--%>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-troika">
-            <div class="container">
-                <%--toggle for navbar--%>
-                <span class="navbar-toggler-icon"></span>
-                <%--adding image to nav bar--%>
-                <a class="navbar-brand" runat="server" href="~/">
-                    <img src="/Images/logo.png" alt="Troika Clothing CC" height="60" class="d-inline-block align-text-top">
-                </a>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/About">About Us</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Products.aspx">Products</a></li>
-                        <li class="nav-item">
-                            <button id="btnThemeToggle" type="button" class="troika-btn troika-btn-secondary theme-toggle-btn" onclick="TroikaTheme.toggle()">🌙 Dark mode</button></li>
+        <%-- ===== Redesigned site header (matches handoff design) ===== --%>
+        <header class="th-site-header">
+
+            <%-- Top tier: logo, primary nav, and the dark-mode icon toggle (showcased here as a feature) --%>
+            <nav class="navbar navbar-expand-sm navbar-troika th-header-top">
+                <div class="container th-header-row">
+                    <a class="navbar-brand th-logo" runat="server" href="~/">
+                        <img src="/Images/logo-mark.png" alt="Troika Clothing CC" />
+                    </a>
+                    <ul class="navbar-nav ms-auto th-nav">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">HOME</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/About">ABOUT US</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Contact">CONTACT</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Products.aspx">SHOP</a></li>
+                        <li class="nav-item th-toggle-wrap">
+                            <button id="btnThemeToggle" type="button" class="th-theme-toggle" onclick="TroikaTheme.toggle()" aria-label="Switch to dark mode" title="Switch to dark mode">
+                                <svg class="th-ico th-ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                                <svg class="th-ico th-ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                                <span class="th-toggle-label th-toggle-label-dark">Dark Mode</span>
+                                <span class="th-toggle-label th-toggle-label-light">Light Mode</span>
+                            </button>
+                        </li>
                     </ul>
                 </div>
-        </nav>
+            </nav>
 
-        <%--navy blue navigation bar that changes depending on who is logged in and when no one is logged in--%>
-        <nav class="navbar navbar-expand-sm navbar-troika1">
-            <div class="container-fluid">
-                <ul class="navbar-nav ms-auto d-flex flex-row text-white py-2">
-                    <!-- When NOT logged in -->
-                    <asp:PlaceHolder ID="phLoggedOut" runat="server" Visible="true">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Public Pages/Cart.aspx">🛒 Cart (<asp:Label ID="lblCartCount" runat="server" Text="0" />) </a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Login.aspx">👤 Account</a></li>
-                    </asp:PlaceHolder>
+            <%-- Bottom tier: purple action bar. Keeps .navbar-troika1 so the existing profile-dropdown CSS/JS still applies. --%>
+            <nav class="navbar navbar-expand-sm navbar-troika1 th-header-bottom">
+                <div class="container">
+                    <ul class="navbar-nav ms-auto d-flex flex-row th-actions-list">
+                        <!-- When NOT logged in -->
+                        <asp:PlaceHolder ID="phLoggedOut" runat="server" Visible="true">
+                            <li class="nav-item"><a class="nav-link th-action-link" runat="server" href="~/Public Pages/Cart.aspx"><svg class="th-action-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Cart (<asp:Label ID="lblCartCount" runat="server" Text="0" />)</a></li>
+                            <li class="nav-item"><a class="nav-link th-action-link" runat="server" href="~/Login.aspx"><svg class="th-action-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Account</a></li>
+                        </asp:PlaceHolder>
                     <!-- When as a customer logged in -->
                     <asp:PlaceHolder ID="phCustLoggedIn" runat="server" Visible="false">
                         <li class="nav-item">
-                            <a class="nav-link" runat="server" href="~/Customer Pages/CustomerProfile">🎉 Welcome,
+                            <a class="nav-link th-action-link" runat="server" href="~/Customer Pages/CustomerProfile">Welcome,
                                
                                 <asp:Label ID="lblWelcome" runat="server"></asp:Label>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" runat="server" href="~/Public Pages/Cart.aspx">🛒 Cart (<asp:Label ID="Label2" runat="server" Text="0" />)
+                            <a class="nav-link th-action-link" runat="server" href="~/Public Pages/Cart.aspx"><svg class="th-action-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Cart (<asp:Label ID="Label2" runat="server" Text="0" />)
                             </a>
                         </li>
                         <li class="nav-item dropdown profile-menu-wrapper">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button">👤 Profile
+                            <a class="nav-link th-action-link dropdown-toggle" href="#" id="navbarDropdown" role="button"><svg class="th-action-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile
                             </a>
 
                             <ul id="profileDropdownMenu"
@@ -124,7 +133,7 @@
 
                     <!-- When as a admin logged in -->
                     <asp:PlaceHolder ID="phAdmin" runat="server" Visible="false">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Admin Pages/AdminProfile">🎉 Welcome,
+                        <li class="nav-item"><a class="nav-link th-action-link" runat="server" href="~/Admin Pages/AdminProfile">Welcome,
                        
                             <asp:Label ID="lblAdmin" runat="server"></asp:Label></a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Admin Pages/ProductManagement">Products</a></li>
@@ -136,18 +145,48 @@
                 </ul>
             </div>
         </nav>
+        </header>
         <%--content from other pages go here--%>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-
-            <%--footer -- added clear divider so no layout issuse occur--%>
-            <div style="clear: both"></div>
-            <hr />
-            <footer class="text-center">
-                <p>&copy; 2025 - Troika Clothing CC</p>
-            </footer>
         </div>
+
+        <%-- Redesigned footer --%>
+        <footer class="th-site-footer">
+            <div class="th-footer-inner">
+                <div class="th-footer-brand">
+                    <img src="/Images/logo-mark.png" alt="Troika Clothing C.C." class="th-footer-logo" />
+                    <p class="th-footer-blurb">Luxurious everyday essentials &mdash; designed for comfort, warmth and effortless style. Stay warm and stylish.</p>
+                    <p class="th-footer-reg">Reg. C.K. 2002 / 058718 / 23</p>
+                </div>
+                <div class="th-footer-col">
+                    <div class="th-footer-h">Shop</div>
+                    <ul>
+                        <li><a runat="server" href="~/Public Pages/Products.aspx">All Products</a></li>
+                        <li><a runat="server" href="~/Public Pages/Cart.aspx">Your Cart</a></li>
+                    </ul>
+                </div>
+                <div class="th-footer-col">
+                    <div class="th-footer-h">Company</div>
+                    <ul>
+                        <li><a runat="server" href="~/Public Pages/About">About Us</a></li>
+                        <li><a runat="server" href="~/Public Pages/Contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="th-footer-col">
+                    <div class="th-footer-h">Account</div>
+                    <ul>
+                        <li><a runat="server" href="~/Login.aspx">Sign In</a></li>
+                        <li><a runat="server" href="~/Register.aspx">Create Account</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="th-footer-bar">
+                <span>&copy; 2025 Troika Clothing C.C. All rights reserved.</span>
+                <span class="th-footer-tag">Stay warm and stylish.</span>
+            </div>
+        </footer>
     </form>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
@@ -160,6 +199,23 @@
 
 
     <script src="<%= ResolveUrl("~/Scripts/theme-toggle.js") %>"></script>
+
+    <%-- Header gains a soft shadow once the page is scrolled (matches handoff) --%>
+    <script type="text/javascript">
+        (function () {
+            var header = document.querySelector(".th-site-header");
+            if (!header) return;
+            function onScroll() {
+                if (window.scrollY > 30) {
+                    header.classList.add("th-scrolled");
+                } else {
+                    header.classList.remove("th-scrolled");
+                }
+            }
+            window.addEventListener("scroll", onScroll, { passive: true });
+            onScroll();
+        })();
+    </script>
 
     <script type="text/javascript">
         function applyProfileDropdownFix() {
