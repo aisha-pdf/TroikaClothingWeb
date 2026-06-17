@@ -206,13 +206,13 @@
             <!-- Email -->
             <div class="register-local-field">
                 <asp:Label ID="lblEmail" runat="server" Text="Email:" AssociatedControlID="txtEmail" />
-                <asp:TextBox ID="txtEmail" runat="server" CssClass="register-local-input" />
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="register-local-input" placeholder="you@example.com" />
             </div>
 
             <!-- Phone Number -->
             <div class="register-local-field">
                 <asp:Label ID="lblPhoneNum" runat="server" Text="Phone Number:" AssociatedControlID="txtPhoneNum"></asp:Label>
-                <asp:TextBox ID="txtPhoneNum" runat="server" MaxLength="10" CssClass="register-local-input"></asp:TextBox>
+                <asp:TextBox ID="txtPhoneNum" runat="server" MaxLength="10" CssClass="register-local-input" placeholder="10 digits starting with 0, e.g. 0821234567"></asp:TextBox>
             </div>
 
             <!-- Username -->

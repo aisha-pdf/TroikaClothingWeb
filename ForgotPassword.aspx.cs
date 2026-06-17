@@ -39,16 +39,5 @@ namespace TroikaClothingWeb
                 return;
             }
         }
-
-        protected void chkShowPassword_CheckedChanged(object sender, EventArgs e)
-        {
-            txtNewPassword.TextMode = chkShowPassword.Checked
-                ? System.Web.UI.WebControls.TextBoxMode.SingleLine
-                : System.Web.UI.WebControls.TextBoxMode.Password;
-
-            txtConfirmPassword.TextMode = chkShowPassword.Checked
-                ? System.Web.UI.WebControls.TextBoxMode.SingleLine
-                : System.Web.UI.WebControls.TextBoxMode.Password;
-        }
     }
 }

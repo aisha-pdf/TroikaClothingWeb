@@ -182,6 +182,170 @@
                 flex-wrap: wrap;
             }
         }
+
+        /* -------------------- ADD-TO-CART MINI POPUP -------------------- */
+
+        .atc-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 11000;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        .atc-window {
+            position: relative;
+            width: 380px;
+            max-width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: var(--troika-surface) !important;
+            color: var(--troika-text) !important;
+            border: 1px solid var(--troika-border) !important;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            text-align: left;
+            animation: atcZoomIn 0.25s ease-out;
+        }
+
+        @keyframes atcZoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.94);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .atc-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px !important;
+            height: 32px;
+            background: transparent !important;
+            color: var(--troika-text) !important;
+            border: none !important;
+            font-size: 22px;
+            line-height: 32px;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 !important;
+            border-radius: 6px;
+        }
+
+            .atc-close:hover {
+                background: var(--troika-surface-alt, #f1ecf7) !important;
+            }
+
+        .atc-product {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-right: 20px;
+        }
+
+        .atc-thumb {
+            width: 72px;
+            height: 72px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--troika-border);
+            flex-shrink: 0;
+        }
+
+        .atc-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--troika-heading-text) !important;
+        }
+
+        .atc-price {
+            font-weight: 700;
+            margin-top: 2px;
+            color: var(--troika-primary) !important;
+        }
+
+        .atc-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 14px;
+        }
+
+        .atc-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--troika-text) !important;
+        }
+
+        .atc-select {
+            padding: 9px 10px !important;
+            border-radius: 6px !important;
+            font-size: 15px;
+            background: var(--troika-input-bg) !important;
+            color: var(--troika-input-text) !important;
+            border: 1px solid var(--troika-border) !important;
+            width: 100%;
+        }
+
+        .atc-qty {
+            width: 100px;
+        }
+
+        .atc-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .atc-btn {
+            flex: 1;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px 14px !important;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid var(--troika-border) !important;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .atc-btn-secondary {
+            background: #a93226 !important;
+            color: #ffffff !important;
+            border-color: #a93226 !important;
+        }
+
+            .atc-btn-secondary:hover {
+                background: #c0392b !important;
+                color: #ffffff !important;
+                transform: translateY(-1px);
+            }
+
+        .atc-btn-primary {
+            background: #2C5F2D !important;
+            color: #ffffff !important;
+            border-color: #2C5F2D !important;
+        }
+
+            .atc-btn-primary:hover {
+                background: #34a853 !important;
+                color: #ffffff !important;
+                transform: translateY(-1px);
+            }
     </style>
 
     <div class="wishlist-page">
@@ -229,6 +393,50 @@
             <asp:Label ID="lblMessage" runat="server" CssClass="wishlist-message" EnableViewState="False" Visible="false" />
         </div>
     </div>
+
+    <%-- Mini product popup: opened by "Add to cart" so the customer can pick a colour,
+         size and quantity (the wishlist row itself captures none of these). Adds to the
+         cart and closes on confirm. Plain full-postback panel to match this page's
+         structure; MaintainScrollPositionOnPostback keeps the scroll position. --%>
+    <asp:Panel ID="pnlAddToCart" runat="server" CssClass="atc-overlay" Visible="false">
+        <div class="atc-window">
+            <asp:Button ID="btnAtcClose" runat="server" CssClass="atc-close" Text="×"
+                CausesValidation="false" OnClick="btnAtcCancel_Click" ToolTip="Close" />
+
+            <div class="atc-product">
+                <asp:Image ID="imgAtc" runat="server" CssClass="atc-thumb" />
+                <div>
+                    <div class="atc-name"><asp:Label ID="lblAtcName" runat="server" /></div>
+                    <div class="atc-price"><asp:Label ID="lblAtcPrice" runat="server" /></div>
+                </div>
+            </div>
+
+            <div class="atc-field">
+                <label class="atc-label">Colour</label>
+                <asp:DropDownList ID="ddlAtcColour" runat="server" CssClass="atc-select" />
+            </div>
+
+            <div class="atc-field">
+                <label class="atc-label">Size</label>
+                <asp:DropDownList ID="ddlAtcSize" runat="server" CssClass="atc-select" />
+            </div>
+
+            <div class="atc-field">
+                <label class="atc-label">Quantity</label>
+                <asp:TextBox ID="txtAtcQuantity" runat="server" CssClass="atc-select atc-qty"
+                    Text="1" TextMode="Number" min="1" />
+            </div>
+
+            <asp:HiddenField ID="hfAtcProductId" runat="server" />
+
+            <div class="atc-actions">
+                <asp:Button ID="btnAtcCancel" runat="server" CssClass="atc-btn atc-btn-secondary"
+                    Text="Cancel" CausesValidation="false" OnClick="btnAtcCancel_Click" />
+                <asp:Button ID="btnAtcAdd" runat="server" CssClass="atc-btn atc-btn-primary"
+                    Text="Add to cart" OnClick="btnAtcAdd_Click" />
+            </div>
+        </div>
+    </asp:Panel>
 
     <div id="wishToast" class="wish-toast" aria-live="polite"></div>
 

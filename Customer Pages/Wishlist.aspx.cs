@@ -33,14 +33,13 @@ namespace TroikaClothingWeb.Customer_Pages
             }
             else if (e.CommandName == "addtocart")
             {
-                AddToCart(productId);
+                OpenAddToCartPopup(productId);
             }
         }
 
-        // Adds the product to the cart directly (keeping it on the wishlist). The cart
-        // requires a colour/size, which the wishlist doesn't capture, so a default
-        // colour/size is used; the customer can change them in the cart's inline editor.
-        private void AddToCart(string productId)
+        // "Add to cart" no longer adds directly - the wishlist row captures no colour/size/
+        // quantity, so it opens a mini product popup where the customer picks those first.
+        private void OpenAddToCartPopup(string productId)
         {
             Product product = _productService.GetProductById(productId);
 
@@ -53,21 +52,69 @@ namespace TroikaClothingWeb.Customer_Pages
                 return;
             }
 
+            hfAtcProductId.Value = product.ProductID;
+            imgAtc.ImageUrl = product.ImageUrl;
+            imgAtc.AlternateText = product.ProductName;
+            lblAtcName.Text = product.ProductName;
+            lblAtcPrice.Text = "R" + product.Price.ToString("F2");
+
+            BindPopupOptions();
+            txtAtcQuantity.Text = "1";
+
+            pnlAddToCart.Visible = true;
+        }
+
+        // Confirms the popup: adds the product to the cart with the chosen colour, size and
+        // quantity (keeping it on the wishlist), then closes the popup.
+        protected void btnAtcAdd_Click(object sender, EventArgs e)
+        {
+            Product product = _productService.GetProductById(hfAtcProductId.Value);
+
+            if (product == null)
+            {
+                // Deactivated while the popup was open - refresh and tell the customer.
+                pnlAddToCart.Visible = false;
+                BindWishlist();
+                ShowToast("This product is no longer available.");
+                return;
+            }
+
             var item = new CartItem
             {
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,
                 UnitPrice = product.Price,
-                Quantity = 1,
-                Colour = ProductOptions.Colours[0],
-                ClothingSize = ProductOptions.Sizes[0],
+                Quantity = ParseQuantity(txtAtcQuantity.Text),
+                Colour = ddlAtcColour.SelectedValue,
+                ClothingSize = ddlAtcSize.SelectedValue,
                 ImageUrl = ResolveUrl(product.ImageUrl)
             };
 
             _cartService.AddOrIncrease(Session, item);
             UpdateMasterCartCount();
 
+            pnlAddToCart.Visible = false;
             ShowToast(product.ProductName + " added to your cart");
+        }
+
+        protected void btnAtcCancel_Click(object sender, EventArgs e)
+        {
+            pnlAddToCart.Visible = false;
+        }
+
+        private void BindPopupOptions()
+        {
+            ddlAtcColour.DataSource = ProductOptions.Colours;
+            ddlAtcColour.DataBind();
+
+            ddlAtcSize.DataSource = ProductOptions.Sizes;
+            ddlAtcSize.DataBind();
+        }
+
+        private int ParseQuantity(string quantityText)
+        {
+            int quantity;
+            return int.TryParse(quantityText, out quantity) ? Math.Max(1, quantity) : 1;
         }
 
         private void ShowToast(string message)

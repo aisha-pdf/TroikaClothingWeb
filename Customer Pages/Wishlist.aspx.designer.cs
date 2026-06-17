@@ -20,5 +20,60 @@ namespace TroikaClothingWeb.Customer_Pages
         /// lblMessage control.
         /// </summary>
         protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
+        /// pnlAddToCart control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Panel pnlAddToCart;
+
+        /// <summary>
+        /// btnAtcClose control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnAtcClose;
+
+        /// <summary>
+        /// imgAtc control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Image imgAtc;
+
+        /// <summary>
+        /// lblAtcName control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblAtcName;
+
+        /// <summary>
+        /// lblAtcPrice control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblAtcPrice;
+
+        /// <summary>
+        /// ddlAtcColour control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAtcColour;
+
+        /// <summary>
+        /// ddlAtcSize control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAtcSize;
+
+        /// <summary>
+        /// txtAtcQuantity control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtAtcQuantity;
+
+        /// <summary>
+        /// hfAtcProductId control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.HiddenField hfAtcProductId;
+
+        /// <summary>
+        /// btnAtcCancel control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnAtcCancel;
+
+        /// <summary>
+        /// btnAtcAdd control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnAtcAdd;
     }
 }
