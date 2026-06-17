@@ -2,6 +2,12 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
 
+    <link href="<%= ResolveUrl("~/Content/wishlist.css") %>" rel="stylesheet" />
+
+    <span id="troikaWishCfg" style="display: none;"
+        data-toggle-url='<%= ResolveUrl("~/Public Pages/WishlistHandler.ashx") %>'
+        data-login-url='<%= ResolveUrl("~/Login.aspx") %>'></span>
+
     <style>
         /* -------------------- PRODUCT DETAIL LIGHT/DARK MODE FIX -------------------- */
 
@@ -703,6 +709,15 @@
             <div class="product-detail">
 
                 <div class="product-image-section">
+                    <% if (HasProduct) { %>
+                    <button type="button" class="wish-heart wish-heart-detail <%= WishHeartClass %>"
+                        data-productid="<%= Server.HtmlEncode(CurrentProductId) %>"
+                        aria-label="Add to wishlist" onclick="troikaToggleWish(this); return false;">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </button>
+                    <% } %>
                     <asp:Image ID="imgProduct" runat="server" CssClass="main-product-image"
                         ImageUrl="~/images/image-placeholder.png" AlternateText="Product Image" />
                 </div>
@@ -862,5 +877,6 @@
     </asp:UpdatePanel>
 
     <script src="<%= ResolveUrl("~/Scripts/delivery-tracker.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Scripts/wishlist.js") %>"></script>
 
 </asp:Content>

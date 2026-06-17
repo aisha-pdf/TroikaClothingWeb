@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -96,6 +97,55 @@ namespace TroikaClothingWeb.Public_Pages
             var args = (e.CommandArgument ?? "").ToString().Split('|');
             _cartService.Remove(Session, args.ElementAtOrDefault(0), args.ElementAtOrDefault(1), args.ElementAtOrDefault(2));
             BindCart();
+            UpdateMasterCartCount();
+        }
+
+        // The master sets the cart-count badge during its own Page_Load, which runs
+        // before these button events mutate the cart - so refresh the badge afterwards
+        // or it shows the pre-change (stale/blank) count.
+        private void UpdateMasterCartCount()
+        {
+            int count = _cartService.GetCartCount(Session);
+
+            SiteMaster master = Page.Master as SiteMaster;
+            if (master != null)
+                master.UpdateCartCount(count);
+
+            // Remove / Clear / quantity edits now run as async (UpdatePanel) postbacks, so
+            // the master page - and its cart-count badge - is not re-rendered. Push the new
+            // count to the badge in the browser so it stays in sync without a full reload
+            // (mirrors ProductDetail's add-to-cart behaviour).
+            SyncCartBadgeClientSide(count);
+        }
+
+        private void SyncCartBadgeClientSide(int count)
+        {
+            var script = new StringBuilder();
+
+            foreach (string id in new[] { "lblCartCount", "Label2" })
+            {
+                var label = FindControlRecursive(Master, id) as Label;
+                if (label != null)
+                    script.AppendFormat(
+                        "var e=document.getElementById('{0}');if(e){{e.textContent='{1}';}}",
+                        label.ClientID, count);
+            }
+
+            if (script.Length > 0)
+                ScriptManager.RegisterStartupScript(upCart, typeof(Cart), "syncCartBadge", script.ToString(), true);
+        }
+
+        private static Control FindControlRecursive(Control root, string id)
+        {
+            if (root == null) return null;
+            if (string.Equals(root.ID, id, StringComparison.Ordinal)) return root;
+
+            foreach (Control child in root.Controls)
+            {
+                Control found = FindControlRecursive(child, id);
+                if (found != null) return found;
+            }
+            return null;
         }
 
         protected void rptCart_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -135,6 +185,7 @@ namespace TroikaClothingWeb.Public_Pages
 
             _cartService.UpdateVariant(Session, productId, oldColour, oldSize, newColour, newSize, qty);
             BindCart();
+            UpdateMasterCartCount();
         }
 
         // Selects value in the list; if the stored value isn't a standard option, inserts it so nothing is lost.
@@ -155,6 +206,7 @@ namespace TroikaClothingWeb.Public_Pages
         {
             _cartService.Clear(Session);
             BindCart();
+            UpdateMasterCartCount();
         }
 
         protected void btnCheckout_Click(object sender, EventArgs e)

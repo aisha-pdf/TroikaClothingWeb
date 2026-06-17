@@ -59,5 +59,10 @@ namespace TroikaClothingWeb.Common
         {
             return new ReportService(new ReportRepository());
         }
+
+        public static WishlistService CreateWishlistService()
+        {
+            return new WishlistService(new WishlistRepository(), new UserRepository());
+        }
     }
 }

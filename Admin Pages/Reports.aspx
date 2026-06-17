@@ -59,21 +59,23 @@
 
         .bi-help-overlay {
             position: fixed; inset: 0; z-index: 1000; background: rgba(28, 18, 40, 0.55);
-            display: flex; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow-y: auto;
+            display: flex; align-items: flex-start; justify-content: center; padding: 24px 16px; overflow-y: auto;
         }
         .bi-help-modal {
-            width: 720px; max-width: 100%; background: var(--troika-surface-alt, #fff);
+            width: 660px; max-width: 100%; max-height: calc(100vh - 48px);
+            display: flex; flex-direction: column; background: var(--troika-surface-alt, #fff);
             border-radius: 16px; border: 1px solid var(--troika-border, #e4dcef);
             box-shadow: 0 20px 60px rgba(28, 18, 40, 0.4); overflow: hidden;
         }
         .bi-help-head {
-            display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px;
+            flex: 0 0 auto;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 22px;
             background-color: #3d304c; background-image: linear-gradient(135deg, #3d304c, #644f7d);
         }
         .bi-help-head h2 { margin: 0; font-size: 19px; font-weight: 800; color: #f4f1ec; }
         .bi-help-x { background: transparent; border: none; color: #f4f1ec; font-size: 26px; line-height: 1; cursor: pointer; opacity: .8; }
         .bi-help-x:hover { opacity: 1; }
-        .bi-help-body { padding: 20px 24px 26px; max-height: 70vh; overflow-y: auto; color: var(--troika-text, #211c2b); font-size: 14px; line-height: 1.6; }
+        .bi-help-body { flex: 1 1 auto; min-height: 0; padding: 18px 24px 22px; overflow-y: auto; color: var(--troika-text, #211c2b); font-size: 14px; line-height: 1.55; }
         .bi-help-body h4 { margin: 18px 0 8px; font-size: 14.5px; color: var(--troika-heading-text, #3a235c); }
         .bi-help-body p { margin: 0 0 10px; }
         .bi-help-graph { margin: 0 0 9px; }
@@ -599,7 +601,7 @@
                 overview: {
                     label: "Overview (All)", subtitle: "Live sales analytics for administrators",
                     cards: [
-                        { id: "chartTrend", title: "Revenue Trend (with 3-month average)", span: 2, render: rTrend },
+                        { id: "chartTrend", title: "Revenue Trend (with 3-month average)", span: 2, render: rTrendSmart },
                         { id: "chartStatus", title: "Order Status Funnel", render: rStatusFunnel },
                         { id: "chartCategory", title: "Revenue by Category", render: rCategory },
                         { id: "chartTopProducts", title: "Top 10 Products (units)", render: rTopProducts },
@@ -1128,7 +1130,20 @@
                 html += EXPORT_HELP;
 
                 el("helpBody").innerHTML = html;
-                el("helpOverlay").style.display = "flex";
+
+                // Start the modal just below the sticky site header (which sits above the
+                // overlay), so it isn't tucked under the top bar and its rounded top
+                // corners are visible. Recomputed each open so it adapts to header height.
+                var overlay = el("helpOverlay");
+                var modal = overlay.querySelector(".bi-help-modal");
+                var header = document.querySelector(".th-site-header");
+                var gapTop = (header ? header.getBoundingClientRect().bottom : 90) + 14;
+                overlay.style.paddingTop = gapTop + "px";
+                // Cap the modal to the space left between the header gap and the bottom of
+                // the viewport, so the top is never clipped and the bottom never overflows
+                // (the body scrolls internally instead).
+                if (modal) modal.style.maxHeight = (window.innerHeight - gapTop - 24) + "px";
+                overlay.style.display = "flex";
             }
             function closeHelp() { el("helpOverlay").style.display = "none"; }
 

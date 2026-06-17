@@ -49,6 +49,7 @@ namespace TroikaClothingWeb.Services
                 report = "overview",
                 kpis = _reportRepository.GetKpis(filter),
                 trend = _reportRepository.GetSalesTrend(filter),
+                trendDaily = _reportRepository.GetSalesTrendDaily(filter),
                 category = _reportRepository.GetRevenueByCategory(filter),
                 topProducts = _reportRepository.GetTopProducts(filter, 10),
                 payment = _reportRepository.GetPaymentBreakdown(filter),

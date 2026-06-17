@@ -250,19 +250,19 @@
                     <!-- Street -->
                     <div class="register-local-field">
                         <asp:Label ID="lblStreet" runat="server" Text="Street Address:" AssociatedControlID="txtStreet" />
-                        <asp:TextBox ID="txtStreet" runat="server" CssClass="register-local-input" />
+                        <asp:TextBox ID="txtStreet" runat="server" CssClass="register-local-input js-troika-street" />
                     </div>
 
                     <!-- Suburb -->
                     <div class="register-local-field">
                         <asp:Label ID="lblSuburb" runat="server" Text="Suburb:" AssociatedControlID="txtSuburb" />
-                        <asp:TextBox ID="txtSuburb" runat="server" CssClass="register-local-input" />
+                        <asp:TextBox ID="txtSuburb" runat="server" CssClass="register-local-input js-troika-suburb" />
                     </div>
 
                     <!-- Post Code -->
                     <div class="register-local-field">
                         <asp:Label ID="lblPostCode" runat="server" Text="Post Code:" AssociatedControlID="txtPostCode" />
-                        <asp:TextBox ID="txtPostCode" runat="server" MaxLength="4" CssClass="register-local-input" />
+                        <asp:TextBox ID="txtPostCode" runat="server" MaxLength="4" CssClass="register-local-input js-troika-postcode" />
                     </div>
                 </div>
             </div>
@@ -349,5 +349,11 @@
             }
         })();
     </script>
+
+    <!-- Google Places address autocomplete (defines the Maps callback first, then loads Maps). -->
+    <script src="<%= ResolveUrl("~/Scripts/troika-address-autocomplete.js") %>"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=<%= System.Configuration.ConfigurationManager.AppSettings["GoogleMapsApiKey"] %>&libraries=places&loading=async&callback=initTroikaAddressAutocomplete"
+        async defer></script>
 
 </asp:Content>

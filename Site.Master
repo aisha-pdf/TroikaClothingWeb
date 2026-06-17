@@ -116,6 +116,14 @@
                                 </li>
 
                                 <li>
+                                    <a id="profileWishlistLink"
+                                        class="dropdown-item profile-dropdown-item"
+                                        runat="server"
+                                        href="~/Customer Pages/Wishlist">My Wishlist
+                                    </a>
+                                </li>
+
+                                <li>
                                     <hr id="profileDropdownDivider" class="dropdown-divider profile-dropdown-divider" />
                                 </li>
 
@@ -224,6 +232,7 @@
             var menu = document.getElementById("profileDropdownMenu");
             var manage = document.getElementById("profileManageLink");
             var orders = document.getElementById("profileOrdersLink");
+            var wishlist = document.getElementById("profileWishlistLink");
             var logout = document.getElementById("<%= btnLogout.ClientID %>");
             var divider = document.getElementById("profileDropdownDivider");
 
@@ -246,6 +255,12 @@
                     orders.style.setProperty("color", "#f5f3f7", "important");
                     orders.style.setProperty("background-color", "#1c1724", "important");
                     orders.style.setProperty("font-weight", "700", "important");
+                }
+
+                if (wishlist) {
+                    wishlist.style.setProperty("color", "#f5f3f7", "important");
+                    wishlist.style.setProperty("background-color", "#1c1724", "important");
+                    wishlist.style.setProperty("font-weight", "700", "important");
                 }
 
                 if (logout) {
@@ -274,6 +289,12 @@
                     orders.style.setProperty("font-weight", "700", "important");
                 }
 
+                if (wishlist) {
+                    wishlist.style.setProperty("color", "#1f1f1f", "important");
+                    wishlist.style.setProperty("background-color", "#ffffff", "important");
+                    wishlist.style.setProperty("font-weight", "700", "important");
+                }
+
                 if (logout) {
                     logout.style.setProperty("color", "#b00020", "important");
                     logout.style.setProperty("background-color", "#ffffff", "important");
@@ -291,9 +312,10 @@
 
             var manage = document.getElementById("profileManageLink");
             var orders = document.getElementById("profileOrdersLink");
+            var wishlist = document.getElementById("profileWishlistLink");
             var logout = document.getElementById("<%= btnLogout.ClientID %>");
 
-            var normalItems = [manage, orders];
+            var normalItems = [manage, orders, wishlist];
 
             normalItems.forEach(function (item) {
                 if (!item) {

@@ -13,15 +13,50 @@ namespace TroikaClothingWeb.Public_Pages
     {
         private readonly ProductService _productService = ServiceFactory.CreateProductService();
         private readonly CartService _cartService = ServiceFactory.CreateCartService();
+        private readonly WishlistService _wishlistService = ServiceFactory.CreateWishlistService();
+
+        // The product for the current ?id=, fetched once per request and shared by the
+        // heart-state, details and add-to-cart logic.
+        private Product _currentProduct;
+        private bool _currentProductLoaded;
+
+        // Surfaced to the markup so the wishlist heart can render with the right product
+        // id and pre-filled state. Recomputed on every load (incl. postbacks).
+        protected bool HasProduct { get; private set; }
+        protected string CurrentProductId { get; private set; }
+        protected string WishHeartClass { get; private set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SetWishlistHeartState();
+
             if (!IsPostBack)
             {
                 BindOptionLists();
                 LoadProductDetails();
                 LoadRelatedProducts();
             }
+        }
+
+        private Product GetCurrentProduct()
+        {
+            if (!_currentProductLoaded)
+            {
+                _currentProduct = _productService.GetProductById(Request.QueryString["id"]);
+                _currentProductLoaded = true;
+            }
+            return _currentProduct;
+        }
+
+        private void SetWishlistHeartState()
+        {
+            Product product = GetCurrentProduct();
+            HasProduct = product != null;
+            CurrentProductId = product != null ? product.ProductID : string.Empty;
+
+            string username = Session["Username"] as string;
+            bool wished = HasProduct && _wishlistService.GetWishlistedProductIds(username).Contains(product.ProductID);
+            WishHeartClass = wished ? "is-wished" : string.Empty;
         }
 
         private void BindOptionLists()
@@ -35,8 +70,7 @@ namespace TroikaClothingWeb.Public_Pages
 
         private void LoadProductDetails()
         {
-            string productId = Request.QueryString["id"];
-            Product product = _productService.GetProductById(productId);
+            Product product = GetCurrentProduct();
 
             if (product == null)
             {
@@ -77,13 +111,20 @@ namespace TroikaClothingWeb.Public_Pages
         {
             if (!AuthService.IsInRole(Session, "Customer"))
             {
+                // Admins are logged in but cannot purchase: show a notice rather than
+                // sending them to login (mirrors the wishlist heart's admin handling).
+                if (AuthService.IsInRole(Session, "Administrator"))
+                {
+                    ShowAdminPurchaseNotice();
+                    return;
+                }
+
                 Session["ReturnUrl"] = Request.RawUrl;
                 Response.Redirect("~/Login.aspx");
                 return;
             }
 
-            string productId = Request.QueryString["id"];
-            Product product = _productService.GetProductById(productId);
+            Product product = GetCurrentProduct();
             if (product == null) return;
 
             var item = new CartItem
@@ -108,6 +149,18 @@ namespace TroikaClothingWeb.Public_Pages
             // its cart-count badge — is not re-rendered. Push the new count to the badge
             // in the browser so it stays in sync without a full reload.
             SyncCartBadgeClientSide();
+        }
+
+        // Pops the shared notice modal (defined in wishlist.js, which this page loads).
+        // Registered against the Add-to-Cart UpdatePanel so it runs after the async postback.
+        private void ShowAdminPurchaseNotice()
+        {
+            const string message = "Administrators are not allowed to make purchases. Please create or log in to a customer account.";
+            string script =
+                "if(window.troikaNotice){window.troikaNotice('" +
+                HttpUtility.JavaScriptStringEncode(message) +
+                "','Action not allowed');}";
+            ScriptManager.RegisterStartupScript(btnAddToCart, typeof(ProductDetail), "adminPurchaseNotice", script, true);
         }
 
         private void SyncCartBadgeClientSide()

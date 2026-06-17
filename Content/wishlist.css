@@ -1,0 +1,185 @@
+/* wishlist.css
+   Shared styles for the wishlist heart icon used on the Products grid and the
+   Product Detail page. White circular background in both light and dark mode. */
+
+/* Positioning anchors for the absolutely-placed heart */
+.product-card {
+    position: relative;
+}
+
+.product-image-section {
+    position: relative;
+}
+
+/* The heart is a <button>, so the global "button { ... !important }" theme rule in
+   TroikaTheme.css would otherwise repaint its background (and padding/border) in BOTH
+   light and dark mode. The !important overrides below keep the heart a clean white
+   circle in every theme, including on hover. */
+.wish-heart {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border: none !important;
+    border-radius: 50%;
+    background: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0 !important;
+    z-index: 3;
+    transition: transform 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+    .wish-heart:hover {
+        background: #ffffff !important;
+        transform: scale(1.12);
+    }
+
+    .wish-heart svg {
+        width: 18px;
+        height: 18px;
+        stroke: #d60000;
+        stroke-width: 2;
+        fill: none;
+        transition: fill 0.2s ease;
+    }
+
+    .wish-heart.is-wished svg {
+        fill: #d60000;
+    }
+
+    .wish-heart.is-busy {
+        opacity: 0.6;
+        cursor: default;
+    }
+
+    /* Pop + burst ring when an item is added */
+    .wish-heart.is-bursting {
+        animation: wishPop 0.45s ease;
+    }
+
+    .wish-heart::after {
+        content: "";
+        position: absolute;
+        inset: 4px;
+        border-radius: 50%;
+        border: 2px solid #d60000;
+        opacity: 0;
+        transform: scale(1);
+        pointer-events: none;
+    }
+
+    .wish-heart.is-bursting::after {
+        animation: wishRing 0.5s ease-out;
+    }
+
+/* Slightly larger heart for the single-product detail page */
+.wish-heart-detail {
+    width: 40px;
+    height: 40px;
+}
+
+    .wish-heart-detail svg {
+        width: 22px;
+        height: 22px;
+    }
+
+@keyframes wishPop {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.35); }
+    50% { transform: scale(0.9); }
+    70% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+@keyframes wishRing {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.85); }
+}
+
+/* -------------------------------------------------------------------------
+   Shared notice modal (troikaNotice in wishlist.js). Used to tell an admin
+   they cannot wishlist / add to cart. Styled to match the cart confirm modal.
+   ------------------------------------------------------------------------- */
+.troika-notice-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+    .troika-notice-overlay.is-open {
+        display: flex;
+    }
+
+.troika-notice-box {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    animation: troikaNoticePop 0.18s ease-out;
+}
+
+body[data-theme="dark"] .troika-notice-box {
+    background: #1c1724;
+    border-color: #3b3048;
+}
+
+.troika-notice-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #1f1f1f;
+}
+
+.troika-notice-msg {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #1f1f1f;
+    line-height: 1.5;
+}
+
+body[data-theme="dark"] .troika-notice-title,
+body[data-theme="dark"] .troika-notice-msg {
+    color: #f5f3f7;
+}
+
+.troika-notice-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.troika-notice-box .troika-notice-ok {
+    background: #3D304C !important;
+    color: #ffffff !important;
+    border: 1px solid #3D304C !important;
+    border-radius: 8px !important;
+    padding: 10px 22px !important;
+    font-weight: 700 !important;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+    .troika-notice-box .troika-notice-ok:hover {
+        background: #644F7D !important;
+        border-color: #644F7D !important;
+        color: #ffffff !important;
+    }
+
+@keyframes troikaNoticePop {
+    from { opacity: 0; transform: scale(0.94); }
+    to { opacity: 1; transform: scale(1); }
+}

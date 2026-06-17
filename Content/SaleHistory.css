@@ -169,7 +169,10 @@
         padding: 0 !important;
         border: none !important;
         background: transparent !important;
-        overflow: hidden !important;
+        /* No overflow:hidden here: the card lifts 2px on hover (translateY) and its top
+           border would be clipped by the cell. The card keeps its own overflow:hidden,
+           so horizontal containment/ellipsis still work. */
+        overflow: visible !important;
     }
 
 .order-card {

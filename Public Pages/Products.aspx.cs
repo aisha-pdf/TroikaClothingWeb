@@ -1,21 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.UI.WebControls;
+using TroikaClothingWeb.Common;
 using TroikaClothingWeb.Models;
 using TroikaClothingWeb.Services;
 
 namespace TroikaClothingWeb
 {
-    public partial class Products : System.Web.UI.Page
+    public partial class Products : BasePage
     {
         private readonly ProductService _productService = new ProductService();
+        private readonly WishlistService _wishlistService = ServiceFactory.CreateWishlistService();
+        private HashSet<string> _wishlistedIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Loaded on every load (incl. postbacks) so GetHeartClass reflects the
+            // current customer's wishlist when the product list is (re)bound.
+            _wishlistedIds = _wishlistService.GetWishlistedProductIds(CurrentUsername);
+
             if (!IsPostBack)
             {
                 BindCategories();
                 BindProducts();
             }
+        }
+
+        protected string GetHeartClass(object productId)
+        {
+            string id = productId == null ? null : productId.ToString();
+            return !string.IsNullOrEmpty(id) && _wishlistedIds.Contains(id) ? "is-wished" : string.Empty;
         }
 
         private void BindCategories()
