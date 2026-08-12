@@ -157,3 +157,52 @@ solution uses `packages.config` rather than PackageReference, so a plain
 Visual Studio. And `Web.config` holds the SQL Server connection string, the Gmail
 OAuth credentials and the Google Maps key in plain `appSettings`, with
 `Web.Release.config` transforming them for the Azure deployment.
+
+## Architecture
+
+A page never touches the database. Every request walks the same four steps: the
+page hands a request model to a service, the service applies the business rules
+and calls a repository interface, the repository runs parameterised ADO.NET
+against SQL Server, and `Db.cs` is the only place a connection is opened.
+
+```
+TroikaClothingWeb/
+├── Public Pages/          # Products, ProductDetail, Cart, OrderConfirmation, About, Contact
+├── Customer Pages/        # HomePage, CustomerProfile, SaleHistory, Wishlist
+├── Admin Pages/           # Admin, AdminProfile, ProductManagement, Reports
+│   ├── ReportDataHandler.ashx    # Admin-only JSON feed for the dashboard
+│   └── ProductImageHandler.ashx
+├── Common/
+│   ├── BasePage.cs        # Session helpers: current username, current role
+│   ├── AdminPage.cs       # Requires the Administrator role
+│   ├── CustomerPage.cs    # Requires the Customer role
+│   ├── SaTime.cs          # South African time, independent of the host's zone
+│   └── ServiceFactory.cs  # Wires services to their concrete repositories
+├── Services/              # Business rules and validation, one class per feature
+├── Repositories/          # SQL, behind IProductRepository, IOrderRepository, ...
+├── Models/                # Requests, results and view models passed between layers
+├── Data/Db.cs             # The single connection factory
+├── Controls/              # AdminSidebar.ascx, PageMessage.ascx
+├── Content/               # TroikaTheme.css and the per-page stylesheets
+├── Scripts/               # theme-toggle, wishlist, delivery-tracker, address autocomplete
+├── analysis/              # Python BI scripts, run offline
+└── App_Data/reports/      # The JSON snapshots those scripts produce
+```
+
+| Layer | Responsibility | Examples |
+| --- | --- | --- |
+| Presentation | Renders pages and handles events | `.aspx` and their code-behind |
+| Service | Business rules, validation, workflows | `CheckoutService`, `RegistrationService`, `ProductManagementService` |
+| Repository | All SQL, behind an interface | `OrderRepository`, `ProductRepository`, `ReportRepository` |
+| Model | Carries structured data between layers | `OrderReceipt`, `CartSummary`, `ProductSaveRequest` |
+
+The interfaces are the part that earns its keep. `CheckoutService` takes an
+`IOrderRepository` through its constructor, so the pricing and ordering rules can
+be exercised without a database behind them, and the ADO.NET repositories could be
+swapped for Entity Framework ones without touching a page.
+
+This layout is the result of the 2026 refactor. The original 2025 code kept SQL,
+validation, business rules and styling together in each page's code-behind, and
+several pages used `SqlDataSource` controls with queries written into the markup.
+The refactor moved those out in sixteen incremental passes, one feature at a time,
+keeping the site working throughout rather than rewriting it.
