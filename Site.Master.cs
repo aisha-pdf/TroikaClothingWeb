@@ -11,6 +11,9 @@ using TroikaClothingWeb.Models;
 
 namespace TroikaClothingWeb
 {
+
+
+
     public partial class SiteMaster : MasterPage
     {
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
