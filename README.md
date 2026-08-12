@@ -422,7 +422,9 @@ extended and documented it.
 
 ### 2025
 
-**Aisha Abba Omar**
+**Aisha Abba Omar** worked as project manager, developer, designer and deployment
+lead. She coordinated sprint planning and progress checking, developed the site master, home, customer profile and order history pages. She also ensured logical navigation throughout the system and
+was responsible for the safe deployment of the website.
 
 **Denica Chetty** worked as a developer and on the documentation. She built the
 first iterations of the customer profile page, establishing the shape that the
@@ -454,14 +456,14 @@ errors.
 
 ### 2026
 
-**Aisha Abba Omar**
+**Aisha Abba Omar** worked as project manager and on the documentation. She managed sprint planning and the delegation of responsibilities across the team. She documented the methodology, team
+structure and version-control processes, and contributed to the business
+intelligence, feasibility and usability documentation. She was responsible for ensuring the safe deployment of the website.
 
-**Firdous Mariam Khan** worked as a developer and tester, and on the
-documentation. She led the refactor of the codebase into the layered architecture,
-moving the SQL, validation and business rules out of the pages and into
-repositories and services, which is what makes the system maintainable today.
-Alongside that she fixed defects carried over from 2025, improved the user
-interface, and worked on the mobile application.
+**Firdous Mariam Khan** worked as a developer and tester, and on the documentation. She led the refactor of the codebase into the layered architecture, moving the SQL, validation and business rules out of the pages and into
+repositories and services, which is what makes the system maintainable today. As part of her testing responsibilities, she tested both the website and mobile application for functional and logic errors, checking that features
+worked as expected and that changes made during the refactoring did not introduce new problems.
+Alongside that she fixed defects carried over from 2025, implemented the Dark Mode feature, improved the overall user interface, and worked on the mobile application.
 
 **Nontando Mthethwa** worked on the documentation.
 
