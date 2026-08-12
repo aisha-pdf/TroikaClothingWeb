@@ -424,46 +424,62 @@ extended and documented it.
 
 **Aisha Abba Omar**
 
-**Denica Chetty**: Developer, documentation. The first iterations of the customer
-profile page.
+**Denica Chetty** worked as a developer and on the documentation. She built the
+first iterations of the customer profile page, establishing the shape that the
+account screens would later grow into.
 
-**Peyton Govender**: Developer, designer, documentation. Prototyping, the user
-management and admin profile pages.
+**Peyton Govender** worked as a developer and designer, and on the documentation.
+She took the early prototypes through to working screens and built the user
+management and admin profile pages that the administrator side is organised
+around.
 
-**Firdous Mariam Ahmed Khan**: Developer, tester, documentation. The products page
-and the add-to-cart page, the checkout functionality with Mohammed Saib, the
-ordering flow, and testing the system for logic errors.
+**Firdous Mariam Ahmed Khan** worked as a developer and tester, and on the
+documentation. She built the products page and the add-to-cart page, and together
+with Mohammed Saib she built the checkout functionality, seeing the ordering flow
+through from a browsing customer to a completed order. She also tested the system
+for logic errors.
 
-**Antoinette Naidoo**: Developer, client liaison, designer, documentation.
-Prototyping, interviewing Troika's stakeholders and observing their operations,
-carrying feedback between the client and the team, and the reporting structure.
+**Antoinette Naidoo** worked as a developer, client liaison and designer, and on
+the documentation. She interviewed Troika's stakeholders and spent time observing
+how the business actually ran, then carried what she learned back to the team,
+which is how much of the system's behaviour came to be defined. Alongside the
+prototyping she designed the reporting structure.
 
-**Mohammed Saib**: Developer, tester, documentation. The product management, add
-product and update product pages, the checkout functionality with Firdous Mariam
-Ahmed Khan, the Tokia chatbot, the email integration, and testing.
+**Mohammed Saib** worked as a developer and tester, and on the documentation. He
+built the product management, add product and update product pages that give the
+administrator control of the catalogue, and together with Firdous Mariam Ahmed
+Khan he built the checkout functionality. He also integrated the Tokia chatbot and
+the email service that sends order receipts, and tested the system for logic
+errors.
 
 ### 2026
 
 **Aisha Abba Omar**
 
-**Firdous Mariam Ahmed Khan**: Developer, tester, documentation. Fixed defects
-carried over from 2025, led the refactor of the codebase into the layered
-architecture, improved the user interface, and worked on the mobile application.
+**Firdous Mariam Ahmed Khan** worked as a developer and tester, and on the
+documentation. She led the refactor of the codebase into the layered architecture,
+moving the SQL, validation and business rules out of the pages and into
+repositories and services, which is what makes the system maintainable today.
+Alongside that she fixed defects carried over from 2025, improved the user
+interface, and worked on the mobile application.
 
-**Nontando Mthethwa**: Documentation.
+**Nontando Mthethwa** worked on the documentation.
 
-**Mohammed Saib**: Developer, tester, documentation.
+**Mohammed Saib** worked as a developer and tester, and on the documentation. His
+main piece of work was the business intelligence and reporting module, which he
+redesigned from a page of basic totals into a proper decision-support dashboard:
+six headline KPIs, seven report groups and an overview that puts every headline
+chart on one screen, filters for period, order status and sales channel, and
+export to PDF and Excel, all fed by an admin-only JSON endpoint that enforces the
+administrator role itself rather than trusting the page that called it. Behind
+that dashboard he built a Python analysis layer for the work that genuinely needs
+computing, scoring every customer by recency, frequency and monetary value,
+deriving market-basket association rules from what sells together, and producing a
+revenue forecast. He also built the wishlist end to end, from the JSON toggle
+handler through to the My Wishlist page, and integrated the Google Maps Places API
+so that delivery addresses are suggested as a customer types and the suburb and
+postal code fill themselves in. Beyond those features he improved the
+administrator functions, fixed defects carried over from 2025, and built the
+mobile application.
 
-- **Business intelligence and reporting.** Redesigned the module, taking it from a
-  page of basic totals to a filterable dashboard: six KPIs, seven report groups,
-  charts, and PDF and Excel export, served by an admin-only JSON endpoint.
-- **Analytics.** Built the Python layer behind the dashboard, covering RFM customer
-  segmentation, market-basket association rules and revenue forecasting.
-- **Wishlist.** Built the feature end to end, from the JSON toggle handler through
-  to the My Wishlist page.
-- **Address capture.** Integrated the Google Maps Places API, so delivery addresses
-  are suggested as they are typed and the suburb and postal code fill themselves in.
-- **Elsewhere.** Improved the administrator functions, fixed defects carried over
-  from 2025, and built the mobile application.
-
-**Moosa Suliman Nakooda**: Documentation.
+**Moosa Suliman Nakooda** worked on the documentation.
