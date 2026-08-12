@@ -233,3 +233,40 @@ adding one, inside the same transaction as the insert.
 
 `App_Data/reports/` holds JSON snapshots produced offline by the Python scripts in
 `analysis/`. They are read by the dashboard as files, not regenerated on request.
+
+## Business intelligence
+
+The Reports page began as a small dashboard with a few totals on it. It was
+rebuilt into the system's decision-support component, and it is the part of the
+project that goes furthest beyond ordinary CRUD.
+
+Six headline KPIs sit at the top: total revenue, total orders, average order
+value, units sold, total customers and completion rate. Below them the reports are
+grouped by the decision they support, and everything can be scoped by period,
+order status and sales channel, then exported to PDF or Excel.
+
+| Report group | What it answers |
+| --- | --- |
+| Sales | Revenue over time with a three-month moving average, average order value, the order-status funnel, payment-method and channel mix |
+| Products | Revenue by category, top sellers, category mix over time, size and colour popularity |
+| Customers | RFM segmentation, repeat-purchase rate, new versus returning, highest-value customers |
+| Operations | Status trends, completion-rate trend, production lead time by category, free versus paid delivery |
+| Seasonality | Revenue by calendar month, orders by weekday and by hour, three-month revenue forecast |
+| Basket | Average basket size, items per order, products frequently bought together |
+| Geography | Highest-earning suburbs, for regional marketing and delivery planning |
+
+Two engines feed this. Most reports are live parameterised SQL through
+`ReportRepository`, served to the browser as JSON by `ReportDataHandler.ashx` and
+drawn with ApexCharts; the handler enforces the Administrator role itself rather
+than trusting the page that called it, so the business data cannot be pulled by a
+signed-in customer poking at the URL.
+
+The heavier analysis is not SQL at all. The scripts in `analysis/` load the tables
+with pandas and write JSON snapshots into `App_Data/reports/`, which the dashboard
+then serves as static files. That is where the techniques that need real
+computation live: RFM scoring of every customer on recency, frequency and monetary
+value; market-basket association rules measured by support, confidence and lift;
+and a revenue forecast that blends a linear trend with Holt-Winters exponential
+smoothing to give a planning range rather than a single number. Running them is a
+deliberate, offline step, so a report that takes seconds to compute never sits in
+the request path.
