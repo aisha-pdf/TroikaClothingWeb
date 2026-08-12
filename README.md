@@ -465,14 +465,16 @@ errors.
 
 **Aisha Abba Omar** worked as project manager and on the documentation. She managed sprint planning and the delegation of responsibilities across the team. She documented the methodology, team
 structure and version-control processes, and contributed to the business
-intelligence, feasibility and usability documentation. She was responsible for ensuring the safe deployment of the website.
+intelligence, KMT, feasibility and usability documentation. She was responsible for ensuring the safe deployment of the website.
 
 **Firdous Mariam Khan** worked as a developer and tester, and on the documentation. She led the refactor of the codebase into the layered architecture, moving the SQL, validation and business rules out of the pages and into
 repositories and services, which is what makes the system maintainable today. As part of her testing responsibilities, she tested both the website and mobile application for functional and logic errors, checking that features
 worked as expected and that changes made during the refactoring did not introduce new problems.
 Alongside that she fixed defects carried over from 2025, implemented the Dark Mode feature, improved the overall user interface, and worked on the mobile application.
 
-**Nontando Mthethwa** worked on the documentation.
+**Nontando Mthethwa** worked on the documentation of the system's features and functionality,
+contributed to the Human Computer Interaction(HCI) documentation and conducted surveys with users to gather
+feedback and information about the usability and user experience of the system.
 
 **Mohammed Saib** worked as a developer and tester, and on the documentation. His
 main piece of work was the business intelligence and reporting module, which he
@@ -491,4 +493,7 @@ postal code fill themselves in. Beyond those features he improved the
 administrator functions, fixed defects carried over from 2025, tested, and built the
 mobile application.
 
-**Moosa Suliman Nakooda** worked on the documentation.
+**Moosa Suliman Nakooda** worked on the documentation. He documented the
+Knowledge Management Theory (KMT) and security components and conducted surveys
+with users to gather information relevant to the evaluation and development of
+the system.
