@@ -433,7 +433,7 @@ She took the early prototypes through to working screens and built the user
 management and admin profile pages that the administrator side is organised
 around.
 
-**Firdous Mariam Ahmed Khan** worked as a developer and tester, and on the
+**Firdous Mariam Khan** worked as a developer and tester, and on the
 documentation. She built the products page and the add-to-cart page, and together
 with Mohammed Saib she built the checkout functionality, seeing the ordering flow
 through from a browsing customer to a completed order. She also tested the system
@@ -445,9 +445,9 @@ how the business actually ran, then carried what she learned back to the team,
 which is how much of the system's behaviour came to be defined. Alongside the
 prototyping she designed the reporting structure.
 
-**Mohammed Saib** worked as a developer and tester, and on the documentation. He
+**Mohammed Abdullah Saib** worked as a developer and tester, and on the documentation. He
 built the product management, add product and update product pages that give the
-administrator control of the catalogue, and together with Firdous Mariam Ahmed
+administrator control of the catalogue, and together with Firdous Mariam
 Khan he built the checkout functionality. He also integrated the Tokia chatbot and
 the email service that sends order receipts, and tested the system for logic
 errors.
@@ -456,7 +456,7 @@ errors.
 
 **Aisha Abba Omar**
 
-**Firdous Mariam Ahmed Khan** worked as a developer and tester, and on the
+**Firdous Mariam Khan** worked as a developer and tester, and on the
 documentation. She led the refactor of the codebase into the layered architecture,
 moving the SQL, validation and business rules out of the pages and into
 repositories and services, which is what makes the system maintainable today.
