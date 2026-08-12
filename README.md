@@ -392,6 +392,18 @@ process in **UTC**, not in the region you picked. Anything that reaches for
 - Schedule the Python analysis rather than running it by hand, so the snapshot
   reports do not go stale
 
+## The mobile app
+
+**https://github.com/Mohammed-Saib/Troika-Mobile-App**
+
+Troika Mobile is the Android half of the same system, written in Kotlin with
+Jetpack Compose. It was built against this website's SQL Server database through
+an ASP.NET Core minimal API, reusing the schema, the validation rules, the pricing
+and the receipt design rather than reimplementing them, so an order placed on a
+phone lands in the same `Sale` and `ProductSold` tables as one placed here. Mobile
+orders are tagged with a `Mobile` sale channel, which is what lets the reports in
+this project separate the two platforms.
+
 ## Contributors
 
 The website was built across two academic years by two teams that shared some
