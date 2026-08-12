@@ -270,3 +270,39 @@ and a revenue forecast that blends a linear trend with Holt-Winters exponential
 smoothing to give a planning range rather than a single number. Running them is a
 deliberate, offline step, so a report that takes seconds to compute never sits in
 the request path.
+
+## Security
+
+Security is handled at four levels, and the theme running through all of them is
+that the control lives in one shared place rather than being repeated, and
+therefore forgotten, page by page.
+
+**Authentication.** Credentials are checked against `WebsiteLogin` through a
+parameterised query, the account status must be `Active`, and the username and
+role go into the session.
+
+**Authorisation.** Role checks live in `AdminPage` and `CustomerPage`, which
+protected pages inherit, so the check cannot be left off a new page by accident.
+The JSON handlers re-check the role themselves rather than assuming the page did.
+
+**Data access.** Every query is a parameterised `SqlCommand` with named
+parameters; no SQL is built by string concatenation anywhere in the repositories.
+Connections and commands are wrapped in `using` blocks, and checkout is wrapped in
+a transaction so an order is all-or-nothing.
+
+**Input.** Validation runs server side in dedicated services,
+`RegistrationValidationService`, `CustomerProfileValidationService` and
+`ProductValidationService`, so disabling JavaScript in the browser bypasses
+nothing. Password fields use `TextMode="Password"`, and the Gmail calls go over
+TLS 1.2.
+
+Three things are worth being upfront about rather than leaving for someone to
+discover. **Passwords are stored in plain text.** That was fixed by the module's
+shared schema, which the mobile app and the other team systems also authenticate
+against, so hashing them here alone would have broken the rest. **`customErrors`
+is still `Off`** in `Web.config`, and the Release transform leaves it alone, so a
+deployed build shows stack traces to whoever triggers an error; it should be
+`RemoteOnly`. **The `Web.config` in this repository carries a real connection
+string and real API credentials**, because that is how the project was submitted.
+Anyone reusing this code should move them into environment configuration and
+rotate them. All three are listed under improvements below.
