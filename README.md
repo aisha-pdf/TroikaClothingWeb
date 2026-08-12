@@ -428,13 +428,17 @@ Ahmed Khan, the Tokia chatbot, the email integration, and testing.
 carried over from 2025, led the refactor of the codebase into the layered
 architecture, improved the user interface, and worked on the mobile application.
 
-**Nontando Mthethwa**: Documentation. System features and functionality, the
-human-computer interaction chapter, and running the user surveys.
+**Nontando Mthethwa**: Documentation.
 
-**Mohammed Saib**: Developer, tester, documentation. Fixed defects from 2025,
-worked on the refactor into the layered architecture, improved the administrator
-functions and rebuilt the business intelligence dashboard, built the mobile
-application.
+**Mohammed Saib**: Developer, tester, documentation. Redesigned the business
+intelligence and reporting features, turning a page of basic totals into a
+filterable dashboard with KPIs, seven report groups, charts and PDF and Excel
+export, backed by an admin-only JSON endpoint and a Python analysis layer for RFM
+segmentation, market-basket association rules and revenue forecasting. Built the
+wishlist feature end to end, from the JSON toggle handler through to the My
+Wishlist page. Integrated the Google Maps Places API for address input and
+management, so delivery addresses are suggested as they are typed and the suburb
+and postal code fill themselves in. Fixed defects carried over from 2025, improved
+the administrator functions, and built the mobile application.
 
-**Moosa Suliman Nakooda**: Documentation. Knowledge management theory and
-security, and running the user surveys.
+**Moosa Suliman Nakooda**: Documentation.
