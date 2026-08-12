@@ -361,5 +361,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-# Local secrets merged into Web.config appSettings at runtime
-secrets.config
