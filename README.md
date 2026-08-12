@@ -400,46 +400,41 @@ extended and documented it.
 
 ### 2025
 
-**Aisha Abba Omar** — Project manager, developer, designer, deployment. Sprint
-planning and progress tracking, prototyping, the home page, the customer profile
-page and the order history page, the site master page and the navigation, and
-responsibility for deploying the system.
+**Aisha Abba Omar**
 
-**Denica Chetty** — Developer. The first iterations of the customer profile page,
-and documenting the system objectives.
+**Denica Chetty**: Developer, documentation. The first iterations of the customer
+profile page.
 
-**Peyton Govender** — Developer, documentation lead, designer. Prototyping, the
-user management and admin profile pages, and documenting the critical success
-factors, use cases and user stories.
+**Peyton Govender**: Developer, designer, documentation. Prototyping, the user
+management and admin profile pages.
 
-**Firdous Mariam Khan** — Developer, tester. The products page and the add-to-cart
-page, the ordering flow, and testing the system for logic errors.
+**Firdous Mariam Ahmed Khan**: Developer, tester, documentation. The products page
+and the add-to-cart page, the checkout functionality with Mohammed Saib, the
+ordering flow, and testing the system for logic errors.
 
-**Antoinette Naidoo** — Developer, client liaison, designer. Prototyping,
-interviewing Troika's stakeholders and observing their operations, carrying
-feedback between the client and the team, and the reporting structure.
+**Antoinette Naidoo**: Developer, client liaison, designer, documentation.
+Prototyping, interviewing Troika's stakeholders and observing their operations,
+carrying feedback between the client and the team, and the reporting structure.
 
-**Mohammed Saib** — Developer, tester. The product management, add product and
-update product pages, the Tokia chatbot, the email integration, and testing.
+**Mohammed Saib**: Developer, tester, documentation. The product management, add
+product and update product pages, the checkout functionality with Firdous Mariam
+Ahmed Khan, the Tokia chatbot, the email integration, and testing.
 
 ### 2026
 
-**Aisha Abba Omar** — Project manager, tester, documentation, deployment. Sprint
-planning and delegation, prototyping, deployment, and documenting the methodology,
-team structure, version control, business intelligence and the usability study.
+**Aisha Abba Omar**
 
-**Firdous Mariam Khan** — Developer, tester, documentation. Fixed defects carried
-over from 2025, led the refactor of the codebase into the layered architecture,
-improved the user interface, worked on the mobile application, and documented the
-analysis, refactoring and conclusion.
+**Firdous Mariam Ahmed Khan**: Developer, tester, documentation. Fixed defects
+carried over from 2025, led the refactor of the codebase into the layered
+architecture, improved the user interface, and worked on the mobile application.
 
-**Nontando Mthethwa** — Documentation. System features and functionality, the
+**Nontando Mthethwa**: Documentation. System features and functionality, the
 human-computer interaction chapter, and running the user surveys.
 
-**Mohammed Saib** — Developer, tester, documentation. Fixed defects from 2025,
+**Mohammed Saib**: Developer, tester, documentation. Fixed defects from 2025,
 worked on the refactor into the layered architecture, improved the administrator
 functions and rebuilt the business intelligence dashboard, built the mobile
-application, and documented the testing strategy.
+application.
 
-**Moosa Suliman Nakooda** — Documentation. Knowledge management theory and
+**Moosa Suliman Nakooda**: Documentation. Knowledge management theory and
 security, and running the user surveys.
