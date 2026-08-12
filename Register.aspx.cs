@@ -14,6 +14,9 @@ namespace TroikaClothingWeb
         {
         }
 
+
+
+
         protected void btnRegister_Click(object sender, EventArgs e)
         {
             RegisterRequest request = BuildRegisterRequestFromForm();
