@@ -10,10 +10,17 @@ SQL Server, and deployed to Azure App Service.
 
 **Developed by:** Aisha Abba Omar, Denica Chetty, Peyton Govender, Firdous Mariam
 Khan, Nontando Mthethwa, Antoinette Naidoo, Moosa Suliman Nakooda and Mohammed
-Saib, across the 2025 and 2026 ISTN modules.
+Saib, across the 2025 and 2026 Information Systems & Technology modules.
 
-The site is one half of a two-platform system. The other half is
-[Troika Mobile](https://github.com/Mohammed-Saib/Troika-Mobile-App), an Android
+The Troika system consists of three connected platforms: the e-commerce
+website, the Troika mobile application, and the front-end system. All three
+platforms connect to the same SQL Server database, allowing customer,
+product, wishlist and order data to remain synchronised across the system. Data
+created or updated through one platform is therefore available to the other
+connected platforms, providing a consistent view of the catalogue, customers
+and orders.
+The website provides the main e-commerce and administrative functionality for retail orders. The 
+[Troika Mobile](https://github.com/Mohammed-Saib/Troika-Mobile-App), is an Android
 client that was built against the same SQL Server database, the same validation
 rules and the same receipt design, so orders placed on either platform land in
 the same tables and show up together in the reports.
@@ -481,7 +488,7 @@ revenue forecast. He also built the wishlist end to end, from the JSON toggle
 handler through to the My Wishlist page, and integrated the Google Maps Places API
 so that delivery addresses are suggested as a customer types and the suburb and
 postal code fill themselves in. Beyond those features he improved the
-administrator functions, fixed defects carried over from 2025, and built the
+administrator functions, fixed defects carried over from 2025, tested, and built the
 mobile application.
 
 **Moosa Suliman Nakooda** worked on the documentation.
