@@ -217,7 +217,7 @@
 
                             <asp:TextBox ID="txtStreetAddress"
                                 runat="server"
-                                CssClass="customer-input"
+                                CssClass="customer-input js-troika-street"
                                 MaxLength="100" />
 
                             <asp:RequiredFieldValidator ID="rfvStreetAddress"
@@ -236,7 +236,7 @@
 
                             <asp:TextBox ID="txtSuburb"
                                 runat="server"
-                                CssClass="customer-input"
+                                CssClass="customer-input js-troika-suburb"
                                 MaxLength="50" />
 
                             <asp:RequiredFieldValidator ID="rfvSuburb"
@@ -255,7 +255,7 @@
 
                             <asp:TextBox ID="txtPostCode"
                                 runat="server"
-                                CssClass="customer-input"
+                                CssClass="customer-input js-troika-postcode"
                                 MaxLength="4" />
 
                             <asp:RequiredFieldValidator ID="rfvPostCode"
@@ -356,5 +356,11 @@
             Sys.Application.add_load(initialiseCustomerPasswordField);
         }
     </script>
+
+    <!-- Google Places address autocomplete (defines the Maps callback first, then loads Maps). -->
+    <script src="<%= ResolveUrl("~/Scripts/troika-address-autocomplete.js") %>"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=<%= System.Configuration.ConfigurationManager.AppSettings["GoogleMapsApiKey"] %>&libraries=places&loading=async&callback=initTroikaAddressAutocomplete"
+        async defer></script>
 
 </asp:Content>

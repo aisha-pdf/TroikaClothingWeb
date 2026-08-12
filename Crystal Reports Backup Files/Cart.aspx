@@ -683,6 +683,13 @@
         <div class="cart">
             <div class="title">Your Cart</div>
 
+            <%-- Cart actions (remove / clear / quantity / variant edits) run as async
+                 (UpdatePanel) partial postbacks so the page never reloads or scroll-bounces.
+                 Save Address and Checkout stay full postbacks via PostBackTrigger because
+                 they reload / redirect anyway. --%>
+            <asp:UpdatePanel ID="upCart" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+
             <asp:PlaceHolder ID="phEmpty" runat="server" Visible="false">
                 <div class="muted" style="text-align: center; margin-top: 40px;">
                     <p>Your cart is empty.</p>
@@ -797,17 +804,17 @@
 
                             <div style="margin-bottom: 10px;">
                                 <asp:Label ID="lblStreet" runat="server" Text="Street Address:" AssociatedControlID="txtStreet" />
-                                <asp:TextBox ID="txtStreet" runat="server" CssClass="form-control" />
+                                <asp:TextBox ID="txtStreet" runat="server" CssClass="form-control js-troika-street" />
                             </div>
 
                             <div style="margin-bottom: 10px;">
                                 <asp:Label ID="lblSuburb" runat="server" Text="Suburb:" AssociatedControlID="txtSuburb" />
-                                <asp:TextBox ID="txtSuburb" runat="server" CssClass="form-control" />
+                                <asp:TextBox ID="txtSuburb" runat="server" CssClass="form-control js-troika-suburb" />
                             </div>
 
                             <div style="margin-bottom: 10px;">
                                 <asp:Label ID="lblPostCode" runat="server" Text="Post Code:" AssociatedControlID="txtPostCode" />
-                                <asp:TextBox ID="txtPostCode" runat="server" CssClass="form-control" MaxLength="4" />
+                                <asp:TextBox ID="txtPostCode" runat="server" CssClass="form-control js-troika-postcode" MaxLength="4" />
                             </div>
 
                             <div style="display: flex; gap: 8px; justify-content: flex-start;">
@@ -835,6 +842,13 @@
                     </div>
                 </div>
             </asp:PlaceHolder>
+
+                </ContentTemplate>
+                <Triggers>
+                    <asp:PostBackTrigger ControlID="btnSaveAddress" />
+                    <asp:PostBackTrigger ControlID="btnCheckout" />
+                </Triggers>
+            </asp:UpdatePanel>
         </div>
     </div>
 
@@ -900,11 +914,26 @@
 
         // Show/hide the delivery-address form entirely client-side, so editing the
         // address no longer triggers a postback (which caused the page to jump).
+        // troikaAddrOpen remembers the user's manual choice: async (UpdatePanel) postbacks
+        // re-render the form from server state, so we re-apply that choice afterwards.
+        // Full postbacks (Save Address / Checkout) reload the page and reset this to null,
+        // letting the server decide the form's state again.
+        var troikaAddrOpen = null;
+
         function troikaToggleAddress(force) {
             var form = document.querySelector('.ec-address-form');
             if (!form) return;
             var open = (typeof force === 'boolean') ? force : !form.classList.contains('is-open');
             form.classList.toggle('is-open', open);
+            troikaAddrOpen = open;
+        }
+
+        if (window.Sys && Sys.WebForms && Sys.WebForms.PageRequestManager) {
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                if (troikaAddrOpen === null) return;
+                var form = document.querySelector('.ec-address-form');
+                if (form) form.classList.toggle('is-open', troikaAddrOpen);
+            });
         }
 
         // +/- quantity stepper: nudges the number box and fires its change event so the
@@ -920,5 +949,11 @@
             input.dispatchEvent(new Event('change', { bubbles: true }));
         }
     </script>
+
+    <!-- Google Places address autocomplete (defines the Maps callback first, then loads Maps). -->
+    <script src="<%= ResolveUrl("~/Scripts/troika-address-autocomplete.js") %>"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=<%= System.Configuration.ConfigurationManager.AppSettings["GoogleMapsApiKey"] %>&libraries=places&loading=async&callback=initTroikaAddressAutocomplete"
+        async defer></script>
 
 </asp:Content>

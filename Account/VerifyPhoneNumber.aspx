@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="Verify Phone Number" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VerifyPhoneNumber.aspx.cs" Inherits="TroikaClothingWeb.Account.VerifyPhoneNumber" %>
+ 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title">
+
         <h2 id="title"><%: Title %>.</h2>
         <p class="text-danger">
             <asp:Literal runat="server" ID="ErrorMessage" />

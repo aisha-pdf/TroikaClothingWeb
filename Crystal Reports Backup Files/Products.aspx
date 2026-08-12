@@ -1,6 +1,13 @@
 ﻿<%@ Page Title="Products" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="TroikaClothingWeb.Products" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <link href="<%= ResolveUrl("~/Content/wishlist.css") %>" rel="stylesheet" />
+
+    <span id="troikaWishCfg" style="display: none;"
+        data-toggle-url='<%= ResolveUrl("~/Public Pages/WishlistHandler.ashx") %>'
+        data-login-url='<%= ResolveUrl("~/Login.aspx") %>'></span>
+
     <div class="troika-page products-container">
         <h1 class="troika-page-title">Women's Clothing Collection</h1>
 
@@ -24,6 +31,14 @@
                 CssClass="products-grid" OnItemCommand="dlProducts_ItemCommand">
                 <ItemTemplate>
                     <div class="product-card">
+                        <button type="button" class="wish-heart <%# GetHeartClass(Eval("ProductID")) %>"
+                            data-productid='<%# Eval("ProductID") %>'
+                            aria-label="Add to wishlist"
+                            onclick="troikaToggleWish(this); return false;">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                        </button>
                         <asp:LinkButton ID="lnkProductCard" runat="server" CommandName="ViewDetails"
                             CommandArgument='<%# Eval("ProductID") %>' CssClass="product-card-link">
                             <div class="product-image">
@@ -49,4 +64,6 @@
             </asp:DataList>
         </div>
     </div>
+
+    <script src="<%= ResolveUrl("~/Scripts/wishlist.js") %>"></script>
 </asp:Content>
