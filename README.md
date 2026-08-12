@@ -42,9 +42,10 @@ the same tables and show up together in the reports.
 
 ### Administrator
 
-The reporting dashboard is the part worth looking at. Six KPIs, eight report
-groups, filters for period, order status and sales channel, PDF and Excel export,
-and a mix of live SQL charts and Python-computed analytics.
+The reporting dashboard is the part worth looking at. Six KPIs, seven report
+groups plus an overview that puts every headline chart on one screen, filters for
+period, order status and sales channel, PDF and Excel export, and a mix of live
+SQL charts and Python-computed analytics.
 
 | User management | Product management |
 | :---: | :---: |
@@ -362,20 +363,6 @@ uppercase letter, a lowercase letter, a number and a special character.
 Administrator accounts are not self-service. An existing administrator creates
 them, or the role is set directly on the `WebsiteLogin` row.
 
-## Deployment
-
-The site was published to Azure App Service straight from Visual Studio, built in
-Release and pushed over MSDeploy through the WMSVC endpoint, with backup-on-deploy
-enabled and `SkipExtraFilesOnServer` set so the server stayed in step with the
-build. `Web.Release.config` applies the production connection string and app
-settings during the transform, so the development values in `Web.config` are not
-what ends up deployed.
-
-One deployment detail is worth carrying forward: Azure App Service runs its worker
-process in **UTC**, not in the region you picked. Anything that reaches for
-`DateTime.Now` will therefore be two hours behind South African time. This is why
-`Common/SaTime.cs` exists and why order timestamps go through it.
-
 ## Possible improvements
 
 **Security**
@@ -465,15 +452,18 @@ architecture, improved the user interface, and worked on the mobile application.
 
 **Nontando Mthethwa**: Documentation.
 
-**Mohammed Saib**: Developer, tester, documentation. Redesigned the business
-intelligence and reporting features, turning a page of basic totals into a
-filterable dashboard with KPIs, seven report groups, charts and PDF and Excel
-export, backed by an admin-only JSON endpoint and a Python analysis layer for RFM
-segmentation, market-basket association rules and revenue forecasting. Built the
-wishlist feature end to end, from the JSON toggle handler through to the My
-Wishlist page. Integrated the Google Maps Places API for address input and
-management, so delivery addresses are suggested as they are typed and the suburb
-and postal code fill themselves in. Fixed defects carried over from 2025, improved
-the administrator functions, and built the mobile application.
+**Mohammed Saib**: Developer, tester, documentation.
+
+- **Business intelligence and reporting.** Redesigned the module, taking it from a
+  page of basic totals to a filterable dashboard: six KPIs, seven report groups,
+  charts, and PDF and Excel export, served by an admin-only JSON endpoint.
+- **Analytics.** Built the Python layer behind the dashboard, covering RFM customer
+  segmentation, market-basket association rules and revenue forecasting.
+- **Wishlist.** Built the feature end to end, from the JSON toggle handler through
+  to the My Wishlist page.
+- **Address capture.** Integrated the Google Maps Places API, so delivery addresses
+  are suggested as they are typed and the suburb and postal code fill themselves in.
+- **Elsewhere.** Improved the administrator functions, fixed defects carried over
+  from 2025, and built the mobile application.
 
 **Moosa Suliman Nakooda**: Documentation.
