@@ -352,3 +352,94 @@ One deployment detail is worth carrying forward: Azure App Service runs its work
 process in **UTC**, not in the region you picked. Anything that reaches for
 `DateTime.Now` will therefore be two hours behind South African time. This is why
 `Common/SaTime.cs` exists and why order timestamps go through it.
+
+## Possible improvements
+
+**Security**
+- Hash passwords with a modern KDF instead of storing them in plain text, across
+  the website, the API and the mobile app together, since they share a schema
+- Set `customErrors` to `RemoteOnly` so a deployed error page stops leaking stack
+  traces
+- Move the connection string, the Gmail OAuth credentials and the Maps key out of
+  a committed `Web.config`, and rotate the ones already in this history
+- Real session tokens with expiry and rotation, rather than a username and role
+  parked in session state
+
+**Testing**
+- Turn the manual test cases into an automated suite. `CheckoutService` already
+  takes its repository through the constructor, so the pricing rules, the R500
+  threshold and the address requirement can be unit tested as they stand
+- Integration tests for the checkout transaction, covering the rollback path as
+  well as the happy one
+- A CI workflow that builds and runs the tests on every push
+
+**Features**
+- A real payment gateway, in place of the simulated confirmation
+- Customer ratings and reviews on the product page
+- Discounts, promotional codes and a mailing list, all of which were ruled out of
+  the original scope
+- Order tracking as a timeline rather than a single status word
+- Colours and sizes as per-product data with stock levels, instead of a fixed list
+  in the UI
+
+**Code and data**
+- Pagination on the catalogue, which is fine at the current size and would not be
+  at ten times it
+- Move the remaining page-level `DateTime` formatting behind a shared helper, so
+  every displayed timestamp goes through `SaTime` the way the receipt does
+- Retire the unused ASP.NET Identity, Entity Framework and Owin scaffolding left
+  over from the project template
+- Schedule the Python analysis rather than running it by hand, so the snapshot
+  reports do not go stale
+
+## Contributors
+
+The website was built across two academic years by two teams that shared some
+members. The 2025 team built the system; the 2026 team fixed, refactored,
+extended and documented it.
+
+### 2025
+
+**Aisha Abba Omar** — Project manager, developer, designer, deployment. Sprint
+planning and progress tracking, prototyping, the home page, the customer profile
+page and the order history page, the site master page and the navigation, and
+responsibility for deploying the system.
+
+**Denica Chetty** — Developer. The first iterations of the customer profile page,
+and documenting the system objectives.
+
+**Peyton Govender** — Developer, documentation lead, designer. Prototyping, the
+user management and admin profile pages, and documenting the critical success
+factors, use cases and user stories.
+
+**Firdous Mariam Khan** — Developer, tester. The products page and the add-to-cart
+page, the ordering flow, and testing the system for logic errors.
+
+**Antoinette Naidoo** — Developer, client liaison, designer. Prototyping,
+interviewing Troika's stakeholders and observing their operations, carrying
+feedback between the client and the team, and the reporting structure.
+
+**Mohammed Saib** — Developer, tester. The product management, add product and
+update product pages, the Tokia chatbot, the email integration, and testing.
+
+### 2026
+
+**Aisha Abba Omar** — Project manager, tester, documentation, deployment. Sprint
+planning and delegation, prototyping, deployment, and documenting the methodology,
+team structure, version control, business intelligence and the usability study.
+
+**Firdous Mariam Khan** — Developer, tester, documentation. Fixed defects carried
+over from 2025, led the refactor of the codebase into the layered architecture,
+improved the user interface, worked on the mobile application, and documented the
+analysis, refactoring and conclusion.
+
+**Nontando Mthethwa** — Documentation. System features and functionality, the
+human-computer interaction chapter, and running the user surveys.
+
+**Mohammed Saib** — Developer, tester, documentation. Fixed defects from 2025,
+worked on the refactor into the layered architecture, improved the administrator
+functions and rebuilt the business intelligence dashboard, built the mobile
+application, and documented the testing strategy.
+
+**Moosa Suliman Nakooda** — Documentation. Knowledge management theory and
+security, and running the user surveys.
