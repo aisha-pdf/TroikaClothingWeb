@@ -124,3 +124,36 @@ refresh token being exchanged for a short-lived access token on each send. The
 Google Maps Places API suggests delivery addresses as they are typed and fills in
 the suburb and postal code, restricted to South Africa, with every field left
 editable so the form still works when the service does not load.
+
+## Tech stack
+
+| Property | Value |
+| --- | --- |
+| Language | C# |
+| Framework | ASP.NET Web Forms on .NET Framework 4.7.2 |
+| IDE | Visual Studio 2022 |
+| Database | Microsoft SQL Server |
+| Data access | ADO.NET, `Microsoft.Data.SqlClient` 6.1.3, parameterised commands |
+| Front end | Bootstrap 5.2.3, jQuery 3.7.0, hand-written CSS |
+| Charts | ApexCharts, loaded on the reports dashboard |
+| Offline analytics | Python with pandas and NumPy |
+| Email | Gmail HTTP API over OAuth2 |
+| Chatbot | Botpress |
+| Address lookup | Google Maps Places API |
+| JSON | Newtonsoft.Json 13.0.3 |
+| Hosting | Azure App Service, published from Visual Studio with MSDeploy |
+
+ASP.NET Identity and Entity Framework are still present because they came with
+the Web Forms project template, but nothing in the Troika workflows uses them.
+Registration, login, product management, checkout, the customer profile and the
+reports all run on custom pages, services and repositories over ADO.NET. Treat
+the `Account/` folder and the Owin and Identity packages as template scaffolding
+rather than as part of the system.
+
+Two configuration notes worth knowing before the project builds or runs. The
+solution uses `packages.config` rather than PackageReference, so a plain
+`msbuild /t:Restore` reports nothing to do; it needs
+`msbuild /t:Restore /p:RestorePackagesConfig=true`, or a restore from within
+Visual Studio. And `Web.config` holds the SQL Server connection string, the Gmail
+OAuth credentials and the Google Maps key in plain `appSettings`, with
+`Web.Release.config` transforming them for the Azure deployment.
