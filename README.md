@@ -17,3 +17,25 @@ The site is one half of a two-platform system. The other half is
 client that was built against the same SQL Server database, the same validation
 rules and the same receipt design, so orders placed on either platform land in
 the same tables and show up together in the reports.
+
+## Screenshots
+
+| Home | Home, dark mode | Shop |
+| :---: | :---: | :---: |
+| ![Home](docs/screenshots/01-home.jpg) | ![Home in dark mode](docs/screenshots/02-home-dark.jpg) | ![Shop](docs/screenshots/03-shop.jpg) |
+
+| Product detail | Size guide | Wishlist |
+| :---: | :---: | :---: |
+| ![Product detail](docs/screenshots/04-product-detail.jpg) | ![Size guide](docs/screenshots/05-size-guide.jpg) | ![Wishlist](docs/screenshots/06-wishlist.jpg) |
+
+| Cart | Free delivery earned | Order confirmed |
+| :---: | :---: | :---: |
+| ![Cart](docs/screenshots/07-cart.jpg) | ![Cart with free delivery](docs/screenshots/08-cart-free-delivery.jpg) | ![Order confirmation](docs/screenshots/09-order-confirmation.jpg) |
+
+| Order history | Account | Register |
+| :---: | :---: | :---: |
+| ![Order history](docs/screenshots/10-order-history.jpg) | ![Account](docs/screenshots/11-profile.jpg) | ![Register](docs/screenshots/12-register.jpg) |
+
+| Sign in | About | Contact |
+| :---: | :---: | :---: |
+| ![Login](docs/screenshots/13-login.jpg) | ![About](docs/screenshots/14-about.jpg) | ![Contact](docs/screenshots/15-contact.jpg) |
