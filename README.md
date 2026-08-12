@@ -306,3 +306,49 @@ deployed build shows stack traces to whoever triggers an error; it should be
 string and real API credentials**, because that is how the project was submitted.
 Anyone reusing this code should move them into environment configuration and
 rotate them. All three are listed under improvements below.
+
+## Building
+
+1. Clone the repository
+2. Open `TroikaClothingWeb.sln` in Visual Studio 2022
+3. Restore the NuGet packages. This is a `packages.config` project, so from the
+   command line it needs
+   `msbuild TroikaClothingWeb.sln /t:Restore /p:RestorePackagesConfig=true`
+4. Point `LoginConnectionString` in `Web.config` at a SQL Server instance holding
+   the schema above. `ReportsConnectionString` is the second name `Db.cs` knows
+   about, used by the reporting queries
+5. Build and run with F5, which starts IIS Express
+
+The pages need a reachable database to render anything: the catalogue, accounts
+and orders all come from SQL Server, and there is no seed data or local fallback.
+The Gmail keys in `appSettings` are only needed for the receipt emails, and the
+Google Maps key only for address autocomplete; without either, the rest of the
+site still works and the address fields stay typeable.
+
+### Demo account
+
+```
+Username: deanwi
+Password: Dean@123
+```
+
+Registering works too. The rules are exactly six characters for a username, ten
+digits for a phone number, and six to eight characters for a password with an
+uppercase letter, a lowercase letter, a number and a special character.
+
+Administrator accounts are not self-service. An existing administrator creates
+them, or the role is set directly on the `WebsiteLogin` row.
+
+## Deployment
+
+The site was published to Azure App Service straight from Visual Studio, built in
+Release and pushed over MSDeploy through the WMSVC endpoint, with backup-on-deploy
+enabled and `SkipExtraFilesOnServer` set so the server stayed in step with the
+build. `Web.Release.config` applies the production connection string and app
+settings during the transform, so the development values in `Web.config` are not
+what ends up deployed.
+
+One deployment detail is worth carrying forward: Azure App Service runs its worker
+process in **UTC**, not in the region you picked. Anything that reaches for
+`DateTime.Now` will therefore be two hours behind South African time. This is why
+`Common/SaTime.cs` exists and why order timestamps go through it.
