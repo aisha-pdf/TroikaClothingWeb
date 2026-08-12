@@ -40,6 +40,29 @@ the same tables and show up together in the reports.
 | :---: | :---: | :---: |
 | ![Login](docs/screenshots/13-login.jpg) | ![About](docs/screenshots/14-about.jpg) | ![Contact](docs/screenshots/15-contact.jpg) |
 
+### Administrator
+
+The reporting dashboard is the part worth looking at. Six KPIs, eight report
+groups, filters for period, order status and sales channel, PDF and Excel export,
+and a mix of live SQL charts and Python-computed analytics.
+
+| User management | Product management |
+| :---: | :---: |
+| ![User management](docs/screenshots/16-admin-users.jpg) | ![Product management](docs/screenshots/17-admin-products.jpg) |
+
+| KPIs, filters and export | Revenue trend, status funnel, categories, top products and regions |
+| :---: | :---: |
+| ![Reports KPIs](docs/screenshots/18-reports-kpis.jpg) | ![Reports charts](docs/screenshots/19-reports-charts.jpg) |
+
+| RFM segmentation and repeat-purchase rate | Market-basket association rules |
+| :---: | :---: |
+| ![RFM segments](docs/screenshots/20-reports-rfm.jpg) | ![Frequently bought together](docs/screenshots/21-reports-basket.jpg) |
+
+The RFM and basket panels are the Python side of the dashboard; the snapshot date
+they were computed from is printed above the KPI row. Email addresses and phone
+numbers in the user-management screenshot are redacted, since that page lists real
+customer contact details.
+
 ## Features
 
 ### Accounts and access
