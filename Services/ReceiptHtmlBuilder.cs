@@ -186,7 +186,7 @@ namespace TroikaClothingWeb.Services
             sb.Append("</table>");
 
             sb.Append("<div class='section-title'>Summary</div><div class='totals'>");
-            sb.Append("<div><span>Order date</span><span>" + receipt.DateOfIssue.ToString("yyyy-MM-dd HH:mm") + "</span></div>");
+            sb.Append("<div><span>Order date</span><span>" + receipt.DateOfIssue.ToString("yyyy-MM-dd HH:mm") + " SAST</span></div>");
             sb.Append("<div><span>Payment method</span><span>" + Enc(receipt.PaymentMethod) + "</span></div>");
             sb.Append("<div><span>Subtotal</span><span>R" + receipt.Subtotal.ToString("0.00") + "</span></div>");
             sb.Append("<div><span>Delivery</span><span>" + (receipt.DeliveryFee == 0 ? "Free" : "R" + receipt.DeliveryFee.ToString("0.00")) + "</span></div>");

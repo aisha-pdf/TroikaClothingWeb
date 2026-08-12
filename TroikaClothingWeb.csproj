@@ -639,6 +639,7 @@
     <Compile Include="Common\CustomerPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Common\SaTime.cs" />
     <Compile Include="Common\ServiceFactory.cs" />
     <Compile Include="Controls\AdminSidebar.ascx.cs">
       <DependentUpon>AdminSidebar.ascx</DependentUpon>

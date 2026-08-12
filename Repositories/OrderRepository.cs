@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using TroikaClothingWeb.Common;
 using TroikaClothingWeb.Data;
 using TroikaClothingWeb.Models;
 
@@ -31,7 +32,9 @@ namespace TroikaClothingWeb.Repositories
             if (cart == null || cart.Count == 0)
                 throw new ArgumentException("Cart cannot be empty.", "cart");
 
-            DateTime now = DateTime.Now;
+            // South African time, not the host's local time: the Azure worker runs in UTC,
+            // which stamped every receipt two hours behind the customer's actual time.
+            DateTime now = SaTime.Now;
 
             using (SqlConnection con = Db.CreateConnection())
             {

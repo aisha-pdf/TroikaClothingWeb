@@ -97,7 +97,7 @@ namespace TroikaClothingWeb.Public_Pages
         private void BindReceipt(OrderReceipt receipt)
         {
             lblReceipt.Text = receipt.ReceiptNumber;
-            lblDate.Text = receipt.DateOfIssue.ToString("yyyy-MM-dd HH:mm");
+            lblDate.Text = receipt.DateOfIssue.ToString("yyyy-MM-dd HH:mm") + " SAST";
             lblPaymentMethod.Text = receipt.PaymentMethod;
             lblChannel.Text = receipt.SaleChannel;
 
